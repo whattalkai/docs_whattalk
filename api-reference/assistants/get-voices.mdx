@@ -4,12 +4,16 @@ api: "GET /user/assistants/voices"
 description: "Retrieve all available voices for assistant configuration"
 ---
 
-This endpoint returns a list of all available voices that can be used when creating or updating assistants, with optional filtering by assistant mode.
+This endpoint returns a list of all available voices that can be used when creating or updating assistants, with optional filtering by assistant mode and language.
 
 ### Query Parameters
 
-<ParamField query="mode" type="string" optional>
-  Filter voices by assistant mode. Options: `pipeline`, `multimodal`
+<ParamField query="mode" type="string">
+  Filter voices by assistant mode. Options: `pipeline`, `multimodal`, `dualplex`
+</ParamField>
+
+<ParamField query="language_id" type="integer">
+  Filter voices by language ID. Use the [Get Languages](/api-reference/assistants/get-languages) endpoint to get available language IDs.
 </ParamField>
 
 ### Response fields
@@ -24,8 +28,12 @@ This endpoint returns a list of all available voices that can be used when creat
       The display name of the voice
     </ResponseField>
 
-    <ResponseField name="mode" type="string">
-      The assistant mode this voice is compatible with (`pipeline` or `multimodal`)
+    <ResponseField name="language_id" type="integer">
+      The language ID this voice is associated with
+    </ResponseField>
+
+    <ResponseField name="gender" type="string">
+      The gender of the voice (male/female)
     </ResponseField>
   </Expandable>
 </ResponseField>
@@ -36,28 +44,21 @@ This endpoint returns a list of all available voices that can be used when creat
 [
   {
     "id": 1,
-    "name": "Sarah",
-    "mode": "pipeline"
+    "name": "Alloy",
+    "language_id": 1,
+    "gender": "female"
   },
   {
     "id": 2,
-    "name": "Michael",
-    "mode": "pipeline"
+    "name": "Echo",
+    "language_id": 1,
+    "gender": "male"
   },
   {
     "id": 3,
-    "name": "Emma",
-    "mode": "multimodal"
-  },
-  {
-    "id": 4,
-    "name": "David",
-    "mode": "multimodal"
-  },
-  {
-    "id": 5,
-    "name": "Sophia",
-    "mode": "pipeline"
+    "name": "Coral",
+    "language_id": null,
+    "gender": "female"
   }
 ]
 ```
@@ -66,8 +67,8 @@ This endpoint returns a list of all available voices that can be used when creat
 
 ### Notes
 
-- Use the `id` field when creating or updating assistants
-- The `mode` field indicates which assistant engine the voice is compatible with
-- Filter by mode to get only voices compatible with your intended assistant type
-- If no mode filter is provided, all available voices are returned
+- Use the `id` field as `voice_id` when creating or updating assistants
+- Filter by `mode` to get only voices compatible with your intended assistant type
+- Filter by `language_id` to get voices for a specific language
+- If no filters are provided, all available voices are returned
 - Only voices that are public or belong to the authenticated user are returned

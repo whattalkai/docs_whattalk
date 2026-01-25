@@ -21,10 +21,11 @@ Quick solutions for common lead management problems and import issues.
 **Issue:** Import completes but no leads appear
 
 **Solutions:**
-1. **Column headers:** Verify headers match required format (phone, name, etc.)
+1. **Column mapping:** Verify you mapped the phone number column during import
 2. **Data validation:** Check that phone numbers are in correct format
 3. **Empty rows:** Remove empty rows from file
 4. **Required fields:** Ensure phone number column contains valid data
+5. **File headers:** Ensure your CSV/Excel has a header row (any names work)
 
 ### Partial Import Success
 **Issue:** Some leads imported, others failed
@@ -104,10 +105,11 @@ Quick solutions for common lead management problems and import issues.
 **Issue:** Custom variables not importing correctly
 
 **Solutions:**
-1. **Column headers:** Match exactly with [assistant configuration](/ai-assistants/settings/prompt-and-tools#call-variables)
-2. **Data types:** Ensure data matches expected variable types
-3. **Required variables:** Include all variables defined in assistant
-4. **Default values:** Check if default values are being applied
+1. **Column mapping:** Ensure you correctly mapped each variable to its column during import
+2. **Auto-detection:** System auto-detects mappings based on common column names
+3. **Data types:** Ensure data matches expected variable types
+4. **Required variables:** Map all variables defined in [assistant configuration](/ai-assistants/settings/prompt-and-tools#call-variables)
+5. **Default values:** Unmapped variables will use assistant's default values
 
 ### Missing Lead Information
 **Issue:** Leads missing names, emails, or custom data

@@ -210,6 +210,40 @@ Same as Stat widgets, plus:
 - End color for gradient
 - Default: Green (#10b981)
 
+**Calculate as Percentage** (radialBar only)
+- Automatically calculates percentage from conditions
+- Formula: (conditions met / total) × 100
+- **Requires:** At least one condition must be added first
+- Example: Condition "status = completed" calculates completed leads / total leads × 100
+- Appears after adding conditions in Step 2
+
+**Show Footer with Numbers** (radialBar only)
+- Displays "X achieved / Y total" below the radialBar chart
+- Only visible when "Calculate as Percentage" is enabled
+- Shows exact numbers alongside the percentage
+- Example footer: "150 achieved / 1,000 total"
+
+**Start Angle** (radialBar only)
+- Where the arc begins in degrees (-360° to 360°)
+- Default: -140°
+- Common values: -140° (default), -90° (left semicircle), 0° (bottom)
+
+**End Angle** (radialBar only)
+- Where the arc ends in degrees (-360° to 360°)
+- Default: 130°
+- **Validation:** Total arc (end - start) cannot exceed 360°
+- Common values: 130° (default), 90° (right semicircle), 180° (half circle), 270° (three-quarters)
+
+**Hollow Size** (radialBar only)
+- Inner circle size as percentage (0-100%)
+- Default: 60%
+- Higher value = thinner ring, lower value = thicker ring
+
+**Dash Array** (radialBar only)
+- Spacing for dashed ring pattern (0-50)
+- Default: 10
+- 0 = solid line, higher numbers = more spacing between dashes
+
 ### Chart Type Guide
 
 **Line Chart**
@@ -243,9 +277,10 @@ Same as Stat widgets, plus:
 - **Example:** Performance across metrics
 
 **Radial Bar**
-- **Use for:** Single percentage/progress
+- **Use for:** Circular progress indicators showing percentages (0-100%)
 - **Does not use:** Group By or Group By Period
-- **Example:** Goal completion %
+- **Percentage Calculation:** Add conditions, then enable "Calculate as Percentage" to automatically compute (conditions met / total) × 100
+- **Example:** Lead conversion rate (15%), SMS delivery success (82.8%), goal completion
 
 ### Examples
 
@@ -291,6 +326,141 @@ Chart Type: bar
 Label: "Calls Per Campaign"
 Group By: campaign.name
 Date Range: 30 days
+```
+
+**Lead Conversion Rate (Radial Bar with Percentage)**
+```
+Table: leads
+Aggregation: COUNT
+Chart Type: radialBar
+Label: "Conversion Rate"
+Description: "Completed leads"
+Color: success
+Date Range: 30 days
+
+Step 2 - Conditions:
+  Field: status
+  Operator: =
+  Value: completed
+
+Step 2 - Percentage (appears after adding condition):
+  Calculate as Percentage: Yes
+  Show Footer with Numbers: Yes
+
+Step 3 - Advanced (optional):
+  Start Angle: -140°
+  End Angle: 130°
+  Hollow Size: 60%
+  Dash Array: 10
+
+How it works:
+  - Counts leads where status = completed (e.g., 150)
+  - Counts total leads (e.g., 1,000)
+  - Calculates: 150 / 1,000 × 100 = 15%
+  - Displays: "15%" with footer "150 achieved / 1,000 total"
+```
+
+**SMS Delivery Success (Radial Bar with Gradient)**
+```
+Table: sms
+Aggregation: COUNT
+Chart Type: radialBar
+Label: "SMS Delivered"
+Description: "Delivery success rate"
+Color: info
+Date Range: 7 days
+
+Step 2 - Conditions:
+  Field: status
+  Operator: =
+  Value: delivered
+
+Step 2 - Percentage:
+  Calculate as Percentage: Yes
+  Show Footer with Numbers: Yes
+
+Step 3 - Advanced:
+  Enable Gradient: Yes
+  Gradient To Color: #10b981 (green)
+  Start Angle: -90°
+  End Angle: 270° (creates three-quarter circle)
+  Hollow Size: 55%
+  Dash Array: 12
+
+Result: "82.8%" with footer "120 achieved / 145 total"
+Visual: Blue to green gradient, three-quarter circle
+```
+
+**Quality Calls (Multiple Conditions)**
+```
+Table: calls
+Aggregation: COUNT
+Chart Type: radialBar
+Label: "Quality Calls"
+Description: "Long completed outbound calls"
+Color: success
+Date Range: 30 days
+
+Step 2 - Conditions (all must be true):
+  Condition 1:
+    Field: status
+    Operator: =
+    Value: completed
+
+  Condition 2:
+    Field: duration
+    Operator: >
+    Value: 180
+
+  Condition 3:
+    Field: type
+    Operator: =
+    Value: outbound
+
+Step 2 - Percentage:
+  Calculate as Percentage: Yes
+  Show Footer with Numbers: Yes
+
+Step 3 - Advanced:
+  Enable Gradient: Yes
+  Gradient To Color: #3b82f6
+  Dash Array: 8
+
+How it works:
+  - Counts calls meeting ALL three conditions (e.g., 45)
+  - Counts total calls (e.g., 100)
+  - Calculates: 45 / 100 × 100 = 45%
+  - Displays: "45%" with footer "45 achieved / 100 total"
+```
+
+**Qualified Leads (Semicircle Style)**
+```
+Table: leads
+Aggregation: COUNT
+Chart Type: radialBar
+Label: "Qualified Leads"
+Color: info
+Date Range: 30 days
+
+Step 2 - Conditions:
+  Field: status
+  Operator: =
+  Value: scheduled
+
+Step 2 - Percentage:
+  Calculate as Percentage: Yes
+  Show Footer with Numbers: Yes
+
+Step 3 - Advanced (semicircle design):
+  Enable Gradient: Yes
+  Gradient To Color: #10b981
+  Start Angle: -90°
+  End Angle: 90° (creates perfect semicircle)
+  Hollow Size: 70% (thinner ring)
+  Dash Array: 0 (solid line)
+
+Result: "2.2%" with footer "4,841 achieved / 220,073 total"
+Visual: Clean semicircle from left to right, blue to green gradient
 ```
 
 ## Table Widgets

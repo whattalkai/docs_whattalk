@@ -35,8 +35,8 @@ This endpoint returns a list of all available languages that can be used when cr
   },
   {
     "id": 2,
-    "name": "Spanish",
-    "iso_2": "es"
+    "name": "Romanian",
+    "iso_2": "ro"
   },
   {
     "id": 3,
@@ -45,13 +45,13 @@ This endpoint returns a list of all available languages that can be used when cr
   },
   {
     "id": 4,
-    "name": "German",
-    "iso_2": "de"
+    "name": "Spanish",
+    "iso_2": "es"
   },
   {
     "id": 5,
-    "name": "Italian",
-    "iso_2": "it"
+    "name": "German",
+    "iso_2": "de"
   }
 ]
 ```
@@ -60,7 +60,7 @@ This endpoint returns a list of all available languages that can be used when cr
 
 ### Notes
 
-- This endpoint does not require any parameters
-- Use the `name` field when creating or updating assistants
+- Use the `id` field as `language_id` when creating or updating assistants
+- Use the `id` field in `secondary_language_ids` array for multi-language assistants
 - The `iso_2` code can be useful for language-specific functionality
 - All available languages are returned in a single request

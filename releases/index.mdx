@@ -8,6 +8,382 @@ icon: "scroll"
 **Stay up to date** — Follow our latest product updates and improvements. We ship new features regularly to enhance your AI calling experience.
 </Note>
 
+<Update label="V1.7.2" description="Jan 26 2026">
+
+### 🔥 New Call Features: Warm Transfers + Keypad Digits Collection
+
+We’ve added two major capabilities to make AI phone agents more reliable in real-world support and sales scenarios — smoother human handoff and faster, more accurate data capture.
+
+☎️ Warm Call Transfer (Hold + Brief + Connect)
+
+<Frame>
+ <img
+ src="/resources/SrwBrXtF1hUPX4WDd53NM7Rfh0YxrhP0NFewY5AU.png"
+ alt="Image"
+ />
+</Frame>
+
+When a caller asks to speak with a human, your AI can now run a **true warm transfer**: it puts the customer on hold (with music or silence), dials a supervisor/agent, **briefs them with context**, and only then connects both sides.
+
+**Why it’s better**
+
+- ✅ **Context preserved:** agents don’t start cold — they already know what the customer needs.
+- 🎶 **Professional experience:** caller hears a hold message + hold music while the agent is reached.
+- 🔁 **More compatible transfers:****Web calls can now transfer to real human phone agents** (the initial interaction doesn’t need to be a phone call anymore).
+- For **SIP trunks without SIP REFER**, warm transfer now works by creating a new **SIP INVITE** and merging calls — no REFER required.
+
+**Configurable options** Supervisor number, caller ID mode, hold music/silence, hold message, supervisor briefing instructions, and the final “connected” message.
+
+⌨️ Customer Keypad Digits Collection (DTMF)
+
+<Frame>
+ <img
+ src="/resources/0R4hEUj2GrQ4btiOSJRqOqD22k7ZE87dhYECpzru.png"
+ alt="Image"
+ />
+</Frame>
+
+Customers can now enter digits on their phone keypad during a conversation, and the assistant receives the input instantly and continues naturally.
+
+**How it works**
+
+- Runs **in the background** — no awkward pauses
+- Auto-submits after a configurable timeout (default **5s**)
+- Instant submit when the user presses **#** or *****
+- Works alongside voice: customers can **speak or type**
+
+**Perfect for** Account numbers, PINs, phone numbers, license plates, order codes — especially when accuracy and privacy matter.
+
+**Configurable options** Input timeout + submit key (# or *).
+
+These upgrades make your assistants feel more human, more reliable, and easier to deploy in production support environments.
+
+</Update>
+
+<Update label="v1.7.1" description="Jan 10 2026">
+
+### ↗️ WhatsApp External Numbers Integration
+
+You can now connect **external WhatsApp sender numbers;** like your own mobile number or SIP/business-owned lines and use them to **fully automate WhatsApp messaging** inside the platform.
+
+### What’s included
+
+- 📲 **Bring your own sender**: use your existing number instead of being limited to platform-provisioned WhatsApp numbers
+- 🤖 **Inbound + outbound automation**: the AI can reply to incoming messages and send outbound follow-ups, reminders, and lead qualification messages
+- ✅ **Simplified onboarding** via Meta Embedded Signup with **OTP verification** (SMS/voice) — no complicated Meta setup guesswork
+
+### Where you’ll find it
+Create a new WhatsApp sender from the platform and choose the **External Number** path. Once connected, you can submit message templates for approval to Meta and use your connected number to **send and receive WhatsApp messages** with AI handling the conversation end-to-end.
+
+This update unlocks a more “native” customer experience — your AI can operate at scale on WhatsApp while keeping your brand identity and sender number consistent.
+
+</Update>
+
+<Update label="v1.7.0" description="Jan 8 2026">
+
+### ✍️ AI Prompt Writer, 🧩 Flow builder & 🟢 Whatsapp native integration
+
+This update packs three major upgrades that change how you build assistants end-to-end: **prompting becomes conversational**, **flows become visual**, and **WhatsApp becomes native** — with a setup that skips the usual Meta headaches.
+
+## ✍️ AI Prompt Writer
+
+<Frame>
+ <img
+ src="/resources/Opnlq1kcM53iN4TWEkiPd7q7mmXjzRUE28xR3ITg.png"
+ alt="Image"
+ />
+</Frame>
+
+Edit prompts by chatting with AI — no manual prompt engineering required.
+- **Conversational editing:** just say what you want (“make it more friendly”, “add return policy info”) and the AI updates your system prompt.
+- **Smart diff preview:** review changes before applying — additions, removals, and edits are clearly highlighted.
+- **Accept/reject control:** apply suggestions one-by-one or in bulk, so you stay in full control.
+- **Quick actions:** one-click improvements like *Make concise*, *Add detail*, *Improve clarity*.
+- **Variables + schema built-in:** manage pre-call variables (e.g. {customer_name}) and define structured post-call extraction fields (string/number/boolean) without leaving the editor.
+- **Template library:** start from proven templates for sales, support, scheduling, surveys.
+
+Now you can refine assistant behavior quickly — without technical skills.
+
+## 🧩 Flow Builder
+
+<Frame>
+ <img
+ src="/resources/Bqsbdh2d6e9z2vqWyafDnVwh2kKYv57Xk25A97kt.png"
+ alt="Image"
+ />
+</Frame>
+
+Design conversation flows visually with drag-and-drop — perfect for production ready flows.
+- **Node-based builder (5 node types):** Start, Speak, Prompt, Action, End.
+- **Branching logic:** build multi-path conversations (Interested / Maybe / Not Interested) with clear outcomes.
+- **Settings panel:** customize agent personality (name, language, assertiveness, humor) per flow.
+- **Auto-layout:** one click to neatly organize your flow.
+- **Import/Export JSON:** share flows across assistants or teammates instantly.
+
+Build complex, multi-branch scripts without writing long prompts — faster iteration, cleaner structure, easier collaboration.
+
+## 🟢 WhatsApp Native Integration
+
+<Frame>
+ <img
+ src="/resources/uCyFS8rdZaEBpRoz4NBKZRGubcU2lzwAnvDlASWc.jpg"
+ alt="Image"
+ />
+</Frame>
+
+Connect your AI assistant to WhatsApp Business in minutes — and let it handle **both inbound and outbound messaging** automatically.
+
+### ✅ Setup that’s actually easy
+Meta’s WhatsApp onboarding is notoriously complex (business setup, verification, templates, embedded signup, compliance). We’ve turned that into a guided flow so you can go from zero to live quickly:
+
+- Simple onboarding wizard that walks you through the required Meta steps
+- Platform-assisted setup that removes the usual guesswork and friction
+- You get WhatsApp running without spending days figuring out Meta’s process
+
+### 🤖 AI-managed inbound + outbound WhatsApp
+Once connected, your assistant can:
+
+- Reply instantly to **incoming messages**
+- Send **outbound messages** proactively (follow-ups, reminders, confirmations, lead qualification)
+- Keep a consistent “brain” across channels — same assistant logic, same data, same tone
+
+### 🔜 What’s coming next
+
+- **External numbers support (soon):** right now WhatsApp can be activated on **numbers from our platform**, but bringing your own number is coming next.
+- **WhatsApp calls support (soon):** we’re expanding from messaging to calls so you can handle the full lifecycle in one channel.
+
+Together, these updates make assistant-building dramatically faster—**design flows visually, refine behavior by chatting with AI, and deploy natively on WhatsApp** for end-to-end omnichannel automation.
+
+</Update>
+
+<Update label="v1.6.4" description="Dec 17 2025">
+
+### 🚀 New Models, Chat Automations & Smarter Call Controls
+
+This release brings together **powerful new AI models**, **chat-based automation triggers**, and **advanced call behavior controls**, marking another big step forward for both voice and text experiences on the platform.
+
+### 🤖 New &amp; Updated AI Models
+
+### **GPT-5.2 Now Available**
+We’ve released **GPT-5.2**, delivering improved reasoning and better instruction-following. For faster responses we recommend to continue using GPT-5.1
+
+### **GPT Realtime Mini Upgrade**
+The realtime mini model has been bumped to:&nbsp;**gpt-realtime-mini-2025-12-15** This update improves stability and responsiveness in low-latency voice interactions.
+
+### **New Gemini Native Audio Model (Speech-to-Speech)**
+Based on Google’s December 12, 2025 release, we’ve added:&nbsp;**gemini-2.5-flash-native-audio-preview-12-2025**
+
+You can find the new version as **Gemini 2.5 Flash Dialog New (Dec 2025)** and the previous version as **Gemini 2.5 Flash Dialog (Oct 2025)**
+
+- Better handling of **complex workflows** and function calls
+- Available in **speech-to-speech mode only**
+
+⚡ **New Conversation Created Trigger**
+
+<Frame>
+ <img
+ src="/resources/KPPMThCP1Dhi38EVAbZAcM6RDZfCS11u7dMfAY29.png"
+ alt="Image"
+ />
+</Frame>
+
+You can now trigger automations **the moment a new chat conversation starts** on the **web widget**.
+- Instantly capture **pre-form input variables** such as name, email, phone number, or any custom fields you’ve defined.
+- Use this data to **create leads**, **sync contacts to your CRM**, **send notifications**, or start any custom automation flow.
+- Works seamlessly with the chat web widget, making text interactions just as automatable as voice calls.
+
+### 📞 Smarter Call Prompts &amp; Behavior
+
+### 📨 **End Call on Voicemail – Custom Prompt**
+You can now define a **custom prompt** that the AI will use when leaving a voicemail. This gives you full control over tone, content, and messaging instead of relying on a generic message.
+
+### 🔁 **Re-Engagement Prompt Setting**
+When the re-engagement interval is reached, the assistant can now use a **custom re-engagement prompt**. This allows you to fine-tune how the AI follows up after silence — making interactions more natural and context-aware.
+
+### 🎧 Multiple Ambient Sound Options
+We’ve added **multiple ambient sound choices** for voice calls.
+
+<Frame>
+ <img
+ src="/resources/OM1aqm7TN9XmixTwsgnYt2KwF39Op6TUBEqeuZ6S.png"
+ alt="Image"
+ />
+</Frame>
+
+*As always, we’re excited to see what you build with these new capabilities.*
+
+</Update>
+
+<Update label="v1.6.3" description="Dec 14 2025">
+
+### ⚙️ Automations Update & Calendly integration
+
+This release focuses on making **automation setup faster and smoother**, while expanding your assistant’s scheduling capabilities.
+
+🔄 **Simplified Data Injection for Automations**
+
+<Frame>
+ <img
+ src="/resources/MwDNCR1Eh2lMXqGaGtOnyE3bQoJnt4H0mEYFT13f.png"
+ alt="Image"
+ />
+</Frame>
+
+Setting up automations is now much easier and more intuitive.
+- Previously, you had to fully build a flow, run a test call, and only then reference the latest data to configure your automations.
+- Now, with a single click on **“Load data”** when adding a trigger, the platform automatically fetches **all custom variables** defined in your assistant settings.
+- This includes both **input variables** and **post-call evaluation / extracted variables**, giving you a complete and accurate data structure from the start.
+
+The result: faster setup, fewer test calls, and a much smoother automation-building experience.
+
+📅 **Calendly Integration**
+
+<Frame>
+ <img
+ src="/resources/CXiro7QKpGU2l6JBlx4bQfQFOuL0g0I0qoxhnGdJ.png"
+ alt="Image"
+ />
+</Frame>
+
+You can now connect **Calendly calendars** directly to your assistants.
+- Seamlessly book appointments through your AI flows.
+- Ideal for sales calls, consultations, demos, or service-based businesses.
+- Works alongside existing calendar integrations, giving you more flexibility in how and where you schedule.
+
+*These improvements remove friction from automation workflows and expand your scheduling options — helping you build, test, and deploy assistants more efficiently than ever.*
+
+</Update>
+
+<Update label="v1.6.2" description="Dec 8 2025">
+
+### 🔊 New Models & Smart Tools Update
+
+This release brings**&nbsp;upgrades** to voice quality, transcription accuracy, and usability across the platform — along with a few handy workflow improvements.
+
+### 🗣️ **Cartesia Sonic 3 (TTS) for Pipeline &amp; Dualplex**
+Introducing **Cartesia Sonic 3**, our newest high-fidelity TTS engine with **voice cloning** support and advanced **emotion control**.
+
+- 🎭 Toggle **SAML tags** to adjust tone, emotion, and intensity in your AI’s voice.
+- 🎤 Clone and fine-tune voices directly within your assistants for natural, expressive conversations.
+
+### ✍️ **ElevenLabs Scribe v2 Transcriber**
+We’ve added **Scribe v2**, a cutting-edge transcription model from ElevenLabs, now available in **Pipeline Mode**. Expect sharper accuracy, better punctuation, and faster transcription speeds — perfect for complex dialogues and noisy environments.
+
+### 🎙️ **Record Voice Samples in-App**
+You can now **record voice samples directly inside the platform** for cloning. No need to upload pre-recorded files — just hit record, speak, and your voice sample will be ready to use in seconds.
+
+### 🔁 **Deepgram Nova-3 Migration**
+All assistants using **Deepgram** have been automatically upgraded from **Nova-2 → Nova-3**, bringing:
+
+- Higher transcription accuracy
+- Better noise handling
+- Faster response times
+
+### 🌐 **Web Widget Preview Sharing**
+You can now **copy a shareable preview URL** of your web widget — no need to embed it on a website first. Perfect for **demoing widgets** to clients or sharing with your team during testing.
+
+### 🔄 **Bulk Resend Webhooks**
+Quickly **resend multiple webhooks** for past calls in one action. Ideal for syncing historical data, debugging integrations, or recovering missed events.
+
+These updates make your assistants **more powerful, expressive, and developer-friendly** — with the latest models and smarter workflow tools across the board.
+
+</Update>
+
+<Update label="v1.6.1" description="Nov 21 2025">
+
+### 🧠 GPT-5.1, campaign level timezone and fixes
+
+🤖 **GPT-5.1 in Pipeline Mode**
+
+<Frame>
+ <img
+ src="/resources/7tSl1oUQfSBuztqqDvJN3kWVA3qcyVs7Xzm1lAbY.png"
+ alt="Image"
+ />
+</Frame>
+
+We’ve added **GPT-5.1** — smarter, faster, and more context-aware than ever. Enjoy improved accuracy and response times across all your pipeline-based assistants.
+
+### 🌍 **Campaign Timezone Settings**
+You can now set a **custom timezone per campaign**, ensuring calls and automations run exactly at the right local time for your audience.
+
+### 🛠️ **General Improvements &amp; Fixes**
+This update also includes multiple **stability, performance, and UI fixes** across the platform for a smoother experience overall.
+
+</Update>
+
+<Update label="v1.6.0" description="Oct 30 2025">
+
+### 💬 Introducing AI Chat for Web Widget — A Major Step Toward Omnichannel Communication
+We’ve just reached a **huge milestone** in our mission to become a truly **omnichannel AI platform** for both **voice and text interactions**.
+
+With this release, your AI assistants can now **chat directly with users** through a **fully integrated web widget**, alongside voice mode. This unlocks an entirely new way for customers to engage with your AI — from websites, landing pages, and soon, across multiple messaging channels.
+
+### 🧠 AI Chat Mode in Web Widget
+Assistants can now operate in **chat mode**, **voice mode**, or a **hybrid voice + chat mode**, allowing you to choose the ideal experience for your users.
+
+The web widget can be easily embedded on any website, giving your visitors instant access to your AI assistant for inquiries, bookings, or lead capture.
+
+**Coming soon:** support for **WhatsApp**, **SMS**, and **Meta Messenger**, making your assistant truly omnichannel.
+
+<Frame>
+ <img
+ src="/resources/axqq44YbKNpElhspxQOK8nNFMQX9dAsY7yEa6VGb.png"
+ alt="Image"
+ />
+</Frame>
+
+### 💬 Conversations View
+Just like you can see your **Call History**, you now have a dedicated section for **Chat Conversations** — view, search, and manage all customer chat interactions directly from the dashboard.
+
+Each conversation is logged with timestamps, user details, and message history, so you can track performance and customer engagement easily.
+
+<Frame>
+ <img
+ src="/resources/olDjnpI3lczxXLQLNjoH7uFmGXvnTCzSNLippbxI.png"
+ alt="Image"
+ />
+</Frame>
+
+### 🧩 Web Widget Pre-Form Builder
+Collect essential lead data **before** your assistant starts chatting or talking.
+
+You can now build **custom pre-chat forms** with a visual form builder, fully customizable for your business use case — whether that’s a salon appointment, a medical consultation, or a sales lead.
+
+### Supported Field Types
+
+- **Text** – Single-line text input
+- **Email** – With built-in validation
+- **Phone** – With country selector
+- **Text Area** – For multi-line inputs
+
+### Additional Settings
+
+- **Required fields** (ensure important info is captured)
+- **Variable names** sent directly to your assistant (e.g. **customer_name**)
+- **Labels, placeholders, and helper text** for a clean, user-friendly interface
+
+<Frame>
+ <img
+ src="/resources/5V0mrtmYWHbCnNxhbZSHKbt1WgfAlXIdfqZ5mTRE.png"
+ alt="Image"
+ />
+</Frame>
+
+### 🎨 Enhanced Widget Customization
+The web widget is now more flexible and on-brand than ever:
+
+- Choose between **Modern** or **Classic** styles
+- Adjust **size, placement, and colors**
+- Enable **voice-only, chat-only, or hybrid** interaction modes
+
+### 💰 Pricing &amp; Availability
+
+- **Free** when used **internally** for testing assistants (no balances deducted).
+- **Public chat mode** costs just **$0.01 per AI reply**, regardless of the model or message size — making it one of the most cost-efficient AI chat options available.
+
+</Update>
+
 <Update label="v1.5.3" description="Oct 23 2025">
 
 ### 🌟 Custom dashboards, 💬 Assistant chat, 💳 Auto top-up, 📅 1-Click Cal.com integration

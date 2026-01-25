@@ -78,26 +78,26 @@ Choose built-in tools that AI can use **mid-call** with the customer.
 <AccordionGroup>
   <Accordion title="Multi Call Transfer" icon="phone-arrow-right">
     Route calls to multiple destination phone numbers like different people or departments according to your flow.
-    
+
     **Use cases:**
     - Escalation to human agents
     - Department routing
     - Specialist handoffs
-    
+
     **Configuration options:**
     - **Standard mode:** Use regular phone numbers (e.g., +1234567890)
     - **Advanced mode:** Use SIP URI format for SIP providers (e.g., sip:+1234567890@sip-server)
-    
+
     **For SIP integrations:**
     - Set transfer to "Advanced" mode
     - Use SIP URI format: `sip:number@sip-server`
     - Verify your SIP provider supports SIP REFER
     - Test with different URI formats if transfers fail
-    
+
     <Note>
     **Prompt instruction:** Include in your system prompt something like "call the transfer function when the user requests to speak with someone else" to ensure the AI uses this tool appropriately.
     </Note>
-    
+
     <Tip>
     If transfers aren't working, see our [SIP Integration troubleshooting guide](/troubleshooting/sip-integration#transfer-phone-call-not-working) for detailed solutions.
     </Tip>
@@ -134,17 +134,24 @@ Choose built-in tools that AI can use **mid-call** with the customer.
   
   <Accordion title="Appointment Scheduling" icon="calendar">
     Real-time booking scheduling integration with multiple calendar platforms.
-    
+
     **Available integrations:**
-    - **Cal.com:** Full setup guide available at [Cal.com Scheduling](https://docs.autocalls.ai/ai-assistants/cal-com-scheduling#cal-com-appointment-scheduling)
+    - **Cal.com:** Full setup guide available at [Cal.com Scheduling](/ai-assistants/cal-com-scheduling)
     - **GoHighLevel:** Complete integration guide at [GoHighLevel Scheduling](/ai-assistants/gohighlevel-scheduling)
-    
+    - **Calendly:** Connect your Calendly account to book appointments directly through calls
+
     **Use cases:**
     - Book appointments with calendars
     - Check real-time availability
     - Send automatic confirmation details
     - Sync with existing calendar systems
-    
+
+    **Setup:**
+    1. Select your calendar provider (Cal.com, GoHighLevel, or Calendly)
+    2. Authenticate with your calendar account
+    3. Choose the event type/calendar to use for bookings
+    4. The AI will automatically check availability and book appointments
+
     <Note>
     Available when calendar integration is enabled in your platform settings.
     </Note>
@@ -286,20 +293,46 @@ See our [Initial Message guide](/ai-assistants/initial-message) for detailed bes
 
 Define the assistant's personality, objectives, and behavior guidelines.
 
+### Editing Tools
+
+Choose the editing experience that works best for you:
+
+<CardGroup cols={2}>
+  <Card title="AI Prompt Editor" icon="sparkles" href="/ai-assistants/ai-prompt-editor">
+    **Chat-based editing with AI assistance**
+
+    Describe changes in plain language and let AI suggest intelligent modifications. Review and accept/reject each change individually.
+
+    **Best for:** Quick iterations, improving existing prompts, text-focused editing
+  </Card>
+
+  <Card title="Flow Builder" icon="share-nodes" href="/ai-assistants/flow-builder">
+    **Visual drag-and-drop editor**
+
+    Design conversation flows by connecting nodes on a canvas. Create branching logic and multi-path decision trees visually.
+
+    **Best for:** Complex call flows, structured scripts, visual thinkers
+  </Card>
+</CardGroup>
+
+<Note>
+Both tools store the prompt in the same field - switching between them is possible but may require adjustments.
+</Note>
+
 ### Prompt Configuration
 
 <CardGroup cols={2}>
   <Card title="Custom Prompt" icon="pencil">
     Write your own system prompt from scratch
-    
+
     - Full control over assistant behavior
     - Tailored to specific use cases
     - Markdown formatting supported
   </Card>
-  
+
   <Card title="Template Library" icon="folder">
     Start with pre-built templates
-    
+
     - Multiple languages available
     - Different conversation types
     - Proven effective prompts

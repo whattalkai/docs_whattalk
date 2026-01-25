@@ -39,11 +39,6 @@
     "color": "#6c63ff",
     "url": "automation-platform"
   }, {
-    "name": "White Label",
-    "icon": "tag",
-    "color": "#ff0142",
-    "url": "white-label"
-  }, {
     "name": "API Reference",
     "icon": "code",
     "color": "#1c51fc",
@@ -85,6 +80,8 @@
         "ai-assistants/assistant-modes",
         "ai-assistants/assistant-configuration",
         "ai-assistants/system-prompt",
+        "ai-assistants/ai-prompt-editor",
+        "ai-assistants/flow-builder",
         "ai-assistants/initial-message",
         "ai-assistants/tools-and-functions",
         "ai-assistants/custom-tools",
@@ -92,7 +89,9 @@
         "ai-assistants/filler-audio",
         "ai-assistants/cal-com-scheduling",
         "ai-assistants/gohighlevel-scheduling",
-        "ai-assistants/testing"
+        "ai-assistants/testing",
+        "ai-assistants/test-chat",
+        "ai-assistants/web-widget"
       ]
     },
     {
@@ -118,6 +117,25 @@
       "pages": [
         "custom-dashboards/overview",
         "custom-dashboards/widget-types"
+      ]
+    },
+    {
+      "group": "Conversations",
+      "icon": "messages",
+      "pages": [
+        "conversations/overview",
+        "conversations/viewing-and-managing"
+      ]
+    },
+    {
+      "group": "WhatsApp Business",
+      "icon": "whatsapp",
+      "pages": [
+        "whatsapp/overview",
+        "whatsapp/senders",
+        "whatsapp/templates",
+        "whatsapp/conversations",
+        "whatsapp/automation"
       ]
     },
     {
@@ -192,23 +210,6 @@
       ]
     },
     {
-      "group": "White Label Program",
-      "pages": [
-        "white-label/overview",
-        "white-label/onboarding",
-        "white-label/plans-setup",
-        "white-label/user-limits",
-        {
-          "group": "Social Logins",
-          "icon": "share-nodes",
-          "pages": [
-            "white-label/social-logins/google",
-            "white-label/social-logins/linkedin"
-          ]
-        }
-      ]
-    },
-    {
       "group": "Troubleshooting & FAQs",
       "pages": [
         "troubleshooting/ai-behavior",
@@ -219,14 +220,17 @@
         "troubleshooting/gohighlevel",
         "troubleshooting/leads",
         "troubleshooting/sip-integration",
-        "troubleshooting/voice-problems"
+        "troubleshooting/voice-problems",
+        "troubleshooting/web-widget",
+        "troubleshooting/whatsapp"
       ]
     },
     {
       "group": "API Reference",
       "pages": [
         "api-reference/introduction",
-        "api-reference/authentication"
+        "api-reference/authentication",
+        "api-reference/user/me"
       ]
     },
     {
@@ -250,8 +254,24 @@
       "group": "Calls",
       "pages": [
         "api-reference/calls/get-calls",
+        "api-reference/calls/get-call",
         "api-reference/calls/make-phone-call",
         "api-reference/calls/delete-call"
+      ]
+    },
+    {
+      "group": "Conversations",
+      "pages": [
+        "api-reference/conversations/list-conversations",
+        "api-reference/conversations/create-conversation",
+        "api-reference/conversations/get-conversation",
+        "api-reference/conversations/send-message"
+      ]
+    },
+    {
+      "group": "AI",
+      "pages": [
+        "api-reference/ai/generate-reply"
       ]
     },
     {
@@ -281,6 +301,30 @@
       ]
     },
     {
+      "group": "Phone Numbers",
+      "pages": [
+        "api-reference/phone-numbers/get-phone-numbers",
+        "api-reference/phone-numbers/search-phone-numbers",
+        "api-reference/phone-numbers/purchase-phone-number",
+        "api-reference/phone-numbers/release-phone-number"
+      ]
+    },
+    {
+      "group": "Knowledgebases",
+      "pages": [
+        "api-reference/knowledgebases/get-knowledgebases",
+        "api-reference/knowledgebases/get-knowledgebase",
+        "api-reference/knowledgebases/create-knowledgebase",
+        "api-reference/knowledgebases/update-knowledgebase",
+        "api-reference/knowledgebases/delete-knowledgebase",
+        "api-reference/knowledgebases/get-documents",
+        "api-reference/knowledgebases/get-document",
+        "api-reference/knowledgebases/create-document",
+        "api-reference/knowledgebases/update-document",
+        "api-reference/knowledgebases/delete-document"
+      ]
+    },
+    {
       "group": "SMS",
       "pages": [
         "api-reference/sms/send-sms"
@@ -290,6 +334,24 @@
       "group": "Webhooks",
       "pages": [
         "api-reference/webhooks/post-call-webhook"
+      ]
+    },
+    {
+      "group": "API Keys",
+      "pages": [
+        "api-reference/authentication/create-api-key",
+        "api-reference/authentication/list-api-keys",
+        "api-reference/authentication/delete-api-key"
+      ]
+    },
+    {
+      "group": "White Label",
+      "pages": [
+        "api-reference/white-label/login",
+        "api-reference/white-label/register",
+        "api-reference/white-label/logout",
+        "api-reference/white-label/get-users",
+        "api-reference/white-label/transfer-balance"
       ]
     },
     {

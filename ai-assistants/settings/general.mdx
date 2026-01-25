@@ -98,7 +98,14 @@ Additional languages your assistant can understand and speak. Useful for:
 
 **Note:** The AI can detect which language the customer is speaking and respond appropriately.
 
-## AI Voice Selection
+## TTS Provider & Voice Selection
+
+### TTS Provider
+Select your Text-to-Speech provider. Available in **Pipeline** and **Dualplex** modes.
+
+**Available Providers:**
+- **ElevenLabs** - High-quality voices
+- **Cartesia** - Fast, low-latency synthesis
 
 Your assistant can choose from existing voices, clone custom voices, or request voices from the ElevenLabs library.
 
@@ -112,20 +119,20 @@ You have three ways to get the perfect voice for your assistant:
 - **Tone variety:** From formal business to casual conversational
 
 **2. Clone a custom voice:**
-Create a custom voice by uploading audio samples:
+Create a custom voice by uploading audio samples. Available in **Pipeline** and **Dualplex** modes.
 
-**Requirements:**
-- Clear, high-quality audio sample (1-5 minutes recommended)
-- MP3 or WAV format
-- Consistent speaking pace and tone
-- Minimal background noise
-- Same voice used throughout
+**Requirements by provider:**
+- **Cartesia** - Single audio file, at least 10 seconds, 1 speaker, no background noise
+- **ElevenLabs** - Samples over 1 minute, 1 speaker, no background noise. Max 5 minutes total.
 
 **Process:**
-1. Record yourself or a voice actor reading sample text
-2. Upload the audio file in assistant settings
-3. Wait for training to complete (few minutes to hours)
-4. Test the cloned voice before using in production
+1. Click "Clone voice" next to voice selector
+2. Select provider (Cartesia or ElevenLabs)
+3. Choose the voice language
+4. Enter a name for your voice
+5. Record or upload audio
+6. Wait for processing
+7. Select your new voice from dropdown
 
 **Use cases:**
 - Brand consistency with company spokesperson
@@ -244,10 +251,30 @@ Control timing and call limits to optimize user experience and costs:
 <AccordionGroup>
   <Accordion title="Re-engagement Interval" icon="clock">
     **Range:** 7 - 600 seconds | **Default:** 30 seconds
-    
+
     AI will try to re-engage the user if no reply is detected within this time.
-    
+
     **Recommended:** 30-60 seconds for professional calls.
+  </Accordion>
+
+  <Accordion title="Re-engagement Prompt" icon="message">
+    Custom prompt used when the AI tries to re-engage the user after silence.
+
+    **Default:** Uses a standard re-engagement phrase like "Are you still there?"
+
+    **Customization:** Write a prompt that instructs the AI how to re-engage.
+
+    **Examples:**
+    - "Gently ask if they are still there and if they need more time."
+    - "Politely check if they have any questions."
+
+    <Warning>
+    Variables like `{customer_name}` cannot be injected directly in this prompt. The AI has access to the conversation history and main system prompt, so it can reference information from there.
+    </Warning>
+
+    <Tip>
+    Leave empty to use the default re-engagement behavior.
+    </Tip>
   </Accordion>
   
   <Accordion title="Max Call Duration" icon="timer">
@@ -288,8 +315,26 @@ Control timing and call limits to optimize user experience and costs:
   
   <Accordion title="End Call on Voicemail" icon="voicemail">
     **Default:** Enabled
-    
+
     Immediately ends call if voicemail is detected during outbound calls (saves costs).
+  </Accordion>
+
+  <Accordion title="Voicemail Message" icon="voicemail">
+    Prompt for the message the AI will say when voicemail is detected before ending the call.
+
+    **Default:** Empty (hangs up immediately without leaving a message)
+
+    **Use case:** Leave a brief message before hanging up so the recipient knows who called.
+
+    **Example:** "Leave a brief voicemail message saying you called and ask them to call back."
+
+    <Warning>
+    Variables like `{company_name}` cannot be injected directly in this prompt. The AI has access to the conversation history and main system prompt, so it can reference information from there.
+    </Warning>
+
+    <Note>
+    Only applies when "End Call on Voicemail" is enabled. Leave empty to hang up without a message.
+    </Note>
   </Accordion>
   
   <Accordion title="Record Calls" icon="record-vinyl">
@@ -318,6 +363,21 @@ Configure text-to-speech voice parameters for natural-sounding conversations.
 Fine-tune your assistant's voice characteristics for optimal performance:
 
 <AccordionGroup>
+  <Accordion title="TTS Emotion" icon="face-smile">
+    **Default:** Enabled
+
+    When enabled, the AI will add emotional cues to the synthesized speech based on the context of the conversation. This makes the voice sound more natural and expressive.
+
+    **Effects:**
+    - Adjusts tone based on conversation context (happy, concerned, empathetic)
+    - Adds natural inflections and emphasis
+    - Makes the assistant sound more human-like
+
+    <Note>
+    Disable if you prefer a more neutral, consistent tone across all conversations.
+    </Note>
+  </Accordion>
+
   <Accordion title="Voice Stability" icon="wave-square">
     **Range:** 0.0 - 1.0 | **Default:** 0.7
     
@@ -433,20 +493,36 @@ Fine-tune these settings if experiencing interruption issues or sluggish respons
 <AccordionGroup>
   <Accordion title="Endpoint Sensitivity" icon="microphone">
     **Range:** 0 - 5 seconds | **Default:** 0.5
-    
+
     Adjust the time the AI will wait for the user to speak after the last word. Lower values make the AI faster, higher values are better for long user phrases.
-    
+
     - **0 (Faster):** Quick responses but may cut off callers
     - **5 (Slower):** Waits longer, reduces interruptions
   </Accordion>
-  
+
   <Accordion title="Interrupt Sensitivity" icon="volume-off">
     How easily the assistant stops when caller talks over it. Controls the sensitivity for detecting when a caller is trying to interrupt.
   </Accordion>
-  
+
   <Accordion title="Minimum Interrupt Words" icon="list-ol">
     Require at least N caller words before interrupting assistant.
     **Use:** Prevents false triggers from background noise or brief sounds.
+  </Accordion>
+
+  <Accordion title="Turn Detection Threshold" icon="sliders">
+    **Available for:** Speech-to-Speech and Dualplex modes only
+
+    **Range:** 0 - 1 | **Default:** Auto (model decides)
+
+    Controls how sensitive the multimodal model is to detecting when the caller has finished speaking. Lower values make the assistant respond faster, higher values wait longer for the caller to finish.
+
+    - **Lower (0.3-0.5):** Faster responses, good for quick conversations
+    - **Higher (0.7-0.9):** Waits longer, better for detailed responses
+    - **Auto:** Let the model decide based on conversation context
+
+    <Note>
+    Only visible when using Speech-to-Speech or Dualplex modes.
+    </Note>
   </Accordion>
 </AccordionGroup>
 
