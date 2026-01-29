@@ -99,6 +99,63 @@ To preview documentation changes locally:
 - **Workflow fails**: Check the Actions log for error details
 - **Branding not applied**: Ensure you ran the "Rebrand Documentation" workflow first
 
+### Sync Workflow Permission Error
+
+If you see an error like `refusing to allow a GitHub App to create or update workflow without 'workflows' permission`, follow these steps:
+
+1. Go to your repository on GitHub
+2. Navigate to **Actions** tab
+3. Click on **"Fix Workflow Files (Run Once)"** in the left sidebar
+4. Click **"Run workflow"**
+5. Type `fix` and click **"Run workflow"**
+6. After it completes, you can run "Sync Updates" normally
+
+**If you don't see "Fix Workflow Files" option:**
+
+1. In your repository, go to `.github/workflows/` folder
+2. Click **"Add file"** → **"Create new file"**
+3. Name it `fix-workflows.yml`
+4. Paste this content:
+
+```yaml
+name: Fix Workflow Files (Run Once)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "fix" to confirm'
+        required: true
+        type: string
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.confirm == 'fix' }}
+    permissions:
+      contents: write
+      workflows: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download latest workflows
+        run: |
+          curl -sL https://raw.githubusercontent.com/Autocalls/documentation/main/.github/workflows/rebrand.yml -o .github/workflows/rebrand.yml
+          curl -sL https://raw.githubusercontent.com/Autocalls/documentation/main/.github/workflows/sync-updates.yml -o .github/workflows/sync-updates.yml
+      - name: Commit
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .github/workflows/
+          git commit -m "Update workflow files" || echo "No changes"
+          git push
+```
+
+5. Click **"Commit new file"**
+6. Go to **Actions** tab and run the new workflow
+7. After it completes, you can run "Sync Updates" normally
+
 ## Support
 
 For platform-related questions, contact your platform provider.
