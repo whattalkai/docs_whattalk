@@ -58,8 +58,14 @@ jobs:
           git remote add upstream https://github.com/${{ inputs.upstream_repo }}.git || true
           git fetch upstream main
 
-          # Get list of files from upstream, excluding workflow files and config
-          git checkout upstream/main -- . 2>/dev/null || git checkout upstream/main -- $(git ls-tree -r --name-only upstream/main | grep -v -E '^\.github/|^brand\.config\.json$')
+          # Get list of files from upstream, EXCLUDING .github folder and brand.config.json
+          # This prevents workflow permission issues and preserves partner's branding
+          FILES_TO_SYNC=$(git ls-tree -r --name-only upstream/main | grep -v -E '^\.github/|^brand\.config\.json$|^\.cursor/')
+          
+          # Checkout each file individually
+          for file in $FILES_TO_SYNC; do
+            git checkout upstream/main -- "$file" 2>/dev/null || true
+          done
 
       # Restore partner's branding config and assets
       - name: Restore branding config and assets
