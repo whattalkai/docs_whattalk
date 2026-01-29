@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Step 1: URL replacements (most specific first to avoid partial matches)
       - name: Replace app.autocalls.ai URLs
@@ -76,6 +78,14 @@ jobs:
         run: |
           # Replace the API baseUrl with dashboard_url + /api/
           sed -i 's|"baseUrl": "https://app.autocalls.ai/api/"|"baseUrl": "${{ inputs.dashboard_url }}/api/"|g' mint.json
+
+      - name: Replace all URLs in mint.json explicitly
+        run: |
+          # Replace URLs in mint.json using sed (more reliable than glob patterns)
+          sed -i 's|https://app.autocalls.ai|${{ inputs.dashboard_url }}|g' mint.json
+          sed -i 's|https://autocalls.ai/contact|${{ inputs.support_url }}|g' mint.json
+          sed -i 's|https://autocalls.ai|${{ inputs.website_url }}|g' mint.json
+          sed -i 's|"name": "Autocalls"|"name": "${{ inputs.brand_name }}"|g' mint.json
 
       - name: Replace LinkedIn URL
         if: ${{ inputs.linkedin_url != '' }}
@@ -260,5 +270,7 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add -A
-          git commit -m "Rebrand documentation to ${{ inputs.brand_name }}"
-          git push
+          git commit -m "Rebrand documentation to ${{ inputs.brand_name }}" || echo "Nothing to commit"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main

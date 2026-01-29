@@ -122,6 +122,14 @@ jobs:
         run: |
           sed -i 's|"baseUrl": "https://app.autocalls.ai/api/"|"baseUrl": "${{ steps.brand.outputs.dashboard_url }}/api/"|g' mint.json
 
+      - name: Replace all URLs in mint.json explicitly
+        run: |
+          # Replace URLs in mint.json using sed (more reliable than glob patterns)
+          sed -i 's|https://app.autocalls.ai|${{ steps.brand.outputs.dashboard_url }}|g' mint.json
+          sed -i 's|https://autocalls.ai/contact|${{ steps.brand.outputs.support_url }}|g' mint.json
+          sed -i 's|https://autocalls.ai|${{ steps.brand.outputs.website_url }}|g' mint.json
+          sed -i 's|"name": "Autocalls"|"name": "${{ steps.brand.outputs.name }}"|g' mint.json
+
       - name: Replace LinkedIn URL
         if: ${{ steps.brand.outputs.linkedin_url != '' }}
         uses: jacobtomlinson/gha-find-replace@v3
@@ -292,6 +300,8 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Sync docs from upstream - $(date +%Y-%m-%d)"
-            git push
+            git commit -m "Sync docs from upstream - $(date +%Y-%m-%d)" || echo "Nothing to commit"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
