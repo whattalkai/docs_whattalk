@@ -35,6 +35,22 @@ This endpoint returns a list of all available voices that can be used when creat
     <ResponseField name="gender" type="string">
       The gender of the voice (male/female)
     </ResponseField>
+
+    <ResponseField name="preview_url" type="string">
+      URL to an audio sample of the voice. Can be used to let users preview voices before selecting one.
+    </ResponseField>
+
+    <ResponseField name="accent" type="string">
+      The accent of the voice (e.g., "American", "British"). May be `null`.
+    </ResponseField>
+
+    <ResponseField name="age" type="string">
+      The age category of the voice (e.g., "Young", "Middle aged"). May be `null`.
+    </ResponseField>
+
+    <ResponseField name="synthesizer_provider_id" type="integer">
+      The TTS provider ID this voice belongs to. Use the [Get Synthesizer Providers](/api-reference/assistants/get-synthesizer-providers) endpoint to resolve provider names. May be `null`.
+    </ResponseField>
   </Expandable>
 </ResponseField>
 
@@ -46,19 +62,31 @@ This endpoint returns a list of all available voices that can be used when creat
     "id": 1,
     "name": "Alloy",
     "language_id": 1,
-    "gender": "female"
+    "gender": "female",
+    "preview_url": "https://cdn.openai.com/API/voice-previews/alloy.flac",
+    "accent": null,
+    "age": "Middle aged",
+    "synthesizer_provider_id": null
   },
   {
-    "id": 2,
-    "name": "Echo",
+    "id": 10,
+    "name": "Zephyr",
     "language_id": 1,
-    "gender": "male"
+    "gender": "female",
+    "preview_url": "https://gstatic.com/aistudio/voices/samples/Zephyr.wav",
+    "accent": null,
+    "age": "Middle aged",
+    "synthesizer_provider_id": 1
   },
   {
-    "id": 3,
-    "name": "Coral",
-    "language_id": null,
-    "gender": "female"
+    "id": 11,
+    "name": "Puck",
+    "language_id": 1,
+    "gender": "male",
+    "preview_url": "https://gstatic.com/aistudio/voices/samples/Puck.wav",
+    "accent": null,
+    "age": "Middle aged",
+    "synthesizer_provider_id": 1
   }
 ]
 ```

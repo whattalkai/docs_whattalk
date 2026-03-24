@@ -89,6 +89,9 @@ The webhook is sent as a POST request to your configured URL with the following 
     <ResponseField name="status" type="string">
       Current status of the lead
     </ResponseField>
+    <ResponseField name="call_tries" type="integer">
+      The number of call attempts made to this lead
+    </ResponseField>
     <ResponseField name="created_at" type="string">
       When the lead was created
     </ResponseField>
@@ -132,6 +135,42 @@ The webhook is sent as a POST request to your configured URL with the following 
           When the campaign was last updated
         </ResponseField>
       </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="transfers" type="array">
+  List of transfer calls made during this call (only included if the call has transfers)
+  <Expandable title="Transfer properties">
+    <ResponseField name="id" type="integer">
+      Unique identifier of the transfer call
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Final status of the transfer call (e.g., "completed", "busy", "failed")
+    </ResponseField>
+    <ResponseField name="transfer_to" type="string">
+      Phone number the call was transferred to in E.164 format
+    </ResponseField>
+    <ResponseField name="duration" type="integer">
+      Duration of the transfer call in seconds
+    </ResponseField>
+    <ResponseField name="carrier_cost" type="number">
+      Carrier cost of the transfer call in USD
+    </ResponseField>
+    <ResponseField name="transcript" type="array">
+      Raw transcript of the transfer call (null if not available)
+    </ResponseField>
+    <ResponseField name="formatted_transcript" type="string">
+      Human-readable formatted transcript of the transfer call
+    </ResponseField>
+    <ResponseField name="recording_url" type="string">
+      URL to download the transfer call recording (only included if "Include recording in webhook" is enabled and a recording exists)
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      ISO 8601 timestamp when the transfer was initiated
+    </ResponseField>
+    <ResponseField name="finished_at" type="string">
+      ISO 8601 timestamp when the transfer was completed
     </ResponseField>
   </Expandable>
 </ResponseField>
@@ -184,6 +223,19 @@ The webhook is sent as a POST request to your configured URL with the following 
   "recording_url": "https://app.autocalls.ai/storage/recordings/call-12345.mp4",
   "created_at": "2025-01-15T10:30:00.000000Z",
   "finished_at": "2025-01-15T10:32:05.000000Z",
+  "transfers": [
+    {
+      "id": 12346,
+      "status": "completed",
+      "transfer_to": "+1555123456",
+      "duration": 85,
+      "carrier_cost": 0.0156,
+      "transcript": null,
+      "formatted_transcript": "",
+      "created_at": "2025-01-15T10:31:00.000000Z",
+      "finished_at": "2025-01-15T10:32:25.000000Z"
+    }
+  ],
   "lead": {
     "id": 789,
     "phone_number": "+1234567890",
@@ -192,6 +244,7 @@ The webhook is sent as a POST request to your configured URL with the following 
       "interest_level": "high"
     },
     "status": "contacted",
+    "call_tries": 2,
     "created_at": "2025-01-15T09:00:00.000000Z",
     "updated_at": "2025-01-15T10:32:05.000000Z",
     "campaign": {
@@ -225,4 +278,5 @@ You can configure the following options for your post-call webhook:
 - The `customer_phone` and `assistant_phone` fields can be `null` if the information is not available
 - The `recording_url` field is only included if you have enabled "Include recording in webhook" in your [assistant settings](/ai-assistants/settings/post-call-actions#webhook-configuration)
 - The `lead` object is only included for calls that are part of a campaign
+- The `transfers` array is only included for calls that have transfer calls associated with them
 - The `extracted_variables` object will contain the variables you defined in your assistant's post-call schema configuration

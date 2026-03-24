@@ -88,6 +88,7 @@
         "ai-assistants/voice-selection",
         "ai-assistants/filler-audio",
         "ai-assistants/cal-com-scheduling",
+        "ai-assistants/calendly-scheduling",
         "ai-assistants/gohighlevel-scheduling",
         "ai-assistants/testing",
         "ai-assistants/test-chat",
@@ -204,9 +205,16 @@
           "pages": [
             "provisioning/sip-trunking/sip-integration",
             "provisioning/sip-trunking/twilio",
-            "provisioning/sip-trunking/zadarma"
+            "provisioning/sip-trunking/zadarma",
+            "provisioning/sip-trunking/didlogic"
           ]
         }
+      ]
+    },
+    {
+      "group": "Settings",
+      "pages": [
+        "settings/data-retention"
       ]
     },
     {
@@ -215,6 +223,7 @@
         "troubleshooting/ai-behavior",
         "troubleshooting/billing",
         "troubleshooting/cal-com",
+        "troubleshooting/calendly",
         "troubleshooting/call-quality",
         "troubleshooting/campaigns",
         "troubleshooting/gohighlevel",
@@ -243,10 +252,14 @@
         "api-reference/assistants/delete-assistant",
         "api-reference/assistants/enable-inbound-webhook",
         "api-reference/assistants/disable-inbound-webhook",
+        "api-reference/assistants/enable-conversation-ended-webhook",
+        "api-reference/assistants/disable-conversation-ended-webhook",
         "api-reference/assistants/disable-webhook",
         "api-reference/assistants/get-languages",
         "api-reference/assistants/get-voices",
         "api-reference/assistants/get-models",
+        "api-reference/assistants/get-synthesizer-providers",
+        "api-reference/assistants/get-transcriber-providers",
         "api-reference/assistants/get-phone-numbers"
       ]
     },
@@ -297,6 +310,7 @@
       "group": "Campaigns",
       "pages": [
         "api-reference/campaigns/get-campaigns",
+        "api-reference/campaigns/create-campaign",
         "api-reference/campaigns/update-status"
       ]
     },
@@ -331,9 +345,20 @@
       ]
     },
     {
+      "group": "WhatsApp",
+      "pages": [
+        "api-reference/whatsapp/get-senders",
+        "api-reference/whatsapp/get-templates",
+        "api-reference/whatsapp/send-template",
+        "api-reference/whatsapp/send-freeform",
+        "api-reference/whatsapp/session-status"
+      ]
+    },
+    {
       "group": "Webhooks",
       "pages": [
-        "api-reference/webhooks/post-call-webhook"
+        "api-reference/webhooks/post-call-webhook",
+        "api-reference/webhooks/conversation-ended-webhook"
       ]
     },
     {

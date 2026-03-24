@@ -1,180 +1,369 @@
 ---
 title: "Zadarma Integration"
-description: "A step by step guide to connect to your Zadarma account via SIP trunking"
+description: "A step by step guide to connect your Zadarma phone numbers via SIP trunking"
 ---
 
-## Step 1: Gather Your Information
+This guide walks you through connecting your Zadarma phone numbers using SIP trunking. Zadarma offers two connection types — **PBX** and **SIP Direct** — and the setup differs slightly for each.
 
--  PBX Extension:
+<Tip>
+**Which type do you have?** If you use Zadarma's virtual PBX with extensions (e.g., 100, 101), you have **PBX**. If you use a standalone SIP account without a PBX, you have **SIP Direct**.
+</Tip>
 
-Go to My Switchboard, Extensions on the main page.
-   <Frame>
-     <img
-       src="/resources/zadarma-mypbx-extensions.png"
-       alt="Zadarma My Switchboard Extensions"
-     />
-   </Frame> 
-Find the following information: 
+Select your connection type below and follow the steps:
 
-```
-Extension number: e.g., 1000
-Server address: e.g., pbx.zadarma.com
-Username: Your extension username
-Password: Your extension password
-```
+<Tabs>
+  <Tab title="PBX">
+    ## Step 1: Gather Your SIP Credentials
 
-    <Frame>
-     <img
-       src="/resources/zadarma-switch-extension-settings.PNG"
-       alt="Zadarma My Switchboard Extensions Settings"
-     />
-   </Frame> 
-
--  SIP Connection:
-
-```
-Phone number: e.g., +1 555 0123
-SIP server: e.g., sip.zadarma.com
-Username: Provided by your phone company
-Password: Provided by your phone company
-```
-
-Go to Configuration, SIP Settings on the main page.
-   <Frame>
-     <img
-       src="/resources/zadarma-sip-settings.png"
-       alt="Zadarma SIP Settings"
-     />
-   </Frame> 
-
-Find the following information: 
-
-   <Frame>
-     <img
-       src="/resources/zadarma-sip-connection-settings.png"
-       alt="Zadarma SIP Connection Settings"
-     />
-   </Frame> 
-
-- For **IP Authorization type**:
-
-1. Go to Services, Connect number on the main page.
-   <Frame>
-     <img
-       src="/resources/zadarma-services.png"
-       alt="Zadarma Services"
-     />
-   </Frame> 
-
-2. Go to Active numbers.
-   <Frame>
-     <img
-       src="/resources/zadarma-active-numbers.png"
-       alt="Zadarma Active Numbers"
-     />
-   </Frame> 
-
-3. Click on the number you want to connect and press settings button.
-   <Frame>
-     <img
-       src="/resources/zadarma-settings-button.png"
-       alt="Zadarma Settings Button"
-     />
-   </Frame> 
-4. Click on external services and then check the option for SIP URI.
-
-  Add ```sip:extension@5wed79aeavr.sip.livekit.cloud ``` (this is Autocalls SIP server address) .
-
-   <Frame>
-     <img
-       src="/resources/zadarma-external-services.png"
-       alt="Zadarma External Services"
-     />
-   </Frame> 
-
-<Note>
-You will need these IPs which you will put in step 2 for inbound authorization type.
-</Note>
-
-## Step 2: Import numbers to Autocalls
-
-You need to import to Autocalls.
-
-1. Go to your Autocalls.ai dashboard
-2. Navigate to **Your Phone Numbers**
-3. Click “Integrate SIP trunk”
-
-   <Frame>
-     <img
-       src="/resources/twillio-import-autocalls-sip1.png"
-       alt="Import numbers to Autocalls"
-     />
-   </Frame>
-4. Fill in your details based on your integration type 
-
-For PBX Extension:
-
-   <Frame>
-     <img
-       src="/resources/zadarma-autocalls-type.png"
-       alt="Fill in your details based on your integration type"
-     />
-   </Frame>
-For SIP Connection:
-   <Frame>
-     <img
-       src="/resources/twillio-autocalls-auth-integration.png"
-       alt="Fill in your details based on your integration type"
-     />
-   </Frame>
-5. Here you will supply the termination SIP URI you set up in Step 1.
-```
-Server address: e.g., pbx.zadarma.com / sip.zadarma.com based on your integration type
-```
-
-   <Frame>
-     <img
-       src="/resources/zadarma-outbound-settings.png"
-       alt="Zadarma Outbound Settings"
-     />
-   </Frame>
-
-6. Here select Authorization type. 
-
-{/* - If you opted for auth route select Username and password.
-
-   <Frame>
-     <img
-       src="/resources/twillio-autocalls-credentials-auth-type.png"
-       alt="Twillio Autocalls Credentials Auth Type"
-     />
-   </Frame> */}
-
-- Add the **IPs** from **Zadarma** (Step 1).
-
-   <Frame>
-     <img
-       src="/resources/zadarma-ip-inbound.png"
-       alt="Twillio Autocalls Credentials IP Type"
-     />
-   </Frame> 
-   
-7. Select the country of where your SIP trunk is located. 
+    1. Log in to your [Zadarma Dashboard](https://my.zadarma.com)
+    2. Go to **My PBX** → **Extensions**
 
     <Frame>
       <img
-        src="/resources/twillio-autocalls-sip-country.png"
-        alt="Twillio Autocalls SIP Country"
+        src="/resources/zadarma-mypbx-extensions.png"
+        alt="Zadarma My PBX Extensions"
       />
     </Frame>
 
-### Step 3: Verify Setup
+    3. Find your extension and note these details:
 
-After configuration:
+    ```
+    Extension: e.g., 510000-100
+    Server address: pbx.zadarma.com
+    Username: Your extension username (e.g., 510000-100)
+    Password: Your extension password
+    Phone number: Your phone number (e.g., +521151900966)
+    ```
 
-1. Make a test call to your number/extension
-2. Check that the AI assistant answers
-3. Use the test call feature to verify outbound calling
+    <Frame>
+      <img
+        src="/resources/zadarma-switch-extension-settings.png"
+        alt="Zadarma PBX Extension Settings"
+      />
+    </Frame>
+
+    ## Step 2: Set Up External Server (for inbound calls)
+
+    To receive inbound calls, you need to configure an **External Server** in Zadarma that forwards incoming calls to the platform's SIP server.
+
+    1. In your [Zadarma Dashboard](https://my.zadarma.com), go to **Settings** → [**Virtual phone numbers**](https://my.zadarma.com/dirnum/active/)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-settings-virtual-numbers.png"
+        alt="Zadarma Settings Virtual phone numbers"
+      />
+    </Frame>
+
+    2. Find the number you want to connect and click the **gear icon** to open its settings
+
+    <Frame>
+      <img
+        src="/resources/zadarma-settings-virtual-numbers-gear-icon.png"
+        alt="Zadarma Settings Virtual phone numbers Gear Icon"
+      />
+    </Frame>
+
+    3. Click **External Server** and enable the **SIP URI** checkbox
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-external-server.png"
+        alt="Zadarma PBX External Server SIP URI configuration"
+      />
+    </Frame>
+
+    4. Enter the SIP server address using your **phone number with the `+` prefix**:
+
+    ```
+    +YOUR_PHONE_NUMBER@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    For example, if your number is `+551151900966`:
+
+    ```
+    +521151900966@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-server-address.png"
+        alt="Zadarma PBX Server Address configuration"
+      />
+    </Frame>
+
+    5. Click **Show IP** below the server address to reveal Zadarma's IP addresses (e.g., `185.45.152.216`, `185.45.155.33`)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-show-ip-button.png"
+        alt="Zadarma PBX Show IP button"
+      />
+    </Frame>
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-show-ip-addresses.png"
+        alt="Zadarma PBX IP addresses revealed"
+      />
+    </Frame>
+
+    <Note>
+    **Save these IPs** — you will need them in Step 3 when configuring inbound authorization in the platform.
+    </Note>
+
+    <Warning>
+    **PBX users must use the phone number with `+`** in the External Server address. Using the PBX extension number (e.g., `533177-100`) will **not** work for inbound calls.
+    </Warning>
+
+    ## Step 3: Import Numbers to the Platform
+
+    Now import the number so the platform knows how to route calls.
+
+    1. Go directly to the Phone Numbers page in your dashboard:
+
+       **[https://app.autocalls.ai/phone-numbers](https://app.autocalls.ai/phone-numbers)**
+
+       If it takes you to the login page, log in first — it will automatically redirect you to the Phone Numbers page.
+
+    2. Click **"Integrate SIP trunk"** (top-right corner of the page)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-import-sip.png"
+        alt="Import numbers via SIP trunk"
+      />
+    </Frame>
+
+    3. Fill in your phone number and SIP credentials:
+
+    ```
+    Phone number: e.g., +551151900966
+    Username: Your PBX extension (e.g., 533100-100)
+    Your SIP Extension: Your phone number (e.g., +551151900966)
+    Password: Your PBX extension password
+    ```
+
+    <Warning>
+    **PBX users:** The **Username** is your PBX extension (e.g., `533100-100`). The **"Your SIP Extension"** field must be your **phone number** — this must match the number you used in the External Server address in Step 2.
+    </Warning>
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-auth.png"
+        alt="PBX Extension credentials"
+      />
+    </Frame>
+
+    4. Enter the **Server address** for outbound calls:
+
+    ```
+    pbx.zadarma.com
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-outbound-settings.png"
+        alt="Zadarma outbound server address"
+      />
+    </Frame>
+
+    5. Select the **Authorization type**. Select **IP** and add the Zadarma IP addresses you noted earlier from **Show IP** in Step 2.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-ip-inbound.png"
+        alt="Zadarma IP Authorization"
+      />
+    </Frame>
+
+    6. Select the **country** where your SIP trunk is located.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-country.png"
+        alt="SIP Country selection"
+      />
+    </Frame>
+
+    ## Step 4: Verify Setup
+
+    1. Make a test call to your number
+    2. Check that the AI assistant answers
+    3. Use the test call feature to verify outbound calling
+  </Tab>
+  <Tab title="SIP Direct">
+    ## Step 1: Gather Your SIP Credentials
+
+    1. Log in to your [Zadarma Dashboard](https://my.zadarma.com)
+    2. Go to **Settings** → **SIP Connection**
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-settings.png"
+        alt="Zadarma SIP Settings"
+      />
+    </Frame>
+
+    3. Note these details:
+
+    ```
+    Server address: sip.zadarma.com
+    Extension: Your SIP extension number (e.g., 247000)
+    Username: Your SIP username (the same as your extension e.g., 247000)
+    Password: Your SIP password
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-connection-settings.png"
+        alt="Zadarma SIP Connection Settings"
+      />
+    </Frame>
+
+    ## Step 2: Set Up External Server (for inbound calls)
+
+    To receive inbound calls, you need to configure an **External Server** in Zadarma that forwards incoming calls to the platform's SIP server.
+
+    1. In your [Zadarma Dashboard](https://my.zadarma.com), go to **Settings** → [**Virtual phone numbers**](https://my.zadarma.com/dirnum/active/)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-settings-virtual-numbers.png"
+        alt="Zadarma SIP Settings Virtual phone numbers"
+      />
+    </Frame>
+
+    2. Find the number you want to connect and click the **gear icon** to open its settings
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-settings-virtual-numbers-gear-icon.png"
+        alt="Zadarma SIP Settings Virtual phone numbers Gear Icon"
+      />
+    </Frame>
+
+    3. Click **External Server** and enable the **SIP URI** checkbox
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-external-server.png"
+        alt="Zadarma SIP External Server SIP URI configuration"
+      />
+    </Frame>
+
+    4. Enter the SIP server address using your **SIP extension number**:
+
+    ```
+    YOUR_EXTENSION@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    For example, if your extension is `247000`:
+
+    ```
+    247000@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-uri.png"
+        alt="Zadarma SIP URI"
+      />
+    </Frame>
+
+    5. Click **Show IP** below the server address to reveal Zadarma's IP addresses (e.g., `185.45.152.216`, `185.45.155.33`)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-show-ip-button.png"
+        alt="Zadarma SIP Show IP button"
+      />
+    </Frame>
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-show-ip-addresses.png"
+        alt="Zadarma SIP IP addresses revealed"
+      />
+    </Frame>
+
+    <Note>
+    **Save these IPs** — you will need them in Step 3 when configuring inbound authorization in the platform.
+    </Note>
+
+    ## Step 3: Import Numbers to the Platform
+
+    Now import the number so the platform knows how to route calls.
+
+    1. Go directly to the Phone Numbers page in your dashboard:
+
+       **[https://app.autocalls.ai/phone-numbers](https://app.autocalls.ai/phone-numbers)**
+
+       If it takes you to the login page, log in first — it will automatically redirect you to the Phone Numbers page.
+
+    2. Click **"Integrate SIP trunk"** (top-right corner of the page)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-import-sip.png"
+        alt="Import numbers via SIP trunk"
+      />
+    </Frame>
+
+    3. Fill in your phone number and SIP credentials:
+
+    ```
+    Phone number: e.g., +1 555 0123
+    Your SIP Extension: Your SIP extension number (e.g., 247000)
+    Username: Your SIP username (the same as your extension e.g., 247000)
+    Password: Your SIP password
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-auth-integration.png"
+        alt="SIP Direct credentials"
+      />
+    </Frame>
+
+    4. Enter the **Server address** for outbound calls:
+
+    ```
+    sip.zadarma.com
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-outbound-settings.png"
+        alt="Zadarma SIP outbound server address"
+      />
+    </Frame>
+
+    5. Select the **Authorization type**. Select **IP** and add the Zadarma IP addresses you noted earlier from **Show IP** in Step 2.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-ip-inbound.png"
+        alt="Zadarma IP Authorization"
+      />
+    </Frame>
+
+    6. Select the **country** where your SIP trunk is located.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip1-country.png"
+        alt="SIP Country selection"
+      />
+    </Frame>
+
+    ## Step 4: Verify Setup
+
+    1. Make a test call to your number
+    2. Check that the AI assistant answers
+    3. Use the test call feature to verify outbound calling
+  </Tab>
+</Tabs>
 
 ## Security Requirements
 
@@ -186,41 +375,55 @@ Your SIP credentials need to be secure:
   - Numbers
   - Upper and lowercase letters
   - Special characters recommended
+
+## Call Transfer Limitations
+
+<Warning>
+**Zadarma does not support SIP REFER**, which means standard cold transfer will not work out of the box. Warm transfer works automatically — the platform handles it via SIP INVITE.
+
+For **cold transfer**, you can use the **Custom SIP Transfer** option in your assistant's transfer settings. Set the custom SIP URI to:
+
+```
+sip:+DESTINATION_NUMBER@sip.zadarma.com
+```
+
+For example: `sip:+15557654321@sip.zadarma.com`
+
+Make sure the number is in international E.164 format with the `+` prefix. Do **not** use `tel:` URI format.
+</Warning>
+
 ## Common Issues
 
 <AccordionGroup>
-  <Accordion title="After connecting, inbound works but outbound does not work?">
-    - Check your Termination SIP URI If there’s a space in it, please remove. Also you should use a localized termination uri that’s near your region. Check out this [doc](https://www.twilio.com/docs/global-infrastructure/localized-uris/termination) to select one.
-    - Check your user name and credentials Please make sure you entered the right user name and credentials which shows in this dialog. Please note the user name is not the friendly name that shows in the credential list. The friendly is different to user name, you need to double check if you happen to give a different name.
-    
-    <Frame>
-     <img
-       src="/resources/twillio-outbound-not-work.png"
-       alt="Twillio outbound not work"
-     />
-   </Frame>
+  <Accordion title="Inbound calls are not working">
+    - **Check your External Server address** — make sure the format matches your connection type:
+      - **PBX**: `+YOUR_PHONE_NUMBER@5wed79aeavr.sip.livekit.cloud` (phone number with `+`)
+      - **SIP Direct**: `YOUR_EXTENSION@5wed79aeavr.sip.livekit.cloud` (extension number)
+    - **Verify the External Server is enabled** in Zadarma's settings
+    - **Check that the "Your SIP Extension" field** in the platform matches: phone number for PBX, extension for SIP Direct
   </Accordion>
 
-{" "}
+  <Accordion title="Outbound calls are not working">
+    - **Check the Server address** — it should be `pbx.zadarma.com` for PBX or `sip.zadarma.com` for SIP Direct
+    - **Verify your credentials** — make sure the username and password match what's shown in your Zadarma SIP settings
+    - **Check your Zadarma balance** — outbound calls require sufficient credit
+  </Accordion>
 
-<Accordion title="How do I set up dialing to international countries?">
-- Search “geo” to find the “Voice Geographic Permissions” setting.  
-    <Frame>
-     <img
-       src="/resources/twillio-setup-dialing-international.png"
-       alt="Twillio setup dialing international"
-     />
-   </Frame>
-- Choose “Elastic Sip Trunking” in selector, and select the countries you would like to dial. 
-    <Frame>
-     <img
-       src="/resources/twillio-choose-elastic-sip-trunking.png"
-       alt="Twillio setup dialing international"
-     />
-   </Frame>
+  <Accordion title="Cold transfer is not working">
+    Zadarma does not support SIP REFER. To enable cold transfer:
+    1. Go to your assistant's **Transfer Phone Call** tool settings
+    2. Enable **"Custom SIP transfer"** (under Advanced)
+    3. Set the SIP URI to `sip:+DESTINATION_NUMBER@sip.zadarma.com`
 
-</Accordion>
-{" "}
+    If cold transfer still fails, verify the destination number is in international format with `+`.
+  </Accordion>
+
+  <Accordion title="Which connection type should I use — PBX or SIP Direct?">
+    - **PBX** is recommended if you need multiple extensions, call routing rules, IVR menus, or other PBX features in Zadarma
+    - **SIP Direct** is simpler if you just need a single number connected without PBX features
+
+    Both work equally well for inbound and outbound AI calls.
+  </Accordion>
 </AccordionGroup>
 
 ---

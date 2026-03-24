@@ -8,6 +8,111 @@ icon: "scroll"
 **Stay up to date** — Follow our latest product updates and improvements. We ship new features regularly to enhance your AI calling experience.
 </Note>
 
+<Update label="v1.7.5" description="Mar 16 2026">
+
+### ✨ AI Assistant Advisor
+
+<Frame>
+ <img
+ src="/resources/tqKbqf0Ik45wszeQDfvWBYCWj4XiBXPe8RGJFU65.jpg"
+ alt="Image"
+ />
+</Frame>
+
+Your AI assistants now have their own personal optimization coach. The new **AI Advisor** automatically analyzes your assistant's configuration and call performance, then gives you clear recommendations to improve call quality — with one-click fixes.
+
+Open any assistant and you'll see a smart banner telling you exactly how many settings could be improved. Click **"View &amp; fix"** to open the full advisor panel.
+
+### 💡 How It Works
+The advisor runs **41 intelligent rules** across three categories:
+
+- **Recommendations** — Settings that aren't optimal for your use case. Things like voice speed, temperature values, silence thresholds, and endpoint sensitivity. Each recommendation explains *why* it matters and what to change.
+- **Troubleshoot** — Experiencing issues on calls? Echo, interruptions, the AI not following your prompt, calls cutting off too early? Select the problem and the advisor shows exactly which settings to adjust.
+- **Best Settings** — A curated guide to the optimal configuration for each voice mode (Pipeline, Multimodal, and Dualplex).
+
+### 🔧 One-Click Fix
+Every recommendation comes with a **"Fix"** button that automatically applies the optimal value — no manual editing needed. You can also hit **"Fix All"** to apply every recommendation at once. The advisor updates in real time as you make changes.
+
+</Update>
+
+<Update label="v1.7.4" description="Mar 7 2026">
+
+### 🆕 New models: Soniox STT, Realtime 1.5, GPT 5.4 & 5.3
+
+### 🎙️ Soniox — New Speech-to-Text Provider in Pipeline Mode
+We've added **Soniox** as a new speech-to-text engine available in pipeline mode. Soniox delivers improved transcription accuracy across multiple languages with noticeably lower latency, meaning your voice assistants understand callers faster and respond more naturally.
+
+You can select Soniox as your transcription provider when configuring any assistant **in pipeline mode** — give it a try and compare the results with your current setup.
+
+### ⚡ GPT Realtime 1.5 — Speech-to-Speech mode Upgrade
+Our speech-to-speech mode now runs on **OpenAI's GPT Realtime 1.5**, bringing major improvements across the board:
+
+- **Better call quality** — More natural, fluid conversations with improved voice output
+- **Lower latency** — Faster responses for a smoother caller experience
+- **Improved prompt following** — The assistant stays on script more reliably and handles complex instructions better
+
+Select GPT Realtime 1.5 in your assistant's speech-to-speech mode configuration and hear the difference.
+
+### 🧠 GPT-5.4 &amp; GPT-5.3 — Latest OpenAI Models Now Available in Pipeline Mode
+You can now select **GPT-5.4** and **GPT-5.3** as the language model for your assistants in pipeline mode — OpenAI's newest and most capable models.
+
+- **GPT-5.4** — OpenAI's most factual model yet, with 33% fewer factual errors than its predecessor. Significantly better at following complex instructions, staying on script, and handling multi-step conversations. Your assistants will give more accurate, reliable answers and follow your prompts more precisely.
+- **GPT-5.3** — A strong all-rounder with excellent speed and reasoning balance. Great for assistants that need fast, smart responses.
+
+Both models are available right now — just select them in your assistant's pipeline mode configuration.
+
+### 🛠️ Other Improvements
+
+- **AEC warmup** — A new parameter that pre-warms the acoustic echo cancellation, reducing audio artifacts at the start of calls
+- **Expanded API** — New endpoints for campaigns, WhatsApp, warm transfers, keypad collection, filler phrases, voice settings, and provider discovery — build your own integrations with full programmatic control
+- **Voice preview fix** — Cartesia voice previews now play correctly
+- **Web widget improvements** — Fixed mobile height and form input collection on auto-open
+
+</Update>
+
+<Update label="v1.7.3" description="Feb 23 2026">
+
+### 🚀 WhatsApp Files & Audio, Cal.com EU + Teams, GDPR Data Retention, Chat Webhooks & Widget Customization
+
+### 🔥 WhatsApp Gets Smarter: Vision, Audio Transcription &amp; Media Attachments
+Your WhatsApp AI agents just got a massive upgrade: they can now **see images**, **transcribe voice messages**, and **handle file attachments** from your customers.
+
+**📸 Vision Support** — When a customer sends an image via WhatsApp, your AI agent can now analyze it using vision-capable LLMs (OpenAI, Claude, Gemini) and respond intelligently. Perfect for reading documents, analyzing property photos, diagnosing issues from images, or identifying products.
+
+**🎙️ Automatic Voice Message Transcription** — Customers who send WhatsApp voice notes no longer get ignored. Agents now automatically transcribe audio messages based on your assistant's language settings.
+
+**📎 Full Media Attachment Support** — All inbound media (images, audio, video, documents) are now securely stored as attachments. A new attachments gallery in the conversation detail view lets operators browse received files. Operators can also send files back to customers from the chat UI.
+
+### 🔒 GDPR Data Retention
+Full GDPR-compliant data retention with **configurable retention periods** for calls, leads, conversations, and SMS. Set retention rules per account — data is automatically cleaned up on schedule so you stay compliant without lifting a finger.
+
+### 📅 Cal.com v2 Integration Overhaul
+Completely rebuilt for the v2 API with **dynamic booking fields** and **team event types**.
+
+- **Region selector** — choose from EU, US, or custom Cal.com endpoint
+- **Dynamic booking fields** — reads your Cal.com event type's custom fields as-is, no more overwriting your configuration
+- **Team event types** — book into team calendars, not just personal ones
+- **Full backward compatibility** — existing configs continue working without changes
+- **Smart event picker** with grouped personal/team events and auto-fetched booking fields
+
+### 💬 Chat Conversation Webhooks &amp; Automation
+Chat conversations now fire **"conversation ended" triggers** on inactivity timeout. Payload includes full transcript, extracted variables, WhatsApp sender info, and AI evaluation using your post-call analysis schema. New automation platform trigger for "Conversation ended".
+
+### 🎨 Widget Customization Upgrade
+
+- **Extra large layout** — half-screen panel, full-screen on mobile
+- **Translatable tab labels** — rename Voice/Chat tabs to match your brand
+- **Auto-open on page load** — widget expands automatically
+- **Custom avatar** — upload your own widget avatar
+- **Hide function calls** — LLM tool calls hidden from chat by default
+
+### 🛠️ Improvements &amp; Fixes
+
+- **Auto top-up locking** — prevents duplicate charges during concurrent top-up attempts
+- **WhatsApp logo sync fix** — resolved an issue where profile logos weren't syncing correctly
+
+</Update>
+
 <Update label="V1.7.2" description="Jan 26 2026">
 
 ### 🔥 New Call Features: Warm Transfers + Keypad Digits Collection

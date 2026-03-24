@@ -127,6 +127,22 @@ This endpoint allows you to update an existing AI assistant's configuration. All
     - `description`: When to transfer the call
     - `custom`: If true, AI can determine transfer number dynamically
     - `timezone`: Timezone for transfer availability
+    - `warm_transfer`: Send a message to the customer before transferring (default: `false`)
+    - `warm_transfer_message`: Prompt telling the AI what to say before transferring (e.g., "Tell the customer that the call is being transferred.")
+
+    **warm_call_transfer** - Warm transfer with supervisor briefing
+    - `supervisor_phone` (required): Phone number to dial for the warm transfer (e.g., "+14155552001"). If `custom_sip` is enabled, this is a SIP address or internal extension instead.
+    - `outbound_phone_id` (required): ID of the phone number used to dial the supervisor.
+    - `description` (required): **When to transfer** — describes when the AI should initiate the warm transfer (e.g., "Transfer the call to a human supervisor when the customer requests to speak with a real person.")
+    - `custom_sip`: Enable to enter a custom SIP address or internal extension instead of a phone number (default: `false`)
+    - `caller_id_mode`: What phone number the supervisor sees when receiving the call. Options: `outbound_number` (default — shows the outbound phone number), `customer_number` (shows the caller's number), `custom` (shows a custom number)
+    - `custom_caller_id`: Custom phone number shown to supervisor. Only used when `caller_id_mode` is `custom`.
+    - `hold_music`: Audio played to the caller while on hold. Options: `hold_music` (default — plays default hold music), `none` (silence, no music)
+    - `hold_music_volume`: Volume level for hold music, 0-100 (default: `80`)
+    - `hold_message`: Message spoken to caller before placing them on hold (default: "Please hold while I connect you with a supervisor.")
+    - `summary_instructions`: Instructions for how the AI should brief the supervisor about the call (default: "Introduce the conversation from your perspective:\n- WHO is calling (name, company if mentioned)\n- WHY they called (their goal or problem)\n- WHY a human is needed at this point\n\nKeep it brief (2-3 sentences).")
+    - `briefing_initial_message`: The first message the AI says to the supervisor when they answer (default: "Hello! I have a caller on the line who needs your assistance. May I brief you on the situation?")
+    - `connected_message`: Message spoken to caller after supervisor is connected (default: "You are now connected with a supervisor. I'll leave you to it.")
 
     **end_call** - End the call programmatically
     - `description`: When the AI should end the call
@@ -134,15 +150,54 @@ This endpoint allows you to update an existing AI assistant's configuration. All
     **dtmf_input** - Send DTMF tones (keypad input)
     - `description`: When to use DTMF input (for IVR navigation)
 
+    **collect_keypad** - Collect keypad input from the caller
+    - `timeout`: Seconds to wait for input, 1-30 (default: 5)
+    - `stop_key`: Key that ends input. Options: `#` (default), `*`
+
     **calendar_integration** - Schedule appointments via Cal.com
     - `calcom_api_key` (required): Your Cal.com API key
-    - `calcom_event_slug` (required): The event type slug
+    - `calcom_event_slug` (required): The event type slug from Cal.com
+    - `calcom_team_slug`: Team slug if the event belongs to a Cal.com team
+    - `calcom_endpoint`: Cal.com API region. Options: `us` (default — `https://api.cal.com`), `eu` (`https://api.cal.eu`), `custom` (uses `calcom_custom_endpoint`)
+    - `calcom_custom_endpoint`: Custom Cal.com API base URL. Only used when `calcom_endpoint` is `custom` (e.g., `https://my-calcom-instance.com`).
+    - `calcom_booking_fields`: Array of custom booking fields for the event. Each field has:
+      - `slug` (required): Field identifier
+      - `type` (required): Field type (e.g., "text", "email", "phone", "select")
+      - `label` (required): Display label
+      - `required`: Whether the field is required (default: `false`)
+      - `options`: Array of options for select fields
+    - `description`: When to offer scheduling
   </Expandable>
 
   ```json
   "tools": [
-    {"type": "dtmf_input", "description": "Navigate IVR when needed"},
-    {"type": "end_call", "description": "End call when done"}
+    {
+      "type": "dtmf_input",
+      "description": "Navigate IVR when needed"
+    },
+    {
+      "type": "warm_call_transfer",
+      "supervisor_phone": "+1234567890",
+      "outbound_phone_id": 7,
+      "description": "Transfer the call to a human supervisor when the customer requests to speak with a real person.",
+      "custom_sip": false,
+      "caller_id_mode": "outbound_number",
+      "hold_music": "hold_music",
+      "hold_music_volume": 80,
+      "hold_message": "Please hold while I connect you with a supervisor.",
+      "summary_instructions": "Introduce the conversation from your perspective:\n- WHO is calling (name, company if mentioned)\n- WHY they called (their goal or problem)\n- WHY a human is needed at this point\n\nKeep it brief (2-3 sentences).",
+      "briefing_initial_message": "Hello! I have a caller on the line who needs your assistance. May I brief you on the situation?",
+      "connected_message": "You are now connected with a supervisor. I'll leave you to it."
+    },
+    {
+      "type": "collect_keypad",
+      "timeout": 5,
+      "stop_key": "#"
+    },
+    {
+      "type": "end_call",
+      "description": "End call when done"
+    }
   ]
   ```
 </ParamField>
@@ -170,11 +225,11 @@ This endpoint allows you to update an existing AI assistant's configuration. All
 </ParamField>
 
 <ParamField body="synthesizer_provider_id" type="integer">
-  Custom TTS provider ID. Set to `null` to use language default.
+  Custom TTS provider ID. Set to `null` to use language default. Use the [Get Synthesizer Providers](/api-reference/assistants/get-synthesizer-providers) endpoint to discover available providers.
 </ParamField>
 
 <ParamField body="transcriber_provider_id" type="integer">
-  Custom STT provider ID. Pipeline mode only. Set to `null` to use language default.
+  Custom STT provider ID. Pipeline mode only. Set to `null` to use language default. Use the [Get Transcriber Providers](/api-reference/assistants/get-transcriber-providers) endpoint to discover available providers.
 </ParamField>
 
 #### Call Behavior Settings
@@ -189,6 +244,24 @@ This endpoint allows you to update an existing AI assistant's configuration. All
   Whether to use filler audio during processing.
 
   <Warning>Only available for `pipeline` mode.</Warning>
+</ParamField>
+
+<ParamField body="filler_config" type="object">
+  Custom filler word profiles per category. Replaces existing filler config. Each category is an array of short phrases.
+
+  - `positive`: Filler words for positive/affirmative responses
+  - `negative`: Filler words for negative/neutral responses
+  - `question`: Filler words when processing a question
+  - `neutral`: Filler words for neutral acknowledgments
+
+  ```json
+  "filler_config": {
+    "positive": ["Great!", "Perfect!"],
+    "negative": ["Hmm.", "I see."],
+    "question": ["Good question.", "Let me check."],
+    "neutral": ["Ok.", "Noted."]
+  }
+  ```
 </ParamField>
 
 <ParamField body="record" type="boolean">
@@ -320,6 +393,20 @@ This endpoint allows you to update an existing AI assistant's configuration. All
     "product": "Premium Widget"
   }
   ```
+</ParamField>
+
+#### Conversation Ended Settings
+
+<ParamField body="conversation_inactivity_timeout" type="integer">
+  Minutes of chat inactivity before the conversation is considered ended (1-1440). Set to `null` to disable. Default: `30`
+</ParamField>
+
+<ParamField body="conversation_ended_retrigger" type="boolean">
+  Whether to allow re-triggering the conversation after it ends due to inactivity
+</ParamField>
+
+<ParamField body="conversation_ended_webhook_url" type="string">
+  Webhook URL called when a chat conversation ends due to inactivity. Set to `null` to remove. Separate from the main call webhook.
 </ParamField>
 
 ---
