@@ -1,0 +1,109 @@
+---
+title: "Fiyatlandırma Dökümü"
+icon: "calculator"
+description: "Arama dakikalarının nasıl hesaplandığı ve faturalandırıldığının detaylı açıklaması"
+---
+
+# Fiyatlandırma Dökümü
+
+WhatTalk.ai faturalandırma için **dakika bazlı** bir sistem kullanır. Bu dakikalar (veya tokenlar/krediler) her arama yaptığınızda veya aldığınızda bakiyenizden **düşülür**. Gerçek "dakika başı maliyet" planınıza bağlıdır ve **operatör maliyetleri** de dakikaya dönüştürülür. İşte nasıl çalıştığı.
+
+---
+
+## 1. Gelen ve Giden Aramalar
+
+- **Gelen**: AI asistanı aramayı açıp görüşmeye başladığı anda dakikalar harcanır.
+- **Giden**: Müşteri aramayı cevapladığında ve bağlı kaldığında dakikalar düşülmeye başlar. Çalma süresi faturalandırılmaz.
+
+> **Not**: Bir arama, AI veya kullanıcı kapattığında **veya** kullanıcının sesli mesajı cevap verdiyse (giden için) sesli mesaj algılama aramayı sonlandırdığında aktif kabul edilir.
+
+---
+
+## 2. Dakikalar Nasıl Kullanılır
+
+### a) AI Konuşma Süresi
+
+- Arama başına **minimum 30 saniyelik (0,5 dak) ücret** vardır. 30 saniyeden kısa aramalar yine 30 saniye olarak faturalandırılır.
+- 30 saniyenin ötesinde maliyet **saniye bazında oranlanır**. Örneğin, 45 saniyelik bir arama planınızdan 0,75 dakika kullanır.
+
+### b) Operatör Dönüşümü
+
+- **Operatör maliyeti** (telekom ağ ücreti) de bakiyenizden düşülür **ancak** genellikle bir sonraki dakikaya **yuvarlanır**.
+- Operatörün dolar tutarını planınızın ücretine göre dakikaya dönüştürürüz.
+  - **Örnek**: 1 dakikalık arama için operatör ücretiniz \$0,05 ve planınızın AI ücreti \$0,10/dak ise, bu \$0,05'i bakiyenizden 0,5 dakikaya dönüştürürüz.
+
+**Dolayısıyla tek bir 1 dakikalık görüşme şunları tüketebilir:**
+
+- **1 AI dakikası** (asistan için)
+- **+ 0,5 "operatör dakikası"** (operatörün \$0,05'inin AI maliyetinizin yarısına dönüştürülmesi).
+- **= Toplam 1,5 dakika** plan bakiyenizden düşülür.
+
+---
+
+## 3. Minimum Ücret ve Saniye Bazlı Faturalandırma ile Yuvarlama
+
+1. **AI Süresi**
+
+   - **Minimum 30 saniyelik ücret** (0,5 dak). 30 saniyenin altındaki aramalar 30 saniye olarak faturalandırılır.
+   - 30 saniyenin ötesinde **saniye bazında ölçülür** — yani 70 saniye ~1,17 dakika AI kullanımıdır.
+   - Planınızın dakika bakiyesinden tam olarak düşülür.
+
+2. **Operatör Süresi**
+   - Ağ ücreti için **sonraki tam dakikaya yuvarlanır**.
+   - Ardından kredi bakiyenizden kaç "dakika" düşüleceğine karar vermek için AI plan maliyetinizin bir kesrine dönüştürülür.
+
+---
+
+## 4. Dahil Dakikalar ve Ek Yüklemeler
+
+- **Her Plan**: Genellikle aylık dakika tahsisi içerir.
+- **Dakikaların Bitmesi**: Dahil dakikaları aştığınızda, planınızın ücretinden ek dakikalar ile cüzdanınıza **ek yükleme** yapabilirsiniz.
+- **Devir Yok**: Kullanılmayan dakikalar genellikle sonraki aya devretmez.
+
+**Örnek**
+
+> **Starter Plan** ile 200 dahil dakikanız var:
+>
+> - Toplam 180 AI dakikası + operatör dönüşümleri = 180 kullanıldıysa, bu ay 20 dakikanız kaldı.
+> - Sonraki ay 200'e sıfırlanır. 210 dakikaya ihtiyacınız varsa, planınızın ücretinden 10 ek dakika ödersiniz.
+
+---
+
+## 5. Hacim İndirimleri veya Kademeler
+
+- Planlar değişir (örn. **Starter** \$0,20/dak, **Pro** \$0,15/dak, **Agency** \$0,09/dak).
+- Yüksek hacimli kullanım (aylık 50.000+ dakika gibi) satış ekibiyle iletişime geçerek genellikle **toplu indirimler** alabilir.
+
+---
+
+## 6. Hızlı Kullanım Örnekleri
+
+### Örnek A (Giden Arama, Starter Plan)
+
+- **AI Ücreti**: \$0,20/dak
+- **Arama Süresi**: 30 saniye → 0,5 AI dakikası = \$0,10 AI maliyeti.
+- **Operatör**: \$0,01/dak, ancak 30 saniye → 1 dakikaya yuvarlanır → \$0,01.
+  - Planınızın \$0,20 ücretinde \$0,01 = 0,05 "plan dakikası" kullanılır (Veya daha basit yaklaşımla, \$0,01 / \$0,20 = 0,05 dakika)
+- **Toplam**: 0,5 (AI) + 0,05 (operatör) = planınızdan 0,55 dakika. 200 dahil dakikanız varsa 199,45 kalır.
+
+### Örnek B (Gelen Arama, Pro Plan)
+
+- **AI Ücreti**: \$0,15/dak
+- **Arama Süresi**: 90 saniye → 1,5 AI dakikası = \$0,225 AI maliyeti.
+- **Operatör**: Gelen için \$0,015/dak olduğunu varsayalım, arama 1,5 dak ise 2 dakikaya yuvarlanır. Toplam \$0,03.
+  - \$0,03 / \$0,15 = planınızdan 0,2 dakika.
+- **Toplam**: 1,5 (AI) + 0,2 (operatör) = 1,7 dakika düşülür.
+
+---
+
+### SSS
+
+- **Kullanıcı ve AI aynı anda konuşursa çift mi öderim?**  
+  **Hayır**, toplam arama süresine dayalıdır, konuşmacı eşzamanlılığına göre değil.
+- **Biri açıp hemen kapatırsa ne olur?**  
+  Minimum AI ücreti 30 saniyedir (0,5 dak), arama yalnızca birkaç saniye sürse bile. Operatör kısmı da 1 dakikaya yuvarlanabilir.
+
+---
+
+**Sonuç**  
+Tüm aramalar, plan dakika bakiyenizden **AI süresi** artı **dönüştürülmüş operatör maliyeti** tüketir. Kontrol panelinde kullanımı takip edin, gerekirse ek yükleme yapın ve hacminize en uygun planı seçin.

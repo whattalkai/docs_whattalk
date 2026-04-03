@@ -1,0 +1,48 @@
+---
+title: "Telefon araması yap"
+api: "POST /user/make_call"
+description: "Telefon araması yapın"
+---
+
+Bu endpoint, telefon araması yapmanızı sağlar.
+
+### İstek gövdesi
+
+<ParamField body="phone_number" type="string" required>
+  Müşterinin E.164 formatındaki telefon numarası (ör. +1234567890)
+</ParamField>
+
+<ParamField body="assistant_id" type="integer" required>
+  Aramayı yapacak asistanın kimliği
+</ParamField>
+
+<ParamField body="variables" type="object">
+  Aramaya aktarılacak özel değişkenler. **Asistanınızda tanımlı olan herhangi bir değişkeni** ekleyebilirsiniz (bkz. [Arama değişkenleri](/ai-assistants/settings/prompt-and-tools#call-variables)). Aşağıdaki örnekler yalnızca gösterim amaçlıdır — asistan ayarlarında yapılandırdığınız kendi değişken adlarınızı kullanın.
+
+  <Expandable title="Örnek değişkenler (kendinizinkini ekleyin)">
+    <ParamField body="customer_name" type="string">
+      ör. müşterinin adı
+    </ParamField>
+
+    <ParamField body="email" type="string">
+      ör. müşterinin e-postası
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string" default="Call initiated successfully">
+  Yanıtın mesajı
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "message": "Call initiated successfully",
+  "data": {}
+}
+```
+
+</ResponseExample>
