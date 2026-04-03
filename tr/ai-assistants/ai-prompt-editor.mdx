@@ -1,0 +1,230 @@
+---
+title: "AI Istem Duzenleyici"
+icon: "sparkles"
+description: "Konusma tabanli bir arayuz araciligiyla AI destekli oneriler kullanarak asistanin istemlerini duzenleyin ve iyilestirin"
+---
+
+AI Istem Duzenleyici, AI asistanin istemlerini dogal dil kullanarak duzenlemenize ve iyilestirmenize olanak taniyan akilli bir aractir. Metni manuel olarak duzenlemek yerine, isteklerinizi anlayan ve akilli degisiklikler oneren bir AI asistanla sohbet edebilirsiniz.
+
+## Genel Bakis
+
+AI Istem Duzenleyici sunlari saglar:
+
+- **Konusma tabanli duzenleme** - Degisiklikleri dogal dilde tanimlayin
+- **Akilli oneriler** - AI baglami anlar ve ilgili degisiklikler yapar
+- **Uygulamadan once inceleme** - Her degisikligi ayri ayri kabul edin veya reddedin
+- **Degisken yonetimi** - Arama oncesi ve arama sonrasi verileri kolayca yonetin
+- **Sablon kutuphanesi** - Kanitlanmis istem sablonlariyla baslayin
+
+<Frame>
+  <img src="/resources/ai-assistants/ai-prompt-editor-overview.png" alt="AI Istem Duzenleyici Arayuzu" />
+</Frame>
+
+## Baslarken
+
+<Steps>
+  <Step title="Asistanizi acin">
+    Kenar cubugunda **Asistanlar** bolumune gidin ve duzenlemek istediginiz asistana tiklayin.
+  </Step>
+  <Step title="AI Istem Duzenleyiciyi bulun">
+    Duzenleme formunda **Sistem Istemi** bolumune kaydin ve **AI Istem Duzenleyici** sekmesini bulun.
+  </Step>
+  <Step title="Duzenleyiciyi baslatın">
+    **AI Istem Duzenleyiciyi Baslat** dugmesine tiklayin. Duzenleyici arayuzuyle bir modal pencere acilacaktir.
+  </Step>
+</Steps>
+
+<Note>
+AI Istem Duzenleyiciyi kullanabilmeniz icin asistanizi en az bir kez kaydetmis olmaniz gerekir.
+</Note>
+
+## Arayuz Genel Bakisi
+
+AI Istem Duzenleyicinin uc ana alani vardir:
+
+### Sohbet Paneli (Sol Taraf)
+
+AI ile etkilesime gectiginiz yer:
+
+- Alt kisadki giris kutusuna isteklerinizi yazin
+- Usttteki konusma gecmisini goruntuyleyin
+- Yaygin islemler icin hizli oneri ciplerine kullanin:
+  - **Daha ozlu yap** - Istemi kisalt
+  - **Daha fazla ayrinti ekle** - Ayrintilarla genislet
+  - **Netiligi iyilestir** - Talimatlari daha net yap
+  - **Talimat ekle** - Yeni davranissal yonergeler ekle
+
+### Duzenleyici Paneli (Sag Taraf)
+
+Mevcut isteminizi iki sekmede gosterir:
+
+- **Sistem Istemi** - Asistaniz icin ana talimatlar
+- **Baslangic Mesaji** - Aramalar basladiginda karsilama mesaji
+
+**Duzenleme** modu (metin alani) ve **Onizleme** modu (fark vurgulariyla bicimlenmis gorunum) arasinda gecis yapin.
+
+### Yan Sekmeler
+
+- **Degiskenler** - Arama oncesi veri degiskenlerini yonetin
+- **Arama Sonrasi** - Aramalardan sonra toplanacak verileri tanimlaying
+
+## Sohbeti Kullanma
+
+### Istekte Bulunma
+
+Neleri degistirmek istediginizi tanimlamin yeter:
+
+<AccordionGroup>
+  <Accordion title="Ornek: Tonu daha samimi yap">
+    **Siz:** "Tonu daha samimi ve rahat yap"
+
+    **AI:** AI, karsilamalari daha sicak yapmak, daha konusma tarzli dil kullanmak ve resmi ifadeleri yumusamak icin degisiklikler onerecektir.
+  </Accordion>
+
+  <Accordion title="Ornek: Bilgi ekle">
+    **Siz:** "Iade politikamiz hakkinda bilgi ekle - 30 gun sorgusuz iade"
+
+    **AI:** AI, isteminizde uygun yeri bulacak ve iade politikasi ayrintlarini ekleyecektir.
+  </Accordion>
+
+  <Accordion title="Ornek: Bir senaryo ele al">
+    **Siz:** "Kizgin musterileri ele almak icin talimatlar ekle"
+
+    **AI:** AI, gerilimi azaltma ve bir insana aktarma icin davranissal yonergeler ekleyecektir.
+  </Accordion>
+</AccordionGroup>
+
+### Daha Iyi Sonuclar Icin Ipuclari
+
+- **Spesifik olun** - "indirim bilgisi ekle"den daha iyisi "%10 indirimden bahset"tir
+- **Baglam saglaying** - "Fiyatlandirma soruldugunda bahset..." AI'ya daha iyi anlayis verir
+- **Bir seferde bir degisiklik** - Karmasik degisiklikleri birden fazla istege bolun
+
+## Degisiklikleri Inceleme
+
+AI degisiklikler onerdiginde, fark gorunumunde gorunurler:
+
+- **Yesil vurgulama** - Eklenen yeni metin
+- **Kirmizi vurgulama** - Kaldirilan metin
+- **Mavi vurgulama** - Degistirilen metin
+
+### Degisiklikleri Kabul Et veya Reddet
+
+Her degisikligin iki dugmesi vardir:
+
+- **✓ Kabul Et** - Bu belirli degisikligi uygula
+- **✗ Reddet** - Bu degisikligi iptal et
+
+Toplu islemler de kullanabilirsiniz:
+
+- **Tumunu Kabul Et** - Bekleyen tum degisiklikleri uygula
+- **Tumunu Reddet** - Bekleyen tum degisiklikleri iptal et
+
+<Warning>
+Kabul etmeden once degisiklikleri her zaman inceleyin. AI akilli oneriler yapar, ancak isletmenizi en iyi siz bilirsiniz.
+</Warning>
+
+<Frame>
+  <img src="/resources/ai-assistants/ai-prompt-editor-diff.png" alt="Fark Gorunumuyle Degisiklikleri Inceleme" />
+</Frame>
+
+## Degiskenler
+
+Degiskenler, aramalari dinamik verilerle kisisellistirmenize olanak tanir.
+
+### Degisken Ekleme
+
+1. **Degiskenler** sekmesine tiklayin
+2. **Degisken Ekle** dugmesine tiklayin
+3. Bir ad girin (ornegin `musteri_adi`, `randevu_saati`)
+4. Bir varsayilan deger ayarlayin
+
+### Istemlerde Degisken Kullanma
+
+Suslu parantez kullanarak degiskenleri dogrudan isteminize yazin: `{degisken_adi}`
+
+**Ornek istem:**
+```
+Merhaba {musteri_adi}, {sirket_adi} adina {randevu_tarihi} tarihindeki randevunuz hakkinda ariyorum.
+```
+
+## Arama Sonrasi Semasi
+
+Aramalar sirasinda veya sonrasinda toplamak istediginiz yapilandirilmis verileri tanimlaying.
+
+### Arama Sonrasi Alanlari Ekleme
+
+1. **Arama Sonrasi** sekmesine tiklayin
+2. **Alan Ekle** dugmesine tiklayin
+3. Yapilandirin:
+   - **Ad** - Alan tanimlayicisi (ornegin `toplanti_planlandi`)
+   - **Tur** - `string`, `number` veya `boolean`
+   - **Aciklama** - Bu alanin ne yakaladigi
+
+### Ornek Alanlar
+
+| Ad | Tur | Aciklama |
+|------|------|-------------|
+| `toplanti_planlandi` | boolean | Bir toplanti planlanip planlanmadigi |
+| `ilgi_duzeyi` | string | Musterinin ilgisi: sicak, ilik, soguk |
+| `geri_arama_zamani` | string | Tercih edilen geri arama tarihi/saati |
+| `itiraz_nedeni` | string | Ilgilenmiyorsa ana itiraz |
+
+<Tip>
+AI, isteminize dayanarak arama sonrasi alanlari oneribilir. Sadece sorun: "Bu aramalardan hangi verileri toplamaliyim?"
+</Tip>
+
+<Frame>
+  <img src="/resources/ai-assistants/ai-prompt-editor-postcall.png" alt="Arama Sonrasi Alan Yapilandirmasi" />
+</Frame>
+
+## Sablonlar
+
+AI Istem Duzenleyiciyi ilk actiginizda, bir sablonla baslamayi secebilirsiniz:
+
+- **Mevcutla devam et** - Mevcut isteminizi koruyun
+- **Sifirdan basla** - Bos bir istemle baslaying
+- **Sablonla basla** - Onceden olusturulmus sablonlardan secin
+
+Sablonlar kullanim durumuna gore duzenlenmistir:
+
+- Satis aramalari
+- Musteri destegi
+- Randevu planlama
+- Anketler ve geri bildirim
+- Potansiyel musteri degerlendirme
+
+<Frame>
+  <img src="/resources/ai-assistants/ai-prompt-editor-templates.png" alt="Sablon Secim Ekrani" />
+</Frame>
+
+## Calismanizi Kaydetme
+
+Tum degisiklikleri asistaniza kaydetmek icin sag ust kosedeki **Kaydet** dugmesine tiklayin.
+
+<Note>
+Duzenleyici kaydedilmemis degisiklikleri otomatik olarak algilar. Kaydedilmemis calismayla kapatmaya calisirsiniz, kaydetmeniz veya iptal etmeniz istenecektir.
+</Note>
+
+## En Iyi Uygulamalar
+
+<CardGroup cols={2}>
+  <Card title="Sablonlarla Baslayin" icon="layer-group">
+    Sablonlar kanitlanmis baslangic noktalari saglar. Sifirdan baslamak yerine ozellestirin.
+  </Card>
+  <Card title="Kademeli Olarak Yineleyin" icon="repeat">
+    Kucuk degisiklikler yapin, test edin ve iyilestirin. Her seyi bir anda yeniden yapmaying.
+  </Card>
+  <Card title="Her Degisikligi Inceleyin" icon="magnifying-glass">
+    AI yardimci ama mukemmel degil. Kabul etmeden once onerileri her zaman inceleyin.
+  </Card>
+  <Card title="Duzenledikten Sonra Test Edin" icon="phone">
+    Asistanin beklenildigi gibi davrandigini dogrulamak icin degisikliklerden sonra test aramalari yapin.
+  </Card>
+</CardGroup>
+
+## Ilgili Kaynaklar
+
+- [Sistem Istemleri Kilavuzu](/tr/ai-assistants/system-prompt) - Istem yazimi hakkinda derinlemesine bilgi
+- [Akis Olusturucu](/tr/ai-assistants/flow-builder) - Konusma tasarimi icin gorsel alternatif
+- [Asistanizi Test Etme](/tr/ai-assistants/testing) - Degisikliklerinizi nasil test edeceksiniz
