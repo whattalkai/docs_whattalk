@@ -1,0 +1,135 @@
+---
+title: "Giden arama asistanlarını getir"
+api: "GET /user/assistants/outbound"
+description: "Kimliği doğrulanmış kullanıcının tüm giden arama asistanlarını getirin"
+---
+
+Bu uç nokta, kimliği doğrulanmış kullanıcıya ait tüm giden arama asistanlarının listesini döndürür. Giden arama asistanları, potansiyel müşterilere ve adaylara arama yapmak için kullanılır.
+
+### Yanıt alanları
+
+<ResponseField name="data" type="array">
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      Asistanın benzersiz tanımlayıcısı
+    </ResponseField>
+
+    <ResponseField name="user_id" type="integer">
+      Bu asistanın sahibi olan kullanıcının kimliği
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Asistanın adı
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Asistan türü (bu uç nokta için her zaman "outbound" olacaktır)
+    </ResponseField>
+
+    <ResponseField name="mode" type="string">
+      Motor modu (`pipeline` veya `multimodal`)
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Asistanın mevcut durumu
+    </ResponseField>
+
+    <ResponseField name="voice_id" type="integer">
+      Asistan tarafından kullanılan sesin kimliği
+    </ResponseField>
+
+    <ResponseField name="language_id" type="integer">
+      Asistan tarafından kullanılan dilin kimliği
+    </ResponseField>
+
+    <ResponseField name="timezone" type="string">
+      Asistanın saat dilimi ayarı
+    </ResponseField>
+
+    <ResponseField name="initial_message" type="string">
+      Asistanın söyleyeceği ilk mesaj
+    </ResponseField>
+
+    <ResponseField name="system_prompt" type="string">
+      Asistanın davranışını tanımlayan sistem istemi
+    </ResponseField>
+
+    <ResponseField name="variables" type="object">
+      Asistan için tanımlanan özel değişkenler
+    </ResponseField>
+
+    <ResponseField name="webhook_url" type="string">
+      Arama sonrası bildirimler için webhook URL'si
+    </ResponseField>
+
+    <ResponseField name="is_webhook_active" type="boolean">
+      Webhook bildirimlerinin etkin olup olmadığı
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Asistanın oluşturulma tarihi ve saati
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      Asistanın en son güncellenme tarihi ve saati
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+[
+  {
+    "id": 123,
+    "user_id": 1,
+    "name": "Sales Outbound Assistant",
+    "type": "outbound",
+    "mode": "pipeline",
+    "status": "active",
+    "voice_id": 8,
+    "language_id": 1,
+    "timezone": "America/New_York",
+    "initial_message": "Hi, this is Sarah from Your Company. I hope I'm catching you at a good time. How are you doing today?",
+    "system_prompt": "You are a sales representative for Your Company. Be professional, friendly, and focus on qualifying leads.",
+    "variables": {
+      "company_name": "Your Company",
+      "product_line": "Premium Services"
+    },
+    "webhook_url": "https://yourcompany.com/api/webhooks/outbound-calls",
+    "is_webhook_active": true,
+    "created_at": "2025-07-15T14:32:15.000000Z",
+    "updated_at": "2025-08-02T09:18:42.000000Z"
+  },
+  {
+    "id": 124,
+    "user_id": 1,
+    "name": "Follow-up Assistant",
+    "type": "outbound",
+    "mode": "multimodal",
+    "status": "inactive",
+    "voice_id": 12,
+    "language_id": 1,
+    "timezone": "America/Los_Angeles",
+    "initial_message": "Hello! I'm calling to follow up on our previous conversation. Do you have a few minutes to chat?",
+    "system_prompt": "You are a follow-up specialist. Be warm and professional while gathering feedback and next steps.",
+    "variables": {
+      "purpose": "follow_up",
+      "max_duration": "5_minutes"
+    },
+    "webhook_url": null,
+    "is_webhook_active": false,
+    "created_at": "2025-07-20T10:15:30.000000Z",
+    "updated_at": "2025-07-25T16:45:22.000000Z"
+  }
+]
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Bu uç nokta yalnızca "outbound" türündeki asistanları döndürür
+- Kimliği doğrulanmış kullanıcıya ait tüm asistanlar döndürülür (sayfalama yok)
+- Giden aramaları başlatmak için bu asistanları arama yapma uç noktası ile kullanın
+- Giden arama asistanları satış aramaları, takip aramaları, anketler ve diğer proaktif arama senaryoları için kullanılabilir

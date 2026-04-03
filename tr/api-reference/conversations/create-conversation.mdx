@@ -1,0 +1,170 @@
+---
+title: "Konuşma Oluştur"
+api: "POST /conversations"
+description: "Bir yapay zeka asistanıyla yeni bir konuşma oturumu oluşturun"
+---
+
+Bu endpoint, bir yapay zeka asistanıyla yeni bir konuşma oturumu oluşturur. Bunu web widget'ınız veya uygulamanız aracılığıyla metin tabanlı bir sohbet oturumu başlatmak için kullanın.
+
+### İstek Gövdesi
+
+<ParamField body="assistant_id" type="string" required>
+  Konuşmayı başlatacağınız asistanın UUID'si. Sistemde mevcut ve geçerli bir asistan UUID'si olmalıdır.
+</ParamField>
+
+<ParamField body="type" type="string" default="widget">
+  Konuşma türü. Olası değerler:
+  - `widget` - Web widget konuşması (varsayılan, ücretli)
+  - `test` - Test konuşması (ücretsiz, geliştirme için)
+</ParamField>
+
+<ParamField body="variables" type="object">
+  Asistana aktarılacak özel değişkenler. Bu değişkenler, asistanın sistem istemi ve ilk mesajında `{{variable_name}}` sözdizimi kullanılarak kullanılabilir.
+
+  Yaygın kullanım alanları:
+  - Formlardan müşteri bilgilerini önceden doldurma
+  - Uygulamanızdan bağlam aktarma
+  - Oturum bazında asistan davranışını özelleştirme
+</ParamField>
+
+### Yanıt Alanları
+
+<ResponseField name="status" type="boolean">
+  İsteğin başarılı olup olmadığını belirtir
+</ResponseField>
+
+<ResponseField name="conversation_id" type="string">
+  Oluşturulan konuşmanın benzersiz UUID tanımlayıcısı. Bu kimliği sonraki mesaj istekleri için kullanın.
+</ResponseField>
+
+<ResponseField name="history" type="array">
+  İlk konuşma geçmişi. Asistanın yapılandırılmış bir ilk mesajı varsa, burada yer alır.
+
+  <Expandable title="Mesaj nesnesi özellikleri">
+    <ResponseField name="role" type="string">
+      Mesaj rolü: `assistant` veya `user`
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      Mesaj içeriği
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="status" type="boolean">
+  Bir hata oluştuğunda `false` olur
+</ResponseField>
+
+<ResponseField name="error" type="string">
+  Neyin yanlış gittiğini açıklayan hata mesajı. Olası değerler:
+  - `Assistant not found` - Sağlanan assistant_id mevcut değil
+  - `Insufficient balance. Please top up your account.` - Asistan sahibinin hesap bakiyesi çok düşük
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://app.whattalk.ai/api/conversations" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "assistant_id": "550e8400-e29b-41d4-a716-446655440000",
+    "type": "widget",
+    "variables": {
+      "customer_name": "John Smith",
+      "company": "Acme Corp",
+      "source": "pricing_page"
+    }
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch('https://app.whattalk.ai/api/conversations', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    assistant_id: '550e8400-e29b-41d4-a716-446655440000',
+    type: 'widget',
+    variables: {
+      customer_name: 'John Smith',
+      company: 'Acme Corp',
+      source: 'pricing_page'
+    }
+  })
+});
+
+const data = await response.json();
+console.log(data.conversation_id);
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://app.whattalk.ai/api/conversations',
+    json={
+        'assistant_id': '550e8400-e29b-41d4-a716-446655440000',
+        'type': 'widget',
+        'variables': {
+            'customer_name': 'John Smith',
+            'company': 'Acme Corp',
+            'source': 'pricing_page'
+        }
+    }
+)
+
+data = response.json()
+print(data['conversation_id'])
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Başarılı
+{
+  "status": true,
+  "conversation_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "history": [
+    {
+      "role": "assistant",
+      "content": "Hello John Smith! Welcome to Acme Corp support. How can I help you today?"
+    }
+  ]
+}
+```
+
+```json 200 Başarılı (İlk mesaj yok)
+{
+  "status": true,
+  "conversation_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "history": []
+}
+```
+
+```json 404 Asistan Bulunamadı
+{
+  "status": false,
+  "error": "Assistant not found"
+}
+```
+
+```json 400 Yetersiz Bakiye
+{
+  "status": false,
+  "error": "Insufficient balance. Please top up your account."
+}
+```
+
+</ResponseExample>
+
+## Fiyatlandırma
+
+- **Widget konuşmaları**: Kullanıcı mesajı başına 0,01 $
+- **Test konuşmaları**: Ücretsiz (geliştirme ve test için)
+
+## Sonraki Adımlar
+
+Bir konuşma oluşturduktan sonra, asistanla mesaj alışverişi yapmak için [Mesaj Gönder](/api-reference/conversations/send-message) endpoint'ini kullanın.

@@ -1,0 +1,187 @@
+---
+title: "Aday Yonetimi"
+icon: "user-gear"
+description: "Ozel degiskenler ve ikincil iletisim kisileriyle adaylari olusturun, duzenleyin ve organize edin"
+---
+
+Kampanyalariniz icin adaylari etkili bir sekilde olusturmayi, duzenlemeyi ve yonetmeyi, uygun degisken kurulumu ve ikincil iletisim kisisi yonetimiyle birlikte ogrenin.
+
+## Yeni Aday Olusturma
+
+### Temel Bilgiler
+1. **Telefon Numarasi:** Birincil iletisim numarasini uluslararasi formatta girin
+2. **Kampanya Atamasi:** Bu adayin hangi kampanyaya ait oldugunu secin
+3. **Durum:** Yeni adaylar icin otomatik olarak "Olusturuldu" ayarlanir
+
+<Note>
+**Telefon numarasi formati:** Otomasyon iceri aktarmalari ve dosya yuklemeleri icin bosluk veya parantez olmadan uluslararasi format kullanin (+1234567890).
+</Note>
+
+### Degisken Kurulumu
+
+#### Asistan Varsayilan Degiskenleri
+Bir kampanya sectiginizde, aday otomatik olarak [asistan yapilandirmasindan](/ai-assistants/settings/prompt-and-tools#call-variables) degiskenleri devralir:
+- **Onceden doldurulmus degerler:** Asistanin varsayilan degiskenleri formda goruntulenir
+- **Ozellestirme:** Bu adaya ozel degerleri degistirin
+- **Zorunlu alanlar:** Bazi degiskenler kampanya islevseligi icin zorunlu olabilir
+
+#### Ozel Degiskenler
+Yapay zeka asistaninizin kullanmasi icin kisisellesmis bilgiler ekleyin:
+
+**Yaygin degisken turleri:**
+- **customer_name:** Kisisellesmis karsilama icin kisinin adi
+- **company:** B2B gorusmeleri icin isletme adi
+- **last_interaction:** Onceki gorusme baglami
+- **preferences:** Musteri tercihleri veya gereksinimleri
+- **budget_range:** Satis aramalari icin finansal bilgiler
+
+**Degisken format ornegi:**
+```json
+{
+  "customer_name": "Sarah Johnson",
+  "company": "TechStart Solutions", 
+  "last_interaction": "Requested demo of premium features",
+  "preferred_contact_time": "Afternoon EST",
+  "industry": "Software Development"
+}
+```
+
+### Ikincil Iletisim Kisileri
+
+Ayni adaya ulasmak icin birden fazla yolunuz oldugunda ek telefon numaralari ekleyin.
+
+#### Ikincil Iletisim Kisilerini Ne Zaman Kullanmali
+- **Karar vericiler:** Karara dahil olan birden fazla kisi
+- **Yedek numaralar:** Ayni kisi icin cep, ofis, ev numaralari
+- **Departman iletisim kisileri:** Ayni sirkettteki farkli departmanlar
+- **Zamana dayali iletisim kisileri:** Farkli zamanlar icin farkli numaralar
+
+#### Ikincil Iletisim Kisisi Kurulumu
+1. **Ikincil Iletisim Kisisi Ekle:** Formdaki "Ikincil Iletisim Kisisi Ekle"ye tiklayin
+2. **Telefon Numarasi:** Ek telefon numarasini girin
+3. **Degiskenler:** Bu iletisim kisisi icin belirli degiskenleri ayarlayin (istege bagli)
+4. **Sira:** Iletisim kisileri eklediginiz sirada denenir
+
+<Tip>
+**Iletisim sirasi onemlidir:** Kampanya iletisim kisilerini sirayla dener. En yuksek cevaplama olasiligi olani ilk siralaya koyun.
+</Tip>
+
+#### Ikincil Iletisim Kisisi Degiskenleri
+Her ikincil iletisim kisisinin benzersiz degiskenleri olabilir:
+- **Farkli kisi:** Farkli isim ve rol degiskenleri kullanin
+- **Ayni kisi:** Ayni kisisel bilgileri ancak farkli iletisim tercihlerini kullanin
+- **Departmana ozel:** Belirli departman ihtiyaclari icin ozellestirin
+
+**Ornek - Birden fazla karar verici:**
+```json
+// Birincil: CEO
+{
+  "contact_name": "John Smith",
+  "role": "CEO", 
+  "decision_authority": "Final approval"
+}
+
+// Ikincil: CTO  
+{
+  "contact_name": "Jane Doe",
+  "role": "CTO",
+  "decision_authority": "Technical decisions"
+}
+```
+
+## Mevcut Adaylari Duzenleme
+
+### Aday Bilgilerini Degistirme
+- **Telefon numarasi:** Iletisim bilgileri degisirse guncelleyin
+- **Kampanya:** Gerekirse adayi farkli kampanyaya tasyin
+- **Durum:** Kampanya kontrolu icin durumu manuel olarak degistirin
+
+### Degisken Yonetimi
+- **Degerleri guncelleme:** Mevcut degisken degerlerini degistirin
+- **Degisken ekleme:** Daha iyi yapay zeka baglami icin yeni bilgiler ekleyin
+- **Degisken kaldirma:** Guncel olmayan veya ilgisiz verileri silin
+
+<Warning>
+**Kampanya uyumlulugu:** Kampanyalari degistirirken, degiskenlerin yeni asistanin yapilandirmasiyla eslesitiginden emin olun.
+</Warning>
+
+### Ikincil Iletisim Kisisi Yonetimi
+- **Kisi ekleme:** Ek telefon numaralari dahil edin
+- **Kisi kaldirma:** Gecersiz veya gereksiz numaralari silin
+- **Kisi siralama:** Arama sirasi onceligini degistirin
+- **Degisken guncelleme:** Kisiye ozel bilgileri degistirin
+
+## Aday Durumu Yonetimi
+
+### Durum Degisikliklerini Anlama
+Aday durumu, kampanya faaliyetine dayali olarak otomatik olarak guncellenir:
+- **Olusturuldu -> Isleniyor:** Kampanya aramayi baslattiginda
+- **Isleniyor -> Tamamlandi:** Arama basarili oldugunda veya hedefe ulasildiginda
+- **Isleniyor -> Yeniden Planlandi:** Arama yeniden deneme gerektirdiginde
+- **Yeniden Planlandi -> Maksimum Deneme:** Yeniden deneme sinirana ulasildiginda
+
+### Manuel Durum Kontrolu
+Gerektiginde aday durumunu manuel olarak degistirebilirsiniz:
+
+#### Tekrar Aranmak Icin Sifirlama
+**"Olusturuldu" olarak ayarla:** Adayi tekrar aranmak uzere sifirlar
+- **Kullanim alani:** Aday belirli bir zamanda geri aranma talep etti
+- **Etki:** Aday kampanya sirasina yeniden katilir
+- **Dikkat edilmesi gerekenler:** Kampanya yeniden deneme sinirlarına uyar
+
+#### Tamamlandi Olarak Isaretleme
+**"Tamamlandi" olarak ayarla:** Kampanyanin bu adayi aramasini durdurur
+- **Kullanim alani:** Hedefe baska kanallar araciligiyla ulasildi
+- **Etki:** Aday gelecekteki kampanya aramalarindan haric tutulur
+- **Dikkat edilmesi gerekenler:** Kampanya tarafindan otomatik olarak sifirlanamaz
+
+#### Diger Durum Degisiklikleri
+- **"Planlanmis":** Sonraki yeniden deneme icin siraya al
+- **"Maksimum Deneme":** Manuel olarak tukenmis olarak isaretle
+- **"Yeniden Planlandi":** Yeniden deneme zamanlayicisini sifirla
+
+<Tip>
+**Durum stratejisi:** Manuel durum degisikliklerini tedbirli kullanin. Tutarli davranis icin kampanya otomasyonunun cogu durum guncellemesini yonetmesine izin verin.
+</Tip>
+
+## Toplu Islemler
+
+### Toplu Silme
+Birden fazla aday secin ve silin:
+1. **Adaylari filtreleyin:** Belirli adaylari secmek icin tablo filtrelerini kullanin
+2. **Adaylari secin:** Silinecek adaylarin onay kutularini isaretleyin
+3. **Toplu sil:** Toplu islemler menusunden silme islemini secin
+4. **Onaylayin:** Uygulamadan once degisiklikleri gozden gecirin
+
+### Toplu Disa Aktarma
+Harici isleme icin filtrelenmis aday verilerini disa aktarin:
+- **Filtre uygulayin:** Kampanya, durum, tarih araligina gore filtreleyin
+- **Sutun secin:** Hangi verilerin disa aktarilacagini secin
+- **Ikincil dahil et:** Ikincil iletisim kisilerini dahil etme secenegi
+- **Indirin:** Elektronik tablo uyumlulugu icin CSV formati
+
+## Aday Organizasyonu
+
+Adaylari kampanya, durum, tarih araligi veya degisken icerigine gore organize etmek icin tablo filtrelerini, siralamayi ve aramayi kullanin.
+
+## Kampanya Entegrasyonu
+
+- Aday basina **tek kampanya** atamasi
+- Asistan yapilandirmasindan **degisken devralma**
+- Kampanya zamanlama ve yeniden deneme mantigi ile **otomatik koordinasyon**
+
+## En Iyi Uygulamalar
+
+### Temel Noktalar
+- **Telefon formati:** Bosluksuz uluslararasi format (+1234567890)
+- **Degiskenler:** Tutarli adlandirma ve ilgili bilgiler kullanin
+- **Ikincil iletisim kisileri:** Oncelik sirasina gore siralayin, tekrarlardan kacinin
+- **Gizlilik:** Veri koruma gereksinimlerine uyun
+
+<Note>
+Yaygin aday sorunlarinin giderilmesi icin [Aday Sorun Giderme](/troubleshooting/leads) sayfasina bakin.
+</Note>
+
+<Note>
+Toplu aday iceri aktarma hakkinda bilgi icin [Aday Iceri Aktarma](/tr/leads/importing-leads) sayfasina bakin.
+</Note>
