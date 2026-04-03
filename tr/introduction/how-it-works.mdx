@@ -1,0 +1,45 @@
+---
+title: "Nasıl Çalışır (Hızlı Genel Bakış)"
+icon: "diagram-project"
+description: "WhatTalk.ai'nin telefon görüşmelerini yapay zeka kullanarak nasıl işlediğini ve yönettiğini anlayın"
+---
+
+WhatTalk.ai, canlı telefon görüşmeleri yürütmek için **yapay zeka ses tanıma** ile **LLM tabanlı yanıtları** birleştirir. Aşağıda basitleştirilmiş bir akış bulunmaktadır:
+
+1. **Arayan veya Potansiyel Müşteri Aranır**
+
+   - **Gelen**: Bir müşteri, size atanan telefon numarasını arar.
+   - **Giden**: WhatTalk.ai'nin sistemi, kampanyanızdaki telefon numarası listesini arar.
+
+2. **Konuşma Tanıma**
+   Yapay zeka, kişinin söylediklerini dinler ve gerçek zamanlı olarak metne dönüştürür.
+
+3. **LLM Kararı**
+   WhatTalk.ai, bir yanıt oluşturmak veya bir sonraki eyleme karar vermek (aramayı aktarma gibi) için büyük dil modeli (LLM) ve yapılandırdığınız "sistem komutunu" kullanır.
+
+4. **Ses Çıktısı**
+   Yapay zekanın yanıtı, ses motorumuz (ElevenLabs sesleri) aracılığıyla doğal ses tonunda konuşmaya dönüştürülür.
+
+5. **Sonuç ve Eylemler**
+
+   - **Gelen** için: Yapay zeka soruları yanıtlayabilir, bilgileri doğrulayabilir veya mesaj alabilir.
+   - **Giden** için: Yapay zeka bir ürün tanıtabilir, potansiyel müşterileri nitelendirebilir veya ilgilenen arayanları bir insan ajana aktarabilir.
+
+6. **Veri ve Raporlama**
+   Transkriptler, arama kayıtları, arama sonuçları ("yanıt yok" veya "başarılı" gibi) ve takip eylemlerini otomatikleştirme imkanı elde edersiniz.
+
+## Farklar: Gelen ve Giden
+
+- **Gelen**
+
+  - Arayan, kiraladığınız veya entegre ettiğiniz bir numarayı arar.
+  - Yapay zeka aramayı açar, karşılar ve sorguları yönetir veya gerekirse arayanı yönlendirir.
+
+- **Giden**
+  - Potansiyel müşterileri yükler veya senkronize edersiniz.
+  - Yapay zeka her numarayı arar, arama senaryonuzu takip eder ve potansiyel müşteri ilgileniyorsa aktarım yapabilir.
+
+## Sonraki Adımlar
+
+- [**Temel Terimler**](/tr/introduction/key-terminology) hakkında bilgi edinin ("Yapay Zeka Asistanı," "Kampanya" vb.).
+- İlk yapay zeka asistanınızı kurmak için [**Başlarken**](/tr/getting-started) bölümüne geçin.
