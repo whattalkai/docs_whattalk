@@ -1,0 +1,445 @@
+---
+title: "Asistanları listele"
+api: "GET /user/assistants/get"
+description: "Kimliği doğrulanmış kullanıcının tüm asistanlarını sayfalama ile listeleyin"
+---
+
+Bu uç nokta, kimliği doğrulanmış kullanıcıya ait tüm yapay zeka asistanlarını almanıza olanak tanır.
+
+### Sorgu Parametreleri
+
+<ParamField query="per_page" type="integer" optional>
+  Sayfa başına asistan sayısı (1-100, varsayılan: 10)
+</ParamField>
+
+<ParamField query="page" type="integer" optional>
+  Sayfa numarası (varsayılan: 1)
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="data" type="array">
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      Asistanın benzersiz tanımlayıcısı
+    </ResponseField>
+
+    <ResponseField name="user_id" type="integer">
+      Bu asistanın sahibi olan kullanıcının kimliği
+    </ResponseField>
+
+    <ResponseField name="phone_number_id" type="integer">
+      Asistana atanan telefon numarasının kimliği
+    </ResponseField>
+
+    <ResponseField name="engine_id" type="integer">
+      Motor kimliği
+    </ResponseField>
+
+    <ResponseField name="synthesizer_id" type="integer">
+      Sentezleyici kimliği
+    </ResponseField>
+
+    <ResponseField name="transcriber_id" type="integer">
+      Yazıya dökücü kimliği
+    </ResponseField>
+
+    <ResponseField name="voice_id" type="integer">
+      Asistan tarafından kullanılan sesin kimliği
+    </ResponseField>
+
+    <ResponseField name="instance_id" type="integer">
+      Asistanın örnek kimliği
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Asistanın adı
+    </ResponseField>
+
+    <ResponseField name="variables" type="object">
+      Asistan için tanımlanan özel değişkenler
+    </ResponseField>
+
+    <ResponseField name="post_call_evaluation" type="boolean">
+      Arama sonrası değerlendirmenin etkin olup olmadığı
+    </ResponseField>
+
+    <ResponseField name="fillers" type="integer">
+      Dolgu sesinin etkin olup olmadığı (1 = etkin, 0 = devre dışı)
+    </ResponseField>
+
+    <ResponseField name="post_call_schema" type="array">
+      Arama sonrası veri çıkarma için şema tanımı
+      <Expandable title="post_call_schema özellikleri">
+        <ResponseField name="name" type="string">
+          Şema alanının adı
+        </ResponseField>
+        <ResponseField name="type" type="string">
+          Veri türü (string, number, bool)
+        </ResponseField>
+        <ResponseField name="description" type="string">
+          Bu alanın neyi temsil ettiğinin açıklaması
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="tools" type="array">
+      Asistanın kullanabileceği araçlar dizisi
+    </ResponseField>
+
+    <ResponseField name="is_webhook_active" type="boolean">
+      Webhook bildirimlerinin etkin olup olmadığı
+    </ResponseField>
+
+    <ResponseField name="webhook_url" type="string">
+      Arama sonrası bildirimler için webhook URL'si
+    </ResponseField>
+
+    <ResponseField name="inbound_webhook_url" type="string">
+      Gelen arama bildirimleri için webhook URL'si
+    </ResponseField>
+
+    <ResponseField name="language" type="string">
+      Dil
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Asistan türü (inbound veya outbound)
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Asistanın mevcut durumu (active veya inactive)
+    </ResponseField>
+
+    <ResponseField name="max_duration" type="integer">
+      Saniye cinsinden maksimum arama süresi
+    </ResponseField>
+
+    <ResponseField name="record" type="boolean">
+      Aramaların kaydedilip kaydedilmeyeceği
+    </ResponseField>
+
+    <ResponseField name="initial_message" type="string">
+      Asistanın söyleyeceği ilk mesaj
+    </ResponseField>
+
+    <ResponseField name="system_prompt" type="string">
+      Asistanın davranışını tanımlayan sistem istemi
+    </ResponseField>
+
+    <ResponseField name="flows_platform_id" type="integer">
+      Akış platformu entegrasyonu için kimlik
+    </ResponseField>
+
+    <ResponseField name="timezone" type="string">
+      Asistanın saat dilimi ayarı
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Asistanın oluşturulma tarihi ve saati
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      Asistanın en son güncellenme tarihi ve saati
+    </ResponseField>
+
+    <ResponseField name="max_silence_duration" type="integer">
+      Yeniden etkileşim öncesi saniye cinsinden maksimum sessizlik süresi
+    </ResponseField>
+
+    <ResponseField name="reengagement_interval" type="integer">
+      Saniye cinsinden yeniden etkileşim aralığı
+    </ResponseField>
+
+    <ResponseField name="deleted_at" type="string">
+      Geçici silme zaman damgası (silinmediyse null)
+    </ResponseField>
+
+    <ResponseField name="end_call_on_voicemail" type="integer">
+      Sesli mesaj algılandığında aramanın sonlandırılıp sonlandırılmayacağı (1 = evet, 0 = hayır)
+    </ResponseField>
+
+    <ResponseField name="llm_temperature" type="string">
+      Metin olarak LLM sıcaklık ayarı
+    </ResponseField>
+
+    <ResponseField name="voice_stability" type="string">
+      Metin olarak ses kararlılık ayarı
+    </ResponseField>
+
+    <ResponseField name="voice_similarity" type="string">
+      Metin olarak ses benzerlik ayarı
+    </ResponseField>
+
+    <ResponseField name="allow_interruptions" type="boolean">
+      Arayan kesintilerine izin verilip verilmeyeceği
+    </ResponseField>
+
+    <ResponseField name="enable_noise_cancellation" type="boolean">
+      Gürültü azaltmanın etkin olup olmadığı
+    </ResponseField>
+
+    <ResponseField name="endpoint_sensitivity" type="number">
+      Uç nokta hassasiyet seviyesi
+    </ResponseField>
+
+    <ResponseField name="speech_speed" type="string">
+      Metin olarak konuşma hızı çarpanı
+    </ResponseField>
+
+    <ResponseField name="endpoint_type" type="string">
+      Ses aktivitesi algılama türü (vad veya ai)
+    </ResponseField>
+
+    <ResponseField name="wait_for_customer" type="boolean">
+      Müşterinin önce konuşmasının beklenip beklenmeyeceği
+    </ResponseField>
+
+    <ResponseField name="mode" type="string">
+      Motor modu (pipeline veya multimodal)
+    </ResponseField>
+
+    <ResponseField name="language_id" type="integer">
+      Asistan tarafından kullanılan dilin kimliği
+    </ResponseField>
+
+    <ResponseField name="transcriber_provider_id" type="integer">
+      Yazıya dökücü sağlayıcının kimliği
+    </ResponseField>
+
+    <ResponseField name="synthesizer_provider_id" type="integer">
+      Sentezleyici sağlayıcının kimliği
+    </ResponseField>
+
+    <ResponseField name="llm_model_id" type="integer">
+      Kullanılan LLM modelinin kimliği
+    </ResponseField>
+
+    <ResponseField name="multimodal_model_id" type="integer">
+      Kullanılan çok modlu modelin kimliği
+    </ResponseField>
+
+    <ResponseField name="ambient_sound" type="string">
+      Ortam sesi ayarı
+    </ResponseField>
+
+    <ResponseField name="uuid" type="string">
+      Asistan için benzersiz UUID
+    </ResponseField>
+
+    <ResponseField name="send_webhook_only_on_completed" type="boolean">
+      Webhook'ların yalnızca tamamlanan aramalar için gönderilip gönderilmeyeceği
+    </ResponseField>
+
+    <ResponseField name="include_recording_in_webhook" type="boolean">
+      Webhook yüküne kayıt URL'sinin dahil edilip edilmeyeceği
+    </ResponseField>
+
+    <ResponseField name="interrupt_sensitivity" type="number">
+      Kesinti hassasiyet seviyesi
+    </ResponseField>
+
+    <ResponseField name="filler_config" type="object">
+      Dolgu ses yanıtları yapılandırması
+      <Expandable title="filler_config özellikleri">
+        <ResponseField name="neutral" type="array">
+          Nötr dolgu yanıtları dizisi
+        </ResponseField>
+        <ResponseField name="negative" type="array">
+          Olumsuz dolgu yanıtları dizisi
+        </ResponseField>
+        <ResponseField name="positive" type="array">
+          Olumlu dolgu yanıtları dizisi
+        </ResponseField>
+        <ResponseField name="question" type="array">
+          Soru dolgu yanıtları dizisi
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="knowledgebase_id" type="integer">
+      İlişkili bilgi tabanının kimliği
+    </ResponseField>
+
+    <ResponseField name="knowledgebase_mode" type="string">
+      Bilgi tabanı modu ayarı
+    </ResponseField>
+
+    <ResponseField name="min_interrupt_words" type="integer">
+      Kesintiye izin verilmeden önce minimum kelime sayısı
+    </ResponseField>
+
+    <ResponseField name="ambient_sound_volume" type="string">
+      Metin olarak ortam sesi ses düzeyi
+    </ResponseField>
+
+    <ResponseField name="widget_settings" type="object">
+      Web widget entegrasyonu ayarları
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="current_page" type="integer">
+  Mevcut sayfa numarası
+</ResponseField>
+
+<ResponseField name="per_page" type="integer">
+  Sayfa başına öğe sayısı
+</ResponseField>
+
+<ResponseField name="total" type="integer">
+  Toplam asistan sayısı
+</ResponseField>
+
+<ResponseField name="last_page" type="integer">
+  Son sayfa numarası
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+{
+  "current_page": 1,
+  "data": [
+    {
+      "id": 127,
+      "user_id": 1,
+      "phone_number_id": 45,
+      "engine_id": null,
+      "synthesizer_id": null,
+      "transcriber_id": null,
+      "voice_id": 8,
+      "instance_id": 1,
+      "name": "Sales Outreach Assistant",
+      "variables": {
+        "company_name": "Your Company",
+        "product_line": "Premium Services",
+        "rep_name": "Assistant"
+      },
+      "post_call_evaluation": true,
+      "fillers": 1,
+      "post_call_schema": [
+        {
+          "name": "interest_level",
+          "type": "string",
+          "description": "Customer's level of interest (high, medium, low)"
+        },
+        {
+          "name": "budget_qualified",
+          "type": "bool",
+          "description": "Whether the prospect has adequate budget"
+        },
+        {
+          "name": "follow_up_date",
+          "type": "string",
+          "description": "Preferred date for follow-up contact"
+        }
+      ],
+      "tools": [],
+      "is_webhook_active": true,
+      "webhook_url": "https://yourcompany.com/api/webhooks/sales-calls",
+      "inbound_webhook_url": null,
+      "language": null,
+      "type": "outbound",
+      "status": "active",
+      "max_duration": 900,
+      "record": true,
+      "initial_message": "Hi, this is an assistant from Your Company. I hope I'm catching you at a good time. How are you doing today?",
+      "system_prompt": "You are a sales representative for Your Company. Be professional, friendly, and focus on qualifying leads for premium services.",
+      "flows_platform_id": null,
+      "timezone": "America/Los_Angeles",
+      "created_at": "2025-07-15T14:32:15.000000Z",
+      "updated_at": "2025-08-02T09:18:42.000000Z",
+      "max_silence_duration": 25,
+      "reengagement_interval": 45,
+      "deleted_at": null,
+      "end_call_on_voicemail": 1,
+      "llm_temperature": "0.35",
+      "voice_stability": "0.75",
+      "voice_similarity": "0.85",
+      "allow_interruptions": true,
+      "enable_noise_cancellation": true,
+      "endpoint_sensitivity": 1.8,
+      "speech_speed": "1.10",
+      "endpoint_type": "vad",
+      "wait_for_customer": true,
+      "mode": "pipeline",
+      "language_id": 1,
+      "transcriber_provider_id": null,
+      "synthesizer_provider_id": null,
+      "llm_model_id": 3,
+      "multimodal_model_id": null,
+      "ambient_sound": "office",
+      "uuid": "a7b3c942-5f1e-4d28-8c59-2e4f7a8b9c3d",
+      "send_webhook_only_on_completed": true,
+      "include_recording_in_webhook": true,
+      "interrupt_sensitivity": 1.2,
+      "filler_config": {
+        "neutral": [
+          "I see.",
+          "Understood.",
+          "Right.",
+          "Got it.",
+          "Okay."
+        ],
+        "negative": [
+          "I understand.",
+          "Hmm.",
+          "I see.",
+          "Okay."
+        ],
+        "positive": [
+          "Excellent!",
+          "That's great!",
+          "Wonderful!",
+          "Perfect!"
+        ],
+        "question": [
+          "Let me think...",
+          "Good question.",
+          "Hmm.",
+          "Right."
+        ]
+      },
+      "knowledgebase_id": 12,
+      "knowledgebase_mode": "hybrid",
+      "min_interrupt_words": 3,
+      "ambient_sound_volume": "0.30",
+      "widget_settings": {
+        "theme": "modern",
+        "color": "#2563eb",
+        "position": "bottom-right"
+      }
+    }
+  ],
+  "first_page_url": "https://app.whattalk.ai/api/user/assistants/get?page=1",
+  "from": 1,
+  "last_page": 5,
+  "last_page_url": "https://app.whattalk.ai/api/user/assistants/get?page=5",
+  "links": [
+    {
+      "url": null,
+      "label": "&laquo; Previous",
+      "active": false
+    },
+    {
+      "url": "https://app.whattalk.ai/api/user/assistants/get?page=1",
+      "label": "1",
+      "active": true
+    },
+    {
+      "url": "https://app.whattalk.ai/api/user/assistants/get?page=2",
+      "label": "2",
+      "active": false
+    }
+  ],
+  "next_page_url": "https://app.whattalk.ai/api/user/assistants/get?page=2",
+  "path": "https://app.whattalk.ai/api/user/assistants/get",
+  "per_page": 10,
+  "prev_page_url": null,
+  "to": 10,
+  "total": 47
+}
+```
+
+</ResponseExample>
