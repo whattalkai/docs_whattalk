@@ -1,0 +1,133 @@
+---
+title: "Arama getir"
+api: "GET /user/calls/{id}"
+description: "Belirli bir aramanın detaylarını kimliğe göre getirin"
+---
+
+Bu endpoint, kimliği doğrulanmış kullanıcıya ait belirli bir arama hakkında ayrıntılı bilgi almanızı sağlar.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Aramanın benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="id" type="integer">
+  Aramanın benzersiz tanımlayıcısı
+</ResponseField>
+
+<ResponseField name="assistant_name" type="string">
+  Aramayı yöneten asistanın adı
+</ResponseField>
+
+<ResponseField name="campaign_name" type="string">
+  Bu aramanın ait olduğu kampanyanın adı (varsa)
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Aramanın türü (`inbound`, `outbound` veya `web`)
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Aramanın saniye cinsinden süresi
+</ResponseField>
+
+<ResponseField name="assistant_phone_number" type="string">
+  Asistan tarafından kullanılan telefon numarası
+</ResponseField>
+
+<ResponseField name="client_phone_number" type="string">
+  Müşterinin telefon numarası
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Aramanın mevcut durumu
+</ResponseField>
+
+<ResponseField name="transcript" type="string">
+  Arama görüşmesinin transkripti
+</ResponseField>
+
+<ResponseField name="variables" type="object">
+  Arama sırasında toplanan değişkenler
+</ResponseField>
+
+<ResponseField name="evaluation" type="object">
+  Arama performansı için değerlendirme verileri
+</ResponseField>
+
+<ResponseField name="webhook_response" type="object">
+  Yapılandırılmış webhook'lardan gelen yanıt
+</ResponseField>
+
+<ResponseField name="carrier_cost" type="number">
+  Bu arama için operatör tarafından uygulanan maliyet
+</ResponseField>
+
+<ResponseField name="total_cost" type="number">
+  Tüm ücretler dahil aramanın toplam maliyeti
+</ResponseField>
+
+<ResponseField name="answered_by" type="string">
+  Aramayı kim yanıtladı (`human`, `machine` veya `unknown`)
+</ResponseField>
+
+<ResponseField name="recording_url" type="string">
+  Arama kaydının URL'si (mevcutsa ve etkinleştirildiyse)
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Aramanın oluşturulma tarihi ve saati
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  Aramanın son güncellenme tarihi ve saati
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "id": 123,
+  "assistant_name": "Sales Assistant",
+  "campaign_name": "Q4 Outreach Campaign",
+  "type": "outbound",
+  "duration": 245,
+  "assistant_phone_number": "+1234567890",
+  "client_phone_number": "+1987654321",
+  "status": "completed",
+  "transcript": "Hello, this is Sarah from WhatTalk. How are you doing today?...",
+  "variables": {
+    "customer_name": "John Smith",
+    "interest_level": "high",
+    "follow_up_date": "2025-08-15"
+  },
+  "evaluation": {
+    "sentiment": "positive",
+    "outcome": "qualified_lead",
+    "score": 8.5
+  },
+  "webhook_response": {
+    "status": "success",
+    "data": {
+      "crm_contact_id": "abc123"
+    }
+  },
+  "carrier_cost": 0.02,
+  "total_cost": 0.025,
+  "answered_by": "human",
+  "recording_url": "https://recordings.whattalk.ai/calls/123.mp3",
+  "created_at": "2025-08-04 14:30:00",
+  "updated_at": "2025-08-04 14:34:05"
+}
+```
+
+```json 404 Yanıt
+{
+  "message": "Call not found"
+}
+```
+
+</ResponseExample>

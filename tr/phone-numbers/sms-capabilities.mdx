@@ -1,0 +1,79 @@
+---
+title: "SMS Özellikleri"
+icon: "message-sms"
+description: "Telefon numaralarınız için SMS özelliklerini, gereksinimlerini ve fiyatlandırmasını öğrenin"
+---
+
+<Card
+  title="Detaylı SMS Dokümantasyonu"
+  icon="book-open"
+  href="/tr/automation-platform/calls-related/sms-capabilities">
+  Bu, SMS özelliklerine genel bir bakıştır. Otomasyon akışları üzerinden SMS gönderme
+  hakkında detaylı talimatlar için [Otomasyon Platformu
+  Dokümantasyonu](/tr/automation-platform/calls-related/sms-capabilities) sayfasına göz atın.
+</Card>
+
+## Gereksinimler
+
+SMS mesajı göndermek için şunlara ihtiyacınız var:
+
+- SMS özellikli bir telefon numarası
+- Hesabınızda yeterli kredi
+- Uygun otomasyon akışı kurulumu
+
+## SMS Segmentleri
+
+SMS mesajları segmentlere bölünür:
+
+- Her segment, standart ASCII metin için 160 karakterdir
+- Veya Unicode (özel karakterler, emojiler) için 70 karakter
+- Uzun mesajlar otomatik olarak birden fazla segmente bölünür
+- Gönderilen segment başına ücretlendirilirsiniz
+
+Örneğin:
+
+- "Merhaba! Nasılsınız?" (20 karakter) = 1 segment
+- 200 ASCII karakterli bir mesaj = 2 segment
+- Emojili ve 100 karakterli bir mesaj = 2 segment
+
+## Maliyetler
+
+SMS fiyatlandırması şunlara göre değişir:
+
+- Hedef ülke
+- Segment sayısı
+- İçerik türü (standart/unicode)
+
+## İzleme ve Geçmiş
+
+SMS etkinliğinizi kontrol panelinden takip edin:
+
+- Teslimat durumu
+- Zaman damgası
+- Segment sayısı
+- Mesaj başına maliyet
+- Alıcı detayları
+- İçerik önizlemesi
+
+## En İyi Uygulamalar
+
+1. **Mesaj Uzunluğu**
+
+   - Mesajları kısa ve öz tutun
+   - Segment sayısını takip edin
+   - Mümkün olduğunda standart karakterler kullanın
+
+2. **Uyumluluk**
+
+   - Abonelikten çıkma talimatlarını ekleyin
+   - Yerel düzenlemelere uyun
+   - Sessiz saatlere saygı gösterin
+
+3. **Test**
+   - Numara özelliklerini doğrulayın
+   - Farklı operatörlere teslimatı test edin
+   - Teslimat oranlarını izleyin
+
+---
+
+**SMS göndermeye başlamak mı istiyorsunuz?** SMS iş akışlarını nasıl kuracağınızı öğrenmek için [otomasyon platformu dokümantasyonu](/tr/automation-platform/calls-related/sms-capabilities) sayfasına göz atın.

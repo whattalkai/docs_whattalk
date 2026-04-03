@@ -1,0 +1,152 @@
+---
+title: "Kampanyalara Genel Bakis"
+icon: "bullhorn"
+description: "Birden fazla adaya verimli bir sekilde ulasmak icin otomatik arama kampanyalari olusturmayi ve yonetmeyi ogrenin"
+---
+
+Kampanyalar, yapay zeka asistaninizi kullanarak birden fazla adayi otomatik olarak aramanizi saglar. Verimli giden arama operasyonlari yonetmek icin zamanlama, yeniden deneme mantigi ve aday yonetimini yapilandirin.
+
+## Kampanya Nedir?
+
+Kampanya, yapilandirilmis bir yapay zeka asistani kullanarak sizin adiniza birden fazla adayi arayan otomatik bir sistemdir. Her kampanya sunlari icerir:
+
+<CardGroup cols={2}>
+  <Card title="Aday Yonetimi" icon="users">
+    **Birincil ve ikincil iletisim kisileri** ile kapsamli erisim
+    
+    CSV, entegrasyonlar veya manuel olarak aday iceri aktarin
+  </Card>
+  
+  <Card title="Zamanlama Kontrolu" icon="calendar">
+    **Zaman ve gun kisitlamalari** ile musteri tercihlerine saygi gosterin
+    
+    Izin verilen arama saatlerini ve haftanin gunlerini belirleyin
+  </Card>
+  
+  <Card title="Yeniden Deneme Mantigi" icon="repeat">
+    **Cevaplanmayan aramalar icin akilli yeniden deneme sistemi**
+    
+    Yeniden deneme sayilarini, araliklerini ve kosullarini yapilandirin
+  </Card>
+  
+  <Card title="Hedef Takibi" icon="bullseye">
+    **Tamamlama degiskenleriyle basari olcumu**
+    
+    Kampanya hedeflerini ve aday donusumunu takip edin
+  </Card>
+</CardGroup>
+
+## Kampanya Durumu
+
+<AccordionGroup>
+  <Accordion title="Taslak" icon="file">
+    Kampanya yapilandiriliyor ancak henuz aktif degil. Adaylari ekleyin ve ayarlari yapilandirin.
+  </Accordion>
+  
+  <Accordion title="Devam Ediyor" icon="play">
+    Kampanya, zamanlama ve yeniden deneme ayarlariniza gore aktif olarak arama yapiyor.
+  </Accordion>
+  
+  <Accordion title="Duraklatildi" icon="pause">
+    Kampanya gecici olarak durduruldu. Ilerleme kaybedilmeden devam ettirilebilir.
+  </Accordion>
+  
+  <Accordion title="Tamamlandi" icon="check">
+    Tum adaylarla basariyla iletisime gecildi veya tamamlandi olarak isaretlendi.
+  </Accordion>
+</AccordionGroup>
+
+## Temel Ozellikler
+
+### Zamanlama ve Saat Ayarlari
+- **Izin verilen arama saatleri:** Baslangic ve bitis saatlerini belirleyin (ornegin, 09:00 - 18:00)
+- **Izin verilen gunler:** Arama yapmak icin haftanin belirli gunlerini secin
+- **Saat dilimi destegi:** Asistanin yapilandirilmis saat dilimini kullanir
+- **Arama penceresi dogrulamasi:** Sistem otomatik olarak zaman kisitlamalarina uyar
+
+### Yeniden Deneme Sistemi
+- **Maksimum yeniden deneme:** Cevaplanmayan aramalar icin 1-5 deneme (varsayilan: 3)
+- **Yeniden deneme araligi:** Denemeler arasinda 10-4320 dakika (varsayilan: 60 dakika)
+- **Sesli mesajda yeniden deneme:** Bir kisi cevaplayana kadar aramaya devam edin
+- **Hedefe dayali yeniden deneme:** Hedef gerceklesene kadar aramaya devam edin (boolean turunde [arama sonrasi degiskenleri](/ai-assistants/settings/post-call-actions#post-call-variables) gerektirir)
+
+### Aday Turleri
+- **Birincil adaylar:** Kampanyaya iceri aktarilan veya eklenen ana iletisim kisileri
+- **Ikincil iletisim kisileri:** Birincil adaylara bagli ek iletisim kisileri
+- **Aday durumu takibi:** Arama ilerlemesini ve sonuclarini izleyin
+
+## Gereksinimler
+
+Bir kampanya baslatmadan once:
+
+<Warning>
+**Telefon Numarasi Gerekli:** Giden aramalar icin asistaninizin [yapilandirilmis bir telefon numarasi](/ai-assistants/settings/general#phone-number-configuration) olmalidir.
+</Warning>
+
+- Giden arama ozelligi olan **yapilandirilmis yapay zeka asistani**
+- Arama maliyetleri icin **yeterli hesap bakiyesi**
+- Kampanyaya **eklenenmis adaylar** (manuel, iceri aktarma veya entegrasyon)
+- Tum adaylar icin **gecerli telefon numaralari**
+
+## Hizli Baslangic
+
+1. **Kampanya Olusturun:** Bir ad secin ve yapay zeka asistaninizi belirleyin
+2. **Zamanlama Ayarlayin:** Izin verilen arama saatlerini ve gunlerini tanimlayin
+3. **Yeniden Denemeleri Yapilandirin:** Yeniden deneme sayilarini ve araliklerini belirleyin
+4. **Aday Ekleyin:** CSV'den iceri aktarin veya manuel olarak ekleyin
+5. **Kampanyayi Baslatin:** Aramaya baslamaya hazir oldugunuzda baslat'a tiklayin
+
+<Note>
+Ayrintili kurulum talimatlari icin [Kampanya Olusturma](/tr/campaigns/creating-campaigns) sayfasina bakin.
+</Note>
+
+## Kampanya Izleme
+
+### Aday Durumu Takibi
+Kampanya boyunca bireysel aday ilerlemesini izleyin:
+- **Olusturuldu:** Aranmaya hazir
+- **Planlanmis:** Sonraki arama denemesi icin siraya alindi
+- **Isleniyor:** Su anda araniyor
+- **Tamamlandi:** Basariyla iletisime gecildi veya hedefe ulasildi
+- **Yeniden Planlandi:** Yeniden deneme icin planlanmis
+- **Maksimum Deneme:** Maksimum yeniden deneme sayisina ulasildi
+
+**Manuel aday yonetimi:** Adaylar tablosunda aday durumunu degistirebilirsiniz:
+- **"Olusturuldu" olarak ayarla:** Adayi tekrar aranmak uzere sifirlayin
+- **"Tamamlandi" olarak ayarla:** Aramayi durdurmak icin adayi tamamlanmis olarak isaretleyin
+
+### Arama Sonuclari
+Ayrintili durumlu bireysel arama sonuclari:
+- **Baslatildi:** Arama basladi
+- **Caliyor:** Telefon caliyor
+- **Devam Ediyor:** Arama baglandi ve aktif
+- **Tamamlandi:** Arama basariyla sonuclandi
+- **Mesgul:** Hat mesguldu
+- **Cevaplanmadi:** Kimse cevap vermedi
+- **Basarisiz:** Teknik bir sorun aramayi engelledi
+
+## Sorun Giderme
+
+**Kampanya baslamiyor:**
+- Asistanin yapilandirilmis telefon numarasinin olup olmadigini kontrol edin
+- Yeterli hesap bakiyesini dogrulayin
+- Kampanyaya aday eklendiginden emin olun
+
+**Arama yapilmiyor:**
+- Baslatiktan sonra 10-15 dakika bekleyin - kampanyalarin baslatilmasi zaman alir
+- Mevcut saatin izin verilen arama saatleri icinde olup olmadigini kontrol edin
+- Izin verilen gunlerin bugunun gununu icerigini dogrulayin
+- Adaylarin gecerli telefon numaralarina sahip oldugundan emin olun
+
+**Cok fazla/az yeniden deneme:**
+- Maksimum yeniden deneme ayarini duzenleyin (1-5 deneme)
+- Yeniden deneme araligini degistirin (10-4320 dakika)
+- Yeniden deneme kosullarini gozden gecirin (sesli mesaj, hedef tamamlama)
+
+<Tip>
+**En Iyi Uygulama:** Tutucu yeniden deneme ayarlariyla baslayin ve kampanya performansi ile musteri geri bildirimlerine gore ayarlayin.
+</Tip>
+
+<Note>
+Ayrintili sorun giderme rehberi icin [Kampanya Sorun Giderme](/troubleshooting/campaigns) sayfasina bakin.
+</Note>

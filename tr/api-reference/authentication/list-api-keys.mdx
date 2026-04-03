@@ -1,0 +1,64 @@
+---
+title: "API anahtarlarını listele"
+api: "GET /user/api-keys"
+description: "Kimliği doğrulanmış kullanıcının tüm API anahtarlarını getirin"
+---
+
+Bu uç nokta, kimliği doğrulanmış kullanıcının hesabıyla ilişkili tüm API anahtarlarının listesini döndürür.
+
+### Yanıt
+
+<ResponseField name="api_keys" type="array">
+  API anahtarı nesneleri dizisi
+  
+  <Expandable title="api_key özellikleri">
+    <ResponseField name="id" type="integer">
+      API anahtarının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      API anahtarının adı/etiketi
+    </ResponseField>
+    
+    <ResponseField name="last_used_at" type="string">
+      API anahtarının en son kullanıldığı zamanın ISO 8601 zaman damgası (hiç kullanılmadıysa null)
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      API anahtarının oluşturulma zamanının ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+{
+  "api_keys": [
+    {
+      "id": 1,
+      "name": "Production API Key",
+      "last_used_at": "2025-01-08T15:30:00.000000Z",
+      "created_at": "2025-01-01T10:00:00.000000Z"
+    },
+    {
+      "id": 2,
+      "name": "Development API Key",
+      "last_used_at": null,
+      "created_at": "2025-01-05T14:20:00.000000Z"
+    }
+  ]
+}
+```
+
+```json 200 Empty Response
+{
+  "api_keys": []
+}
+```
+
+</ResponseExample>
+
+<Note>
+Güvenlik nedeniyle, gerçek API anahtarı belirteçleri döndürülmez. Yalnızca anahtarlarla ilgili meta veriler gösterilir.
+</Note>

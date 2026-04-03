@@ -1,0 +1,143 @@
+---
+title: "Kampanya Olusturma"
+icon: "plus"
+description: "Ilk otomatik arama kampanyanizi kurmak icin adim adim rehber"
+---
+
+Yapay zeka asistaninizla birden fazla adaya verimli bir sekilde ulasmak icin otomatik arama kampanyalari olusturun ve yapilandirin.
+
+## On Kosullar
+
+Bir kampanya olusturmadan once sunlara sahip oldugunuzdan emin olun:
+- Giden aramalar icin yapilandirilmis **yapay zeka asistani**
+- Asistaniniza atanmis **telefon numarasi**
+- Arama maliyetleri icin yeterli **hesap bakiyesi**
+- Iceri aktarmaya veya manuel olarak eklemeye hazir **adaylar**
+
+## Kampanya Kurulumu
+
+### 1. Temel Bilgiler
+
+**Kampanya Adi:** Kolay tanimlama icin aciklayici bir ad secin
+**Asistan Secimi:** Aramalari hangi yapay zeka asistaninin yapacagini secin
+
+<Note>
+Asistanin yapilandirmasi (ses, komut istemi, araclar) tum kampanya aramalari icin kullanilacaktir.
+</Note>
+
+### 2. Zamanlama Yapilandirmasi
+
+#### Izin Verilen Arama Saatleri
+Kampanyanizin ne zaman arama yapabilecegini ayarlayin:
+- **Baslangic saati:** Aramaya baslamak icin en erken saat (varsayilan: 00:00)
+- **Bitis saati:** Aramayi durdurmak icin en gec saat (varsayilan: 23:59)
+- **Saat dilimi:** Asistanin yapilandirilmis saat dilimini kullanir
+
+#### Izin Verilen Gunler
+Hangi gunlerde arama yapilacagini secin:
+- **Varsayilan:** Pazartesi'den Pazar'a
+- **Sadece is gunleri:** Pazartesi'den Cuma'ya
+- **Ozel:** Belirli gunleri secin
+
+<Tip>
+**Oneri:** Is aramalari icin, potansiyel musterinin saat diliminde Pazartesi-Cuma 09:00 - 18:00 kullanin.
+</Tip>
+
+### 3. Yeniden Deneme Ayarlari
+
+#### Temel Yeniden Deneme Secenekleri
+- **Maksimum yeniden deneme:** Cevaplanmayan aramalar icin 1-5 deneme (varsayilan: 3)
+- **Yeniden deneme araligi:** Denemeler arasinda 10-4320 dakika (varsayilan: 60 dakika)
+
+#### Gelismis Yeniden Deneme Kosullari
+
+**Sesli Mesajda Yeniden Deneme:**
+- **Etkin:** Bir kisi cevaplayana kadar aramaya devam eder
+- **Devre disi:** Sesli mesaji iletisim denemesi olarak sayar
+
+**Hedef Tamamlanana Kadar Yeniden Deneme:**
+- **Etkin:** Hedefe ulasilana kadar aramaya devam eder
+- **Hedef degiskeni:** Asistanin arama sonrasi semasindan boolean degiskeni secin
+- **Kullanim alani:** Satis aramalari, randevu alma, aday yeterliligi
+
+<Warning>
+**Hedefe dayali yeniden deneme**, asistaninizin boolean alanlariyla (dogru/yanlis) yapilandirilmis arama sonrasi degiskenlere sahip olmasini gerektirir.
+</Warning>
+
+### 4. Aday Yonetimi
+
+#### Aday Ekleme
+
+**Manuel Giris:**
+- Telefon numaralariyla bireysel aday ekleyin
+- Isim ve ek iletisim bilgilerini dahil edin
+
+**CSV Iceri Aktarma:**
+- Aday bilgileriyle elektronik tablo yukleyin
+- Gerekli: Telefon numarasi sutunu
+- Istege bagli: Isim, e-posta, ek alanlar
+
+**Entegrasyon Iceri Aktarma:**
+- GoHighLevel, Google Sheets veya diger bagli platformlardan iceri aktarin
+- Harici aday kaynaklariyla otomatik senkronizasyon
+
+#### Ikincil Iletisim Kisileri
+Ayni aday icin ek telefon numaralari ekleyin:
+- **Kullanim alani:** Birden fazla karar verici, yedek iletisim kisileri
+- **Mantik:** Kampanya her aday icin tum numaralari dener
+- **Durum:** Her iletisim kisisi icin bagimsiz takip
+
+## Kampanyanizi Baslatma
+
+### Lansman Oncesi Kontrol Listesi
+- [ ] Asistanin yapilandirilmis telefon numarasi var
+- [ ] Yeterli hesap bakiyesi
+- [ ] Gecerli telefon numaralariyla adaylar eklendi
+- [ ] Zamanlama uygun sekilde yapilandirildi
+- [ ] Yeniden deneme mantigi kampanya hedefleriyle uyumlu
+
+### Lansman Sureci
+1. **Ayarlari son kez gozden gecirin**
+2. **"Kampanyayi Baslat"a tiklayin** ve baslayin
+3. **Ilerlemeyi izleyin** kampanya kontrol panelinde
+4. **Gerekirse ayarlari duzenleyin** (once kampanyayi duraklattin)
+
+## Kampanya Izleme
+
+### Gercek Zamanli Durum
+- **Devam eden aramalar:** Su anda aktif aramalar
+- **Tamamlanan aramalar:** Sonuclariyla bitmis aramalar
+- **Kalan adaylar:** Henuz aranmamis kisiler
+- **Sonraki arama zamani:** Sonraki aramanin ne zaman yapilacagi
+
+### Ilerlemeyi Takip Etme
+Kampanya kontrol panelinde aday durumunu ve arama sonuclarini takip edin. Ayrintili durum aciklamalari icin [Kampanyalara Genel Bakis](/tr/campaigns/index#kampanya-izleme) sayfasina bakin.
+
+## Aktif Kampanyalari Yonetme
+
+### Kampanyayi Duraklatma
+- **Aninda durdurma:** Mevcut arama tamamlanir, yeni aramalar baslamaz
+- **Devam ettirme ozelligi:** Ilerleme kaybedilmeden yeniden baslatilabilir
+- **Kullanim alanlari:** Ayarlari duzenleme, sonuclari gozden gecirme, gecici duraklama
+
+### Ayarlari Degistirme
+1. **Once kampanyayi duraklattin**
+2. **Yapilandirmayi gerekli sekilde duzenleyin**
+3. **Degisiklikleri kaydedin**
+4. **Kampanyayi devam ettirin** yeni ayarlarla devam etmek icin
+
+### Daha Fazla Aday Ekleme
+- **Aktif kampanyaya ekleme:** Yeni adaylar mevcut yeniden deneme sirasina katilir
+- **Ek iletisim kisilerini iceri aktarma:** CSV veya entegrasyon iceri aktarma
+- **Ikincil iletisim kisileri:** Mevcut adaylar icin yedek numaralar ekleyin
+
+## En Iyi Uygulamalar
+
+- **Tutucu zamanlama:** Is saatleri, saat dilimlerine saygi gosterin
+- **2-3 yeniden denemeyle baslayin:** Geri bildirimlere gore izleyin ve ayarlayin
+- **Temiz aday verileri:** Gecerli numaralar, tekrarlari kaldirin
+- **Uyumluluk:** Yerel yonetmeliklere ve abonelikten cikma taleplerine uyun
+
+<Note>
+Yaygin sorunlarin giderilmesi icin [Kampanya Sorun Giderme](/troubleshooting/campaigns) sayfasina bakin.
+</Note>

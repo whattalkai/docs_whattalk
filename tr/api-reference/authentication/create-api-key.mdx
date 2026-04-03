@@ -1,0 +1,85 @@
+---
+title: "API anahtarı oluştur"
+api: "POST /user/api-keys"
+description: "Kimliği doğrulanmış kullanıcı için yeni bir API anahtarı oluşturun"
+---
+
+Bu uç nokta, kimliği doğrulanmış kullanıcı için yeni bir API anahtarı oluşturur. Oturum belirteci oluşturan giriş uç noktasından farklı olarak, bu uç nokta uzun süreli API erişimi için kullanılabilecek kalıcı bir API anahtarı oluşturur.
+
+<Note>
+Bu uç nokta kimlik doğrulama gerektirir. Ek API anahtarları oluşturmak için mevcut API anahtarınızı veya oturum belirtecinizi kullanın.
+</Note>
+
+### İstek Gövdesi
+
+<ParamField body="name" type="string" required>
+  API anahtarı için bir ad/etiket (ör. "Production", "Development", "My App")
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="api_key" type="object">
+  Oluşturulan API anahtarı detayları
+  
+  <Expandable title="api_key özellikleri">
+    <ResponseField name="name" type="string">
+      API anahtarının adı/etiketi
+    </ResponseField>
+    
+    <ResponseField name="token" type="string">
+      API anahtarı belirteci. **Bunu güvenli bir şekilde saklayın** - yalnızca bir kez gösterilecektir.
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      API anahtarının oluşturulma zamanının ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 201 Created
+{
+  "message": "API key created successfully.",
+  "api_key": {
+    "name": "Production API Key",
+    "token": "1|abc123xyz789abcdef...",
+    "created_at": "2025-01-08T10:30:00.000000Z"
+  }
+}
+```
+
+```json 422 Validation Error
+{
+  "message": "The name field is required.",
+  "errors": {
+    "name": ["The name field is required."]
+  }
+}
+```
+
+</ResponseExample>
+
+### Örnek İstek
+
+```bash
+curl -X POST https://app.whattalk.ai/api/user/api-keys \
+  -H "Authorization: Bearer YOUR_EXISTING_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Production API Key"
+  }'
+```
+
+<Warning>
+API anahtarı belirteci yalnızca bir kez döndürülür. Güvenli bir şekilde sakladığınızdan emin olun. Kaybederseniz yeni bir tane oluşturmanız gerekecektir.
+</Warning>
+
+### API Anahtarlarını Yönetme
+
+- **GET /user/api-keys** - Kimliği doğrulanmış kullanıcının tüm API anahtarlarını listeleyin
+- **DELETE /user/api-keys/{id}** - Belirli bir API anahtarını silin

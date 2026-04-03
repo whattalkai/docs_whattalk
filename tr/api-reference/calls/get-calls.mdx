@@ -1,0 +1,211 @@
+---
+title: "Aramaları listele"
+api: "GET /user/calls"
+description: "Kimliği doğrulanmış kullanıcının tüm aramalarını filtreleme seçenekleriyle listeleyin"
+---
+
+Bu endpoint, kimliği doğrulanmış kullanıcıya ait tüm aramaları çeşitli filtreleme seçenekleriyle listelemenizi sağlar.
+
+### Sorgu Parametreleri
+
+<ParamField query="status" type="string" optional>
+  Aramaları duruma göre filtreleyin. Olası değerler: `initiated`, `ringing`, `busy`, `in-progress`, `ended`, `completed`, `ended_by_customer`, `ended_by_assistant`, `no-answer`, `failed`
+</ParamField>
+
+<ParamField query="type" type="string" optional>
+  Aramaları türe göre filtreleyin. Olası değerler: `inbound`, `outbound`, `web`
+</ParamField>
+
+<ParamField query="phone_number" type="string" optional>
+  Aramaları müşteri telefon numarasına göre filtreleyin
+</ParamField>
+
+<ParamField query="assistant_id" type="integer" optional>
+  Aramaları asistan kimliğine göre filtreleyin
+</ParamField>
+
+<ParamField query="campaign_id" type="integer" optional>
+  Aramaları kampanya kimliğine göre filtreleyin
+</ParamField>
+
+<ParamField query="date_from" type="string" optional>
+  Bu tarihten itibaren aramaları filtreleyin (YYYY-MM-DD formatı)
+</ParamField>
+
+<ParamField query="date_to" type="string" optional>
+  Bu tarihe kadar aramaları filtreleyin (YYYY-MM-DD formatı)
+</ParamField>
+
+<ParamField query="per_page" type="integer" optional>
+  Sayfa başına arama sayısı (1-100, varsayılan: 15)
+</ParamField>
+
+<ParamField query="page" type="integer" optional>
+  Sayfa numarası (varsayılan: 1)
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="data" type="array">
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      Aramanın benzersiz tanımlayıcısı
+    </ResponseField>
+
+    <ResponseField name="assistant_name" type="string">
+      Aramayı yöneten asistanın adı
+    </ResponseField>
+
+    <ResponseField name="campaign_name" type="string">
+      Bu aramanın ait olduğu kampanyanın adı (varsa)
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Aramanın türü (`inbound`, `outbound` veya `web`)
+    </ResponseField>
+
+    <ResponseField name="duration" type="integer">
+      Aramanın saniye cinsinden süresi
+    </ResponseField>
+
+    <ResponseField name="assistant_phone_number" type="string">
+      Asistan tarafından kullanılan telefon numarası
+    </ResponseField>
+
+    <ResponseField name="client_phone_number" type="string">
+      Müşterinin telefon numarası
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Aramanın mevcut durumu
+    </ResponseField>
+
+    <ResponseField name="transcript" type="string">
+      Arama görüşmesinin transkripti
+    </ResponseField>
+
+    <ResponseField name="variables" type="object">
+      Arama sırasında toplanan değişkenler
+    </ResponseField>
+
+    <ResponseField name="evaluation" type="object">
+      Arama performansı için değerlendirme verileri
+    </ResponseField>
+
+    <ResponseField name="webhook_response" type="object">
+      Yapılandırılmış webhook'lardan gelen yanıt
+    </ResponseField>
+
+    <ResponseField name="carrier_cost" type="number">
+      Bu arama için operatör tarafından uygulanan maliyet
+    </ResponseField>
+
+    <ResponseField name="total_cost" type="number">
+      Tüm ücretler dahil aramanın toplam maliyeti
+    </ResponseField>
+
+    <ResponseField name="answered_by" type="string">
+      Aramayı kim yanıtladı (`human`, `machine` veya `unknown`)
+    </ResponseField>
+
+    <ResponseField name="recording_url" type="string">
+      Arama kaydının URL'si (mevcutsa ve etkinleştirildiyse)
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Aramanın oluşturulma tarihi ve saati
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      Aramanın son güncellenme tarihi ve saati
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="current_page" type="integer">
+  Mevcut sayfa numarası
+</ResponseField>
+
+<ResponseField name="per_page" type="integer">
+  Sayfa başına öğe sayısı
+</ResponseField>
+
+<ResponseField name="total" type="integer">
+  Kriterlere uyan toplam arama sayısı
+</ResponseField>
+
+<ResponseField name="last_page" type="integer">
+  Son sayfa numarası
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "current_page": 1,
+  "data": [
+    {
+      "id": 123,
+      "assistant_name": "Sales Assistant",
+      "campaign_name": "Q4 Outreach Campaign",
+      "type": "outbound",
+      "duration": 245,
+      "assistant_phone_number": "+1234567890",
+      "client_phone_number": "+1987654321",
+      "status": "completed",
+      "transcript": "Hello, this is Sarah from WhatTalk. How are you doing today?...",
+      "variables": {
+        "customer_name": "John Smith",
+        "interest_level": "high",
+        "follow_up_date": "2025-08-15"
+      },
+      "evaluation": {
+        "sentiment": "positive",
+        "outcome": "qualified_lead",
+        "score": 8.5
+      },
+      "webhook_response": {
+        "status": "success",
+        "data": {
+          "crm_contact_id": "abc123"
+        }
+      },
+      "carrier_cost": 0.02,
+      "total_cost": 0.025,
+      "answered_by": "human",
+      "recording_url": "https://recordings.whattalk.ai/calls/123.mp3",
+      "created_at": "2025-08-04 14:30:00",
+      "updated_at": "2025-08-04 14:34:05"
+    }
+  ],
+  "first_page_url": "https://app.whattalk.ai/api/user/calls?page=1",
+  "from": 1,
+  "last_page": 10,
+  "last_page_url": "https://app.whattalk.ai/api/user/calls?page=10",
+  "links": [
+    {
+      "url": null,
+      "label": "&laquo; Previous",
+      "active": false
+    },
+    {
+      "url": "https://app.whattalk.ai/api/user/calls?page=1",
+      "label": "1",
+      "active": true
+    },
+    {
+      "url": "https://app.whattalk.ai/api/user/calls?page=2",
+      "label": "2",
+      "active": false
+    }
+  ],
+  "next_page_url": "https://app.whattalk.ai/api/user/calls?page=2",
+  "path": "https://app.whattalk.ai/api/user/calls",
+  "per_page": 15,
+  "prev_page_url": null,
+  "to": 15,
+  "total": 150
+}
+```
+
+</ResponseExample>

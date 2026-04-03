@@ -1,0 +1,124 @@
+---
+title: "Bilgi Tabanları"
+icon: "database"
+description: "Yapay zeka asistanınıza SSS, belgeler ve diğer bilgi kaynaklarına nasıl erişim sağlayacağınızı öğrenin"
+---
+
+Bilgi tabanları, yapay zeka asistanınızın web siteleri, belgeler ve dosyalar gibi çeşitli kaynaklardan özel bilgilere erişmesini ve bunlara başvurmasını sağlar. Bu güçlü özellik, asistanınızın kendi içeriğinize dayalı doğru ve bağlama özel yanıtlar vermesine olanak tanır.
+
+## Bilgi Entegrasyonu Yaklaşımları
+
+### 1. Prompt'a Kopyala-Yapıştır
+
+- **Artıları**: Hızlı kurulum, anında kullanılabilirlik.
+- **Eksileri**: Büyük metinler yanıtları yavaşlatabilir veya kısmi "halüsinasyon" riski oluşturabilir.
+- **Kullanım**: En sık sorulan 10 soru gibi kısa referanslar için kullanışlıdır.
+
+### 2. Bilgi Tabanı Özelliği
+
+Özel Bilgi Tabanı özelliğimiz, yapay zekanın talep üzerine sorgulayabileceği belgeleri depolamanıza ve yönetmenize olanak tanır:
+
+<CardGroup cols={2}>
+  <Card title="Web Sitesi İçeriği" icon="globe">
+    Mevcut tüm bilgileri yakalamak için **tüm web sitelerini tarayın**
+    - Şirket web siteleri
+    - Ürün dokümantasyonu
+    - SSS sayfaları
+    - Blog içeriği
+  </Card>
+  
+  <Card title="Belge Dosyaları" icon="file">
+    Bilgilerinizle **çeşitli dosya formatlarını yükleyin**
+    - **PDF dosyaları:** Kılavuzlar, rehberler, raporlar
+    - **Word belgeleri (.docx):** Politikalar, prosedürler
+    - **Metin dosyaları (.txt):** Basit içerik, notlar
+  </Card>
+</CardGroup>
+
+#### İşleme Durumu
+
+Her bilgi tabanı farklı işleme aşamalarından geçer:
+
+<AccordionGroup>
+  <Accordion title="Boş" icon="folder-open">
+    Henüz belge eklenmedi. Bilgi tabanını etkinleştirmek için içerik ekleyin.
+  </Accordion>
+  
+  <Accordion title="İşleniyor" icon="clock">
+    Belgeler analiz ediliyor ve indeksleniyor. İşleme süresi içerik boyutuna göre değişir.
+  </Accordion>
+  
+  <Accordion title="Aktif" icon="check">
+    Bilgi tabanı hazır. Yapay zeka asistanınız artık bu bilgileri arayabilir ve başvurabilir.
+  </Accordion>
+  
+  <Accordion title="Başarısız" icon="x">
+    İşleme başarısız oldu. Yaygın nedenler: korumalı web siteleri, erişilemeyen içerik, bozuk dosyalar.
+  </Accordion>
+</AccordionGroup>
+
+#### Entegrasyon Modları
+
+Yapay zeka asistanınızın bilgi tabanı bilgilerine nasıl erişeceğini seçin:
+
+<CardGroup cols={2}>
+  <Card title="Fonksiyon Çağrısı" icon="function">
+    **Önerilen:** Yalnızca gerektiğinde arama yapar. Daha verimli ve hızlı.
+    
+    **En uygun:** Genel konuşmalar
+  </Card>
+  
+  <Card title="Prompt Enjeksiyonu" icon="syringe">
+    **Kapsamlı:** Her müşteri mesajından sonra arama yapar. Daha doğru ancak daha yavaş.
+    
+    **En uygun:** Destek odaklı asistanlar. [Dolgu sesi](/tr/ai-assistants/filler-audio) ile kullanın
+  </Card>
+</CardGroup>
+
+## En İyi Uygulamalar
+
+- Bilgileri kısa tutun, madde işaretleri kullanın.
+- Yapay zekanın daha etkili ayrıştırabilmesi için konuları net başlıklarla ayırın.
+- Yapay zekanın verilerinize doğru şekilde başvurduğunu doğrulamak için arama transkriptlerini izleyin.
+- Web sitesi taraması için herkese açık URL'ler kullanın
+- Büyük belgeler için dosya boyutunu ve işleme süresini göz önünde bulundurun
+
+## Web Sitesi Tarama Hususları
+
+<Warning>
+**Web Sitesi Koruması:** Bazı web sitelerinde işlemenin başarısız olmasına neden olabilecek anti-tarama koruması bulunur. Web sitesi size aitse, tarama sırasında korumayı geçici olarak devre dışı bırakın.
+</Warning>
+
+**Yaygın sorunlar:**
+- Cloudflare koruması, hız sınırlama, oturum açma gereksinimleri
+- JavaScript ağırlıklı siteler, korumalı içerik
+
+**Çözümler:**
+- Herkese açık URL'ler kullanın
+- İçeriği manuel olarak dışa aktarın ve belge olarak yükleyin
+- Korumalı içerik yardımı için destek ile iletişime geçin
+
+## Kurulum Süreci
+
+1. Kontrol panelinizde Bilgi Tabanları bölümüne gidin
+2. "Bilgi Tabanı Oluştur" seçeneğine tıklayın
+3. Ad ve açıklama ekleyin
+4. Belgeleri (PDF, DOCX, TXT) yükleyin veya web sitesi URL'leri ekleyin
+5. İşlemenin tamamlanmasını bekleyin
+6. [Asistan Ayarları](/tr/ai-assistants/settings/prompt-and-tools#knowledge-base) bölümünden asistanınıza atayın
+
+## Kullanım
+
+Bağlandıktan sonra, asistanınız içeriğinize dayalı doğru ve bilgili yanıtlar sağlamak için konuşmalar sırasında bilgi tabanını otomatik olarak arar.
+
+**Arama işlevi:** Yapay zeka, müşterinin sorusuna göre ilgili bilgileri bulmak için bilgi tabanınızdaki tüm belgeleri tarar ve bağlama duyarlı yanıtlar sunar.
+
+## Sorun Giderme
+
+**İşleme başarısız oluyor:** URL'lerin herkese açık olup olmadığını kontrol edin, web sitesi size aitse korumayı devre dışı bırakın
+**Arama sonucu yok:** İçerik uygunluğunu doğrulayın, işlemenin tamamlandığından emin olun (Aktif durumu)
+**Yavaş yanıtlar:** Prompt Enjeksiyonu modundan Fonksiyon Çağrısı moduna geçin
+
+---
+
+**Not:** Ayrıntılı yapılandırma ve gelişmiş ayarlar için [Asistan Ayarları Rehberi](/tr/ai-assistants/settings/prompt-and-tools#knowledge-base) bölümüne bakın.

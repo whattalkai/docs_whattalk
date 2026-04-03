@@ -1,0 +1,87 @@
+---
+title: "Asistan Modlari"
+icon: "wave-pulse"
+description: "AI asistanlariniz icin mevcut uc ses olusturma modunu ve her birinin ne zaman kullanilacagini anlayin."
+---
+
+WhatTalk.ai uzerindeki AI asistanlar **uc farkli modda** konusabilir. Her mod, arayanin konusmasinin nasil anlasildigini ve asistanin yaninin nasil olusturulacagini belirler:
+
+<Callout>
+Dogru modu secmek yanit suresini, dogalligi ve genel arama deneyimini iyilestirebilir.
+</Callout>
+
+## 1. Pipeline
+
+| | |
+|---|---|
+| **Arayuzdeki Etiketi** | `Pipeline` |
+| **Nasil calisir** | Konusmadan Metne → LLM → Metinden Konusmaya |
+| **Gecikme** | ~800 – 1500 ms (dil ve modele bagli) |
+| **En uygun** | Karmasik muhakeme, dinamik istemler, cok cumleli yanitlar |
+
+Pipeline modu once arayanin sozcuklerini metne donusturur, bu metni dil modelinden gecirir, ardindan yaniti tekrar sese donusturur. Maksimum esneklik sunan kanitlanmis bir yaklasimdir:
+
+- Kutuphanedeki **tum sesleri** destekler (ozel klonlanmis sesler dahil).
+- **Uzun yanitlari** veya paragraf tarzi yanitlari iyi yonetir.
+- LLM'nin **degiskenleri eklemesine** ve onceki baglama temiz bir sekilde basvurmasina olanak tanir.
+
+### Pipeline ne zaman secilmeli
+
+1. Zengin, cok cumleli yanitlara ihtiyaciniz varsa (ornegin destek sorgulari, ayrintili aciklamalar).
+2. Asistan **yapilandirilmis veriler** veya karmasik istemler uzerinde muhakeme yapmak zorundaysa.
+3. Konusulan ses uzerinde mutlak kontrol tercih ediyorsaniz (klon veya marka sesi).
+
+## 2. Konusmadan Konusmaya (Multimodal)
+
+| | |
+|---|---|
+| **Arayuzdeki Etiketi** | `Speech-to-speech` |
+| **Nasil calisir** | Dogrudan **konusmadan konusmaya** uretim (ara metin yok) |
+| **Gecikme** | ~300 – 600 ms (ultra dusuk) |
+| **En uygun** | Dogal karsilikli konusma, kisa ve reaktif yanitlar |
+
+Konusmadan konusmaya modu ayri transkripsiyon ve TTS'yi atlar. Bunun yerine, dogrudan dinleyen ve konusan bir **multimodal model** kullanarak daha dogal bir konusma akisi uretir:
+
+- **Hizli soz degisimi** – arayanlar neredeyse anlik yanitlar deneyimler.
+- Dogal olarak **daha ifadeli prozodi** (tonlama, dolgu sesleri) uretir.
+- Su anda **sinirli bir ses seti** destekler, ancak duzenli olarak yenileri eklenmektedir.
+
+### Konusmadan Konusmaya ne zaman secilmeli
+
+1. Konusmanin **hizli** hissettirmesi gerektiginde (satis, rezervasyon onaylari).
+2. Yanitlariniz genellikle **kisa cumleler** veya hizli onaylamalarsa.
+3. Daha hizli etkilesim icin sistem tarafindan saglanan ses secenekleriyle sorun yasamiyorsaniz.
+
+<Note>
+Konusmadan konusmaya hizla gelisiyor. Dusuk gecikmeyle ozel klonlanmis bir sese ihtiyaciniz varsa, **Dualplex**'i deneyin.
+</Note>
+
+## 3. Dualplex (Beta)
+
+| | |
+|---|---|
+| **Arayuzdeki Etiketi** | `Dualplex` |
+| **Nasil calisir** | Multimodal STT + LLM (konusmadan konusmaya) ile ElevenLabs TTS ciktisi |
+| **Gecikme** | Dusuk (ses ve modele gore degisir) |
+| **En uygun** | Yuksek kaliteli/marka sesleriyle (klonlanmis) hizli, dogal yanitlar |
+
+Dualplex, konusmadan konusmayanin duyarliligini Pipeline'da kullanilan ElevenLabs'in premium sesleri ve klonlama ozellikleriyle birlestir. Asistan, arayani anlamak ve yaniti planlamak icin multimodal modeli kullanir, ardindan tutarli, yuksek kaliteli cikti icin son konusmayi ElevenLabs araciligiyla olusturur.
+
+- Konusmadan konusmaya benzer **neredeyse anlik soz degisimi**.
+- **Ozel klonlanmis sesler** dahil **ElevenLabs** ses kutuphanesine erisim.
+- Ifadeli prozodiyle **kisa ve orta** yanitlar icin mukemmel.
+- Bugun cogu kullanim senaryosu icin **onerilen varsayilan**; su anda **Beta** asamasinda.
+
+### Dualplex ne zaman secilmeli
+
+1. Hizli karsilikli konusma istiyorsaniz ancak markali veya klonlanmis bir sese ihtiyaciniz varsa.
+2. Hassas ses seciminden vazgecmeden daha ifadeli sunum istiyorsaniz.
+3. Hala Beta asamasinda olan yeni bir ozellik kullanmakta rahat hissediyorsaniz.
+
+## Modlar arasi gecis
+
+Her asistan icin modu **Asistan → Ayarlar → Ses Motoru** bolumunden secebilirsiniz. Kullanim durumunuz icin en iyi hiz ve kalite dengesini saglayanini gormek icin uc modu da test edin. `Dualplex` su anda **Beta** olarak etiketlenmistir.
+
+---
+
+**Profesyonel Ipucu:** Her modda birer arama kaydedin ve hangisinin akiniza uygun olduguna karar vermek icin arayanin algilanan gecikmesini ve etkilesim duzeyini karsilastirin.

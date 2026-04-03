@@ -1,0 +1,108 @@
+---
+title: "Veri Aktarımı"
+icon: "wand-sparkles"
+description: "Önceki adımlardan gelen verileri mevcut adımda kullanma"
+---
+
+## Veri akışı
+
+Herhangi bir akış, **bir tetikleyici adımla başlayan** ve ardından **herhangi bir sayıda eylem adımı** içeren dikey bir diyagramdır.
+
+Adımlar dikey olarak bağlıdır. Veri, üst adımlardan alt adımlara akar. Alt adımlar, üst adımların çıktı verilerine erişebilir.
+
+## Örnek Adımlar
+
+<video
+  width="450"
+  autoPlay
+  muted
+  loop
+  playsinline
+  src="/resources/passing-data-3steps.mp4"></video>
+
+Bu akışın 3 adımı vardır ve verilere şu şekilde erişebilirler:
+
+- **Adım 1**, sonraki adımlarda kullanılacak ana veri üreticisidir. Adım 1 tarafından üretilen veriler, Adım 2 ve 3'te erişilebilir olacaktır. Ancak bazı tetikleyiciler veri üretmez, Zamanlamalar gibi.
+
+- **Adım 2**, Adım 1 tarafından üretilen verilere erişebilir. Yürütme sonrasında bu adım da sonraki adım(lar)da kullanılmak üzere veri üretecektir.
+
+- **Adım 3**, üst adımları olan Adım 1 ve 2 tarafından üretilen verilere erişebilir. Bu adım veri üretebilir ancak akıştaki son adım olduğu için diğer adımlar tarafından kullanılamaz.
+
+## Veri Ekleme Paneli
+
+Mevcut adımınızda önceki bir adımdan veri kullanmak için imlecinizi herhangi bir giriş alanına yerleştirin, **Veri Ekleme** paneli açılacaktır.
+
+<video
+  autoPlay
+  muted
+  loop
+  playsinline
+  src="/resources/passing-data-data-to-insert-panel.mp4"></video>
+
+Bu panel erişilebilir adımları ve verilerini gösterir. Veri öğelerini genişleterek içeriklerini görüntüleyebilir ve öğelere tıklayarak bunları mevcut ayar giriş alanınıza ekleyebilirsiniz.
+
+Bu paneldeki bir öğenin sağında bir açılır ok (⌄) varsa, öğeye tıklayarak alt özelliklerini genişletebilirsiniz. İhtiyacınıza göre üst öğeyi veya özelliklerini seçebilirsiniz.
+
+Bu panelden veri eklediğinizde, giriş alanındaki imleç konumuna eklenir. Bu, herhangi bir alanda statik metin ve dinamik veriyi birleştirebileceğiniz anlamına gelir.
+
+<video
+  autoPlay
+  muted
+  loop
+  playsinline
+  src="/resources/passing-data-main-insert-data-example.mp4"></video>
+
+Öğeleri eklemeden önce genişletmenizi öneririz; böylece içerdikleri veri türünü ve doldurduğunuz giriş alanına uygun olup olmadığını anlayabilirsiniz.
+
+## Veri Oluşturmak İçin Adımları Test Etme
+
+Verilerine erişmeden önce adımları test etmenizi gerektiriyoruz. Bu yaklaşım, yanlış veri seçmenizi ve akışlarınızı yayınladıktan sonra bozmanızı önler.
+
+Bir adım test edilmemişse ve verilerine erişmeye çalışırsanız, şu mesajı göreceksiniz:
+
+<img
+  width="350"
+  src="/resources/passing-data-test-step-first.png"
+  alt="Önce otomasyon adımınızı test edin"
+/>
+
+Bunu düzeltmek için adıma gidin ve test etmek için Örnek Veri Oluştur panelini kullanın. Adımlar test için farklı yaklaşımlar kullanır. Yaygın olanlar şunlardır:
+
+- **Veri Yükle:** Bazı tetikleyiciler, bağlı hesabınızda herhangi bir işlem yapmanıza gerek kalmadan veri yüklemenize olanak tanır.
+- **Tetikleyiciyi Test Et:** Bazı tetikleyiciler, örnek veri oluşturmak için bağlı hesabınıza gidip tetikleyiciyi çalıştırmanızı gerektirir.
+- **Veri Gönder:** Webhook'lar, örnek veri oluşturmak için webhook URL'sine örnek bir istek göndermenizi gerektirir.
+- **Eylemi Test Et:** Eylem adımları, örnek veri oluşturmak için eylemi çalıştırmanıza olanak tanır.
+
+Adımınızın nasıl test edilmesi gerektiğini öğrenmek için Örnek Veri Oluştur panelindeki talimatları izleyin. Bazı tetikleyiciler ayrıca Sahte Veri Kullan seçeneği sunar; bu, parçadan statik örnek veri oluşturur. Sahte veri kullanmak yerine adımı test etmenizi öneririz.
+
+Bu, **Veri Yükle** düğmesini kullanarak bir tetikleyici için örnek veri oluşturma örneğidir:
+
+<video
+  autoPlay
+  muted
+  loop
+  playsinline
+  src="/resources/passing-data-load-data.mp4"></video>
+
+## İleri Düzey İpuçları
+
+### Dinamik Değerlere Geçiş
+
+Açılır menüler ve bazı diğer giriş türleri, önceki adımlardan veri seçmenize izin vermez. Bunu atlamak ve bunun yerine önceki adımlardan veri kullanmak istiyorsanız, bu düğmeyi kullanarak giriş alanını dinamik bir giriş alanına dönüştürün:
+
+<video
+  autoPlay
+  muted
+  loop
+  playsinline
+  src="/resources/passing-data-dynamic-value.mp4"></video>
+
+### Yol ile veriye erişim
+
+Aradığınız veriyi **Veri Ekleme** panelinde bulamıyorsanız ancak kullanmak istiyorsanız, bunun yerine bir JSON yolu yazabilirsiniz.
+
+JSON yolları yazmak için şu sözdizimini kullanın:
+
+`{{step_slug.path.to.property}}`
+
+`step_slug`, imlecinizi akış adımlarınızdan herhangi birinin üzerine getirerek bulunabilir; adımın sağında görünecektir.

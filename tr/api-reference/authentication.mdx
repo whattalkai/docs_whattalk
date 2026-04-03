@@ -1,0 +1,42 @@
+---
+title: "Kimlik Doğrulama"
+icon: "key"
+description: "API isteklerinizi nasıl doğrulayacağınızı öğrenin"
+---
+
+WhatTalk API, istekleri doğrulamak için API anahtarları kullanır. API'ye yaptığınız her isteğin başlığına API anahtarınızı eklemeniz gerekir.
+
+## API Anahtarı Edinme
+
+Bir API anahtarı edinmek için:
+
+1. [https://app.whattalk.ai](https://app.whattalk.ai) adresinden WhatTalk hesabınıza giriş yapın
+2. "API Keys" sayfasına gidin
+3. "Create new API Key" butonuna tıklayın
+4. Yeni API anahtarınızı kopyalayın ve güvenli bir şekilde saklayın
+
+<Warning>
+  API anahtarınızı gizli ve güvenli tutun. Herkese açık olarak paylaşmayın veya
+  sürüm kontrol sistemlerine eklemeyin.
+</Warning>
+
+## API Anahtarını Kullanma
+
+API anahtarınızı her isteğin `Authorization` başlığına ekleyin:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+`YOUR_API_KEY` yerine gerçek API anahtarınızı yazın.
+
+## Örnek İstek
+
+API anahtarını bir cURL isteğine nasıl ekleyeceğinize dair bir örnek:
+
+```bash
+curl -X GET "https://api.whattalk.ai/api/user/campaigns" \
+     -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+İstek yaparken `YOUR_API_KEY` yerine gerçek API anahtarınızı yazın.

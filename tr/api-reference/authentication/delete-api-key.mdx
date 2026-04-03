@@ -1,0 +1,39 @@
+---
+title: "API anahtarını sil"
+api: "DELETE /user/api-keys/{id}"
+description: "Bir API anahtarını silin"
+---
+
+Bu uç nokta, bir API anahtarını kalıcı olarak siler. Bu anahtarı kullanan tüm uygulamalar anında erişimlerini kaybedecektir.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Silinecek API anahtarının benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+{
+  "message": "API key deleted successfully."
+}
+```
+
+```json 404 Not Found
+{
+  "message": "API key not found."
+}
+```
+
+</ResponseExample>
+
+<Warning>
+Bu işlem anında gerçekleşir ve geri alınamaz. Bu API anahtarını kullanan tüm uygulamalar anında çalışmayı durduracaktır.
+</Warning>

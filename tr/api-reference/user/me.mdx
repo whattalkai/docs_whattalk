@@ -1,0 +1,41 @@
+---
+title: "Mevcut kullanıcıyı getir"
+api: "GET /user/me"
+description: "Kimliği doğrulanmış kullanıcının profil bilgilerini getirin"
+---
+
+Bu uç nokta, hesap bakiyesi dahil olmak üzere mevcut kimliği doğrulanmış kullanıcının profil bilgilerini döndürür.
+
+### Yanıt
+
+<ResponseField name="name" type="string">
+  Kullanıcının tam adı
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Kullanıcının e-posta adresi
+</ResponseField>
+
+<ResponseField name="total_balance" type="number">
+  Kullanıcının USD cinsinden mevcut hesap bakiyesi
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "total_balance": 125.50
+}
+```
+
+</ResponseExample>
+
+### Kullanım Alanları
+
+Bu uç nokta şunlar için kullanışlıdır:
+
+- **Kimlik doğrulamayı onaylama** - API anahtarının geçerli olduğunu ve beklenen kullanıcıya ait olduğunu doğrulayın
+- **Hesap bakiyesini kontrol etme** - API çağrıları yapmadan önce mevcut kredileri izleyin
+- **Kullanıcı bilgilerini görüntüleme** - Uygulamanızın arayüzünde mevcut kullanıcıyı gösterin
