@@ -1,0 +1,93 @@
+---
+title: "Kampanyaları listele"
+api: "GET /user/campaigns"
+description: "Tüm kampanyaları listeleyin"
+---
+
+Bu endpoint, tüm kampanyaları listelemenizi sağlar.
+
+### Yanıt alanları
+
+<ResponseField name="campaigns" type="array">
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      Kampanyanın kimliği
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Kampanyanın adı
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Kampanyanın durumu
+    </ResponseField>
+
+    <ResponseField name="max_calls_in_parallel" type="integer">
+      Paralel olarak yapılabilecek maksimum arama sayısı
+    </ResponseField>
+
+    <ResponseField name="mark_complete_when_no_leads" type="boolean">
+      Potansiyel müşteri kalmadığında kampanyayı tamamlandı olarak işaretleyip işaretlemeyeceği
+    </ResponseField>
+
+    <ResponseField name="allowed_hours_start_time" type="string">
+      İzin verilen arama saatlerinin başlangıç zamanı
+    </ResponseField>
+
+    <ResponseField name="allowed_hours_end_time" type="string">
+      İzin verilen arama saatlerinin bitiş zamanı
+    </ResponseField>
+
+    <ResponseField name="allowed_days" type="array">
+      Aramaların yapılmasına izin verilen haftanın günleri
+    </ResponseField>
+
+    <ResponseField name="max_retries" type="integer">
+      Başarısız aramalar için maksimum yeniden deneme sayısı
+    </ResponseField>
+
+    <ResponseField name="retry_interval" type="integer">
+      Yeniden denemeler arasındaki saniye cinsinden süre
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Kampanyanın oluşturulma zaman damgası
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      Kampanyanın son güncellenme zaman damgası
+    </ResponseField>
+
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+[
+  {
+    "id": 1,
+    "name": "Test campaing",
+    "status": "draft",
+    "max_calls_in_parallel": 3,
+    "mark_complete_when_no_leads": true,
+    "allowed_hours_start_time": "00:00:00",
+    "allowed_hours_end_time": "23:59:00",
+    "allowed_days": [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday"
+    ],
+    "max_retries": 3,
+    "retry_interval": 60,
+    "created_at": "2025-05-29T07:18:34.000000Z",
+    "updated_at": "2025-05-29T07:18:34.000000Z"
+  }
+]
+```
+
+</ResponseExample>

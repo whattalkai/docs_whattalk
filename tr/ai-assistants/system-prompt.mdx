@@ -1,0 +1,176 @@
+---
+title: "Sistem Istemleri"
+icon: "brain"
+description: "AI asistanin temel zekasi olan etkili sistem istemleri olusturmayi ogrenin"
+---
+
+Sistem istemi, AI asistanin en onemli bilesidir. Asistanin kisiligini, davranisini, bilgisini ve yeteneklerini tanimlar. Bunu "beyin" ve "egitim kilavuzu"nun birlesimi olarak dusunun.
+
+## Duzenleme Secenekleri
+
+Sistem isteminizi olusturmak ve duzenlemek icin uc yolunuz var:
+
+<Frame>
+  <img src="/resources/ai-assistants/system-prompt-options.png" alt="Sistem Istemi Duzenleme Secenekleri" />
+</Frame>
+
+<CardGroup cols={3}>
+  <Card title="AI Istem Duzenleyici" icon="sparkles" href="/tr/ai-assistants/ai-prompt-editor">
+    Isteminizi duzenlemek icin AI ile sohbet edin. Hizli yinelemeler ve iyilestirmeler icin en uygun.
+  </Card>
+  <Card title="Akis Olusturucu" icon="share-nodes" href="/tr/ai-assistants/flow-builder">
+    Gorsel surukle-birak duzenleyici. Yapilandirilmis, cok yollu konusmalar icin en uygun.
+  </Card>
+  <Card title="Klasik Duzenleyici" icon="pencil">
+    Dogrudan metin duzenleme. Tam kontrol ve manuel ince ayar icin en uygun.
+  </Card>
+</CardGroup>
+
+## Sablonlarla Hizli Baslangic
+
+Hizla baslamak icin:
+
+1. [Asistan ayarlarina](/tr/ai-assistants/settings/prompt-and-tools#system-prompt) gidin
+2. Sistem istemi alanini bulun
+3. Yakinindaki "Sablonlar" dugmesine tiklayin
+4. Kullanim durumunuza uyan bir sablon secin
+5. Ihtiyaclariniza gore ozellestirin
+
+## Dil Destegi
+
+Sistem isteminiz, konusma dili ayarindan bagimsiz olarak herhangi bir dilde yazilabilir:
+
+- Istemi tercih ettiginiz dilde yazin
+- Konusma dilini [asistan ayarlari](/tr/ai-assistants/settings/general#language-configuration) bolumunden ayri olarak ayarlayin
+- AI, secilen dilde konusurken istemin talimatlarini takip edecektir
+
+Ornegin:
+
+- Ingilizce sistem istemi, konusma dili Ispanyolca olarak ayarlanmis
+- Almanca sistem istemi, konusma dili Fransizca olarak ayarlanmis
+- Cince sistem istemi, konusma dili Ingilizce olarak ayarlanmis
+
+## Neden Onemliler
+
+Sistem isteminiz:
+
+- AI'nin nasil dusundugunu ve yanit verdigini sekillendiri
+- Konusma sinirlarini belirler
+- Temel bilgileri saglar
+- Davranisi ve tonu kontrol eder
+- Ucs durumlarin nasil ele alinacagini belirler
+
+## Temel Bilesenler
+
+Iyi bir sistem istemi sunlari icermelidir:
+
+### 1. Rol ve Kimlik
+
+```
+Siz [Sirket] icin profesyonel bir satis temsilcisisiniz. [Urun/Hizmet] konusunda uzmansiniz ve tekliflerimiz hakkinda kapsamli bilgiye sahipsiniz.
+```
+
+### 2. Konusma Tarzi
+
+```
+Samimi, profesyonel bir ton surdurmelisiniz. Net, ozlu bir dil kullanin. Ozellikle sorulmadikca teknik jargondan kacinin.
+```
+
+### 3. Temel Bilgiler
+
+```
+Ana urunlerimiz:
+- Urun A (aylik $X): [ozellikler]
+- Urun B (aylik $Y): [ozellikler]
+Mevcut promosyon: Ilk 3 ay %20 indirim
+```
+
+### 4. Davranissal Yonergeler
+
+```
+- Hesap ayrintilarina gecmeden once her zaman musteri bilgilerini dogrulayin
+- Musteri sinirli gorunuyorsa bir insan temsilciye aktarin
+- Teslimat tarihleri hakkinda soz vermeyin
+```
+
+### 5. Yanit Cercevesi
+
+```
+Fiyatlandirma soruldugunda:
+1. Once ihtiyaclarini anlayin
+2. Ilgili paket seceneklerini sunun
+3. Deger onesini aciklayin
+4. Gecerli indirimleri paylasin
+```
+
+## En Iyi Uygulamalar
+
+1. **Spesifik Olun**
+
+   - Net talimatlar daha iyi sonuclar verir
+   - Iyi yanit ornekleri ekleyin
+   - Yapilmamasi gerekenleri tanimlayin
+
+2. **Yapi Onemlidir**
+
+   - Bilgileri mantiksal olarak duzenleyin
+   - Madde isaretleri ve bolumler kullanin
+   - Ilgili bilgileri bir arada tutun
+
+3. **Test Edin ve Yineleyin**
+   - Temel bir istemle baslayin
+   - Cesitli senaryolari test edin
+   - Arama kayitlarina dayanarak iyilestirin
+   - Uc durumlar icin islem ekleyin
+
+## Yaygin Hatalar
+
+- **Cok Belirsiz**: "Yardimci ve profesyonel ol" (Yeterince spesifik degil)
+- **Cok Katı**: Her olasi yaniti komut dosyasi haline getirmek (Dogal akisi azaltir)
+- **Bilgi Asiriliği**: Gereksiz ayrintilari dahil etmek
+- **Eksik Yonergeler**: Yaygin durumlarin nasil ele alinacagini belirtmemek
+
+## Ornek Yapi
+
+```
+# Rol ve Amac
+[AI'nin kim oldugunu ve ana hedeflerini tanimlayin]
+
+# Temel Bilgi
+[Urunler/hizmetler hakkinda temel bilgiler]
+
+# Konusma Yonergeleri
+[Musterilerle nasil etkilesime gecilinecegi]
+
+# Yanit Kaliplari
+[Belirli durumlarin nasil ele alinacagi]
+
+# Sinirlamalar ve Sinirlar
+[AI'nin yapmamasi gerekenler]
+```
+
+## Isteminizi Test Etme
+
+1. Su konulari kapsayan test aramalari yapin:
+
+   - Yaygin senaryolar
+   - Uc durumlar
+   - Zor durumlar
+   - Cesitli musteri kislikleri
+
+2. Gozden gecirin ve ayarlayin:
+   - Arama kayitlarini dinleyin
+   - Yanit dogrulugunu kontrol edin
+   - Ton tutarliligini dogrulayin
+   - Bilgi tutma kapasitesini test edin
+
+## Optimizasyon Ipuclari
+
+- Hizli yinelemeler icin Hizli Motor ile baslayin
+- Bosluklari belirlemek icin arama kayitlarini kullanin
+- Iyi/kotu yanit ornekleri ekleyin
+- Beklenmeyen sorularin ele alinmasini dahil edin
+
+---
+
+**Profesyonel Ipucu:** Sistem isteminiz yasayan bir belgedir - gercek arama deneyimlerine ve musteri etkilesimlerine dayanarak duzenli olarak guncelleyin.

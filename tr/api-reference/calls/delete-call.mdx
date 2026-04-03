@@ -1,0 +1,52 @@
+---
+title: "Arama sil"
+api: "DELETE /user/calls/{call}"
+description: "Belirli bir arama kaydını silin"
+---
+
+Bu endpoint, kimliği doğrulanmış kullanıcıya ait belirli bir arama kaydını silmenizi sağlar.
+
+### Yol Parametreleri
+
+<ParamField path="call" type="integer" required>
+  Silinecek aramanın benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Aramanın başarıyla silindiğini belirten onay mesajı
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Arama bulunamadığında veya kimliği doğrulanmış kullanıcıya ait olmadığında dönen hata mesajı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Başarılı Yanıt
+{
+  "message": "Call deleted successfully"
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Call not found"
+}
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Yalnızca kimliği doğrulanmış kullanıcıya ait asistanların aramaları silinebilir
+- Bir arama silindikten sonra geri alınamaz
+- Bu işlem, ilişkili transkript, kayıt ve meta veriler dahil olmak üzere arama kaydını kalıcı olarak kaldırır
+- Arama kayıt dosyası (varsa) da depolamadan silinir

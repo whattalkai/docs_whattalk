@@ -1,0 +1,280 @@
+---
+title: "Yapay Zeka Yanıtı Oluştur"
+api: "POST /user/ai/generate-reply"
+description: "Harici bir müşteri tanımlayıcısı kullanarak bir asistan aracılığıyla yapay zeka yanıtı oluşturun"
+---
+
+Bu uç nokta, yapılandırılmış asistanınızı kullanarak belirli bir mesaj için yapay zeka yanıtı oluşturur. Müşteri tanımlayıcısına göre otomatik olarak konuşma oluşturur veya mevcut konuşmayı yeniden kullanır, bu da onu harici platformlara, CRM'lere veya özel sohbet arayüzlerine yapay zeka yanıtları entegre etmek için ideal kılar.
+
+<Info>
+**Hız Sınırlı** — Bu uç nokta, kötüye kullanımı önlemek için API belirteci başına dakikada 5 istek ile sınırlandırılmıştır.
+</Info>
+
+### İstek Gövdesi
+
+<ParamField body="assistant_id" type="integer" required>
+  Yanıt oluşturmak için kullanılacak asistanın kimliği. Hesabınıza ait olmalıdır.
+</ParamField>
+
+<ParamField body="customer_identifier" type="string" required>
+  Müşteri için benzersiz bir tanımlayıcı. Bu, birden fazla mesaj arasında konuşma bağlamını korumak için kullanılır.
+  
+  Örnekler: telefon numarası, e-posta adresi, CRM iletişim kimliği, Facebook kullanıcı kimliği.
+  
+  Maksimum uzunluk: 255 karakter.
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  Yanıtlanacak müşteri mesajı.
+</ParamField>
+
+<ParamField body="variables" type="object">
+  Asistana iletilecek isteğe bağlı bağlam değişkenleri. Bunlar mevcut konuşma değişkenleriyle birleştirilir.
+  
+  Müşteri verilerini, oturum bağlamını veya diğer meta verileri iletmek için kullanışlıdır.
+</ParamField>
+
+### Yanıt Alanları
+
+<ResponseField name="success" type="boolean">
+  İsteğin başarılı olup olmadığını gösterir
+</ResponseField>
+
+<ResponseField name="conversation_id" type="string">
+  Konuşmanın UUID'si. Konuşmayı daha sonra takip etmek veya referans vermek için kullanın.
+</ResponseField>
+
+<ResponseField name="customer_identifier" type="string">
+  İstekte sağlanan müşteri tanımlayıcısı
+</ResponseField>
+
+<ResponseField name="reply" type="string">
+  Müşterinin mesajına yapay zeka tarafından oluşturulan yanıt
+</ResponseField>
+
+<ResponseField name="function_calls" type="array">
+  Asistanın mesajı işlerken yaptığı fonksiyon çağrıları dizisi. Hiçbir fonksiyon çağrılmadıysa boş dizi.
+
+  <Expandable title="Fonksiyon çağrısı nesnesi özellikleri">
+    <ResponseField name="name" type="string">
+      Çağrılan fonksiyonun adı
+    </ResponseField>
+    <ResponseField name="arguments" type="object">
+      Fonksiyona iletilen argümanlar
+    </ResponseField>
+    <ResponseField name="result" type="object">
+      Fonksiyonun döndürdüğü sonuç
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="ai_disabled" type="boolean">
+  Bu konuşma için yapay zeka yanıtlarının devre dışı bırakılıp bırakılmadığını gösterir (ör. manuel devralma nedeniyle)
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="success" type="boolean">
+  Bir hata oluştuğunda `false` olacaktır
+</ResponseField>
+
+<ResponseField name="error" type="string">
+  Neyin yanlış gittiğini açıklayan hata mesajı
+</ResponseField>
+
+<ResponseField name="error_code" type="string">
+  Makine tarafından okunabilir hata kodu. Olası değerler:
+  - `ASSISTANT_NOT_FOUND` - Asistan kimliği geçersiz veya hesabınıza ait değil
+  - `INSUFFICIENT_BALANCE` - Hesap bakiyeniz mesajı işlemek için çok düşük
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://app.whattalk.ai/api/user/ai/generate-reply" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "assistant_id": 123,
+    "customer_identifier": "+14155551234",
+    "message": "Hi, I would like to schedule an appointment",
+    "variables": {
+      "customer_name": "John Smith",
+      "source": "whatsapp"
+    }
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch('https://app.whattalk.ai/api/user/ai/generate-reply', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_TOKEN',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    assistant_id: 123,
+    customer_identifier: '+14155551234',
+    message: 'Hi, I would like to schedule an appointment',
+    variables: {
+      customer_name: 'John Smith',
+      source: 'whatsapp'
+    }
+  })
+});
+
+const data = await response.json();
+console.log(data.reply);
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://app.whattalk.ai/api/user/ai/generate-reply',
+    headers={
+        'Authorization': 'Bearer YOUR_API_TOKEN',
+        'Content-Type': 'application/json'
+    },
+    json={
+        'assistant_id': 123,
+        'customer_identifier': '+14155551234',
+        'message': 'Hi, I would like to schedule an appointment',
+        'variables': {
+            'customer_name': 'John Smith',
+            'source': 'whatsapp'
+        }
+    }
+)
+
+data = response.json()
+print(data['reply'])
+```
+
+```php PHP
+$response = Http::withToken('YOUR_API_TOKEN')
+    ->post('https://app.whattalk.ai/api/user/ai/generate-reply', [
+        'assistant_id' => 123,
+        'customer_identifier' => '+14155551234',
+        'message' => 'Hi, I would like to schedule an appointment',
+        'variables' => [
+            'customer_name' => 'John Smith',
+            'source' => 'whatsapp'
+        ]
+    ]);
+
+$reply = $response->json()['reply'];
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Success
+{
+  "success": true,
+  "conversation_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "customer_identifier": "+14155551234",
+  "reply": "Hi John! I'd be happy to help you schedule an appointment. What day and time work best for you?",
+  "function_calls": [],
+  "ai_disabled": false
+}
+```
+
+```json 200 Success (With Function Calls)
+{
+  "success": true,
+  "conversation_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "customer_identifier": "+14155551234",
+  "reply": "I've checked our calendar and we have availability tomorrow at 2 PM and Friday at 10 AM. Which works better for you?",
+  "function_calls": [
+    {
+      "name": "check_availability",
+      "arguments": {
+        "start_date": "2025-01-08",
+        "days": 7
+      },
+      "result": {
+        "slots": ["2025-01-08 14:00", "2025-01-10 10:00"]
+      }
+    }
+  ],
+  "ai_disabled": false
+}
+```
+
+```json 404 Assistant Not Found
+{
+  "success": false,
+  "error": "Assistant not found or does not belong to you",
+  "error_code": "ASSISTANT_NOT_FOUND"
+}
+```
+
+```json 402 Insufficient Balance
+{
+  "success": false,
+  "error": "Insufficient balance. Please top up your account.",
+  "error_code": "INSUFFICIENT_BALANCE"
+}
+```
+
+```json 422 Validation Error
+{
+  "message": "The assistant id field is required.",
+  "errors": {
+    "assistant_id": ["The assistant id field is required."]
+  }
+}
+```
+
+```json 429 Rate Limited
+{
+  "message": "Too Many Attempts.",
+  "retry_after": 60
+}
+```
+
+</ResponseExample>
+
+## Kullanım Alanları
+
+### Çok Kanallı Yapay Zeka Yanıtları
+
+Bu uç noktayı herhangi bir mesajlaşma platformuna yapay zeka yanıtları eklemek için kullanın:
+
+1. WhatsApp, Facebook, SMS veya başka bir kanaldan mesaj alın
+2. Mesaj ve müşteri tanımlayıcısı ile bu uç noktayı çağırın
+3. Yapay zeka yanıtını orijinal kanal üzerinden geri gönderin
+
+### CRM Entegrasyonu
+
+Yapay zeka yanıtlarını CRM'inize veya yardım masanıza entegre edin:
+
+1. CRM iletişim kimliğini `customer_identifier` olarak kullanın
+2. Kişiselleştirilmiş yanıtlar için müşteri verilerini `variables` olarak iletin
+3. Konuşma, aynı tanımlayıcı kullanılarak oturumlar arasında devam eder
+
+### Özel Sohbet Arayüzleri
+
+WhatTalk asistanınız tarafından desteklenen kendi sohbet arayüzünüzü oluşturun:
+
+1. Her kullanıcı oturumu için benzersiz bir tanımlayıcı oluşturun
+2. Mesajları bu uç nokta üzerinden gönderin
+3. Yapay zeka yanıtlarını arayüzünüzde görüntüleyin
+
+## Konuşma Kalıcılığı
+
+Konuşmalar, `assistant_id` ve `customer_identifier` kombinasyonuna göre otomatik olarak kalıcı hale getirilir:
+
+- **Aynı tanımlayıcı**: Mesajlar mevcut konuşmaya eklenir ve tam bağlam korunur
+- **Yeni tanımlayıcı**: Müşteri için yeni bir konuşma oluşturulur
+- **Değişken birleştirme**: Değişkenler sağlandığında, mevcut konuşma değişkenleriyle birleştirilir
+
+## En İyi Uygulamalar
+
+1. **Tutarlı tanımlayıcılar kullanın**: Müşteri tanımlayıcıları için her zaman aynı formatı kullanın (ör. telefon numaraları için her zaman E.164)
+2. **İlgili bağlamı iletin**: Yapay zekanın yanıtları kişiselleştirmesine yardımcı olan müşteri verilerini sağlamak için `variables` alanını kullanın
+3. **Hız sınırlarını yönetin**: Hız sınırlı istekler için üstel geri çekilme ile yeniden deneme mantığı uygulayın
+4. **Konuşma kimliklerini saklayın**: Daha sonra referans veya hata ayıklama için döndürülen `conversation_id` değerini kaydedin
+5. **Maliyetleri izleyin**: Özellikle yüksek hacimli entegrasyonlar için maliyetleri yönetmek amacıyla kullanımı takip edin

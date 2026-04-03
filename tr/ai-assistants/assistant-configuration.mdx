@@ -1,0 +1,111 @@
+---
+title: "Asistan en iyi uygulamalari"
+icon: "sliders"
+description: "En iyi arama deneyimi icin mod, transkriber, model ve diger ayarlari ince ayar yapmak icin hizli kilavuz."
+---
+
+> **Son guncelleme:** 1 Eylul 2025
+
+Harika sonuclar almak genellikle **dogru motor ayarlarini secmeye** baglidir. Bir asistani yapilandirirken bu kontrol listesini kullanin:
+
+## 1. Bir Mod Secin
+
+| Mod | Neden secilmeli? | Notlar |
+| --- | --- | --- |
+| **Dualplex (Beta)** | Hizli soz degisimi + premium/klonlanmis sesler | Onerilen varsayilan. **Gemini Flash 2.0/2.5** veya **GPT-5 Realtime** ile eslestirin. |
+| **Konusmadan Konusmaya (Multimodal)** | En hizli soz degisimi ve en dogal akis | Onerilen model: **GPT-5 Realtime**. |
+| **Pipeline** | Ses ve uzun yanitlar uzerinde maksimum kontrol | Onerilen model: **GPT-5 Mini**. Pipeline secerseniz, asagidaki **Transkriber** adimina devam edin. |
+
+Modlar arasindaki farklar hakkinda daha fazla bilgi edinmek ister misiniz? <a href="/tr/ai-assistants/assistant-modes">Asistan modlari</a> kilavuzunu okuyun.
+
+<Note>
+Uc modun hepsini deneyin: ayni senaryoyu her birinde kaydedin ve yanit suresini ve arayan memnuniyetini karsilastirin.<br/>
+</Note>
+
+## 2. Bir Transkriber Secin (Yalnizca Pipeline)
+
+| Transkriber | Dogruluk | Gecikme | En uygun |
+| --- | --- | --- | --- |
+| **Azure** | ⭐⭐⭐⭐ | ⏱️⏱️⏱️ (daha yavas) | En yuksek transkripsiyon dogrulugu gerektiginde. |
+| **Gladia** | ⭐⭐⭐ | ⏱️ (daha hizli) | Cogu dil icin iyi bir genel secim. |
+| **Deepgram** | ⭐⭐⭐ | ⏱️ (daha hizli) | Bir diger saglam secenek—diliniz ve ses kurulumunuz icin hangisinin daha iyi performans gosterdigini test edin. |
+
+> **Ipucu:** Farkli diller, aksanlar veya arka plan gurultusu her motoru farkli etkileyebilir. Hizli bir A/B testi yapin ve en iyi performans gostereni secin.
+
+## 3. Bir LLM Model Secin
+
+| Model | Guclii yonler | Odunlesimler |
+| --- | --- | --- |
+| **GPT-5 Mini** | Dusuk gecikmeyle dengeli muhakeme | Hizli soz degisimi icin gercek zamanli modellerden daha yavas olabilir. |
+| **GPT-5 Realtime** | Ultra dusuk gecikmeli sesli turlar icin tasarlanmistir | **Konusmadan Konusmaya** ve **Dualplex** icin en uygun. |
+| **GPT-4o** | Guclu muhakeme ve multimodal anlama | Daha yuksek gecikme. |
+| **Gemini Flash 2.0 / 2.5** | Dualplex/Multimodal'da sesli turlar icin ultra hizli | Algilanan gecikmeyi en aza indirmek icin mukemmel. |
+
+Hiz kritikse, **GPT-5 Realtime** (**Konusmadan Konusmaya** icin ideal) veya **Gemini Flash 2.0/2.5** (**Dualplex** icin ideal) kullanin. Daha zengin muhakeme icin **GPT-4o** veya **GPT-5 Mini** kullanin ve dolgu sesleriyle gecikmeyi dengeleyeyin.
+
+## 4. Gurultu Iptali
+
+Arayanlar hoparlorde veya sessiz bir ortamdaysa, **gurultu iptalini ACIK** tutun. Arama hacminiz dusukse veya bazi kelimeler "kesiliyorsa", transkriberin tam dalga formunu alabilmesi icin **KAPATIN**.
+
+<Note>
+Asistanin sizi iyi duymuyorsa, gurultu iptalini kapatmayi deneyebilirsiniz.
+</Note>
+
+## 5. Konusma Zamanlayicilari
+
+Parametre | Onerilen | Neden
+--- | --- | ---
+**Yeniden etkilesim** | `≈ 30 sn` | Arayanlara dusunmeleri icin yeterli zaman verir. Dusuk degerler baskici hissettirebilir.
+**Maksimum sessizlik suresi** | `≈ 60 sn` | Erken kapatmalari onlerken gercekten sessiz aramalari sonlandirir.
+
+Gercek aramalarda farkli degerleri test edin — cok dusuk kesintiye yol acabilir, cok yuksek garip bosluklara neden olabilir.
+
+## 6. Baslangic Mesaji
+
+Mod | Nasil kullanilir | En iyi uygulama
+--- | --- | ---
+**Pipeline** | Yazildigi gibi **birebir** okunur (TTS tarafindan donusturulur). | Selamlamayi oldugu gibi yazin: "Merhaba, ben Alex ...".
+**Dualplex** | Yazildigi gibi **birebir** okunur (ElevenLabs TTS ile olusturulur). | Selamlamayi oldugu gibi yazin, ardindan klonlanmis sesinizi secin.
+**Konusmadan Konusmaya** | Model tarafindan bir **istem** olarak yorumlanir. | "Musteriyi selamla ve de ki ..." gibi talimatlar ekleyin _veya_ birebir cikti saglamak icin basina `tam olarak soyle: ` ekleyin.
+
+## 7. Ortam sesi
+
+Varsayilan olarak etkin, ortam sesi asistanin sesine arka plan gurultusu ekleyen bir ozelliktir.
+
+<Note>
+Asistan sizi iyi duymuyorsa, ortam sesini kapatmayi veya ses seviyesini dusurmeyi deneyebilirsiniz.
+</Note>
+
+## 8. Son nokta kaydiricilari
+
+Asistan ayarlarinin alt kismindaki son nokta hassasiyeti kaydiricisiyla **asistanin ne zaman konusmaya baslayacagini kontrol edin**.
+
+| Ayar | Etki | Ne zaman kullanilir |
+| --- | --- | --- |
+| **Dusuk hassasiyet** | Arayan konusmayi biraktiktan sonra asistan **daha hizli** yanit verir | Hizli, kisa turlu konusmalar istediginizde |
+| **Yuksek hassasiyet** | Asistan yanit vermeden once **daha uzun** bekler | Arayanlar daha uzun, daha ayrintili yanitlar verdiginde |
+
+<Tip>
+**Profesyonel ipucu:** Asistanin arayanlarin sozunu kestigi durumlarda hassasiyeti **artirin**. Yanitlar yavas hissediyorsa **azaltin**.
+</Tip>
+
+## 9. Arama transkripsiyonu ile hata ayiklama
+
+Asistanla ilgili sorunlariniz varsa, sorunu ayiklamak icin arama transkripsiyonunu kullanabilirsiniz.
+
+1. Arama gecmisi sayfasina gidin.
+2. Test ettiginiz son aramaya tiklayin.
+3. Fonksiyon cagrilari ve parametreleri dahil arama transkripsiyonu gosterilecektir.
+
+## 10. Hala sorulariniz mi var?
+
+Herhangi bir sorunuz varsa, lutfen uygulama icindeki sohbet widgeti araciligiyla destek ekibimizle iletisime gecin.
+
+<Note>
+Gercek aramalarla farkli ayarlari test edin — dogru denge konusma akiniza ve arayan davranis kaliplarina baglidir.
+</Note>
+
+---
+
+Her acma/kapama ve kaydiricirnin tam listesine mi ihtiyaciniz var? Tam
+<a href="/tr/ai-assistants/settings/general">Asistan ayarlari referansina</a> bakin.

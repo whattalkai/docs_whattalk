@@ -1,0 +1,31 @@
+---
+title: "Webhook ve API"
+icon: "code"
+description: "Özel entegrasyonlar ve otomasyon için webhook'ları ve REST API'yi nasıl kullanacağınızı öğrenin"
+---
+
+Kodsuz blokların ötesinde daha derin özelleştirme istiyorsanız, WhatTalk.ai **webhook'ları** ve bir **REST API** destekler.
+
+## 1. Webhook'lar
+
+- **Ne Zaman Kullanılır**: WhatTalk.ai'de bir şey olduğu anda harici sistemlerde olayları tetikleyin (ör. "Arama Sona Erdi").
+- **Yapılandırma**: Asistan/kampanya ayarlarınızda veya otomasyon platformunda bir webhook URL'si belirleyin.
+- **Veri Yükü**: Genellikle arama kimliği, transkript, arama sonucu veya toplanan kullanıcı verilerini içerir.
+
+## 2. REST API
+
+- **Temel İşlevler**:
+
+  1. **Potansiyel Müşteri Oluştur/Güncelle**
+  2. **Kampanyaları Yönet**
+
+- **Kimlik Doğrulama ve Hız Sınırları**: Genellikle API token'ları kullanır. Uç noktalar ve kullanım kotaları hakkında ayrıntılar için [API dokümantasyonunu](/tr/api-reference/introduction) kontrol edin.
+
+## 3. Örnek Kullanım Senaryoları
+
+- **Gerçek Zamanlı CRM Senkronizasyonu**: Her yeni arama için CRM'nizin uç noktasına veri gönderin.
+- **Özel Panolar**: Arama verilerini kendi analitik panolarınıza çekin.
+
+---
+
+**Not:** Resmi API referansını özel bir dokümantasyon bölümünde veya WhatTalk.ai kontrol paneliniz aracılığıyla bulabilirsiniz. Token'larınızı her zaman güvende tutun ve uç noktaları bir geliştirme ortamında test edin.

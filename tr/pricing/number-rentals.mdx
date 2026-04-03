@@ -1,0 +1,69 @@
+---
+title: "Numara Kiralama ve Uluslararası Tarifeler"
+icon: "globe"
+description: "Telefon numarası kiralama maliyetlerini, ayrıca SIP ve Arayan Kimliği kullanımının dakika bazında nasıl faturalandırıldığını anlayın."
+---
+
+WhatTalk.ai, gelen veya giden aramalar için telefon numaralarını yönetmenin birden fazla yolunu sunar. Bizden özel bir numara **kiralayabilir**, bir **SIP** trunk kullanabilir (aylık ücret yok ancak operatör maliyetleri kendi PBX'inizde) veya mevcut bir **Arayan Kimliğini** doğrulayabilirsiniz (yine aylık ücret yok, ancak bölgeye göre dakika başı ücretler).
+
+---
+
+## 1. Özel Numara Kiralama
+
+Tam yönetimli bir gelen/giden hat istiyorsanız, doğrudan platformdan kiralayabilirsiniz:
+
+- **Aylık Ücret**: Standart yerel numaralar (ABD/CA/İngiltere) için genellikle \$3,99/ay. Bölgeler değişir:
+  - **AB Ülkeleri**: €3–€5/ay
+  - **Latin Amerika, Asya, Afrika**: Müsaitlik veya yerel vergilere bağlı olarak bazı durumlarda \$10+
+- **Özel Temin**: İstediğiniz ülke veya bölgeyi listede göremiyorsanız, ekibimiz yerel belgeleri doğruladıktan sonra özel bir numara temin edebilir.
+
+**Dakika Başı Ücretler**
+
+- Kiralanan numaradan giden aramalar: aradığınız ülkeye bağlıdır — pahalı bir hedef için \$0,05/dak ile \$0,50/dak arasında değişebilir.
+- Gelen aramalar: genellikle o bölgede özel/ücretli bir senaryo olmadıkça ek ücret yoktur.
+
+---
+
+## 2. SIP Entegrasyonu (Aylık Ücret Yok)
+
+Zaten bir VOIP/PBX çözümünüz varsa, WhatTalk.ai'den **aylık kiralama ücreti olmadan** bir **SIP trunk** ile entegre edebilirsiniz. Bunun yerine şunları ödersiniz:
+
+- **SIP Dakika Başı**: Operatör köprüleme için bizim tarafımızda \$0,00045/dak. VOIP sağlayıcınızın ayrı kullanım ücretleri de olabilir.
+- **Mevcut Numaranız**: Gelen ve giden aramalar için kendi telefon hatlarınızı kullanmaya devam edersiniz, ancak AI arama sırasında olduğunda operatör katmanı bizimle \$0,00045/dak maliyetindedir.
+
+Bu, kendi telefon sisteminizi yönetmekte rahat iseniz veya bizden kiralamadan mevcut numaralarınızı korumak istiyorsanız idealdir. Kurulum talimatları için [SIP Entegrasyon Kılavuzumuza](/tr/provisioning/sip-trunking/sip-integration) bakın.
+
+---
+
+## 3. Arayan Kimliği (Aylık Ücret Yok)
+
+Mevcut bir numarayı yalnızca **giden aramalar** için doğrulayabilirsiniz — gelen yönlendirme yoktur.
+
+- **Doğrulama**: Kısa bir OTP veya arama ile sahipliği onaylarız.
+- **Dakika Başı**: Arka planda kullanılan telefon hizmeti için bölgeye göre ücretler alırız.
+  - **Örnek**: ABD'de Arayan Kimliği kullanımı \$0,01/dak olabilir.
+  - Diğer ülkeler değişir; ayrıntılar için destek ile iletişime geçin.
+
+> **Not**: Arayan Kimliği tek başına gelen AI'yı **etkinleştirmez**; yalnızca giden aramalarınızı doğrulanmış numaranızla maskeler.
+
+---
+
+## 4. Uluslararası Tarifeler ve Bölgeler
+
+Giden arama yaparken:
+
+- **Operatör Tarifeleri**: Bazı ülkeler yerel operatörler nedeniyle \$0,01/dak, diğerleri \$0,50/dak maliyetindedir.
+- **Gelen**: Yüksek maliyetli bir bölge veya özel türde bir numara kiralarsanız, gelen aramalarda ek ücretler olabilir.
+
+Numara kiralamanız veya Arayan Kimliği/SIP kullanmanız fark etmeksizin, arama maliyetinin **operatör kısmı** hedef/kaynak ülkeye bağlıdır ve genellikle genel kullanımınıza eklenir.
+
+---
+
+## 5. Her Şeyi Bir Araya Getirme
+
+1. **Numara Kiralayın**
+   - Aylık ücret ödeyin (\$3,99'dan başlayan), artı o hattaki aramalar için standart gelen/giden operatör maliyetleri.
+2. **SIP Kullanın**
+   - Bizden aylık ücret yok, ancak \$0,00045/dak AI köprüleme maliyeti, artı kendi PBX ücretleriniz.
+3. **Arayan Kimliği**
+   - Bizden aylık ücret yok, ancak bölgeye göre dakika başı telefon ücretleri (örn. ABD'de \$0,01/dak). Yalnızca giden.

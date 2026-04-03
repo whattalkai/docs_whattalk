@@ -1,0 +1,41 @@
+---
+title: "Kampanya durumunu güncelle"
+api: "POST /user/campaigns/update-status"
+description: "WhatTalk sisteminde bir kampanyayı başlatın veya durdurun"
+---
+
+Bu endpoint, WhatTalk sisteminde bir kampanyayı başlatmanızı veya durdurmanızı sağlar.
+
+### İstek gövdesi
+
+<ParamField body="campaign_id" type="integer" required>
+  Güncellenecek kampanyanın kimliği
+</ParamField>
+
+<ParamField body="action" type="string" required>
+  Kampanya üzerinde gerçekleştirilecek işlem. "start" veya "stop" olmalıdır
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string" default="Campaign started successfully.">
+  Yanıtın mesajı
+</ResponseField>
+
+<ResponseField name="success" type="boolean" default="true">
+  İşlemin başarılı olup olmadığı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Yanıtın verileri
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="campaign_id" type="integer">
+      Güncellenen kampanyanın kimliği
+    </ResponseField>
+    
+    <ResponseField name="status" type="string" default="in-progress">
+      Kampanyanın yeni durumu (ör. başlatılan kampanyalar için "in-progress", durdurulan kampanyalar için "stopped")
+    </ResponseField>
+  </Expandable>
+</ResponseField>

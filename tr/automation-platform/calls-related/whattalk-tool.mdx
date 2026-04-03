@@ -1,0 +1,131 @@
+---
+title: "WhatTalk Aracı"
+icon: "phone"
+description: "Yapay zeka çağrı akışlarınızda WhatTalk tetikleyicilerini ve eylemlerini nasıl kullanacağınızı öğrenin"
+---
+
+# WhatTalk Aracı
+
+WhatTalk aracı, yapay zeka çağrı sisteminizi otomasyon akışlarıyla bağlayan temel bileşendir. Yapay zeka asistanlarınız ile iş sistemleriniz arasında gerçek zamanlı veri alışverişi sağlayarak kişiselleştirilmiş konuşmalara ve otomatik takip işlemlerine olanak tanır.
+
+<Note>
+  WhatTalk aracını, tetikleyici veya eylem ararken arama kenar çubuğunun
+  üst kısmında belirgin bir şekilde görebilirsiniz.
+</Note>
+
+## Tetikleyiciler
+
+### Çağrı Sona Erdi
+
+![WhatTalk Çağrı Sona Erdi Tetikleyicisi](/resources/whattalk-trigger.jpg)
+
+Çağrı Sona Erdi tetikleyicisi, bir yapay zeka çağrısı tamamlandıktan hemen sonra etkinleşir ve etkileşim hakkında kapsamlı veriler sağlar:
+
+- Zaman damgalı tam konuşma transkripti
+- Yapay zeka asistanı yanıtları ve kararları
+- Çağrı süresi ve teknik meta veriler
+- Müşteri bilgileri ve telefon numarası
+- Çağrı sonucu ve duygu analizi
+- Konuşma sırasında ayarlanan değişkenler
+
+#### Yapılandırma
+
+1. Tetikleyiciniz olarak "Çağrı Sona Erdi"yi seçin
+2. İzlenecek belirli yapay zeka asistanını seçin
+3. Değişken eşlemesini yapılandırın
+
+### Gelen Çağrı Değişken Enjeksiyonu
+
+Bu güçlü tetikleyici, yapay zeka asistanınız gelen bir çağrıyı yanıtlamadan önce etkinleşir ve şunları yapmanıza olanak tanır:
+
+- Gerçek zamanlı müşteri verilerini getirme ve enjekte etme
+- Bağlama göre yapay zeka davranışını özelleştirme
+- Konuşma parametrelerini ayarlama
+- Yapay zeka kişilik özelliklerini tanımlama
+- İş mantığı değişkenleri sağlama
+
+#### Yapılandırma
+
+1. Tetikleyiciniz olarak "Gelen Çağrı"yı seçin
+2. Yapay zeka bağlamı için gerekli değişkenleri tanımlayın
+
+## Eylemler
+
+### Kampanyaya Potansiyel Müşteri Ekleme
+
+![WhatTalk Eylemi](/resources/whattalk-action.jpg)
+
+Bu eylem, yapay zeka çağrı kampanyalarınızı yönetmenize yardımcı olur:
+
+- Sheets, Hubspot, Facebook leads gibi harici araçlardan yeni potansiyel müşteriler oluşturma
+- Potansiyel müşterileri belirli yapay zeka kampanyalarına atama
+- Gelecekteki çağrılar için bağlam ekleme
+
+#### Yapılandırma
+
+1. Hedef yapay zeka kampanyasını seçin
+2. Tetikleyici verilerinden iletişim bilgilerini eşleyin
+3. Yapay zeka bağlamı için özel nitelikler ekleyin
+
+### Değişken Döndürme
+
+Bu eylem, gelen çağrılar için kritik öneme sahiptir ve yapay zekanın istemine enjekte edilen bağlamı döndürür:
+
+- Müşteri profili ve tercihleri
+- Konuşma geçmişi özeti
+- İş kuralları ve kısıtlamalar
+- Özel yapay zeka davranış bayrakları
+- Dinamik yanıt şablonları
+
+#### Yapılandırma
+
+1. Yanıt JSON yapısını oluşturun
+2. Müşteri verilerini değişkenlerle eşleyin
+3. Yapay zeka konuşma parametrelerini ayarlayın
+4. Zaman aşımı yönetimini yapılandırın
+
+## Örnek Kullanım
+
+### Çağrı Sonrası Potansiyel Müşteri Yönetimi
+
+```javascript
+Tetikleyici: Yapay Zeka Çağrısı Sona Erdi
+↓
+Konuşma içgörülerini çıkar
+↓
+Hubspot kaydını güncelle
+↓
+Nitelikli ise takip kampanyasına ekle
+```
+
+### Akıllı Gelen Çağrı Yönlendirme
+
+```javascript
+Tetikleyici: Yapay Zekaya Gelen Çağrı
+↓
+CRM'den müşteri profilini getir
+↓
+Etkileşim geçmişini al
+↓
+Yapay zeka istemi için zenginleştirilmiş bağlamı döndür
+```
+
+## En İyi Uygulamalar
+
+1. **Değişken Enjeksiyonu Performansı**
+
+   - İşlemeyi 2 saniyenin altında tutun
+   - Mantıklı varsayılan değerler belirleyin
+
+2. **Veri Yapısı**
+
+   - Yapay zeka istem gereksinimlerini takip edin
+   - Tüm değişkenleri doğrulayın
+   - İç içe nesneleri açıkça yapılandırın
+   - Özel alanları belgeleyin
+
+3. **Hata Yönetimi**
+   - Yedek değerler sağlayın
+   - Enjeksiyon hatalarını kaydedin
+   - Yanıt sürelerini izleyin
+   - Eksik verileri zarif bir şekilde yönetin
