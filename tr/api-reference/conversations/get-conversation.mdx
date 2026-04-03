@@ -1,0 +1,147 @@
+---
+title: "Konuşma Getir"
+api: "GET /conversations/{uuid}"
+description: "Bir konuşmanın mesaj geçmişini getirin"
+---
+
+Bu endpoint, mevcut bir konuşmanın tam mesaj geçmişini getirir. Bunu bir konuşmayı devam ettirirken önceki mesajları görüntülemek veya konuşma içeriğini incelemek için kullanın.
+
+### Yol Parametreleri
+
+<ParamField path="uuid" type="string" required>
+  Getirilecek konuşmanın benzersiz UUID tanımlayıcısı
+</ParamField>
+
+### Yanıt Alanları
+
+<ResponseField name="status" type="boolean">
+  İsteğin başarılı olup olmadığını belirtir
+</ResponseField>
+
+<ResponseField name="history" type="array">
+  Konuşmadaki mesajların dizisi, kronolojik sırayla (en eskiden en yeniye).
+
+  <Expandable title="Mesaj nesnesi özellikleri">
+    <ResponseField name="role" type="string">
+      Mesaj rolü: `assistant` veya `user`
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      Mesaj içeriği
+    </ResponseField>
+    <ResponseField name="function_calls" type="array">
+      İsteğe bağlı. Bu mesaj sırasında asistan tarafından yapılan fonksiyon çağrılarının dizisi (ör. takvim rezervasyonları, API çağrıları).
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="status" type="boolean">
+  Bir hata oluştuğunda `false` olur
+</ResponseField>
+
+<ResponseField name="error" type="string">
+  Hata mesajı. Olası değerler:
+  - `Conversation not found` - Sağlanan UUID herhangi bir konuşmayla eşleşmiyor
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://app.whattalk.ai/api/conversations/7c9e6679-7425-40de-944b-e07fc1f90ae7"
+```
+
+```javascript JavaScript
+const conversationId = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+
+const response = await fetch(
+  `https://app.whattalk.ai/api/conversations/${conversationId}`
+);
+
+const data = await response.json();
+console.log(data.history);
+```
+
+```python Python
+import requests
+
+conversation_id = '7c9e6679-7425-40de-944b-e07fc1f90ae7'
+
+response = requests.get(
+    f'https://app.whattalk.ai/api/conversations/{conversation_id}'
+)
+
+data = response.json()
+print(data['history'])
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Başarılı
+{
+  "status": true,
+  "history": [
+    {
+      "role": "assistant",
+      "content": "Hello! Welcome to our support. How can I help you today?"
+    },
+    {
+      "role": "user",
+      "content": "I'd like to schedule a demo"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd be happy to help you schedule a demo! I have availability tomorrow at 2 PM or Thursday at 10 AM. Which works better for you?",
+      "function_calls": [
+        {
+          "name": "check_calendar_availability",
+          "arguments": {
+            "date_range": "next_7_days"
+          },
+          "result": {
+            "available_slots": ["2025-01-10 14:00", "2025-01-12 10:00"]
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Thursday at 10 AM works for me"
+    },
+    {
+      "role": "assistant",
+      "content": "I've scheduled your demo for Thursday, January 12th at 10 AM. You'll receive a calendar invitation shortly. Is there anything specific you'd like us to cover during the demo?",
+      "function_calls": [
+        {
+          "name": "book_appointment",
+          "arguments": {
+            "datetime": "2025-01-12T10:00:00",
+            "title": "Product Demo"
+          },
+          "result": {
+            "success": true,
+            "booking_id": "abc123"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+```json 404 Bulunamadı
+{
+  "status": false,
+  "error": "Conversation not found"
+}
+```
+
+</ResponseExample>
+
+## Kullanım Alanları
+
+- **Konuşmaları devam ettirme**: Bir kullanıcı geri döndüğünde konuşmayı sürdürmek için geçmişi getirin
+- **Analitik**: Kalite güvencesi için konuşma içeriğini inceleyin
+- **Entegrasyon**: Konuşma verilerini CRM'iniz veya destek sisteminizle senkronize edin
