@@ -1,5 +1,4 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
   "name": "WhatTalk",
   "logo": {
     "dark": "/resources/logo/dark.png",
@@ -18,13 +17,16 @@
   "sidebar": {
     "items": "card"
   },
-  "topbarLinks": [{
-    "name": "Home",
-    "url": "https://whattalk.ai"
-  }, {
-    "name": "Support",
-    "url": "https://whattalk.ai/contact"
-  }],
+  "topbarLinks": [
+    {
+      "name": "Home",
+      "url": "https://whattalk.ai"
+    },
+    {
+      "name": "Support",
+      "url": "https://whattalk.ai/contact"
+    }
+  ],
   "topbarCtaButton": {
     "name": "Dashboard",
     "url": "https://app.whattalk.ai"
@@ -404,7 +406,7 @@
             "tab": "Platform Rehberi",
             "groups": [
               {
-                "group": "Giriş",
+                "group": "Giri\u015f",
                 "pages": [
                   "tr/introduction/what-is-whattalk",
                   "tr/introduction/how-it-works",
@@ -412,18 +414,18 @@
                 ]
               },
               {
-                "group": "Başlarken",
+                "group": "Ba\u015flarken",
                 "pages": [
                   "tr/getting-started/core-concepts",
                   "tr/getting-started/understanding-billing"
                 ]
               },
               {
-                "group": "AI Asistanlara Genel Bakış",
+                "group": "AI Asistanlara Genel Bak\u0131\u015f",
                 "pages": [
                   "tr/ai-assistants/what-is-ai-assistant",
                   {
-                    "group": "AI Asistan Oluşturma ve Düzenleme",
+                    "group": "AI Asistan Olu\u015fturma ve D\u00fczenleme",
                     "icon": "robot",
                     "pages": [
                       "tr/ai-assistants/settings/general",
@@ -457,7 +459,7 @@
                 ]
               },
               {
-                "group": "Potansiyel Müşteriler",
+                "group": "Potansiyel M\u00fc\u015fteriler",
                 "pages": [
                   "tr/leads/index",
                   "tr/leads/managing-leads",
@@ -465,14 +467,14 @@
                 ]
               },
               {
-                "group": "Özel Panolar",
+                "group": "\u00d6zel Panolar",
                 "pages": [
                   "tr/custom-dashboards/overview",
                   "tr/custom-dashboards/widget-types"
                 ]
               },
               {
-                "group": "Konuşmalar",
+                "group": "Konu\u015fmalar",
                 "pages": [
                   "tr/conversations/overview",
                   "tr/conversations/viewing-and-managing"
@@ -489,7 +491,7 @@
                 ]
               },
               {
-                "group": "Telefon Numaraları",
+                "group": "Telefon Numaralar\u0131",
                 "pages": [
                   "tr/phone-numbers/types",
                   "tr/phone-numbers/purchasing-and-managing",
@@ -519,7 +521,7 @@
                 ]
               },
               {
-                "group": "AI Prompt ve Konuşma Tasarımı",
+                "group": "AI Prompt ve Konu\u015fma Tasar\u0131m\u0131",
                 "pages": [
                   "tr/conversation-design/prompt-basics",
                   "tr/conversation-design/knowledge-bases",
@@ -536,7 +538,7 @@
                 ]
               },
               {
-                "group": "Maliyetler ve Fiyatlandırma",
+                "group": "Maliyetler ve Fiyatland\u0131rma",
                 "pages": [
                   "tr/pricing/overview",
                   "tr/pricing/usage-based",
@@ -601,7 +603,7 @@
                 ]
               },
               {
-                "group": "Arama İlişkili",
+                "group": "Arama \u0130li\u015fkili",
                 "pages": [
                   "tr/automation-platform/calls-related/whattalk-tool",
                   "tr/automation-platform/calls-related/common-integrations",
@@ -611,10 +613,10 @@
             ]
           },
           {
-            "tab": "API Referansı",
+            "tab": "API Referans\u0131",
             "groups": [
               {
-                "group": "API Referansı",
+                "group": "API Referans\u0131",
                 "pages": [
                   "tr/api-reference/introduction",
                   "tr/api-reference/authentication",
@@ -652,7 +654,7 @@
                 ]
               },
               {
-                "group": "Konuşmalar",
+                "group": "Konu\u015fmalar",
                 "pages": [
                   "tr/api-reference/conversations/list-conversations",
                   "tr/api-reference/conversations/create-conversation",
@@ -667,7 +669,7 @@
                 ]
               },
               {
-                "group": "Arama İçi Araçlar",
+                "group": "Arama \u0130\u00e7i Ara\u00e7lar",
                 "pages": [
                   "tr/api-reference/mid-call-tools/get-tools",
                   "tr/api-reference/mid-call-tools/get-tool",
@@ -677,7 +679,7 @@
                 ]
               },
               {
-                "group": "Potansiyel Müşteriler",
+                "group": "Potansiyel M\u00fc\u015fteriler",
                 "pages": [
                   "tr/api-reference/leads/get-lead",
                   "tr/api-reference/leads/create",
@@ -694,7 +696,7 @@
                 ]
               },
               {
-                "group": "Telefon Numaraları",
+                "group": "Telefon Numaralar\u0131",
                 "pages": [
                   "tr/api-reference/phone-numbers/get-phone-numbers",
                   "tr/api-reference/phone-numbers/search-phone-numbers",
@@ -703,7 +705,7 @@
                 ]
               },
               {
-                "group": "Bilgi Tabanları",
+                "group": "Bilgi Tabanlar\u0131",
                 "pages": [
                   "tr/api-reference/knowledgebases/get-knowledgebases",
                   "tr/api-reference/knowledgebases/get-knowledgebase",
@@ -741,7 +743,7 @@
                 ]
               },
               {
-                "group": "API Anahtarları",
+                "group": "API Anahtarlar\u0131",
                 "pages": [
                   "tr/api-reference/authentication/create-api-key",
                   "tr/api-reference/authentication/list-api-keys",
@@ -751,10 +753,10 @@
             ]
           },
           {
-            "tab": "Platform Güncellemeleri",
+            "tab": "Platform G\u00fcncellemeleri",
             "groups": [
               {
-                "group": "Platform Güncellemeleri",
+                "group": "Platform G\u00fcncellemeleri",
                 "pages": [
                   "tr/releases/index"
                 ]
@@ -773,5 +775,6 @@
     "auth": {
       "method": "bearer"
     }
-  }
+  },
+  "theme": "mint"
 }
