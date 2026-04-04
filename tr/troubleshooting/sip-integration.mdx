@@ -1,0 +1,133 @@
+---
+title: "SIP Entegrasyon Sorunları"
+icon: "phone-volume"
+description: "SIP trunk bağlantı sorunlarını ve yapılandırma problemlerini giderme"
+---
+
+Bu kılavuz, SIP sağlayıcınızı WhatTalk.ai'ye bağlarken yaygın SIP entegrasyon sorunlarını çözmenize yardımcı olur.
+
+## Test Stratejisi
+
+1. **Önce Giden aramaları test edin** - yapılandırması daha kolay
+2. **Sonra Gelen aramaları test edin** - giden çalıştıktan sonra
+
+## Giden SIP Sorunları
+
+### Bağlantı Sorunları
+
+**SIP trunk giden aramalar için bağlanmıyor:**
+
+1. **SIP Kimlik Bilgilerini Doğrulayın** - kullanıcı adı, şifre, sunucu detayları
+2. **Telefon Türü Seçimi** - doğru tür için sağlayıcınıza danışın
+3. **Sabit IP Yapılandırması** - genellikle etkinleştirin ve sağlayıcının IP adresini girin
+4. **Sağlayıcı Ayarları** - codec, taşıma, port ayarlarını doğrulayın
+
+### SIP Kayıt Sorunları
+
+**Önemli:** WhatTalk.ai platformu:
+- Sağlayıcınıza SIP REGISTER mesajları **GÖNDERMEZ**
+- Sağlayıcınızdan SIP REGISTER almayı **GEREKTİRMEZ**
+- Bunun yerine **doğrudan arama kimlik doğrulaması** kullanır
+
+### Giden Testi
+
+1. SIP trunk ayarlarını yapılandırın
+2. Platform üzerinden **doğrudan test araması yapın**
+3. Hatalar için arama kayıtlarını kontrol edin
+
+## Gelen SIP Sorunları
+
+### Kimlik Doğrulama Kurulumu
+
+**Gelen aramalar için:**
+
+1. **IP Kimlik Doğrulaması Kullanın** - kullanıcı adı/şifre yerine
+2. **Sağlayıcı IP'lerini Beyaz Listeye Alın** - platformumuzda TÜM sağlayıcı IP'lerini ekleyin
+3. **Sağlayıcı Yapılandırması - ÖNEMLİ**
+   - Yönlendirme için **FQDN alan adımızı kullanın** (giden IP DEĞİL)
+   - **Alan adına gönderin** - doğru yönlendirmeyi sağlar
+   - **IP'ye gönderMEYİN** - yönlendirme sorunlarına neden olur
+
+### Yaygın Gelen Sorunlar
+
+**Aramalar asistana ulaşmıyor:**
+- Tüm sağlayıcı IP'lerinin beyaz listeye alındığını doğrulayın
+- Sağlayıcının FQDN alan adına gönderdiğinden emin olun (IP değil)
+- Hedef numara formatını kontrol edin
+
+## Genel Sorunlar
+
+**Ağ sorunları:**
+- İnternet bağlantısını kontrol edin
+- SIP trafiğini engelleyen güvenlik duvarı olmadığını doğrulayın
+
+**Sağlayıcı uyumluluğu:**
+- Sağlayıcının doğrudan aramayı (kayıt olmadan) desteklediğini doğrulayın
+- IP kimlik doğrulama desteğini kontrol edin
+
+## Test Kontrol Listesi
+
+### Destek ile İletişim Öncesi
+
+1. **Giden Testi:**
+   - [ ] Kimlik bilgileri doğrulandı
+   - [ ] Telefon türü doğru seçildi
+   - [ ] Sabit IP sağlayıcının IP adresiyle etkinleştirildi
+   - [ ] Doğrudan test araması denendi
+
+2. **Gelen Testi:**
+   - [ ] IP kimlik doğrulaması yapılandırıldı
+   - [ ] Tüm sağlayıcı IP'leri platformumuzda beyaz listeye alındı
+   - [ ] Sağlayıcı FQDN alan adına gönderecek şekilde yapılandırıldı (doğrudan IP değil)
+   - [ ] Harici numaradan test araması
+
+3. **Genel:**
+   - [ ] Ağ bağlantısı doğrulandı
+
+## SSS
+
+### Telefon Araması Aktarma Çalışmıyor
+
+**S: Telefon Araması Aktarma fonksiyonu neden çalışmıyor?**
+
+**C:** Arama aktarmaları başarısız oluyorsa, şu çözümleri deneyin:
+
+1. **SIP Aktarma Ayarlarını Kontrol Edin:**
+   - Arama aktarmayı "Gelişmiş" moduna ayarlayın
+   - SIP URI formatı kullanın: `sip:numara@sip-sunucu`
+   - Örnek: `sip:+1234567890@sip.saglayici.com:5060`
+
+2. **Sağlayıcı Desteğini Doğrulayın:**
+   - SIP sağlayıcınızın SIP REFER'i desteklediğini onaylayın
+   - Hesabınızda aktarma işlevinin etkinleştirildiğini kontrol edin
+   - Bazı sağlayıcılar aktarma için özel yapılandırma gerektirir
+
+3. **Farklı Formatları Deneyin:**
+   - Port ile deneyin: `sip:+1234567890@sip-sunucu:5060`
+   - Port olmadan deneyin: `sip:+1234567890@sip-sunucu`
+   - Basit format deneyin: `sip:+1234567890`
+
+4. **Hedefi Doğrulayın:**
+   - Hedef numaranın ulaşılabilir olduğundan emin olun
+   - Numaranın normalde aramalara cevap verip vermediğini test edin
+   - Numaranın engellenmiş veya kısıtlanmış olup olmadığını kontrol edin
+
+5. **Yaygın Sorunlar:**
+   - Sağlayıcı SIP REFER'i desteklemiyor
+   - Yanlış SIP URI formatı
+   - Ağ/güvenlik duvarı aktarma isteklerini engelliyor
+   - Hedef numara cevap vermiyor
+
+**Sorun giderme adımları:**
+1. Önce bilinen çalışan bir numarayla test edin
+2. Farklı SIP URI formatlarını deneyin
+3. Aktarma desteğini onaylamak için SIP sağlayıcınızla iletişime geçin
+4. Belirli hata mesajları için arama kayıtlarını kontrol edin
+
+## Yardım Alma
+
+**Destek ile iletişime geçerken şunları sağlayın:**
+- Arama kayıtlarından hata mesajları
+- SIP trunk yapılandırması
+- Test sonuçları (giden ve gelen)
+- Aktarma girişimi detayları ve kullanılan SIP URI formatı

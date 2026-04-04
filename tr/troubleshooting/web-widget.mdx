@@ -1,0 +1,87 @@
+---
+title: "Web Widget Sorunları"
+icon: "code"
+description: "Yaygın web widget sorunlarını ve entegrasyon problemlerini giderme"
+---
+
+Yaygın web widget sorunları için çözümler.
+
+## Widget Görünmüyor
+
+**Şunları kontrol edin:**
+- Gömme kodunun kapanış `</body>` etiketinden önce yerleştirildiğini
+- Tarayıcı önbelleğini temizleyin (Ctrl+Shift+R veya Cmd+Shift+R)
+- Gizli pencerede test edin
+- Planınızın web widget erişimi içerdiğini doğrulayın
+- JavaScript hataları için tarayıcı konsolunu (F12) kontrol edin
+- Widget yapılandırmasından gömme kodunu yeniden kopyalayın
+
+## Ses Çalışmıyor
+
+**HTTPS Gerekli:**
+Ses işlevselliği HTTPS gerektirir. HTTP siteleri yalnızca sohbet modunu kullanabilir.
+
+**Şunları kontrol edin:**
+- Web sitesinin HTTPS (SSL sertifikası) kullandığını
+- Tarayıcının mikrofon izninin olduğunu
+- Mikrofonun diğer uygulamalarda çalıştığını
+- Modern tarayıcı kullanıldığını (Chrome, Firefox, Safari, Edge)
+- WebRTC'yi engelleyen VPN veya güvenlik duvarı olmadığını
+
+## Sohbet Çalışmıyor
+
+**Şunları kontrol edin:**
+- Hatalar için tarayıcı konsolunu (F12)
+- Asistanın düzgün yapılandırıldığını
+- Asistanı [Test Sohbeti](/ai-assistants/test-chat) ile test edin
+- [Konuşmalar](/conversations/overview) sayfasında konuşmayı inceleyin
+- Widget durumunu sıfırlamak için sayfayı yeniden yükleyin
+
+## Ön Sohbet Formu Sorunları
+
+**Şunları kontrol edin:**
+- Form alanlarının widget ayarlarında yapılandırıldığını
+- Form alanlarının hem ad hem de etiket içerdiğini
+- Widget ayarlarının kaydedildiğini
+- Alan adlarının asistan değişkenleriyle tam olarak eşleştiğini
+- Tarayıcı önbelleğini temizleyin ve gizli pencerede test edin
+
+## Görüntü ve Stil Sorunları
+
+**Şunları kontrol edin:**
+- Yapılandırmadaki widget konum ayarını
+- Web sitesi CSS'inin widget stillerini geçersiz kılıp kılmadığını
+- Daha iyi görünürlük için birincil rengi değiştirin
+- Sayfa öğelerinin widget'ı kapatıp kapatmadığını (z-index)
+- Gerçek mobil cihazlarda test edin
+
+## Yapılandırma Güncellenmiyor
+
+**Şunları kontrol edin:**
+- "Widget ayarlarını kaydet" düğmesine tıklandığını
+- Kaydettikten sonra yeni gömme kodunu kopyalayın
+- Web sitenizdeki eski gömme kodunu değiştirin
+- Tarayıcı önbelleğini temizleyin (Ctrl+Shift+R)
+- Gizli pencerede test edin
+
+## WordPress/CMS Sorunları
+
+**Şunları kontrol edin:**
+- Özel HTML blok/widget kullanın (görsel düzenleyici değil)
+- Gömme kodunu kapanış `</body>` etiketinden önce ekleyin
+- Önbellekleme eklentisi önbelleğini temizleyin
+- Gerekirse güvenlik eklentilerini geçici olarak devre dışı bırakın
+
+## Hâlâ Sorun mu Yaşıyorsunuz?
+
+1. Hatalar için tarayıcı konsolunu (F12) kontrol edin
+2. Gizli modda test edin
+3. Farklı tarayıcı deneyin
+4. Asistanı [Test Sohbeti](/ai-assistants/test-chat) ile test edin
+5. Tarayıcı konsol ekran görüntüsüyle destek ile iletişime geçin
+
+## İlgili Belgeler
+
+- [Web Widget Kurulumu](/ai-assistants/web-widget)
+- [Test Sohbet Arayüzü](/ai-assistants/test-chat)
+- [Konuşmaları Görüntüleme](/conversations/viewing-and-managing)
