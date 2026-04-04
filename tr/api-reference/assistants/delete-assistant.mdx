@@ -1,0 +1,66 @@
+---
+title: "Asistanı sil"
+api: "DELETE /user/assistant/{id}"
+description: "Belirli bir AI asistanını silin"
+---
+
+Bu endpoint, doğrulanmış kullanıcıya ait bir AI asistanını kalıcı olarak silmenizi sağlar.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Silinecek asistanın benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Asistanın başarıyla silindiğini belirten onay mesajı
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Asistan bulunamadığında veya doğrulanmış kullanıcıya ait olmadığında hata mesajı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="500 Internal Server Error">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Asistan silme işleminin başarısız olduğunu belirten hata mesajı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Success Response
+{
+  "message": "Assistant deleted successfully"
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Assistant not found"
+}
+```
+
+```json 500 Internal Server Error
+{
+  "message": "Assistant deletion failed"
+}
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Yalnızca doğrulanmış kullanıcıya ait asistanlar silinebilir
+- Bir asistan silindikten sonra geri alınamaz
+- Bu işlem asistanı ve tüm yapılandırmasını kalıcı olarak kaldırır
+- Asistan şu anda aktif aramaları yönetiyorsa, bu aramalar etkilenebilir
