@@ -1,0 +1,62 @@
+---
+title: "Yazici saglayicilarini getirme"
+api: "GET /user/assistants/transcriber-providers"
+description: "Mevcut STT (konusmadan metne) yazici saglayicilarini alma"
+---
+
+Bu endpoint, asistan olusturulurken veya guncellenirken kullanilabilecek mevcut yazici saglayicilarinin listesini dondurur. Bir asistani yapilandirirken dondurulmus `id` degerini `transcriber_provider_id` olarak kullanin.
+
+### Sorgu Parametreleri
+
+<ParamField query="language_id" type="integer">
+  Saglayicilari dil destegine gore filtreleyin. Yalnizca verilen dili destekleyen saglayicilari dondurur. Mevcut dil kimliklerini almak icin [Dilleri Getir](/api-reference/assistants/get-languages) endpointini kullanin.
+</ParamField>
+
+### Yanit alanlari
+
+<ResponseField name="data" type="array">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Saglayicinin benzersiz tanimlayicisi. Asistan olusturulurken veya guncellenirken bunu `transcriber_provider_id` olarak kullanin.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Saglayicinin gorunen adi (ornegin, "Deepgram", "Azure", "Gladia")
+    </ResponseField>
+
+    <ResponseField name="code" type="string">
+      Saglayicinin dahili kodu
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+[
+  {
+    "id": 1,
+    "name": "Deepgram",
+    "code": "deepgram"
+  },
+  {
+    "id": 2,
+    "name": "Azure",
+    "code": "azure"
+  },
+  {
+    "id": 3,
+    "name": "Gladia",
+    "code": "gladia"
+  }
+]
+```
+
+</ResponseExample>
+
+### Notlar
+
+- `language_id` filtresi saglanmazsa, tum saglayicilar dondurulur
+- Tum saglayicilar tum dilleri desteklemez — uyumlu saglayicilari almak icin `language_id` filtresini kullanin
+- Yazici saglayicilari yalnizca `pipeline` modu icin gecerlidir (multimodal ve dualplex modlari STT'yi dahili olarak yonetir)
+- Asistan olustururken `transcriber_provider_id` ayarlamazsaniz, dilin varsayilan saglayicisi kullanilir

@@ -1,0 +1,102 @@
+---
+title: "Mevcut sesleri getirme"
+api: "GET /user/assistants/voices"
+description: "Asistan yapilandirmasi icin mevcut tum sesleri alma"
+---
+
+Bu endpoint, asistan olusturulurken veya guncellenirken kullanilabilecek tum mevcut seslerin listesini, istege bagli olarak asistan modu ve dile gore filtreleme secenegiyle birlikte dondurur.
+
+### Sorgu Parametreleri
+
+<ParamField query="mode" type="string">
+  Sesleri asistan moduna gore filtreleyin. Secenekler: `pipeline`, `multimodal`, `dualplex`
+</ParamField>
+
+<ParamField query="language_id" type="integer">
+  Sesleri dil kimligine gore filtreleyin. Mevcut dil kimliklerini almak icin [Dilleri Getir](/api-reference/assistants/get-languages) endpointini kullanin.
+</ParamField>
+
+### Yanit alanlari
+
+<ResponseField name="data" type="array">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Sesin benzersiz tanimlayicisi
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Sesin gorunen adi
+    </ResponseField>
+
+    <ResponseField name="language_id" type="integer">
+      Bu sesin iliskilendirildigi dil kimligi
+    </ResponseField>
+
+    <ResponseField name="gender" type="string">
+      Sesin cinsiyeti (male/female)
+    </ResponseField>
+
+    <ResponseField name="preview_url" type="string">
+      Sesin ses orneginin URL'si. Kullanicilarin secim yapmadan once sesleri onizlemesine olanak tanimak icin kullanilabilir.
+    </ResponseField>
+
+    <ResponseField name="accent" type="string">
+      Sesin aksani (ornegin, "American", "British"). `null` olabilir.
+    </ResponseField>
+
+    <ResponseField name="age" type="string">
+      Sesin yas kategorisi (ornegin, "Young", "Middle aged"). `null` olabilir.
+    </ResponseField>
+
+    <ResponseField name="synthesizer_provider_id" type="integer">
+      Bu sesin ait oldugu TTS saglayici kimligi. Saglayici adlarini cozumlemek icin [Sentezleyici Saglayicilarini Getir](/api-reference/assistants/get-synthesizer-providers) endpointini kullanin. `null` olabilir.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+[
+  {
+    "id": 1,
+    "name": "Alloy",
+    "language_id": 1,
+    "gender": "female",
+    "preview_url": "https://cdn.openai.com/API/voice-previews/alloy.flac",
+    "accent": null,
+    "age": "Middle aged",
+    "synthesizer_provider_id": null
+  },
+  {
+    "id": 10,
+    "name": "Zephyr",
+    "language_id": 1,
+    "gender": "female",
+    "preview_url": "https://gstatic.com/aistudio/voices/samples/Zephyr.wav",
+    "accent": null,
+    "age": "Middle aged",
+    "synthesizer_provider_id": 1
+  },
+  {
+    "id": 11,
+    "name": "Puck",
+    "language_id": 1,
+    "gender": "male",
+    "preview_url": "https://gstatic.com/aistudio/voices/samples/Puck.wav",
+    "accent": null,
+    "age": "Middle aged",
+    "synthesizer_provider_id": 1
+  }
+]
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Asistan olusturulurken veya guncellenirken `id` alanini `voice_id` olarak kullanin
+- Yalnizca hedeflediginiz asistan turuyle uyumlu sesleri almak icin `mode` ile filtreleyin
+- Belirli bir dil icin sesleri almak icin `language_id` ile filtreleyin
+- Hicbir filtre saglanmazsa, mevcut tum sesler dondurulur
+- Yalnizca herkese acik olan veya kimlik dogrulamasi yapilmis kullaniciya ait sesler dondurulur

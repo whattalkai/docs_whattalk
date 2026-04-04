@@ -1,0 +1,72 @@
+---
+title: "Mevcut modelleri getirme"
+api: "GET /user/assistants/models"
+description: "Asistan yapilandirmasi icin mevcut yapay zeka modellerini alma"
+---
+
+Bu endpoint, asistan olusturulurken veya guncellenirken kullanilabilecek mevcut yapay zeka modellerinin listesini dondurur.
+
+### Sorgu Parametreleri
+
+<ParamField query="type" type="string" default="llm">
+  Motor moduna gore alinacak model turleri:
+  - `llm` - **pipeline** modu icin LLM modelleri (varsayilan)
+  - `multimodal` - **multimodal** modu icin multimodal modeller
+  - `dualplex` - **dualplex** modu icin multimodal modeller
+</ParamField>
+
+### Yanit alanlari
+
+<ResponseField name="data" type="array">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Modelin benzersiz tanimlayicisi
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Modelin gorunen adi
+    </ResponseField>
+
+    <ResponseField name="code" type="string">
+      Dahili kod (yalnizca multimodal/dualplex modeller icin)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json LLM Models (type=llm)
+[
+  {
+    "id": 1,
+    "name": "GPT-4o-mini"
+  },
+  {
+    "id": 2,
+    "name": "GPT-4.1-mini"
+  }
+]
+```
+
+```json Multimodal/Dualplex Models (type=multimodal or type=dualplex)
+[
+  {
+    "id": 1,
+    "name": "GPT-4o",
+    "code": "gpt-4o-realtime"
+  },
+  {
+    "id": 4,
+    "name": "GPT Realtime",
+    "code": "gpt-realtime"
+  }
+]
+```
+
+</ResponseExample>
+
+### Notlar
+
+- `type` parametresi saglanmazsa, varsayilan olarak LLM modelleri dondurulur
+- **pipeline** asistanlari olustururken `llm_model_id` alanini kullanin
+- **multimodal** veya **dualplex** asistanlari olustururken `multimodal_model_id` alanini kullanin

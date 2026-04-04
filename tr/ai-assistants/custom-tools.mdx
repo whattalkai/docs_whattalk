@@ -1,0 +1,282 @@
+---
+title: "Ozel Arama Ici Araclar"
+icon: "code-branch"
+description: "Yapay zeka asistaninizin aramalar sirasinda kullanabilecegi ozel API entegrasyonlarini olusturmayi ve yapilandirmayi ogrenin"
+---
+
+<Note>
+  Ozel Arama Ici Araclar, yapay zeka asistaninizin aramalar sirasinda dis
+  sistemlerle etkilesim kurmasini saglar. Stok kontrolu, musteri verisi
+  dogrulama veya gercek zamanli bilgi alma gibi islemlerle yapay zekanizi daha
+  guclu ve baglantili hale getirir.
+</Note>
+
+## Genel Bakis
+
+Ozel Arama Ici Araclar, yapay zeka asistaninizin sunlari yapmasini saglar:
+
+- Konusmalar sirasinda gercek zamanli API cagrilari yapma
+- Sistemlerinizden veri cekme veya veri gonderme
+- Canli verilere dayanarak bilinçli kararlar alma
+- Arayanlara dogru ve guncel bilgi saglama
+
+<Card title="Temel Avantajlar" icon="star">
+  - Kodlama gerektirmez - sadece API ucu noktasini ve parametreleri yapilandirin - Yapay zeka
+  araclari ne zaman ve nasil kullanacagini otomatik olarak bilir - Aramalar
+  sirasinda gercek zamanli veri erisimi - Mevcut sistemlerinizle sorunsuz entegrasyon
+</Card>
+
+## Aracinizi Kurma
+
+### 1. Temel Yapilandirma
+
+<Frame>
+  <img src="/resources/mid-call.png" alt="Ana Arac Yapilandirmasi" />
+</Frame>
+
+<Steps>
+  <Step title="Arac Olusturmaya Erisin">
+    **Arama ici araclar** bolumune gidin ve **Arama Ici Arac Olustur** dügmesine tiklayin
+  </Step>
+
+  <Step title="Ana Ayarlari Yapilandirin">
+    Temel bilgileri doldurun:
+
+    - **Ad**: Kucuk harf ve alt cizgi kullanin (orn. `siparis_durumu_kontrol`)
+    - **Aciklama**: Yapay zekanin bu araci ne zaman ve nasil kullanmasi gerektigini aciklayin
+    - **Uç Nokta**: API URL'niz (orn. `https://api.sirketiniz.com/siparisler`)
+    - **Zaman Asimi**: Yanitlar icin ne kadar beklenmesi gerektigi (saniye cinsinden)
+    - **Yontem**: GET, POST, PUT, PATCH veya DELETE secin
+
+  </Step>
+
+  <Step title="Basliklar Ekleyin">
+    Ihtiyac duyabileceginiz yaygin basliklar:
+    ```yaml
+    Content-Type: application/json
+    Authorization: Bearer sizin_tokeniniz
+    ```
+  </Step>
+</Steps>
+
+### 2. Degisken Yapilandirmasi
+
+<Frame>
+  <img src="/resources/mid-call-param.png" alt="Degisken Yapilandirmasi" />
+</Frame>
+
+<Steps>
+  <Step title="Parametreleri Tanimlayin">
+    Bunlar, yapay zekanizin arama sirasinda toplayacagi bilgi parcalaridir:
+    
+    ```yaml
+    Ad: siparis_numarasi
+    Tur: string
+    Aciklama: "Musteriden alinan 10 haneli siparis numarasi"
+    ```
+  </Step>
+
+  <Step title="Dogrulama Kurallarini Belirleyin">
+    Aciklamaya format gereksinimlerini ekleyin:
+    
+    ```yaml
+    "gg/aa/yyyy formatinda tarih"
+    "Bosluksuz telefon numarasi"
+    "Onay icin e-posta adresi"
+    ```
+  </Step>
+</Steps>
+
+## Parametre Turlerini Anlama
+
+<CardGroup cols={2}>
+  <Card title="String" icon="font">
+    Adlar, adresler veya referans numaralari gibi metin degerleri
+
+    ```yaml
+    Tur: string
+    Ornekler: "Ahmet Yilmaz", "Ataturk Cad. No:123"
+    ```
+
+  </Card>
+
+  <Card title="Number" icon="calculator">
+    Tutarlar, miktarlar veya kimlikler gibi sayisal degerler
+
+    ```yaml
+    Tur: number
+    Ornekler: 42, 99.99
+    ```
+
+  </Card>
+
+  <Card title="true_false" icon="toggle-on">
+    Evet/hayir durumlari icin boolean degerleri
+
+    ```yaml
+    Tur: true_false
+    Ornekler: true, false
+    ```
+
+  </Card>
+
+  <Card title="Formatlama Yardimi" icon="wand-magic-sparkles">
+    Aciklamalara format talimatlari ekleyin
+
+    ```yaml
+    "gg/aa/yyyy formatinda tarih"
+    "Bosluksuz telefon"
+    ```
+
+  </Card>
+</CardGroup>
+
+## Dinamik Uç Noktalar
+
+<Warning>
+  Uç nokta URL'nizde degiskenler kullanirken, bunlari suslu parantez icine
+  aldiginizdan ve tam parametre adini kullandiginizdan emin olun.
+</Warning>
+
+Degiskenler kullanarak uç noktalarinizi dinamik hale getirebilirsiniz:
+
+```yaml
+Temel URL:
+https://api.ornek.com/siparisler/durum
+
+Degiskenli:
+https://api.ornek.com/siparisler/{siparis_id}/durum
+```
+
+Yapay zeka, konusma sirasinda toplanan gercek degerle `{siparis_id}` ifadesini otomatik olarak degistirecektir.
+
+## Kolay Test Etme
+
+<Card title="Otomatik Test" icon="vial">
+Test verisiyle bir test calistirmak icin "Araci Test Et" dügmesine tiklayin:
+- String parametreleri: "test"
+- Number parametreleri: 1
+- Boolean parametreleri: true
+
+Yanit kodunu ve govdesini goreceksiniz, bu da her seyin calistigini dogrulamaniza yardimci olur.
+
+</Card>
+
+## Ileri Duzey Ozellik: Otomasyon Platformu Entegrasyonu
+
+<Note>
+  Daha karmasik mantik mi gerekiyor? Gelismis is akislari icin aracinizi
+  otomasyon platformuna baglayin.
+</Note>
+
+Gelismis entegrasyonlar ve karmasik is akislari icin, ozel araclari [Otomasyon Platformumuz](/tr/automation-platform/introduction) ile birlestirebilirsiniz.
+
+Guclu entegrasyonlar olusturmanin yolu:
+
+1. Otomasyon platformunda:
+
+   - Yeni bir akis olusturun
+   - Bir webhook tetikleyicisi ekleyin
+   - Mantiginizi olusturun (API cagrilari, veri donusumu vb.)
+   - "Yanit Dondur" ile bitirin
+
+2. Ozel aracinizda:
+   - Webhook URL'sini uç nokta olarak kullanin
+   - Sonuna `/sync` ekleyin
+   - Ornek: `https://automation.whattalk.ai/webhook/abc123/sync`
+
+Bu size sunlari saglar:
+
+- API cagrilarindan once/sonra veri donusumu
+- Sirali olarak birden fazla API cagrisi yapma
+- Karmasik is mantigi uygulama
+- Hatalari duzgun bir sekilde yonetme
+
+## Gercek Dunya Ornekleri
+
+<AccordionGroup>
+  <Accordion title="Siparis Sorgulama Sistemi" icon="magnifying-glass">
+    ```yaml
+    Ad: siparis_kontrol
+    Uç Nokta: https://api.magazaniz.com/siparisler/{siparis_numarasi}
+    Parametreler:
+      - Ad: siparis_numarasi
+        Tur: string
+        Aciklama: "Siparis referansi (format: SIP-XXXXX)"
+    ```
+
+    Yapay zeka sunlari yapacaktir:
+    1. Siparis numarasini sorar
+    2. Durumu sorgular
+    3. Teslimat tarihlerini ve durumu musteriye aciklar
+
+  </Accordion>
+
+  <Accordion title="Randevu Uygunlugu" icon="calendar">
+    ```yaml
+    Ad: uygun_saatleri_kontrol
+    Uç Nokta: https://api.takvim.com/uygunluk
+    Parametreler:
+      - Ad: hizmet
+        Tur: string
+        Aciklama: "Hizmet turu (sac kesimi, masaj, danismanlik)"
+      - Ad: tarih
+        Tur: string
+        Aciklama: "Tercih edilen tarih (gg/aa/yyyy)"
+    ```
+
+    Yapay zeka sunlari yapacaktir:
+    1. Istenen hizmeti sorar
+    2. Tercih edilen tarihi alir
+    3. Uygun zaman dilimlerini gosterir
+
+  </Accordion>
+
+  <Accordion title="Musteri Dogrulama" icon="shield-check">
+    ```yaml
+    Ad: musteri_dogrula
+    Uç Nokta: https://api.crm.com/dogrula
+    Parametreler:
+      - Ad: telefon
+        Tur: string
+        Aciklama: "10 haneli telefon numarasi"
+      - Ad: eposta
+        Tur: string
+        Aciklama: "Dogrulama icin e-posta adresi"
+    ```
+
+    Yapay zeka sunlari yapacaktir:
+    1. Iletisim bilgilerini toplar
+    2. CRM sisteminizle dogrular
+    3. Dogrulama durumuna gore islem yapar
+
+  </Accordion>
+</AccordionGroup>
+
+## Yapay Zekanizi Yapilandirma
+
+<Info>
+  Yapay zekanin ozel araclarinizi etkili bir sekilde kullanabilmesi icin sistem
+  isteminde net talimatlara ihtiyaci vardir.
+</Info>
+
+Ornek istem bolumu:
+
+```yaml
+siparis_kontrol aracini ne zaman kullanmali:
+1. Musteri siparis durumunu sorar
+2. Takip veya teslimattan bahseder
+3. Paketinin nerede oldugunu bilmek ister
+
+Nasil kullanilir:
+1. Verilmediyse siparis numarasini sorun
+2. Formati dogrulayin (SIP-XXXXX)
+3. Durumu sorgulamak icin araci kullanin
+4. Sonuclari basit bir dille aciklayin
+```
+
+<Tip>
+  Yapay zekanin tum senaryolari sorunsuz bir sekilde yonettiginden emin olmak
+  icin araclarinizi cesitli konusma akislariyla test edin. Yayina almadan once
+  basit test aramalariyla baslatin.
+</Tip>

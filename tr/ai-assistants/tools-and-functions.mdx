@@ -1,0 +1,56 @@
+---
+title: "Araclar ve Fonksiyonlar"
+icon: "screwdriver-wrench"
+description: "Aramalar sirasinda yapay zeka asistaninizin yeteneklerini gelistiren yerlesik araclari ve fonksiyonlari kesfedin"
+---
+
+WhatTalk.ai, yapay zeka asistaninizin arama sirasinda kullanabilecegi yerlesik "araclar" sunar. Bunlar, konusma akisini sekillendirmenize ve cagri aktarma veya randevu planlama gibi islemleri otomatiklestirmenize yardimci olur.
+
+## 1. Aramayi Sonlandirma Araci
+
+- **Amac**: Yapay zekaya konusmayi kibarca sonlandirmasini soyler.
+- **Nasil Calisir**: Sistem isteminde veya mantiginizda belirtebilirsiniz, ornegin: "Kullanici `hosca kalin` derse aramayi sonlandir."
+- **Yapilandirma**: [Istem ve Araclar ayarlarinda](/tr/ai-assistants/settings/prompt-and-tools#default-tools) etkinlestirin ve sistem isteminizde aramayi sonlandirmayi tetikleyecek kosullari tanimlayin.
+
+## 2. Aktarma Araci
+
+- **Amac**: Aramaciyi yapay zeka asistanindan bir insan temsilciye veya harici telefon numarasina aktarir.
+- **Kullanim Senaryolari**: Satis aramasinda sicak musteriler, destek aramasinda yonlendirmeler vb.
+- **Yapilandirma**: [Istem ve Araclar ayarlarinda](/tr/ai-assistants/settings/prompt-and-tools#default-tools) aramanin yonlendirilecegi telefon numarasini veya departmani ve istege bagli olarak kisa bir bekleme mesaji ekleyerek yapilandirin.
+
+## 3. Randevu Planlayici
+
+- **Amac**: Yapay zekanin takvim uygunlugunuzu kontrol etmesini ve otomatik olarak randevu olusturmasini saglar.
+- **Mevcut Entegrasyonlar**: Cal.com, GoHighLevel ve Calendly takvim sistemleri
+- **Tipik Akis**:
+  1. Yapay zeka randevu planlamayi teklif eder.
+  2. Arayan tarih/saat secer.
+  3. Yapay zeka onaylar ve bir onay gonderir (yapilandirilmissa e-posta veya SMS ile).
+- **Yapilandirma**: [Istem ve Araclar ayarlarinda](/tr/ai-assistants/settings/prompt-and-tools#default-tools) takvim entegrasyonunuzla yapilandirin.
+
+## 4. DTMF Girisi
+
+- **Amac**: Yapay zekanin aramalar sirasinda telefon menuleri, IVR sistemleri ve otomatik is akislarinda gezinmek icin tus takimi girisleri gondermesini saglar.
+- **Nasil Calisir**: Yapay zeka, otomatik sistemler veya menu istemcileriyle karsilastiginda telefon tus takimi tusarina (0-9, *, #) basabilir.
+- **Kullanim Senaryolari**: 
+  - Sirket telefon menuleri arasinda gezinme
+  - Belirli departmanlara ulasmak icin dahili numara girisi
+  - Guvenlik kodlari veya hesap numaralarini girme
+  - Insan temsilcilere ulasmak icin IVR sistemlerini atlama
+- **Yapilandirma**: [Istem ve Araclar ayarlarinda](/tr/ai-assistants/settings/prompt-and-tools#default-tools) etkinlestirin ve sistem isteminize DTMF'nin ne zaman kullanilacagina dair talimatlari ekleyin.
+
+## 5. Kodsuz Otomasyon Platformu
+
+- **Amac**: Aramalardan sonra yapay zeka, otomasyon platformunda islemler tetikleyebilir (CRM guncelleme, e-posta gonderme veya sonuclari Google Sheets'e kaydetme gibi).
+- **Yapilandirma**: [Otomasyon Platformunda](/tr/automation-platform/introduction) tetikleyiciler ve eylemler olusturun, ardindan [Arama Sonrasi Eylemler](/tr/ai-assistants/settings/post-call-actions#webhook-configuration) bolumundeki webhook yapilandirmasi uzerinden asistaniniza baglantilarin.
+
+## 6. Ozel Arama Ici Araclar
+
+- **Amac**: Yapay zekanin aramalar sirasinda kullanabilecegi kendi ozel API entegrasyonlarinizi olusturun.
+- **Kullanim Senaryolari**: Stok kontrolu, musteri verisi dogrulama, gercek zamanli bilgi alma veya kendi sistemlerinizle entegrasyon.
+- **Yapilandirma**: [Istem ve Araclar ayarlarinda](/tr/ai-assistants/settings/prompt-and-tools#custom-mid-call-tools) API ucu noktalarini, parametreleri ve yapay zekanin bunlari ne zaman kullanmasi gerektigini tanimlayarak yapilandirin.
+- Ayrintili kurulum talimatlari ve ornekler icin [Ozel Arama Ici Araclar Kilavuzu](/tr/ai-assistants/custom-tools) sayfamiza bakin.
+
+---
+
+**Not:** Araclar birlikte kullanilabilir. Ornegin, yapay zeka uygunlugu kontrol etmek icin ozel bir arac kullanabilir, ardindan bir randevu planlayabilir ve gerekirse son olarak bir insan temsilciye aktarabilir.

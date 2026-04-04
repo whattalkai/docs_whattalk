@@ -1,0 +1,77 @@
+---
+title: "Mevcut telefon numaralarini getirme"
+api: "GET /user/assistants/phone-numbers"
+description: "Asistan atamasi icin mevcut tum telefon numaralarini alma"
+---
+
+Bu endpoint, kimlik dogrulamasi yapilmis kullaniciya ait olan ve asistanlara atanabilecek telefon numaralarinin listesini, istege bagli olarak asistan turune gore filtreleme secenegiyle birlikte dondurur.
+
+### Sorgu Parametreleri
+
+<ParamField query="type" type="string" optional>
+  Telefon numaralarini asistan turune gore filtreleyin. Secenekler: `inbound`, `outbound`
+</ParamField>
+
+### Yanit alanlari
+
+<ResponseField name="data" type="array">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Telefon numarasinin benzersiz tanimlayicisi
+    </ResponseField>
+
+    <ResponseField name="phone_number" type="string">
+      E.164 formatindaki telefon numarasi
+    </ResponseField>
+
+    <ResponseField name="country_code" type="string">
+      Telefon numarasinin ulke kodu
+    </ResponseField>
+
+    <ResponseField name="type_label" type="string">
+      Telefon numarasinin okunabilir tur etiketi
+    </ResponseField>
+
+    <ResponseField name="is_available" type="boolean">
+      Telefon numarasinin atama icin uygun olup olmadigi (su anda bir gelen arama asistanina atanmamis olmasi)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+[
+  {
+    "id": 45,
+    "phone_number": "+1234567890",
+    "country_code": "US",
+    "type_label": "Normal",
+    "is_available": true
+  },
+  {
+    "id": 46,
+    "phone_number": "+1234567891",
+    "country_code": "US",
+    "type_label": "SIP",
+    "is_available": false
+  },
+  {
+    "id": 47,
+    "phone_number": "+441234567890",
+    "country_code": "GB",
+    "type_label": "Caller ID",
+    "is_available": true
+  }
+]
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Yalnizca kimlik dogrulamasi yapilmis kullaniciya ait telefon numaralari dondurulur
+- `type=inbound` belirtildiginde, arayan kimlik numaralari ve zaten atanmis numaralar filtrelenir
+- `is_available` alani, numaranin yeni bir gelen arama asistanina atanip atanamayacagini gosterir
+- Telefon numaralari, degerler koleksiyonu formatinda (indeksli dizi) dondurulur
+- Asistanlara telefon numarasi atarken `id` alanini kullanin
