@@ -10,6 +10,7 @@
     "light": "#8B5CF6",
     "dark": "#6C2BD9"
   },
+  "css": "/custom.css",
   "sidebar": {
     "items": "card"
   },
