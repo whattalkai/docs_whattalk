@@ -1,0 +1,79 @@
+---
+title: "Konuşma sona erdi webhook'unu etkinleştir"
+api: "POST /user/assistants/enable-conversation-ended-webhook"
+description: "Bir sohbet konuşması sona erdiğinde webhook bildirimlerini etkinleştirin"
+---
+
+Bu endpoint, bir asistan için konuşma sona erdi webhook bildirimlerini etkinleştirir ve bir sohbet konuşması (WhatsApp veya Web Widget) sona erdiğinde gerçek zamanlı güncellemeler almanızı sağlar. Webhook, tam transkript, çıkarılan değişkenler ve müşteri bilgilerini içerir.
+
+### İstek Gövdesi
+
+<ParamField body="assistant_id" type="integer" required>
+  Konuşma sona erdi webhook'unun etkinleştirileceği asistanın kimliği
+</ParamField>
+
+<ParamField body="webhook_url" type="string" required>
+  Bir konuşma sona erdiğinde webhook bildirimlerinin gönderileceği URL
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Webhook'un etkinleştirildiğini onaylayan başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Boş dizi (gelecekteki kullanım için ayrılmıştır)
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Asistan bulunamadığında veya doğrulanmış kullanıcıya ait olmadığında hata mesajı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="422 Validation Error">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Doğrulama hatası belirten hata mesajı
+    </ResponseField>
+    <ResponseField name="errors" type="object">
+      Her alan için ayrıntılı doğrulama hataları
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Success Response
+{
+  "message": "Conversation ended webhook enabled successfully",
+  "data": []
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Assistant not found"
+}
+```
+
+```json 422 Validation Error
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "assistant_id": [
+      "The assistant id field is required."
+    ],
+    "webhook_url": [
+      "The webhook url field is required."
+    ]
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,72 @@
+---
+title: "Asistan gelen arama webhook'unu devre dışı bırak"
+api: "POST /user/assistants/disable-inbound-webhook"
+description: "Belirli bir asistan için gelen arama webhook bildirimlerini devre dışı bırakın"
+---
+
+Bu endpoint, bir asistan için gelen arama webhook bildirimlerini devre dışı bırakır ve gelen arama tamamlanmaları ile verileri hakkında gerçek zamanlı güncellemelerin iletilmesini durdurur.
+
+### İstek Gövdesi
+
+<ParamField body="assistant_id" type="integer" required>
+  Webhook'un devre dışı bırakılacağı asistanın kimliği
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Webhook'un devre dışı bırakıldığını onaylayan başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Boş dizi (gelecekteki kullanım için ayrılmıştır)
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Asistan bulunamadığında veya doğrulanmış kullanıcıya ait olmadığında hata mesajı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="422 Validation Error">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Doğrulama hatası belirten hata mesajı
+    </ResponseField>
+    <ResponseField name="errors" type="object">
+      Her alan için ayrıntılı doğrulama hataları
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Success Response
+{
+  "message": "Inbound webhook disabled successfully",
+  "data": []
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Assistant not found"
+}
+```
+
+```json 422 Validation Error
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "assistant_id": [
+      "The assistant id field is required."
+    ]
+  }
+}
+```
+
+</ResponseExample>

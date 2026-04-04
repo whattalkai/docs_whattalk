@@ -1,0 +1,79 @@
+---
+title: "Asistan gelen arama webhook'unu etkinleştir"
+api: "POST /user/assistants/enable-inbound-webhook"
+description: "Belirli bir asistan için gelen arama webhook bildirimlerini etkinleştirin"
+---
+
+Bu endpoint, bir asistan için gelen arama webhook bildirimlerini etkinleştirir ve gelen arama tamamlanmaları ve verileri hakkında gerçek zamanlı güncellemeler almanızı sağlar.
+
+### İstek Gövdesi
+
+<ParamField body="assistant_id" type="integer" required>
+  Webhook'un etkinleştirileceği asistanın kimliği
+</ParamField>
+
+<ParamField body="webhook_url" type="string" required>
+  Webhook bildirimlerinin gönderileceği URL
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Webhook'un etkinleştirildiğini onaylayan başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Boş dizi (gelecekteki kullanım için ayrılmıştır)
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Asistan bulunamadığında veya doğrulanmış kullanıcıya ait olmadığında hata mesajı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="422 Validation Error">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Doğrulama hatası belirten hata mesajı
+    </ResponseField>
+    <ResponseField name="errors" type="object">
+      Her alan için ayrıntılı doğrulama hataları
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Success Response
+{
+  "message": "Webhook enabled successfully",
+  "data": []
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Assistant not found"
+}
+```
+
+```json 422 Validation Error
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "assistant_id": [
+      "The assistant id field is required."
+    ],
+    "webhook_url": [
+      "The webhook url field is required."
+    ]
+  }
+}
+```
+
+</ResponseExample>
