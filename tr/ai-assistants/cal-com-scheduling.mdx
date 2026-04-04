@@ -1,0 +1,110 @@
+---
+title: "Cal.com Randevu Planlama"
+icon: "calendar-days"
+description: "AI asistanınızın Cal.com kullanarak randevu planlamasını etkinleştirin"
+---
+
+Cal.com entegrasyonu ile AI asistanınızın toplantı planlamasını etkinleştirin. Sistem, rezervasyon alanlarını sizin için otomatik olarak yapılandırır.
+
+## Kurulum
+
+### 1. API Anahtarı Alın
+
+1. [Cal.com](https://cal.com/) adresine giriş yapın
+2. **Ayarlar** → **Geliştirici** → **API Anahtarları** bölümüne gidin
+3. Yeni bir API anahtarı oluşturun ve kopyalayın
+
+<img height="200" src="/resources/calcom-api-key.png" />
+
+### 2. Bölgenizi Seçin
+
+Cal.com farklı API bölgeleri sunar. Cal.com hesabınızla eşleşen bölgeyi seçin:
+
+| Bölge | API Uç Noktası |
+|-------|---------------|
+| **US** (varsayılan) | `api.cal.com` |
+| **EU** | `api.cal.eu` |
+| **Özel** | Kendi barındırdığınız Cal.com uç noktanız |
+
+Bağlanmadan önce Cal.com yapılandırma panelinde bölgenizi seçin. Emin değilseniz, US uç noktası varsayılandır.
+
+### 3. Cal.com'u Bağlayın
+
+1. Asistan ayarlarınızda → **Araçlar** sekmesi → **Randevu Planlama**
+2. Takvim türünden **Cal.com**'u seçin
+3. API bölgenizi seçin
+4. API anahtarınızı yapıştırın
+5. Açılır menüden bir etkinlik seçin
+
+<img height="200" src="/resources/calcom-connect.png" />
+
+### 4. Etkinliği Senkronize Edin
+
+Rezervasyon alanlarını otomatik olarak yapılandırmak için **"Etkinliği Senkronize Et"** düğmesine tıklayın.
+
+<img height="200" src="/resources/calcom-sync.png" />
+
+<Check>
+Senkronizasyon, etkinlik türünüzün özel alanlarını otomatik olarak okur ve bunları AI asistanı için yapılandırır. Ad, e-posta ve telefon zorunlu olarak ayarlanır. Diğer tüm özel rezervasyon alanları otomatik olarak içe aktarılır.
+</Check>
+
+## Etkinlik Türleri
+
+### Kişisel Etkinlikler
+
+Kişisel etkinlik türlerinizden seçim yapın (örn. 15 dakikalık tanışma görüşmesi, 30 dakikalık danışmanlık).
+
+### Takım Etkinlikleri
+
+Ayrıca **takım etkinlik türlerine** de rezervasyon yapabilirsiniz. API anahtarınızın takım takvimlerine erişimi olduğunda, takım etkinlikleri etkinlik açılır menüsünde kişisel etkinliklerden ayrı gruplanmış olarak görünür.
+
+<Tip>
+Takım etkinlikleri, AI'ın müsaitlik durumlarına göre takım üyelerinize dağıtılan toplantılar planlamasını istediğinizde kullanışlıdır.
+</Tip>
+
+## Dinamik Rezervasyon Alanları
+
+Bir etkinliği senkronize ettiğinizde, sistem Cal.com'daki ilgili etkinlik türünde yapılandırılmış tüm özel rezervasyon alanlarını otomatik olarak okur. Bu şu anlama gelir:
+
+- **Manuel alan yapılandırması yok** — alanlar doğrudan Cal.com etkinlik türünüzden alınır
+- **Özel alanlar desteklenir** — Cal.com etkinlik türünüze eklediğiniz tüm özel alanlar otomatik olarak kullanılabilir
+- **Senkronizasyonda otomatik yenileme** — Cal.com etkinliğinizin rezervasyon alanlarını değiştirirseniz tekrar "Etkinliği Senkronize Et"e tıklayın
+
+## Birden Fazla Takvim
+
+Daha fazla takvim eklemek için Randevu Planlama yanındaki **"+"** düğmesine tıklayın (örn. 15 dk, 30 dk toplantılar).
+
+## E-posta Kurulumu
+
+Takvim davetlerinin çalışması için:
+
+1. Asistan [giriş değişkenlerinde](/tr/ai-assistants/settings/prompt-and-tools#call-variables) `email` tanımlayın
+2. Potansiyel müşteri oluştururken müşteri e-postasını iletin
+
+Telefon numarası senkronizasyondan sonra otomatik olarak dahil edilir.
+
+## Geriye Dönük Uyumluluk
+
+Halihazırda yapılandırılmış bir Cal.com entegrasyonunuz varsa, mevcut ayarlarınız değişiklik yapılmadan çalışmaya devam eder. Bölge varsayılan olarak US'dir ve mevcut alan yapılandırmaları korunur. İsteğe bağlı olarak dinamik rezervasyon alanlarından yararlanmak için yeniden senkronize edebilirsiniz.
+
+## Sorun Giderme
+
+**Geçersiz API Anahtarı:** Cal.com ayarlarında aktif olduğunu ve `cal_live_` önekini içerdiğini doğrulayın
+
+**Senkronizasyon Başarısız Oldu:** Alanları sıfırlamak için **"Sorun Gider"** düğmesine tıklayın
+
+**Davet Gönderilmedi:** `email` değişkeninin tanımlı olduğundan ve potansiyel müşterilerle birlikte iletildiğinden emin olun
+
+**Alan Hataları:** Sıfırlamak için "Sorun Gider" kullanın. Yalnızca ad, e-posta, telefon zorunlu olmalıdır.
+
+**Yanlış Bölge:** Kimlik doğrulama hataları alıyorsanız, doğru bölgeyi seçtiğinizi kontrol edin (EU hesapları EU uç noktasını kullanmalıdır).
+
+<Note>
+Ayrıntılı sorun giderme için [Cal.com Sorunları](/tr/troubleshooting/cal-com) sayfasına bakın.
+</Note>
+
+## Test Etme
+
+1. Bir test araması yapın ve toplantı isteyin
+2. Rezervasyonun Cal.com'da göründüğünü doğrulayın
+3. Takvim davet e-postasının alınıp alınmadığını kontrol edin

@@ -1,0 +1,67 @@
+---
+title: "Calendly Randevu Planlama"
+icon: "calendar-days"
+description: "AI asistanınızın Calendly kullanarak randevu planlamasını etkinleştirin"
+---
+
+Calendly entegrasyonu ile AI asistanınızın toplantı planlamasını etkinleştirin. AI, müsaitlik durumunu kontrol edecek ve aramalar sırasında doğrudan randevu oluşturacaktır.
+
+## Ön Koşullar
+
+- Aktif bir Calendly hesabı
+- Calendly'de yapılandırılmış en az bir aktif etkinlik türü
+
+## Kurulum
+
+### 1. Calendly'yi Bağlayın
+
+1. Asistan ayarlarınızda **Araçlar** sekmesi → **Randevu Planlama** bölümüne gidin
+2. Takvim türü olarak **Calendly**'yi seçin
+3. **Calendly'ye Bağlan** düğmesine tıklayın
+4. Calendly OAuth sayfasında uygulamayı yetkilendirin
+5. Asistan ayarlarınıza yönlendirileceksiniz
+
+<Note>
+Bağlantı sorunları yaşıyorsanız, kimlik doğrulama çakışmalarını çözmek için **gizli/özel tarayıcı penceresi** kullanmayı deneyin.
+</Note>
+
+### 2. Etkinlik Türü Seçin
+
+1. Bağlandıktan sonra, Calendly etkinlik türlerinizi getirmek için **"Etkinlikleri Yükle"** düğmesine tıklayın
+2. AI'ın rezervasyonlar için kullanmasını istediğiniz etkinlik türünü seçin
+3. Asistanınızı kaydedin
+
+### 3. Calendly'de Konum Yapılandırın
+
+Calendly etkinlik türünüzün konum ayarı sesli asistan ile uyumlu olmalıdır.
+
+1. [calendly.com](https://calendly.com) → **Etkinlik Türleri** bölümüne gidin
+2. Asistanınıza bağlı etkinlik türünü düzenleyin
+3. **Konum** bölümünde aşağıdakilerden birini ayarlayın:
+   - **"Özel"** — önerilir, tüm durumlarda çalışır
+   - **"Telefon Araması" → "Gelen arama"** — sesli AI için de çalışır
+
+<Warning>
+Etkinlik türünüz yalnızca video konferans (Google Meet, Zoom, Teams) kullanıyorsa, rezervasyonlar başarısız olur. Sesli asistan toplantı bağlantıları oluşturamaz. "Özel" seçeneğine geçin veya ek konum seçeneği olarak ekleyin.
+</Warning>
+
+## Birden Fazla Takvim
+
+Daha fazla takvim aracı eklemek için Randevu Planlama yanındaki **"+"** düğmesine tıklayın (örn. farklı amaçlar için farklı etkinlik türleri). AI'ın doğru takvimi seçmesine yardımcı olmak için "Ne zaman planlanmalı" açıklamasını kullanın.
+
+## Kuruluş Hesapları
+
+Calendly hesabınız bir kuruluşun parçasıysa:
+
+- **Yönetici/Sahip hesapları** Round Robin ve Toplu etkinlikler dahil tüm takım üyelerinin etkinlik türlerini görebilir
+- **Normal üyeler** yalnızca kendi etkinlik türlerini görebilir
+
+## Test Etme
+
+1. Bir test araması yapın ve toplantı planlamayı isteyin
+2. Rezervasyonun Calendly kontrol panelinizde göründüğünü doğrulayın
+3. Takvim davetinin gönderildiğini kontrol edin
+
+<Note>
+Sorun giderme için [Calendly Sorunları](/tr/troubleshooting/calendly) sayfasına bakın.
+</Note>

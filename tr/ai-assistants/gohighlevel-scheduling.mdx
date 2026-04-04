@@ -1,0 +1,150 @@
+---
+title: "GoHighLevel Randevu Planlama"
+icon: "calendar-plus"
+description: "AI asistanınızın GoHighLevel entegrasyonu ile randevu planlamasını nasıl etkinleştireceğinizi öğrenin"
+---
+
+GoHighLevel entegrasyonu ile AI asistanınızın sorunsuz bir şekilde toplantı ve randevu planlamasını etkinleştirin. Bu güçlü özellik, AI'ınızın mevcut GoHighLevel takvim sisteminizi kullanarak aramalar sırasında müsaitlik kontrolü yapmasına ve toplantı planlamasına olanak tanır.
+
+## Ön Koşullar
+
+GoHighLevel entegrasyonunu kurmadan önce şunlara ihtiyacınız olacak:
+* Aktif bir GoHighLevel hesabı
+* GoHighLevel konumunuzda yapılandırılmış takvim(ler)
+* Uygulama bağlantılarını yetkilendirmek için yönetici veya uygun izinler
+
+## Kurulum Süreci
+
+### 1. GoHighLevel Hesap Gereksinimleri
+
+**Hesap Kurulumu:**
+- Aktif bir GoHighLevel hesabınız olduğundan emin olun
+- Takvimlerinizin hesabınızda düzgün şekilde kurulduğunu doğrulayın
+- Harici uygulamaları bağlamak için gerekli izinlere sahip olduğunuzu onaylayın
+
+**Takvim Yapılandırması:**
+- GoHighLevel konumunuzda takvimler oluşturun veya mevcut takvimleri doğrulayın
+- Uygun müsaitlik zamanları ve rezervasyon ayarlarını belirleyin
+- Randevular için gerekli özel alanları yapılandırın
+
+### 2. GoHighLevel'ı Asistanınıza Bağlama
+
+1. [AI asistanı ayarlarınızda](/tr/ai-assistants/settings/prompt-and-tools#default-tools) **Araçlar** bölümüne gidin
+2. Kullanılabilir araçlardan **Randevu Planlama**'yı seçin
+3. Takvim entegrasyon türü olarak **GoHighLevel**'ı seçin
+4. **GoHighLevel'a Bağlan** düğmesine tıklayın
+
+**OAuth Yetkilendirme Süreci:**
+1. GoHighLevel'ın yetkilendirme sayfasına yönlendirileceksiniz
+2. Mevcut seçeneklerden **hesabınızı seçin**
+3. Takvim verilerinize erişim için **uygulamayı yetkilendirin**
+4. Asistan ayarlarınıza geri yönlendirileceksiniz
+
+<Note>
+GoHighLevel'a bağlanırken sorun yaşıyorsanız, kimlik doğrulama çakışmalarını çözebilecek **Gizli/Özel tarayıcı penceresi** kullanmayı deneyin.
+</Note>
+
+### 3. Takvim Seçimi
+
+Başarılı bağlantıdan sonra:
+1. GoHighLevel konumunuzdan belirli **takvimi** seçin
+2. Kullanılabilir takvimleriniz otomatik olarak getirilip görüntülenecektir
+3. Randevuların planlanması gereken takvimi seçin
+
+### 4. Entegrasyonu Test Etme
+
+**Temel test adımları:**
+1. AI asistanınıza bir test araması yapın
+2. Konuşma sırasında randevu planlamayı isteyin
+3. Rezervasyonun GoHighLevel takviminizde göründüğünü doğrulayın
+4. Onay bilgilerinin uygun şekilde gönderildiğini kontrol edin
+5. Farklı senaryoları test edin (müsait/müsait olmayan zamanlar)
+
+## GoHighLevel'dan Gerekli Bilgiler
+
+Entegrasyonu tamamlamak için sistemin şunlara erişmesi gerekir:
+
+### GoHighLevel Hesabınızdan:
+- **Konum Kimliği:** OAuth yetkilendirmesi sırasında otomatik olarak alınır
+- **Takvim Kimlikleri:** Konumunuzun kullanılabilir takvimlerinden alınır
+- **Erişim Token'ları:** OAuth akışı aracılığıyla otomatik olarak yönetilir
+
+### Takvim İzinleri:
+- **Takvim müsaitliğini okuma:** Açık zaman dilimlerini kontrol etmek için
+- **Randevu oluşturma:** Yeni toplantılar planlamak için
+- **Takvim ayrıntılarına erişim:** Takvim adlarını ve ayarlarını almak için
+
+## Entegrasyon Özellikleri
+
+### Otomatik Randevu Planlama
+- **Gerçek zamanlı müsaitlik kontrolü:** AI açık zaman dilimlerini doğrular
+- **Anında rezervasyon onayı:** Randevular GoHighLevel'da hemen oluşturulur
+- **Çakışma önleme:** Sistem çift rezervasyonu engeller
+- **Saat dilimi yönetimi:** Takvim ve müşteri saat dilimlerine uyar
+
+### Randevular için E-posta Gereksinimi
+
+**Önemli:** Randevu planlamak için AI asistanınızın müşteriden bir e-posta adresi alması gerekir.
+
+**Kurulum seçenekleri:**
+1. **Giriş değişkenlerinde e-posta tanımlayın:** [Asistan ayarlarınıza](/tr/ai-assistants/settings/prompt-and-tools#call-variables) `email` giriş değişkeni olarak ekleyin
+2. **E-posta ile potansiyel müşteri içe aktarın:** Potansiyel müşterileri içe aktarırken e-posta adreslerinin dahil edildiğinden emin olun
+3. **Arama sırasında AI toplama:** Mevcut değilse, asistanınızı konuşma sırasında e-posta sormak üzere yapılandırın
+
+**Örnek talimat:**
+```
+"Müşteri randevu almak istiyorsa ve e-posta adresi elimde yoksa, 
+rezervasyon onayı için e-posta adresini vermesini isteyin."
+```
+
+## En İyi Uygulamalar
+
+### Takvim Yönetimi
+- **Takvimleri güncel tutun:** GoHighLevel'da müsaitlik durumunun güncel olduğundan emin olun
+- **Tampon süreleri belirleyin:** Randevular arasında uygun boşluklar yapılandırın
+- **Açık takvim adları kullanın:** Kurulum sırasında seçimi kolaylaştırır
+
+### Asistan Yapılandırması
+- **Sistem talimatına takvim bağlamı ekleyin:** AI'ın rezervasyon senaryolarını anlamasına yardımcı olun
+- **Randevu değişkenlerini tanımlayın:** GoHighLevel için ilgili bilgileri çıkarın
+- **Randevu süresini yapılandırın:** Randevuların ne kadar sürmesi gerektiğini belirtin
+
+**Randevu Süresi Kurulumu:**
+AI asistanınıza sistem talimatında randevu süreleri hakkında bilgi verin:
+
+```
+"Randevu planlarken 45 dakikalık slotlar kullanın. Müşteri sabah 8:00'de 
+buluşmak istediğini söylerse, bitiş zamanını 8:45 olarak ayarlayın. Bitiş 
+zamanını her zaman başlangıç zamanı artı 45 dakika olarak hesaplayın."
+```
+
+**Örnek senaryolar:**
+- Müşteri diyor ki: "Saat 14:00'te buluşabilir miyiz?"
+- AI planlar: 14:00 - 14:45 (45 dakikalık slot)
+
+- **Çeşitli senaryoları test edin:** Farklı zaman talepleri, çakışmalar, yeniden planlama
+
+### Güvenlik ve Uyumluluk
+- **Token yönetimi:** OAuth token'ları otomatik olarak yenilenir
+- **Veri gizliliği:** Yalnızca gerekli takvim verilerine erişilir
+- **İzin kapsamı:** Entegrasyon minimum gerekli izinleri kullanır
+
+## Sorun Giderme
+
+### Hızlı Çözümler:
+
+**Eksik API Anahtarı Hatası:**
+- **Çözüm:** GoHighLevel hesabınızı bağlantıdan çıkarın ve yeniden bağlayın, ardından bir asistan seçin ve kaydedin
+- **Adımlar:** [Asistan ayarları](/tr/ai-assistants/settings/prompt-and-tools#default-tools) → Randevu Planlama → Bağlantıyı Kes → Tekrar Bağlan → Asistan Seç → Kaydet
+
+**Bağlantı Sorunları:**
+- OAuth yetkilendirmesi için **gizli modu deneyin**
+- **Hesap izinlerini** ve takvim kurulumunu doğrulayın
+
+**Takvim Sorunları:**
+- Takvimler görünmüyorsa **bağlantıyı yenileyin**
+- **Saat dilimlerini** ve müsaitlik ayarlarını kontrol edin
+
+<Note>
+Ayrıntılı çözümler ve ek sorunlar dahil kapsamlı GoHighLevel sorun giderme için [GoHighLevel Sorunları](/tr/troubleshooting/gohighlevel) sayfasına bakın.
+</Note>
