@@ -1,0 +1,101 @@
+---
+title: "Bilgi bankası oluştur"
+api: "POST /user/knowledgebases"
+description: "Yeni bir bilgi bankası oluşturun"
+---
+
+Bu endpoint yeni bir bilgi bankası oluşturur. Oluşturduktan sonra, [belge oluştur](/api-reference/knowledgebases/create-document) endpoint'ini kullanarak belge ekleyebilirsiniz.
+
+### İstek Gövdesi
+
+<ParamField body="name" type="string" required>
+  Bilgi bankasının adı (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="description" type="string">
+  Bilgi bankasının isteğe bağlı açıklaması (maksimum 255 karakter)
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Oluşturulan bilgi bankası nesnesi
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Bilgi bankasının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Bilgi bankasının adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Bilgi bankasının açıklaması
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      Mevcut durum (yeni bilgi bankaları için `empty` olacaktır)
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Oluşturulma ISO 8601 zaman damgası
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Son güncelleme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 201 Created
+{
+  "message": "Knowledgebase created successfully.",
+  "data": {
+    "id": 1,
+    "name": "Product Documentation",
+    "description": "Technical documentation for our products",
+    "status": "empty",
+    "status_label": "Empty",
+    "created_at": "2025-01-08T10:30:00.000000Z",
+    "updated_at": "2025-01-08T10:30:00.000000Z"
+  }
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "The name field is required.",
+  "errors": {
+    "name": [
+      "The name field is required."
+    ]
+  }
+}
+```
+
+```json 500 Hata
+{
+  "error": "Failed to create knowledgebase. Please try again."
+}
+```
+
+</ResponseExample>
+
+### Sonraki Adımlar
+
+Bir bilgi bankası oluşturduktan sonra şunları yapmak isteyeceksiniz:
+
+1. **Belge ekleyin** - İçerik eklemek için [belge oluştur](/api-reference/knowledgebases/create-document) endpoint'ini kullanın
+2. **İşlenmeyi bekleyin** - Belgeler eşzamansız olarak işlenir
+3. **Asistana ekleyin** - Bilgi bankasını eklemek için [asistan güncelle](/api-reference/assistants/update-assistant) endpoint'ini kullanın

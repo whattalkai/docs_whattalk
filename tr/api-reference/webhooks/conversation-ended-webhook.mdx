@@ -1,0 +1,203 @@
+---
+title: "Konuşma Sona Erdi Webhook'u"
+icon: "webhook"
+description: "Bir sohbet konuşması sona erdikten sonra transkript, çıkarılan değişkenler ve müşteri verilerini içeren webhook"
+---
+
+Konuşma Sona Erdi Webhook'u, bir sohbet konuşması (WhatsApp veya Web Widget) sona erdikten sonra belirttiğiniz webhook URL'sine otomatik olarak gönderilir. Bu webhook, tam transkripti, çıkarılan değişkenleri, müşteri bilgilerini ve gönderen detaylarını içerir.
+
+## Webhook Yapılandırması
+
+Konuşma sona erdi webhook'larını etkinleştirmek için:
+1. [Konuşma Sona Erdi Webhook'unu Etkinleştir](/api-reference/assistants/enable-conversation-ended-webhook) API endpoint'ini kullanın
+2. Bildirimlerin gönderileceği webhook URL'nizi sağlayın
+3. İsteğe bağlı olarak, konuşmalardan yapılandırılmış veri çıkarmak için asistanınızda arama sonrası değişkenleri yapılandırın
+
+## İstek Formatı
+
+Webhook, yapılandırılmış URL'nize aşağıdaki JSON yüküyle POST isteği olarak gönderilir:
+
+### Yük Yapısı
+
+<ResponseField name="conversation_id" type="string">
+  Konuşmanın benzersiz tanımlayıcısı (UUID)
+</ResponseField>
+
+<ResponseField name="assistant_id" type="string">
+  Konuşmayı yöneten asistanın benzersiz tanımlayıcısı (UUID)
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Konuşma türü. Olası değerler: `widget`, `whatsapp`
+</ResponseField>
+
+<ResponseField name="message_count" type="integer">
+  Konuşmada alışverilen toplam mesaj sayısı
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Konuşmanın durumu. Değer: `ended`
+</ResponseField>
+
+<ResponseField name="extracted_variables" type="object">
+  Asistanınızın arama sonrası şema yapılandırmasına göre yapay zeka tarafından çıkarılan değişkenler
+  <Expandable title="Örnek çıkarılan değişkenler">
+    <ResponseField name="status" type="boolean">
+      Konuşma hedefinin gerçekleştirilip gerçekleştirilmediği
+    </ResponseField>
+    <ResponseField name="summary" type="string">
+      Konuşma özeti
+    </ResponseField>
+    <ResponseField name="custom_variable" type="string|number|boolean">
+      Asistan yapılandırmasında tanımladığınız herhangi bir özel değişken
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="input_variables" type="object">
+  Konuşma başlangıcında asistana aktarılan değişkenler (ör. ön sohbet form alanlarından veya otomasyon akışlarından)
+</ResponseField>
+
+<ResponseField name="transcript" type="array">
+  Tam konuşmayı temsil eden mesaj nesneleri dizisi
+  <Expandable title="Mesaj özellikleri">
+    <ResponseField name="role" type="string">
+      Gönderen rolü: `assistant` veya `user`
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      Mesaj içeriği
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="formatted_transcript" type="string">
+  `AI:` ve `Customer:` ön ekleriyle okunabilir biçimlendirilmiş transkript
+</ResponseField>
+
+<ResponseField name="customer_phone" type="string">
+  Müşteri telefon numarası (WhatsApp konuşmaları için mevcuttur, widget konuşmaları için `null`)
+</ResponseField>
+
+<ResponseField name="customer_name" type="string">
+  Sağlandıysa müşteri adı (ör. ön sohbet formundan) veya `null`
+</ResponseField>
+
+<ResponseField name="sender" type="object">
+  WhatsApp gönderen bilgileri (yalnızca WhatsApp konuşmalarında mevcuttur, widget için `null`)
+  <Expandable title="Gönderen özellikleri">
+    <ResponseField name="phone_number" type="string">
+      WhatsApp gönderen telefon numarası
+    </ResponseField>
+    <ResponseField name="display_name" type="string">
+      WhatsApp gönderen görünen adı
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Konuşmanın başladığı ISO 8601 zaman damgası (kullanıcının yapılandırılmış saat diliminde)
+</ResponseField>
+
+<ResponseField name="ended_at" type="string">
+  Konuşmanın sona erdiği ISO 8601 zaman damgası (kullanıcının yapılandırılmış saat diliminde)
+</ResponseField>
+
+<ResponseExample>
+```json Konuşma Sona Erdi Webhook Yükü
+{
+  "conversation_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "assistant_id": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+  "type": "widget",
+  "message_count": 8,
+  "status": "ended",
+  "extracted_variables": {
+    "status": true,
+    "summary": "Customer asked about pricing plans and was interested in the Pro plan"
+  },
+  "input_variables": {
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! How can I help you today?"
+    },
+    {
+      "role": "user",
+      "content": "I have a question about your service."
+    },
+    {
+      "role": "assistant",
+      "content": "Of course! I'd be happy to help. What would you like to know?"
+    },
+    {
+      "role": "user",
+      "content": "What are your pricing plans?"
+    }
+  ],
+  "formatted_transcript": "AI: Hi! How can I help you today?\nCustomer: I have a question about your service.\nAI: Of course! I'd be happy to help. What would you like to know?\nCustomer: What are your pricing plans?",
+  "customer_phone": null,
+  "customer_name": "John Doe",
+  "sender": null,
+  "created_at": "2026-02-23T09:30:00+01:00",
+  "ended_at": "2026-02-23T10:00:00+01:00"
+}
+```
+
+```json WhatsApp Konuşma Sona Erdi Webhook'u
+{
+  "conversation_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "assistant_id": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+  "type": "whatsapp",
+  "message_count": 12,
+  "status": "ended",
+  "extracted_variables": {
+    "status": true,
+    "summary": "Customer scheduled an appointment for next week"
+  },
+  "input_variables": {},
+  "transcript": [
+    {
+      "role": "user",
+      "content": "Hello, I'd like to book an appointment"
+    },
+    {
+      "role": "assistant",
+      "content": "Hi! I'd be happy to help you book an appointment. What date works best for you?"
+    }
+  ],
+  "formatted_transcript": "Customer: Hello, I'd like to book an appointment\nAI: Hi! I'd be happy to help you book an appointment. What date works best for you?",
+  "customer_phone": "+1234567890",
+  "customer_name": null,
+  "sender": {
+    "phone_number": "+19876543210",
+    "display_name": "My Business"
+  },
+  "created_at": "2026-02-23T14:00:00+01:00",
+  "ended_at": "2026-02-23T14:25:00+01:00"
+}
+```
+</ResponseExample>
+
+## Yeniden Deneme Davranışı
+
+Webhook endpoint'iniz 2xx dışı bir durum kodu döndürürse veya istek başarısız olursa, sistem yeniden dener:
+
+| Deneme | Gecikme |
+|--------|---------|
+| 1. yeniden deneme | 30 saniye |
+| 2. yeniden deneme | 60 saniye |
+| 3. yeniden deneme | 120 saniye |
+
+3 başarısız denemeden sonra, webhook teslimi başarısız olarak işaretlenir ve başka yeniden deneme yapılmaz.
+
+## Önemli Notlar
+
+- `conversation_id` ve `assistant_id` UUID'dir, tam sayı kimlik değildir
+- `sender` alanı yalnızca WhatsApp konuşmaları için doldurulur — web widget konuşmaları için `null` olur
+- `customer_phone` yalnızca WhatsApp konuşmaları için mevcuttur
+- `customer_name` ön sohbet formu verilerinden veya konuşma bağlamından gelir
+- Zaman damgaları kullanıcının yapılandırılmış saat dilimini kullanır (ISO 8601 formatı)
+- `extracted_variables` asistanınızın arama sonrası şema değerlendirmesinden doldurulur
+- `input_variables` ön sohbet formlarından (web widget) veya otomasyon akışlarından gelen verileri içerir

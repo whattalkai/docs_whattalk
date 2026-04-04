@@ -1,0 +1,103 @@
+---
+title: "Mevcut telefon numaralarını ara"
+api: "GET /user/phone-numbers/search"
+description: "Satın alınabilecek mevcut telefon numaralarını arayın"
+---
+
+Bu endpoint, sağlayıcımızdan mevcut telefon numaralarını aramanızı sağlar. Sonuçları kullanarak satın almak istediğiniz bir numara bulun.
+
+### Sorgu Parametreleri
+
+<ParamField query="country_code" type="string" default="US">
+  Aranacak ISO 3166-1 alpha-2 ülke kodu (ör. US, GB, AU, CA)
+</ParamField>
+
+<ParamField query="contains" type="string">
+  Belirli rakamları içeren telefon numaralarını filtreleyin (yalnızca sayısal karakterler, maksimum 10 rakam)
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="data" type="array">
+  Mevcut telefon numaraları dizisi
+  
+  <Expandable title="mevcut numara özellikleri">
+    <ResponseField name="phone_number" type="string">
+      E.164 formatındaki telefon numarası
+    </ResponseField>
+    
+    <ResponseField name="phone_number_formatted" type="string">
+      Görüntüleme için biçimlendirilmiş telefon numarası
+    </ResponseField>
+    
+    <ResponseField name="country_code" type="string">
+      ISO ülke kodu
+    </ResponseField>
+    
+    <ResponseField name="price" type="number">
+      USD cinsinden aylık kira fiyatı
+    </ResponseField>
+    
+    <ResponseField name="stripe_price_id" type="string">
+      Faturalandırma için Stripe fiyat kimliği
+    </ResponseField>
+    
+    <ResponseField name="address_requirements" type="string">
+      Bu numara için adres gereksinimleri: `none`, `local`, `foreign` veya `inventory`
+    </ResponseField>
+    
+    <ResponseField name="sms_capable" type="boolean">
+      Numaranın SMS destekleyip desteklemediği
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "data": [
+    {
+      "phone_number": "+14155551234",
+      "phone_number_formatted": "+1 415-555-1234",
+      "country_code": "US",
+      "price": 3.99,
+      "stripe_price_id": "price_1PkA4dBXoZOzqQuAsvGvVJTZ",
+      "address_requirements": "none",
+      "sms_capable": true
+    },
+    {
+      "phone_number": "+14155555678",
+      "phone_number_formatted": "+1 415-555-5678",
+      "country_code": "US",
+      "price": 3.99,
+      "stripe_price_id": "price_1PkA4dBXoZOzqQuAsvGvVJTZ",
+      "address_requirements": "none",
+      "sms_capable": false
+    }
+  ]
+}
+```
+
+```json 200 Boş Yanıt
+{
+  "data": []
+}
+```
+
+</ResponseExample>
+
+### Desteklenen Ülkeler
+
+| Ülke | Kod |
+|------|-----|
+| Amerika Birleşik Devletleri | US |
+| Kanada | CA |
+| Birleşik Krallık | GB |
+| Avustralya | AU |
+| İsrail | IL |
+| Polonya | PL |
+| Finlandiya | FI |
+| Hollanda | NL |
+| Danimarka | DK |
+| İtalya | IT |

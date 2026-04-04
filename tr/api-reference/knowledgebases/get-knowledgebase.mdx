@@ -1,0 +1,83 @@
+---
+title: "Bilgi bankası getir"
+api: "GET /user/knowledgebases/{id}"
+description: "Kimliğe göre tek bir bilgi bankası getirin"
+---
+
+Bu endpoint, belirli bir bilgi bankasının detaylarını döndürür.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="data" type="object">
+  Bilgi bankası nesnesi
+  
+  <Expandable title="bilgi bankası özellikleri">
+    <ResponseField name="id" type="integer">
+      Bilgi bankasının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Bilgi bankasının adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Bilgi bankasının isteğe bağlı açıklaması
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      Mevcut durum: `empty`, `processing`, `active` veya `failed`
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="documents_count" type="integer">
+      Bu bilgi bankasındaki belge sayısı
+    </ResponseField>
+    
+    <ResponseField name="assistants_count" type="integer">
+      Bu bilgi bankasını kullanan asistan sayısı
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Oluşturulma ISO 8601 zaman damgası
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Son güncelleme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "data": {
+    "id": 1,
+    "name": "Product Documentation",
+    "description": "Technical documentation for our products",
+    "status": "active",
+    "status_label": "Active",
+    "documents_count": 5,
+    "assistants_count": 2,
+    "created_at": "2025-01-05T10:30:00.000000Z",
+    "updated_at": "2025-01-08T14:20:00.000000Z"
+  }
+}
+```
+
+```json 404 Not Found
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+</ResponseExample>

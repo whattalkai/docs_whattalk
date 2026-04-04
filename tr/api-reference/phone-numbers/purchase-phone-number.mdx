@@ -1,0 +1,117 @@
+---
+title: "Telefon numarası satın al"
+api: "POST /user/phone-numbers/purchase"
+description: "Özel bir telefon numarası satın alın"
+---
+
+Bu endpoint, [arama endpoint'i](/api-reference/phone-numbers/search-phone-numbers) kullanılarak bulunan bir telefon numarasını satın almanızı sağlar. Platform fiyatlandırmayı, faturalandırmayı ve sağlamayı otomatik olarak yönetir.
+
+<Note>
+Bir telefon numarası satın almadan önce dosyanızda geçerli bir ödeme yönteminiz olmalıdır. Satın alma, otomatik olarak yenilenecek aylık bir abonelik oluşturur.
+</Note>
+
+### İstek Gövdesi
+
+<ParamField body="phone_number" type="string" required>
+  E.164 formatında satın alınacak telefon numarası (ör. +14155551234). Arama endpoint'inden döndürülen bir numara olmalıdır.
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Satın alınan telefon numarası detayları
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Telefon numarasının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="phone_number" type="string">
+      E.164 formatındaki telefon numarası
+    </ResponseField>
+    
+    <ResponseField name="country_code" type="string">
+      ISO ülke kodu
+    </ResponseField>
+    
+    <ResponseField name="type" type="string">
+      Telefon numarası türü (satın alınan numaralar için her zaman `normal`)
+    </ResponseField>
+    
+    <ResponseField name="sms_capable" type="boolean">
+      Numaranın SMS destekleyip desteklemediği
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 201 Created
+{
+  "message": "Phone number purchased successfully.",
+  "data": {
+    "id": 123,
+    "phone_number": "+14155551234",
+    "country_code": "US",
+    "type": "normal",
+    "sms_capable": true
+  }
+}
+```
+
+```json 400 Zaten Kullanımda
+{
+  "error": "This phone number is already in use."
+}
+```
+
+```json 400 Mevcut Değil
+{
+  "error": "This phone number is not available for purchase. Please search for available numbers first."
+}
+```
+
+```json 402 Ödeme Yöntemi Yok
+{
+  "error": "No payment method found. Please add a payment method to your account."
+}
+```
+
+```json 402 Ödeme Başarısız
+{
+  "error": "Payment failed. Please update your payment method."
+}
+```
+
+```json 422 Geçersiz Format
+{
+  "error": "Unable to parse phone number. Please provide a valid E.164 format number."
+}
+```
+
+```json 500 Sağlayıcı Hatası
+{
+  "error": "Failed to purchase phone number from provider. Please contact support."
+}
+```
+
+</ResponseExample>
+
+### Nasıl Çalışır
+
+1. **Ara** - Önce mevcut numaraları bulmak için [arama endpoint'ini](/api-reference/phone-numbers/search-phone-numbers) kullanın
+2. **Satın Al** - İstediğiniz telefon numarasını bu endpoint'e gönderin
+3. **Otomatik İşleme** - Platform:
+   - Numaranın hala mevcut olduğunu doğrular
+   - Ülkeye göre doğru fiyatlandırmayı belirler
+   - Ödeme yönteminizde aylık bir abonelik oluşturur
+   - Numarayı telefon sağlayıcımız üzerinden sağlar
+   - Hesabınızda telefon numarası kaydını oluşturur
+
+<Warning>
+Telefon numarası satın alımları iade edilemez. Abonelik, [numarayı serbest bırakana](/api-reference/phone-numbers/release-phone-number) kadar devam eder.
+</Warning>

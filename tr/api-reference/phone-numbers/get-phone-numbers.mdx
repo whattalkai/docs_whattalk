@@ -1,0 +1,88 @@
+---
+title: "Tüm telefon numaralarını getir"
+api: "GET /user/phone-numbers/all"
+description: "Kimliği doğrulanmış kullanıcıya ait tüm telefon numaralarını getirin"
+---
+
+Bu endpoint, hesabınızla ilişkili tüm telefon numaralarının listesini, abonelik durumları ve yetenekleri dahil olmak üzere döndürür.
+
+### Yanıt
+
+<ResponseField name="data" type="array">
+  Telefon numarası nesneleri dizisi
+  
+  <Expandable title="telefon numarası özellikleri">
+    <ResponseField name="id" type="integer">
+      Telefon numarasının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="phone_number" type="string">
+      E.164 formatındaki telefon numarası (ör. +14155551234)
+    </ResponseField>
+    
+    <ResponseField name="country_code" type="string">
+      ISO 3166-1 alpha-2 ülke kodu (ör. US, GB, AU)
+    </ResponseField>
+    
+    <ResponseField name="type" type="string">
+      Telefon numarası türü: `normal`, `sip` veya `caller_id`
+    </ResponseField>
+    
+    <ResponseField name="type_label" type="string">
+      Telefon numarası türünün okunabilir etiketi
+    </ResponseField>
+    
+    <ResponseField name="sms_capable" type="boolean">
+      Telefon numarasının SMS gönderip alamayacağı
+    </ResponseField>
+    
+    <ResponseField name="region" type="string">
+      Telefon numarasının sağlandığı bölge
+    </ResponseField>
+    
+    <ResponseField name="has_active_subscription" type="boolean">
+      Telefon numarasının aktif bir aboneliğe sahip olup olmadığı
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Telefon numarasının satın alınma ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "data": [
+    {
+      "id": 1,
+      "phone_number": "+14155551234",
+      "country_code": "US",
+      "type": "normal",
+      "type_label": "Dedicated Number",
+      "sms_capable": true,
+      "region": "us1",
+      "has_active_subscription": true,
+      "created_at": "2025-01-08T10:30:00.000000Z"
+    },
+    {
+      "id": 2,
+      "phone_number": "+442071234567",
+      "country_code": "GB",
+      "type": "normal",
+      "type_label": "Dedicated Number",
+      "sms_capable": false,
+      "region": "us1",
+      "has_active_subscription": true,
+      "created_at": "2025-01-05T14:20:00.000000Z"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+
+<Note>
+SMS özellikli ve aktif abonelikleri olan yalnızca telefon numaralarını döndüren eski bir endpoint `GET /user/phone-numbers` de mevcuttur. SMS yeteneği veya abonelik durumundan bağımsız olarak tüm telefon numaralarına ihtiyacınız varsa bu `/all` endpoint'ini kullanın.
+</Note>

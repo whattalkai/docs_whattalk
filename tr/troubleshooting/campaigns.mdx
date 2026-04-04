@@ -1,0 +1,198 @@
+---
+title: "Kampanya Sorunları"
+icon: "wrench"
+description: "Yaygın kampanya sorunlarını çözme ve performansı optimize etme"
+---
+
+Yaygın kampanya sorunları ve performans optimizasyon ipuçları için hızlı çözümler.
+
+## Kampanya Başlamıyor
+
+### Telefon Numarası Yapılandırılmamış
+**Hata:** "Temsilcinizin telefon numarası kurulumu yok"
+
+**Çözüm:**
+1. [Asistan Ayarları](/ai-assistants/settings/general#phone-number-configuration) bölümüne gidin
+2. Bir telefon numarası yapılandırın (Platform numarası, SIP veya Arayan Kimliği)
+3. Asistan ayarlarını kaydedin
+4. Kampanyayı tekrar başlatmayı deneyin
+
+### Yetersiz Bakiye
+**Hata:** "Kampanyayı başlatmak için yetersiz bakiye"
+
+**Çözüm:**
+1. Faturalandırma bölümünde hesap bakiyenizi kontrol edin
+2. Hesabınıza bakiye ekleyin
+3. Kampanyaya dönün ve başlat'a tıklayın
+
+### Aranacak Potansiyel Müşteri Yok
+**Hata:** "Aranacak potansiyel müşteri yok"
+
+**Çözüm:**
+1. Manuel olarak veya CSV'den içe aktararak potansiyel müşteriler ekleyin
+2. Potansiyel müşterilerin geçerli telefon numaralarına sahip olduğunu doğrulayın
+3. Tüm potansiyel müşterilerin tamamlandı olarak işaretlenip işaretlenmediğini kontrol edin
+4. "Potansiyel müşteri kalmadığında tamamlandı olarak işaretle" ayarının ihtiyaçlarınıza uyduğundan emin olun
+
+## Arama Yapılmıyor
+
+### İzin Verilen Saatlerin Dışında
+**Sorun:** Kampanya çalışıyor görünüyor ama arama yapılmıyor
+
+**Kontrol:**
+- Mevcut saatin izin verilen arama saatleri içinde olup olmadığı
+- Bugünün izin verilen arama günü olup olmadığı
+- Asistan saat diliminin beklenen programa uyup uymadığı
+
+**Çözüm:** İzin verilen saatleri ayarlayın veya bir sonraki izin verilen zaman penceresini bekleyin
+
+### Tüm Potansiyel Müşteriler Arandı
+**Sorun:** Kampanya boşta görünüyor
+
+**Kontrol:**
+- Tüm birincil potansiyel müşterilerin maksimum kez denenip denenmediği
+- İkincil kişilerin denenip denenmediği
+- Hedef bazlı yeniden deneme kullanılıyorsa hedef tamamlama durumu
+
+**Çözüm:** Daha fazla potansiyel müşteri ekleyin veya yeniden deneme ayarlarını gözden geçirin
+
+## Arama Kalitesi Sorunları
+
+### Yüksek Başarısızlık Oranı
+**Belirtiler:** Birçok arama "Başarısız" olarak işaretlendi
+
+**Yaygın nedenler:**
+- Potansiyel müşteri listesinde geçersiz telefon numaraları
+- Ağ bağlantısı sorunları
+- Operatör kısıtlamaları
+
+**Çözümler:**
+1. **Veri temizliği:** Geçersiz numaraları kaldırın
+2. **Tekli arama testi:** Potansiyel müşterileri manuel olarak tek tek aramayı deneyin
+3. **Numara formatını kontrol edin:** Doğru formatlama sağlayın (+1234567890)
+4. **Destek ile iletişim:** Kalıcı teknik sorunlar için
+
+### Düşük Cevaplanma Oranı
+**Belirtiler:** Çoğu arama sesli mesaja gidiyor veya cevaplanmıyor
+
+**Optimizasyon:**
+1. **Arama saatlerini ayarlayın:** Farklı zaman dilimleri deneyin
+2. **Yeniden deneme aralığını gözden geçirin:** Denemeleri daha fazla aralıklayın
+3. **Potansiyel müşteri kalitesini kontrol edin:** Numaraların güncel olduğunu doğrulayın
+4. **Arayan kimliği kurulumu:** Profesyonel arayan kimliği görüntüsü sağlayın
+
+## Yeniden Deneme Mantığı Sorunları
+
+### Çok Fazla Yeniden Deneme
+**Sorun:** Potansiyel müşteriler aşırı aramadan şikayet ediyor
+
+**Çözümler:**
+1. **Maksimum yeniden denemeyi azaltın:** 5'ten 2-3 denemeye düşürün
+2. **Yeniden deneme aralığını artırın:** Aramaları 2-4 saat aralıklayın
+3. **Sesli mesaj yeniden denemesini devre dışı bırakın:** Sesli mesajı iletişim olarak kabul edin
+4. **Hedef değişkenlerini gözden geçirin:** Doğru tamamlama takibi sağlayın
+
+### Yetersiz Yeniden Deneme
+**Sorun:** Sınırlı denemelerle potansiyel kişileri kaçırma
+
+**Çözümler:**
+1. **Maksimum yeniden denemeyi artırın:** 5 denemeye kadar
+2. **Sesli mesaj yeniden denemesini etkinleştirin:** İnsan temasına kadar devam edin
+3. **Yeniden deneme aralığını ayarlayın:** Günün farklı saatlerini deneyin
+4. **Hedef bazlı yeniden deneme kullanın:** Yüksek değerli potansiyel müşteriler için
+
+## Hedef Tamamlama Sorunları
+
+### Hedef Değişkeni Çalışmıyor
+**Sorun:** Hedef tamamlanana kadar yeniden deneme çalışmıyor
+
+**Gereksinimler:**
+1. **Arama sonrası değişkenler** asistanda yapılandırılmalıdır
+2. Arama sonrası şemasında **boolean değişken** bulunmalıdır
+3. **Değişken adı** kampanya ayarlarında tam olarak eşleşmelidir
+4. **AI çıkarma** düzgün çalışmalıdır
+
+**Çözüm:** Asistanın arama sonrası değişken çıkarmasını manuel aramalarla test edin
+
+### Yanlış Hedef Tamamlama
+**Sorun:** Potansiyel müşteriler yanlışlıkla tamamlandı olarak işaretleniyor
+
+**Hata Ayıklama:**
+1. AI çıkarma hataları için **arama transkriptlerini inceleyin**
+2. Örnek aramalarla **değişken tanımlarını test edin**
+3. Daha net hedef kriterleri için **AI komutunu ayarlayın**
+4. Asistan ayarlarında **değişken açıklamalarını iyileştirin**
+
+## Performans Optimizasyonu
+
+### Yavaş Kampanya İlerlemesi
+**Nedenler:**
+- Muhafazakar yeniden deneme aralıkları
+- Sınırlı izin verilen arama saatleri
+- Yüksek başarısızlık oranı mevcut potansiyel müşterileri azaltıyor
+
+**Çözümler:**
+1. **Paralel işleme:** Birden fazla küçük kampanya oluşturun
+2. **Zamanlama optimizasyonu:** Yoğun cevaplanma saatlerini kullanın
+3. **Veri temizliği:** Sorunlu numaraları kaldırın
+4. **Arama penceresini genişletin:** İzin verilen saatleri uzatın
+
+### Sistem Kaynak Sorunları
+**Belirtiler:** Gecikmeli aramalar, işleme darboğazları
+
+**Çözümler:**
+1. **Eşzamanlı kampanyaları azaltın:** Aktif kampanyaları sınırlayın
+2. **Kampanya başlangıçlarını kademelendeirin:** Birden fazla kampanyayı aynı anda başlatmayın
+3. **Destek ile iletişim:** Platform performans sorunları için
+
+## Potansiyel Müşteri Yönetimi Sorunları
+
+### Yinelenen Kişiler
+**Sorun:** Aynı kişi farklı potansiyel müşterilerden birden fazla kez aranıyor
+
+**Önleme:**
+1. **Veri temizliği:** İçe aktarmadan önce yinelenenleri kaldırın
+2. **Telefon numarası doğrulama:** Format varyasyonlarını kontrol edin
+3. **Potansiyel müşteri yineleme kaldırma:** Yinelenenleri tespit etmek için araçlar kullanın
+
+### İkincil Kişi Karışıklığı
+**Sorun:** Hangi kişiye ulaşıldığı belirsiz
+
+**Çözüm:**
+1. **Net isimlendirme:** İkincil kişiler için açıklayıcı isimler kullanın
+2. **Arama notları:** Kimin cevapladığını belirlemek için transkriptleri inceleyin
+3. **Potansiyel müşteri organizasyonu:** İlgili kişileri düzgün gruplandırın
+
+## Yaygın Hata Mesajları
+
+### "Kampanya zaten devam ediyor"
+**Çözüm:** Kampanya zaten çalışıyor. Değişiklik yapmak için önce duraklatın.
+
+### "Kampanya çalışmıyor"
+**Çözüm:** Kampanya duraklatılmış veya durdurulmuş. Aramayı devam ettirmek için başlatın.
+
+### "Asistan saat dilimi ayarlanmamış"
+**Çözüm:** Kampanya oluşturmadan önce asistan ayarlarında saat dilimini yapılandırın.
+
+## Yardım Alma
+
+### Destek ile İletişim Öncesi
+1. Belirli rehberlik için **hata mesajlarını kontrol edin**
+2. Bariz sorunlar için **kampanya ayarlarını gözden geçirin**
+3. Sorunları izole etmek için **tek potansiyel müşteri ile test edin**
+4. **Hesap durumunu** ve faturalandırmayı kontrol edin
+
+### Sağlanacak Bilgiler
+- Kampanya kimliği ve adı
+- Alınan hata mesajları
+- Sorundan önce atılan adımlar
+- Beklenen ve gerçek davranış
+- Asistan ve telefon numarası yapılandırması
+
+<Warning>
+**Kampanya gecikmeleri:** Aramaların başlamasını beklemeden önce başlattıktan sonra 10-15 dakika bekleyin. Sistemin potansiyel müşterileri başlatması ve sıraya koyması zaman alır.
+</Warning>
+
+<Note>
+Kampanya optimizasyonu hakkında ek yardım için [Kampanya En İyi Uygulamaları](/campaigns/best-practices) bölümüne bakın.
+</Note>

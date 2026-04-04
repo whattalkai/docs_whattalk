@@ -1,0 +1,74 @@
+---
+title: "Telefon numarasını serbest bırak"
+api: "DELETE /user/phone-numbers/{id}"
+description: "Bir telefon numarasını serbest bırakın ve aboneliğini iptal edin"
+---
+
+Bu endpoint, hesabınızdan bir telefon numarasını serbest bırakır. Abonelikleri olan özel numaralar için, abonelik iptal edilir ve numara mevcut fatura döneminin sonunda serbest bırakılır.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Serbest bırakılacak telefon numarasının benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Serbest bırakma durumunu belirten başarı mesajı
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Abonelik İptal Edildi
+{
+  "message": "Phone number released successfully. It will be removed at the end of the billing period."
+}
+```
+
+```json 200 Hemen Silindi
+{
+  "message": "Phone number deleted successfully."
+}
+```
+
+```json 400 Zaten Planlandı
+{
+  "error": "Phone number is already scheduled for release."
+}
+```
+
+```json 404 Not Found
+{
+  "error": "Phone number not found."
+}
+```
+
+```json 500 Hata
+{
+  "error": "Failed to release phone number. Please try again or contact support."
+}
+```
+
+</ResponseExample>
+
+### Serbest Bırakma Davranışı
+
+Serbest bırakma davranışı telefon numarası türüne bağlıdır:
+
+| Tür | Davranış |
+|-----|----------|
+| **Özel (normal)** | Abonelik iptal edilir. Numara fatura döneminin sonuna kadar aktif kalır, ardından serbest bırakılır. |
+| **SIP** | Hesabınızdan hemen silinir. |
+| **Arayan Kimliği** | Hesabınızdan hemen silinir ve telefon sağlayıcısından kaldırılır. |
+
+<Warning>
+Bir telefon numarası serbest bırakıldığında, aynı numarayı geri alamayabilirsiniz. Serbest bırakmadan önce bu numarayı kullanan tüm asistanları veya kampanyaları güncellediğinizden emin olun.
+</Warning>
+
+### Bağlı Kaynaklara Ne Olur
+
+Bir telefon numarasını serbest bıraktığınızda:
+- Bu numaraya bağlı tüm **gelen arama asistanları** telefon numarası ataması kaldırılır
+- Bu numarayı kullanan tüm **kampanyalar** telefon numarası rotasyonundan kaldırılır
+- **Arama geçmişi** korunur ve erişilebilir olmaya devam eder

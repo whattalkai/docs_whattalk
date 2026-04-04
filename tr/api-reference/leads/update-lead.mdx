@@ -1,0 +1,109 @@
+---
+title: "Potansiyel Müşteriyi Güncelle"
+api: "PUT /user/leads/{id}"
+description: "Kampanyalarınızdaki mevcut bir potansiyel müşteriyi güncelleyin"
+---
+
+Potansiyel müşteri kimliğini ve değiştirmek istediğiniz alanları sağlayarak bir potansiyel müşteriyi güncelleyin. Yalnızca istekte sağlanan alanlar güncellenir.
+
+## Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Güncellenecek potansiyel müşterinin kimliği
+</ParamField>
+
+## Gövde Parametreleri
+
+<ParamField body="campaign_id" type="integer" optional>
+  Potansiyel müşterinin atanacağı kampanyanın kimliği
+</ParamField>
+
+<ParamField body="phone_number" type="string" optional>
+  Potansiyel müşterinin telefon numarası (E164 formatına dönüştürülecektir)
+</ParamField>
+
+<ParamField body="status" type="string" optional>
+  Potansiyel müşterinin durumu. Şunlardan biri olmalıdır: `created`, `completed`, `reached-max-retries`
+</ParamField>
+
+<ParamField body="variables" type="object" optional>
+  Mevcut potansiyel müşteri değişkenleriyle birleştirilecek özel değişkenler
+</ParamField>
+
+## Yanıt
+
+<ResponseField name="message" type="string">
+  Potansiyel müşterinin güncellendiğini belirten başarı mesajı
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl -X PUT "https://app.whattalk.ai/api/user/leads/123" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaign_id": 456,
+    "phone_number": "+1234567890",
+    "variables": {
+      "name": "John Doe",
+      "company": "Acme Corp"
+    }
+  }'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Başarılı Yanıt
+{
+  "message": "Lead updated successfully"
+}
+```
+
+```json Hata Yanıtı - Potansiyel Müşteri Bulunamadı
+{
+  "message": "Lead not found"
+}
+```
+
+```json Hata Yanıtı - Kampanya Bulunamadı
+{
+  "message": "Campaign not found"
+}
+```
+
+```json Hata Yanıtı - Geçersiz Telefon Numarası
+{
+  "message": "Invalid phone number"
+}
+```
+
+```json Hata Yanıtı - Doğrulama Başarısız
+{
+  "message": "Validation failed",
+  "errors": {
+    "campaign_id": ["The selected campaign does not exist"],
+    "status": ["This status is assigned automatically and cannot be set manually"],
+    "variables": ["Variables must be an array"]
+  }
+}
+```
+
+```json Hata Yanıtı - Geçersiz Alanlar
+{
+  "message": "Invalid fields: invalid_field, another_invalid_field"
+}
+```
+
+</ResponseExample>
+
+## Notlar
+
+- Potansiyel müşteri, kimliği doğrulanmış kullanıcıya ait olmalıdır
+- Kampanya güncelleniyorsa, yeni kampanya da kimliği doğrulanmış kullanıcıya ait olmalıdır
+- Telefon numaraları otomatik olarak formatlanır ve doğrulanır
+- Değişkenler mevcut değişkenlerle birleştirilir (değiştirilmez)
+- Yalnızca izin verilen alanlar güncellenebilir: `campaign_id`, `phone_number`, `status`, `variables`
+- `status` alanı veri bütünlüğü için kısıtlı değerlere sahiptir

@@ -1,0 +1,65 @@
+---
+title: "GoHighLevel Sorunları"
+icon: "calendar-days"
+description: "Yaygın GoHighLevel entegrasyon sorunları ve çözümleri"
+---
+
+Bu sayfa, WhatTalk.ai ile GoHighLevel entegrasyonlarını kullanırken karşılaşılan yaygın sorunları kapsar.
+
+## Randevu Planlama Sorunları
+
+### Eksik API Anahtarı Hatası
+
+**Sorun:** "GoHighLevel için api_key location_id veya calendar_id eksik" hatası alınıyor
+
+**Çözüm:**
+1. [Asistan ayarlarına](/ai-assistants/settings/prompt-and-tools#default-tools) gidin
+2. **Randevu Planlama** bölümüne gidin
+3. Mevcut GoHighLevel bağlantısını kaldırmak için **Bağlantıyı Kes**'e tıklayın
+4. Yeniden yetkilendirmek için tekrar **Bağlan**'a tıklayın
+5. Açılır menüden bir **takvim seçin**
+6. Yapılandırmayı uygulamak için **Kaydet**'e tıklayın
+7. Yeniden bağlandıktan sonra bağlantının aktif göründüğünü **doğrulayın**
+
+### Bağlantı Sorunları
+
+**OAuth Yetkilendirmesi Başarısız:**
+- Kimlik doğrulama çakışmalarını çözmek için **gizli modu deneyin**
+- **Hesap seçimini doğrulayın** - doğru GoHighLevel hesabını seçtiğinizden emin olun
+- **İzinleri kontrol edin** - GoHighLevel hesabına yönetici erişiminiz olduğunu onaylayın
+
+### Takvim Görünmüyor
+
+**Takvimler asistan ayarlarında görünmüyor:**
+- Bağlantıyı keserek ve yeniden bağlanarak **bağlantıyı yenileyin**
+- GoHighLevel hesabınızda **takvim kurulumunu doğrulayın**
+- Takvim erişimi için **hesap izinlerini kontrol edin**
+
+### Rezervasyon Hataları
+
+**Randevular planlanmıyor:**
+- **E-posta Gerekli:** Asistanın [asistan ayarlarında](/ai-assistants/settings/prompt-and-tools#default-tools) tanımlanmış bir e-postası olduğundan ve potansiyel müşterinin gelen değişkenlerde veya konuşmadan bir e-postası olduğundan emin olun. Detaylı kurulum için [Randevular için E-posta Gereksinimi](/ai-assistants/gohighlevel-scheduling#email-requirement-for-appointments) bölümüne bakın.
+- **Takvim müsaitliğini test edin** - takvimde açık zaman dilimlerinin olduğunu doğrulayın
+- **Saat dilimlerini kontrol edin** - her iki sistemde de doğru saat dilimi yapılandırmasını sağlayın
+- **Asistan kayıtlarını inceleyin** - rezervasyon girişimleri için arama transkriptlerini kontrol edin
+- GoHighLevel'da rezervasyon kısıtlamaları için **takvim ayarlarını doğrulayın**
+
+### Veri Eşleme Sorunları
+
+**Potansiyel müşteri verileri doğru senkronize olmuyor:**
+- Otomasyon platformunda **alan eşlemesini doğrulayın**
+- GoHighLevel'daki **gerekli alanları kontrol edin**
+- Canlı kampanyalardan önce **örnek verilerle test edin**
+
+## Yardım Alma
+
+Bu çözümler sorununuzu çözmüyorsa:
+
+1. AI'ın tam olarak ne denediğini görmek için **arama transkriptlerini kontrol edin**
+2. Basit bir randevu rezervasyonu ile **entegrasyonu test edin**
+3. Belirli hata mesajları ve ekran görüntüleri ile **destek ile iletişime geçin**
+
+**Desteğe Gereken Yaygın Bilgiler:**
+- Hata mesajının ekran görüntüsü
+- Takvim yapılandırma detayları
+- Asistan ayarları yapılandırması

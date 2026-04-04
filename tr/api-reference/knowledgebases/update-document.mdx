@@ -1,0 +1,118 @@
+---
+title: "Belgeyi güncelle"
+api: "PUT /user/knowledgebases/{knowledgebaseId}/documents/{documentId}"
+description: "Bir belgenin adını veya açıklamasını güncelleyin"
+---
+
+Bu endpoint, mevcut bir belgenin meta verilerini günceller. Yalnızca ad ve açıklama güncellenebilir - belge türü ve içeriği değiştirilemez.
+
+### Yol Parametreleri
+
+<ParamField path="knowledgebaseId" type="integer" required>
+  Bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+<ParamField path="documentId" type="integer" required>
+  Güncellenecek belgenin benzersiz tanımlayıcısı
+</ParamField>
+
+### İstek Gövdesi
+
+<ParamField body="name" type="string">
+  Belgenin yeni adı (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="description" type="string">
+  Belgenin yeni açıklaması (maksimum 255 karakter)
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Güncellenen belge nesnesi
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Belgenin benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Belgenin adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Belgenin açıklaması
+    </ResponseField>
+    
+    <ResponseField name="type" type="string">
+      Belge türü
+    </ResponseField>
+    
+    <ResponseField name="type_label" type="string">
+      Okunabilir tür etiketi
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      İşleme durumu
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Son güncelleme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "message": "Document updated successfully.",
+  "data": {
+    "id": 1,
+    "name": "Updated Product Manual",
+    "description": "Revised user guide with new features",
+    "type": "pdf",
+    "type_label": "PDF",
+    "status": "active",
+    "status_label": "Active",
+    "updated_at": "2025-01-08T15:45:00.000000Z"
+  }
+}
+```
+
+```json 404 Bilgi Bankası Bulunamadı
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+```json 404 Belge Bulunamadı
+{
+  "error": "Document not found."
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "The name may not be greater than 255 characters.",
+  "errors": {
+    "name": [
+      "The name may not be greater than 255 characters."
+    ]
+  }
+}
+```
+
+</ResponseExample>
+
+<Note>
+Bir belgenin içeriğini güncellemek için mevcut belgeyi silmeniz ve güncellenmiş içerikle yeni bir tane oluşturmanız gerekir.
+</Note>

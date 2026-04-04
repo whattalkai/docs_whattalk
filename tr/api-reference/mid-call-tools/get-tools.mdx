@@ -1,0 +1,173 @@
+---
+title: "Arama içi araçları listele"
+api: "GET /user/tools"
+description: "Tüm arama içi araçları getirin"
+---
+
+Bu endpoint, tüm arama içi araçları getirmenizi sağlar. Arama içi araçlar, yapay zeka asistanlarınızın arama sırasında harici API'lerle etkileşim kurmasını sağlar.
+
+### Başlıklar
+
+<ParamField header="Authorization" type="string" required>
+  Kimlik doğrulama için Bearer token
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json` olmalıdır
+</ParamField>
+
+<ParamField header="Accept" type="string" required>
+  `application/json` olmalıdır
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="data" type="array">
+  Arama içi araçlar dizisi
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      Aracın benzersiz tanımlayıcısı
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Aracın adı (alt çizgi ile küçük harfler)
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Yapay zekanın bu aracı ne zaman ve nasıl kullanması gerektiğinin ayrıntılı açıklaması
+    </ResponseField>
+
+    <ResponseField name="endpoint" type="string">
+      Çağrılacak API endpoint URL'si
+    </ResponseField>
+
+    <ResponseField name="method" type="string">
+      HTTP yöntemi (GET, POST, PUT, PATCH, DELETE)
+    </ResponseField>
+
+    <ResponseField name="timeout" type="integer">
+      Saniye cinsinden istek zaman aşımı (1-30)
+    </ResponseField>
+
+    <ResponseField name="headers" type="array">
+      İstekle birlikte gönderilecek HTTP başlıkları
+      <Expandable title="başlık özellikleri">
+        <ResponseField name="name" type="string">
+          Başlık adı
+        </ResponseField>
+        <ResponseField name="value" type="string">
+          Başlık değeri
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="schema" type="array">
+      Yapay zekanın çıkaracağı ve endpoint'e göndereceği parametreler
+      <Expandable title="şema özellikleri">
+        <ResponseField name="name" type="string">
+          Parametre adı
+        </ResponseField>
+        <ResponseField name="type" type="string">
+          Parametre türü (string, number, boolean)
+        </ResponseField>
+        <ResponseField name="description" type="string">
+          Yapay zekanın bu parametreyi nasıl çıkaracağını anlamasına yardımcı olan açıklama
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Aracın oluşturulma ISO 8601 zaman damgası
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      Aracın son güncellenme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+[
+  {
+    "id": 1,
+    "name": "get_weather",
+    "description": "Use this tool to get the current weather in a specific city. Call this when the customer asks about weather conditions.",
+    "endpoint": "https://api.openweathermap.org/data/2.5/weather",
+    "method": "GET",
+    "timeout": 10,
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      },
+      {
+        "name": "Authorization",
+        "value": "Bearer sk_..."
+      }
+    ],
+    "schema": [
+      {
+        "name": "city",
+        "type": "string",
+        "description": "The city name to get weather for"
+      },
+      {
+        "name": "temperature",
+        "type": "number",
+        "description": "Current temperature value"
+      },
+      {
+        "name": "is_raining",
+        "type": "boolean",
+        "description": "Whether it is currently raining"
+      }
+    ],
+    "created_at": "2025-10-10T12:00:00.000000Z",
+    "updated_at": "2025-10-10T12:00:00.000000Z"
+  },
+  {
+    "id": 2,
+    "name": "send_notification",
+    "description": "Use this tool to send a notification to the customer. Call this when customer requests updates.",
+    "endpoint": "https://api.yourcompany.com/notifications/send",
+    "method": "POST",
+    "timeout": 15,
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "schema": [
+      {
+        "name": "message",
+        "type": "string",
+        "description": "The notification message to send"
+      },
+      {
+        "name": "priority_level",
+        "type": "number",
+        "description": "Priority level from 1 to 5"
+      },
+      {
+        "name": "send_sms",
+        "type": "boolean",
+        "description": "Whether to also send SMS notification"
+      }
+    ],
+    "created_at": "2025-10-09T14:30:00.000000Z",
+    "updated_at": "2025-10-10T09:15:00.000000Z"
+  }
+]
+```
+
+</ResponseExample>
+
+### Araçları Asistanlara Atama
+
+Bu araçları asistanlarla kullanmak için bakınız:
+
+- **[Asistan Oluştur](/api-reference/assistants/create-assistant)** - `tool_ids` parametresini kullanarak araçları ekleyin
+- **[Asistan Güncelle](/api-reference/assistants/update-assistant)** - `tool_ids` parametresini kullanarak araç atamalarını yönetin

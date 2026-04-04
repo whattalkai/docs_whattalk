@@ -1,0 +1,55 @@
+---
+title: "Arama içi aracı sil"
+api: "DELETE /user/tools/{id}"
+description: "Bir arama içi aracı silin"
+---
+
+Bu endpoint, bir arama içi aracı kalıcı olarak silmenizi sağlar. Bu işlem, aracı atanmış olduğu tüm asistanlardan da kaldırır.
+
+### Başlıklar
+
+<ParamField header="Authorization" type="string" required>
+  Kimlik doğrulama için Bearer token
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json` olmalıdır
+</ParamField>
+
+<ParamField header="Accept" type="string" required>
+  `application/json` olmalıdır
+</ParamField>
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Silinecek aracın benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="message" type="string">
+  Silme işlemini onaylayan başarı mesajı
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "message": "Tool deleted successfully"
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Tool not found"
+}
+```
+
+</ResponseExample>
+
+### Not
+
+Bir araç silindiğinde, otomatik olarak tüm asistanlardan kaldırılır. Aracı silmeden araç atamalarını yönetmek için:
+
+- **[Asistan Güncelle](/api-reference/assistants/update-assistant)** - Belirli asistanlardan araçları kaldırmak için `tool_ids` parametresini kullanın

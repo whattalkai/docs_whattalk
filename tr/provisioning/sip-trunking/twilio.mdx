@@ -1,0 +1,243 @@
+---
+title: "Twilio Entegrasyonu"
+description: "Twilio telefon numaralarınızı Elastic SIP Trunking ile bağlamak için adım adım kılavuz"
+---
+
+Bu kılavuz, Elastic SIP Trunking kullanarak Twilio telefon numaralarınızı bağlama sürecinde size yol gösterir. Twilio'da bir SIP trunk oluşturacak, numaralarınızı buna atayacak ve platformda içe aktaracaksınız.
+
+<Tip>
+**Tek seferlik kurulum:** Elastic SIP Trunk'ı yalnızca bir kez oluşturmanız gerekir (Adım 1). Bundan sonraki her ek telefon numarası için, mevcut trunk'ınıza eklemeniz (Adım 2) ve içe aktarmanız (Adım 3) yeterlidir.
+</Tip>
+
+## Adım 1: Elastic SIP Trunking Oluşturma
+
+1. [Twilio Konsolunuza](https://console.twilio.com) giriş yapın
+2. Kontrol panelinin üst kısmındaki **arama çubuğuna** **"Elastic SIP Trunking"** yazın ve sonuca tıklayın
+
+   Alternatif olarak, sol kenar çubuğundaki **"..."** menüsüne tıklayarak **Tüm Ürünler ve Hizmetler**'e gidin, ardından aşağı kaydırıp **Elastic SIP Trunking**'e tıklayın
+
+3. **Yeni SIP Trunk oluştur**'a tıklayın ve bir **Kolay ad** verin (örn. `whattalk`)
+
+   <Frame>
+     <img
+       src="/resources/twillio-create-elastic-sip1.jpeg"
+       alt="Elastic SIP Trunking Oluşturma"
+     />
+   </Frame>
+
+### Sonlandırmayı Yapılandırma (giden aramalar için)
+
+4. Sol kenar çubuğunda **Termination**'a tıklayın
+5. **Termination SIP URI** alanına yalnızca benzersiz bir ad girin — örneğin `sirketiniz`
+
+   Twilio otomatik olarak `.pstn.twilio.com` ekler, yani tam URI'niz şöyle olur: `sirketiniz.pstn.twilio.com`
+
+   <Frame>
+     <img
+       src="/resources/twillio-setup-termination1.jpeg"
+       alt="Sonlandırma Kurulumu"
+     />
+   </Frame>
+
+<Warning>
+**Yalnızca ad kısmını girin** (örn. `sirketiniz`). `.pstn.twilio.com` son eki Twilio tarafından önceden doldurulur. Giriş alanına tam bir URI veya yerelleştirilmiş bir URI (örn. `london-ix`) yapıştırmayın — bu çalışmayacak hatalı bir adres oluşturur. Genel URI trafiği otomatik olarak en yakın bölgeye yönlendirir.
+</Warning>
+
+<Note>
+**Bu URI'yi kaydedin** — Adım 3'te numarayı içe aktarırken tam Termination SIP URI'sine (`sirketiniz.pstn.twilio.com`) ihtiyacınız olacak.
+</Note>
+
+6. SIP trunk'ınızın giden istekleri kabul etmesi için kimlik doğrulama ayarlamanız gerekir. **Authentication**'a gidin ve IP Erişim Kontrol Listelerini yapılandırın:
+
+   Şu anda SIP sunucusunun statik IP'si yoktur, bu nedenle aralıktaki tüm IP adreslerini beyaz listeye eklemeniz gerekir:
+
+   <Frame>
+     <img
+       src="/resources/twillio-new-access-control.jpeg"
+       alt="Twilio Yeni Erişim Kontrolü"
+     />
+   </Frame>
+
+   <Frame>
+     <img
+       src="/resources/twillio-new-access-control2.jpeg"
+       alt="Twilio Yeni Erişim Kontrolü"
+     />
+   </Frame>
+
+### Kaynağı Yapılandırma (gelen aramalar için)
+
+7. Sol kenar çubuğunda **Origination**'a tıklayın
+8. **Yeni Origination URI ekle**'ye tıklayın ve SIP sunucu adresini girin:
+
+   ```
+   sip:5wed79aeavr.sip.livekit.cloud
+   ```
+
+   <Frame>
+     <img
+       src="/resources/twillio-setup-origination1.jpeg"
+       alt="Kaynak Kurulumu"
+     />
+   </Frame>
+
+## Adım 2: Numaraları SIP Trunk'ınıza Atama
+
+Şimdi Twilio telefon numaralarınızı az önce oluşturduğunuz trunk'a atayın.
+
+1. SIP trunk'ınızda, sol kenar çubuğundaki **Numbers**'a tıklayın
+2. **Numara Ekle**'ye tıklayın ve kullanmak istediğiniz telefon numarasını/numaralarını seçin
+
+   <Frame>
+     <img
+       src="/resources/twillio-move-numbers1.jpeg"
+       alt="Numaraları Elastic SIP Trunking'e taşıma"
+     />
+   </Frame>
+
+<Tip>
+Gelecekteki numaralar için yalnızca bu adımı ve aşağıdaki Adım 3'ü tekrarlamanız yeterlidir. Adım 1'deki trunk yapılandırması zaten tamamlanmıştır.
+</Tip>
+
+## Adım 3: Numaraları Platforma İçe Aktarma
+
+Şimdi platformun aramaları nasıl yönlendireceğini bilmesi için numarayı içe aktarın.
+
+1. Kontrol panelinizdeki Telefon Numaraları sayfasına doğrudan gidin:
+
+   **[https://app.whattalk.ai/phone-numbers](https://app.whattalk.ai/phone-numbers)**
+
+   Sizi giriş sayfasına yönlendirirse, önce giriş yapın — otomatik olarak Telefon Numaraları sayfasına yönlendirileceksiniz.
+
+2. **"SIP trunk entegre et"**e tıklayın (sayfanın sağ üst köşesi)
+
+   <Frame>
+     <img
+       src="/resources/twillio-import-whattalk-sip1.png"
+       alt="SIP trunk ile numaraları içe aktarma"
+     />
+   </Frame>
+
+3. Telefon numaranızı ve SIP kimlik bilgilerinizi doldurun:
+
+   ```
+   Telefon numarası: örn. +1 555 0123
+   Kullanıcı adı: Dahili hat kullanıcı adınız
+   Şifre: Dahili hat şifreniz
+   ```
+
+   <Frame>
+     <img
+       src="/resources/twillio-whattalk-auth-integration.png"
+       alt="Entegrasyon türünüze göre bilgilerinizi doldurun"
+     />
+   </Frame>
+
+4. Adım 1'de oluşturduğunuz **Termination SIP URI**'sini girin:
+
+   ```
+   Sunucu adresi: örn. sirketiniz.pstn.twilio.com
+   ```
+
+   <Frame>
+     <img
+       src="/resources/twillio-outbound-settings.PNG"
+       alt="Twilio SIP ile Numara Bağlama"
+     />
+   </Frame>
+
+5. **Yetkilendirme türünü** seçin. Adım 1'de IP tabanlı kimlik doğrulama yapılandırdıysanız, IP'yi seçin ve şu adresleri ekleyin:
+
+   ```
+   54.244.51.0
+   54.244.51.1
+   54.244.51.2
+   54.244.51.3
+   54.172.60.0
+   54.172.60.1
+   54.172.60.2
+   54.172.60.3
+   ```
+
+   <Frame>
+     <img
+       src="/resources/twillio-whattalk-credentials-ip-type1.png"
+       alt="Kimlik Bilgileri IP Türü"
+     />
+   </Frame>
+
+6. SIP trunk'ınızın bulunduğu **ülkeyi** seçin.
+
+   <Frame>
+     <img
+       src="/resources/twillio-whattalk-sip-country.png"
+       alt="SIP Ülke seçimi"
+     />
+   </Frame>
+
+## Adım 4: Kurulumu Doğrulama
+
+Yapılandırmadan sonra:
+
+1. Numaranıza bir test araması yapın
+2. AI asistanın cevap verdiğini kontrol edin
+3. Giden aramayı doğrulamak için test arama özelliğini kullanın
+
+## Güvenlik Gereksinimleri
+
+SIP kimlik bilgilerinizin güvenli olması gerekir:
+
+- **Kullanıcı adı**: Dahili hat numaranız veya sağlayıcı tarafından verilen kullanıcı adı
+- **Şifre şunlara sahip olmalı**:
+  - 12 veya daha fazla karakter
+  - Sayılar
+  - Büyük ve küçük harfler
+  - Özel karakterler önerilir
+
+## Yaygın Sorunlar
+
+<AccordionGroup>
+  <Accordion title="Her yeni numara için Elastic SIP Trunking kurulum yapmam gerekiyor mu?">
+    Hayır. Elastic SIP Trunk'ı yalnızca bir kez oluşturursunuz (Adım 1). Her yeni numara için, mevcut trunk'ınıza atamanız (Adım 2) ve platforma içe aktarmanız (Adım 3) yeterlidir.
+  </Accordion>
+
+  <Accordion title="Bağladıktan sonra gelen çalışıyor ama giden çalışmıyor mu?">
+    - **Termination SIP URI'nizi kontrol edin** — boşluk olmadığından ve doğru okunduğundan emin olun (örn. `sirketiniz.pstn.twilio.com`). Twilio'da yalnızca ad kısmını girdiğinizi ve yanlışlıkla yerelleştirilmiş bir URI eklemediğinizi veya `.pstn.twilio.com` son ekini çoğaltmadığınızı doğrulayın.
+    - **Kullanıcı adınızı ve kimlik bilgilerinizi kontrol edin** — kullanıcı adı, kimlik bilgileri listesindeki "Kolay ad" ile **aynı değildir**. Gerçek kullanıcı adını girdiğinizden emin olun.
+
+    <Frame>
+     <img
+       src="/resources/twillio-outbound-not-work.png"
+       alt="Twilio giden çalışmıyor"
+     />
+   </Frame>
+  </Accordion>
+
+  <Accordion title="Uluslararası ülkelere aramayı nasıl ayarlarım?">
+    1. Twilio Konsol arama çubuğunda **"geo"** yazarak **Voice Geographic Permissions**'ı bulun.
+
+    <Frame>
+     <img
+       src="/resources/twillio-setup-dialing-international.png"
+       alt="Twilio uluslararası arama kurulumu"
+     />
+   </Frame>
+
+    2. Seçicide **"Elastic SIP Trunking"**'i seçin, ardından aramak istediğiniz ülkeleri seçin.
+
+    <Frame>
+     <img
+       src="/resources/twillio-choose-elastic-sip-trunking.png"
+       alt="Uluslararası arama için Twilio Elastic SIP Trunking seçimi"
+     />
+   </Frame>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Note>
+  Kurulum konusunda yardıma mı ihtiyacınız var? Destek ekibimiz müşterilerin telefon
+  sistemlerini entegre etmelerine yardımcı olma konusunda uzmanlaşmıştır. Belirli telefon
+  sistemi yapılandırmanızla sorunsuz bir kurulum sağlayarak tüm süreç boyunca size rehberlik edeceğiz.
+</Note>

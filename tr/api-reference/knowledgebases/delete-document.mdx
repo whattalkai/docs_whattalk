@@ -1,0 +1,68 @@
+---
+title: "Belgeyi sil"
+api: "DELETE /user/knowledgebases/{knowledgebaseId}/documents/{documentId}"
+description: "Bir bilgi bankasından belge silin"
+---
+
+Bu endpoint, bir bilgi bankasından belgeyi kalıcı olarak siler. Belgenin vektör gömmeleri de vektör veritabanından kaldırılır.
+
+### Yol Parametreleri
+
+<ParamField path="knowledgebaseId" type="integer" required>
+  Bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+<ParamField path="documentId" type="integer" required>
+  Silinecek belgenin benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "message": "Document deleted successfully."
+}
+```
+
+```json 404 Bilgi Bankası Bulunamadı
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+```json 404 Belge Bulunamadı
+{
+  "error": "Document not found."
+}
+```
+
+```json 500 Hata
+{
+  "error": "Failed to delete document. Please try again."
+}
+```
+
+</ResponseExample>
+
+### Neler Silinir
+
+Bir belgeyi sildiğinizde:
+
+- **Belge kaydı** veritabanından kaldırılır
+- **Vektör gömmeleri** vektör veritabanından silinir
+- **İşlenmiş içerik** harici belge depolarından kaldırılır
+- **Üst bilgi bankası durumu** otomatik olarak güncellenir
+
+<Warning>
+Bu işlem geri alınamaz. Belge ve tüm işlenmiş içeriği kalıcı olarak silinecektir.
+</Warning>
+
+<Note>
+Bu, bilgi bankasındaki son belgeyse, bilgi bankası durumu `empty` olarak değişir.
+</Note>

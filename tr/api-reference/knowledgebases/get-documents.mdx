@@ -1,0 +1,104 @@
+---
+title: "Belgeleri getir"
+api: "GET /user/knowledgebases/{knowledgebaseId}/documents"
+description: "Bir bilgi bankasındaki tüm belgeleri getirin"
+---
+
+Bu endpoint, belirli bir bilgi bankasındaki tüm belgelerin listesini döndürür.
+
+### Yol Parametreleri
+
+<ParamField path="knowledgebaseId" type="integer" required>
+  Bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="data" type="array">
+  Belge nesneleri dizisi
+  
+  <Expandable title="belge özellikleri">
+    <ResponseField name="id" type="integer">
+      Belgenin benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Belgenin adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Belgenin isteğe bağlı açıklaması
+    </ResponseField>
+    
+    <ResponseField name="type" type="string">
+      Belge türü: `website`, `pdf`, `txt` veya `docx`
+    </ResponseField>
+    
+    <ResponseField name="type_label" type="string">
+      Okunabilir tür etiketi
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      İşleme durumu: `processing`, `active` veya `failed`
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Oluşturulma ISO 8601 zaman damgası
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Son güncelleme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Product Manual",
+      "description": "Complete product user manual",
+      "type": "pdf",
+      "type_label": "PDF",
+      "status": "active",
+      "status_label": "Active",
+      "created_at": "2025-01-05T10:30:00.000000Z",
+      "updated_at": "2025-01-05T10:35:00.000000Z"
+    },
+    {
+      "id": 2,
+      "name": "Company Website",
+      "description": "Main website content",
+      "type": "website",
+      "type_label": "Website",
+      "status": "processing",
+      "status_label": "Processing",
+      "created_at": "2025-01-08T09:00:00.000000Z",
+      "updated_at": "2025-01-08T09:00:00.000000Z"
+    }
+  ]
+}
+```
+
+```json 404 Bilgi Bankası Bulunamadı
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+</ResponseExample>
+
+### Belge Durumları
+
+| Durum | Açıklama |
+|-------|----------|
+| `processing` | Belge ayrıştırılıyor ve vektör veritabanına gömülüyor |
+| `active` | Belge işlendi ve kullanıma hazır |
+| `failed` | Belge işleme başarısız oldu |

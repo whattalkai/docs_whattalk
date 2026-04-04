@@ -1,0 +1,195 @@
+---
+title: "Belge oluştur"
+api: "POST /user/knowledgebases/{knowledgebaseId}/documents"
+description: "Bir bilgi bankasına yeni belge ekleyin"
+---
+
+Bu endpoint, bir bilgi bankasında yeni belge oluşturur. Belgeler eşzamansız olarak işlenir - endpoint hemen yanıt dönerken işleme arka planda devam eder.
+
+### Yol Parametreleri
+
+<ParamField path="knowledgebaseId" type="integer" required>
+  Bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+### İstek Gövdesi
+
+<ParamField body="name" type="string" required>
+  Belgenin adı (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="description" type="string">
+  Belgenin isteğe bağlı açıklaması (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="type" type="string" required>
+  Belge türü: `website`, `pdf`, `txt` veya `docx`
+</ParamField>
+
+#### Web Sitesi Belgeleri
+
+<ParamField body="url" type="string">
+  Taranacak ana URL. `links` sağlanmadıysa zorunludur.
+</ParamField>
+
+<ParamField body="links" type="array">
+  Taranacak belirli URL'lerin dizisi. `url` sağlanmadıysa zorunludur.
+  
+  <Expandable title="bağlantı özellikleri">
+    <ParamField body="link" type="string" required>
+      Belgeye dahil edilecek geçerli bir URL
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="relative_links_limit" type="integer" default="10">
+  Tarama sırasında takip edilecek maksimum bağıl bağlantı sayısı (1-50)
+</ParamField>
+
+#### Dosya Belgeleri (PDF, TXT, DOCX)
+
+<ParamField body="file" type="file" required>
+  Yüklenecek dosya (maksimum 20MB). `multipart/form-data` kodlaması kullanın.
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Oluşturulan belge nesnesi
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Belgenin benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Belgenin adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Belgenin açıklaması
+    </ResponseField>
+    
+    <ResponseField name="type" type="string">
+      Belge türü
+    </ResponseField>
+    
+    <ResponseField name="type_label" type="string">
+      Okunabilir tür etiketi
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      İşleme durumu (başlangıçta `processing` olacaktır)
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Oluşturulma ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 201 Web Sitesi Belgesi Oluşturuldu
+{
+  "message": "Document created successfully. Processing will begin shortly.",
+  "data": {
+    "id": 1,
+    "name": "Company Website",
+    "description": "Main website content",
+    "type": "website",
+    "type_label": "Website",
+    "status": "processing",
+    "status_label": "Processing",
+    "created_at": "2025-01-08T10:30:00.000000Z"
+  }
+}
+```
+
+```json 201 PDF Belgesi Oluşturuldu
+{
+  "message": "Document created successfully. Processing will begin shortly.",
+  "data": {
+    "id": 2,
+    "name": "Product Manual",
+    "description": "User guide for our product",
+    "type": "pdf",
+    "type_label": "PDF",
+    "status": "processing",
+    "status_label": "Processing",
+    "created_at": "2025-01-08T10:35:00.000000Z"
+  }
+}
+```
+
+```json 404 Bilgi Bankası Bulunamadı
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "A file is required for this document type.",
+  "errors": {
+    "file": [
+      "A file is required for this document type."
+    ]
+  }
+}
+```
+
+```json 500 İşleme Hatası
+{
+  "error": "Failed to create document. Please try again."
+}
+```
+
+</ResponseExample>
+
+### Belge Türleri
+
+| Tür | Açıklama | Girdi |
+|-----|----------|-------|
+| `website` | Web sayfalarını tarar ve metin içeriğini çıkarır | URL veya URL listesi |
+| `pdf` | PDF dosyalarından metin çıkarır | PDF dosya yüklemesi |
+| `txt` | Düz metin içeriği | TXT dosya yüklemesi |
+| `docx` | Word belgelerinden metin çıkarır | DOCX dosya yüklemesi |
+
+### Örnek: Web Sitesi Belgesi Oluşturma
+
+```bash
+curl -X POST https://app.whattalk.ai/api/user/knowledgebases/1/documents \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Company Website",
+    "description": "Main website content",
+    "type": "website",
+    "url": "https://example.com",
+    "relative_links_limit": 20
+  }'
+```
+
+### Örnek: PDF Belgesi Yükleme
+
+```bash
+curl -X POST https://app.whattalk.ai/api/user/knowledgebases/1/documents \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "name=Product Manual" \
+  -F "description=User guide for our product" \
+  -F "type=pdf" \
+  -F "file=@/path/to/document.pdf"
+```
+
+<Note>
+Belge işleme eşzamansızdır. İşlemenin tamamlanıp tamamlanmadığını kontrol etmek için [belge getir](/api-reference/knowledgebases/get-document) endpoint'ini sorgulayın.
+</Note>

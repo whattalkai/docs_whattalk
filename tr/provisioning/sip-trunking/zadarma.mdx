@@ -1,0 +1,435 @@
+---
+title: "Zadarma Entegrasyonu"
+description: "Zadarma telefon numaralarınızı SIP trunking ile bağlamak için adım adım kılavuz"
+---
+
+Bu kılavuz, SIP trunking kullanarak Zadarma telefon numaralarınızı bağlama sürecinde size yol gösterir. Zadarma iki bağlantı türü sunar — **PBX** ve **SIP Direct** — ve kurulum her biri için biraz farklıdır.
+
+<Tip>
+**Hangi türe sahipsiniz?** Zadarma'nın dahili hatlı (örn. 100, 101) sanal PBX'ini kullanıyorsanız, **PBX**'iniz var. PBX olmadan bağımsız bir SIP hesabı kullanıyorsanız, **SIP Direct**'iniz var.
+</Tip>
+
+Aşağıdan bağlantı türünüzü seçin ve adımları izleyin:
+
+<Tabs>
+  <Tab title="PBX">
+    ## Adım 1: SIP Kimlik Bilgilerinizi Toplayın
+
+    1. [Zadarma Kontrol Panelinize](https://my.zadarma.com) giriş yapın
+    2. **PBX'im** → **Dahili Hatlar**'a gidin
+
+    <Frame>
+      <img
+        src="/resources/zadarma-mypbx-extensions.png"
+        alt="Zadarma PBX'im Dahili Hatlar"
+      />
+    </Frame>
+
+    3. Dahili hattınızı bulun ve şu bilgileri not edin:
+
+    ```
+    Dahili hat: örn. 510000-100
+    Sunucu adresi: pbx.zadarma.com
+    Kullanıcı adı: Dahili hat kullanıcı adınız (örn. 510000-100)
+    Şifre: Dahili hat şifreniz
+    Telefon numarası: Telefon numaranız (örn. +521151900966)
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-switch-extension-settings.png"
+        alt="Zadarma PBX Dahili Hat Ayarları"
+      />
+    </Frame>
+
+    ## Adım 2: Harici Sunucu Kurulumu (gelen aramalar için)
+
+    Gelen aramaları almak için, Zadarma'da gelen aramaları platformun SIP sunucusuna ileten bir **Harici Sunucu** yapılandırmanız gerekir.
+
+    1. [Zadarma Kontrol Panelinizde](https://my.zadarma.com), **Ayarlar** → [**Sanal telefon numaraları**](https://my.zadarma.com/dirnum/active/) bölümüne gidin
+
+    <Frame>
+      <img
+        src="/resources/zadarma-settings-virtual-numbers.png"
+        alt="Zadarma Ayarlar Sanal telefon numaraları"
+      />
+    </Frame>
+
+    2. Bağlamak istediğiniz numarayı bulun ve ayarlarını açmak için **dişli simgesine** tıklayın
+
+    <Frame>
+      <img
+        src="/resources/zadarma-settings-virtual-numbers-gear-icon.png"
+        alt="Zadarma Ayarlar Sanal telefon numaraları Dişli Simgesi"
+      />
+    </Frame>
+
+    3. **Harici Sunucu**'ya tıklayın ve **SIP URI** onay kutusunu etkinleştirin
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-external-server.png"
+        alt="Zadarma PBX Harici Sunucu SIP URI yapılandırması"
+      />
+    </Frame>
+
+    4. **`+` öneki ile telefon numaranızı** kullanarak SIP sunucu adresini girin:
+
+    ```
+    +TELEFON_NUMARANIZ@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    Örneğin, numaranız `+551151900966` ise:
+
+    ```
+    +521151900966@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-server-address.png"
+        alt="Zadarma PBX Sunucu Adresi yapılandırması"
+      />
+    </Frame>
+
+    5. Zadarma'nın IP adreslerini görmek için sunucu adresinin altındaki **IP Göster**'e tıklayın (örn. `185.45.152.216`, `185.45.155.33`)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-show-ip-button.png"
+        alt="Zadarma PBX IP Göster düğmesi"
+      />
+    </Frame>
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-show-ip-addresses.png"
+        alt="Zadarma PBX IP adresleri gösterildi"
+      />
+    </Frame>
+
+    <Note>
+    **Bu IP'leri kaydedin** — Adım 3'te platformda gelen yetkilendirmeyi yapılandırırken bunlara ihtiyacınız olacak.
+    </Note>
+
+    <Warning>
+    **PBX kullanıcıları Harici Sunucu adresinde `+` ile telefon numarasını kullanmalıdır**. PBX dahili hat numarasını (örn. `533177-100`) kullanmak gelen aramalar için **çalışmaz**.
+    </Warning>
+
+    ## Adım 3: Numaraları Platforma İçe Aktarma
+
+    Şimdi platformun aramaları nasıl yönlendireceğini bilmesi için numarayı içe aktarın.
+
+    1. Kontrol panelinizdeki Telefon Numaraları sayfasına doğrudan gidin:
+
+       **[https://app.whattalk.ai/phone-numbers](https://app.whattalk.ai/phone-numbers)**
+
+       Sizi giriş sayfasına yönlendirirse, önce giriş yapın — otomatik olarak Telefon Numaraları sayfasına yönlendirileceksiniz.
+
+    2. **"SIP trunk entegre et"**e tıklayın (sayfanın sağ üst köşesi)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-import-sip.png"
+        alt="SIP trunk ile numaraları içe aktarma"
+      />
+    </Frame>
+
+    3. Telefon numaranızı ve SIP kimlik bilgilerinizi doldurun:
+
+    ```
+    Telefon numarası: örn. +551151900966
+    Kullanıcı adı: PBX dahili hattınız (örn. 533100-100)
+    SIP Dahili Hattınız: Telefon numaranız (örn. +551151900966)
+    Şifre: PBX dahili hat şifreniz
+    ```
+
+    <Warning>
+    **PBX kullanıcıları:** **Kullanıcı adı** PBX dahili hattınızdır (örn. `533100-100`). **"SIP Dahili Hattınız"** alanı **telefon numaranız** olmalıdır — bu, Adım 2'de Harici Sunucu adresinde kullandığınız numarayla eşleşmelidir.
+    </Warning>
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-auth.png"
+        alt="PBX Dahili Hat kimlik bilgileri"
+      />
+    </Frame>
+
+    4. Giden aramalar için **Sunucu adresini** girin:
+
+    ```
+    pbx.zadarma.com
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-pbx-outbound-settings.png"
+        alt="Zadarma giden sunucu adresi"
+      />
+    </Frame>
+
+    5. **Yetkilendirme türünü** seçin. **IP**'yi seçin ve Adım 2'deki **IP Göster**'den not ettiğiniz Zadarma IP adreslerini ekleyin.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-ip-inbound.png"
+        alt="Zadarma IP Yetkilendirme"
+      />
+    </Frame>
+
+    6. SIP trunk'ınızın bulunduğu **ülkeyi** seçin.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-country.png"
+        alt="SIP Ülke seçimi"
+      />
+    </Frame>
+
+    ## Adım 4: Kurulumu Doğrulama
+
+    1. Numaranıza bir test araması yapın
+    2. AI asistanın cevap verdiğini kontrol edin
+    3. Giden aramayı doğrulamak için test arama özelliğini kullanın
+  </Tab>
+  <Tab title="SIP Direct">
+    ## Adım 1: SIP Kimlik Bilgilerinizi Toplayın
+
+    1. [Zadarma Kontrol Panelinize](https://my.zadarma.com) giriş yapın
+    2. **Ayarlar** → **SIP Bağlantısı**'na gidin
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-settings.png"
+        alt="Zadarma SIP Ayarları"
+      />
+    </Frame>
+
+    3. Şu bilgileri not edin:
+
+    ```
+    Sunucu adresi: sip.zadarma.com
+    Dahili hat: SIP dahili hat numaranız (örn. 247000)
+    Kullanıcı adı: SIP kullanıcı adınız (dahili hattınızla aynı, örn. 247000)
+    Şifre: SIP şifreniz
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-connection-settings.png"
+        alt="Zadarma SIP Bağlantı Ayarları"
+      />
+    </Frame>
+
+    ## Adım 2: Harici Sunucu Kurulumu (gelen aramalar için)
+
+    Gelen aramaları almak için, Zadarma'da gelen aramaları platformun SIP sunucusuna ileten bir **Harici Sunucu** yapılandırmanız gerekir.
+
+    1. [Zadarma Kontrol Panelinizde](https://my.zadarma.com), **Ayarlar** → [**Sanal telefon numaraları**](https://my.zadarma.com/dirnum/active/) bölümüne gidin
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-settings-virtual-numbers.png"
+        alt="Zadarma SIP Ayarları Sanal telefon numaraları"
+      />
+    </Frame>
+
+    2. Bağlamak istediğiniz numarayı bulun ve ayarlarını açmak için **dişli simgesine** tıklayın
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-settings-virtual-numbers-gear-icon.png"
+        alt="Zadarma SIP Ayarları Sanal telefon numaraları Dişli Simgesi"
+      />
+    </Frame>
+
+    3. **Harici Sunucu**'ya tıklayın ve **SIP URI** onay kutusunu etkinleştirin
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-external-server.png"
+        alt="Zadarma SIP Harici Sunucu SIP URI yapılandırması"
+      />
+    </Frame>
+
+    4. **SIP dahili hat numaranızı** kullanarak SIP sunucu adresini girin:
+
+    ```
+    DAHILI_HATTINIZ@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    Örneğin, dahili hattınız `247000` ise:
+
+    ```
+    247000@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-uri.png"
+        alt="Zadarma SIP URI"
+      />
+    </Frame>
+
+    5. Zadarma'nın IP adreslerini görmek için sunucu adresinin altındaki **IP Göster**'e tıklayın (örn. `185.45.152.216`, `185.45.155.33`)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-show-ip-button.png"
+        alt="Zadarma SIP IP Göster düğmesi"
+      />
+    </Frame>
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-show-ip-addresses.png"
+        alt="Zadarma SIP IP adresleri gösterildi"
+      />
+    </Frame>
+
+    <Note>
+    **Bu IP'leri kaydedin** — Adım 3'te platformda gelen yetkilendirmeyi yapılandırırken bunlara ihtiyacınız olacak.
+    </Note>
+
+    ## Adım 3: Numaraları Platforma İçe Aktarma
+
+    Şimdi platformun aramaları nasıl yönlendireceğini bilmesi için numarayı içe aktarın.
+
+    1. Kontrol panelinizdeki Telefon Numaraları sayfasına doğrudan gidin:
+
+       **[https://app.whattalk.ai/phone-numbers](https://app.whattalk.ai/phone-numbers)**
+
+       Sizi giriş sayfasına yönlendirirse, önce giriş yapın — otomatik olarak Telefon Numaraları sayfasına yönlendirileceksiniz.
+
+    2. **"SIP trunk entegre et"**e tıklayın (sayfanın sağ üst köşesi)
+
+    <Frame>
+      <img
+        src="/resources/zadarma-import-sip.png"
+        alt="SIP trunk ile numaraları içe aktarma"
+      />
+    </Frame>
+
+    3. Telefon numaranızı ve SIP kimlik bilgilerinizi doldurun:
+
+    ```
+    Telefon numarası: örn. +1 555 0123
+    SIP Dahili Hattınız: SIP dahili hat numaranız (örn. 247000)
+    Kullanıcı adı: SIP kullanıcı adınız (dahili hattınızla aynı, örn. 247000)
+    Şifre: SIP şifreniz
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-auth-integration.png"
+        alt="SIP Direct kimlik bilgileri"
+      />
+    </Frame>
+
+    4. Giden aramalar için **Sunucu adresini** girin:
+
+    ```
+    sip.zadarma.com
+    ```
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip-outbound-settings.png"
+        alt="Zadarma SIP giden sunucu adresi"
+      />
+    </Frame>
+
+    5. **Yetkilendirme türünü** seçin. **IP**'yi seçin ve Adım 2'deki **IP Göster**'den not ettiğiniz Zadarma IP adreslerini ekleyin.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-ip-inbound.png"
+        alt="Zadarma IP Yetkilendirme"
+      />
+    </Frame>
+
+    6. SIP trunk'ınızın bulunduğu **ülkeyi** seçin.
+
+    <Frame>
+      <img
+        src="/resources/zadarma-sip1-country.png"
+        alt="SIP Ülke seçimi"
+      />
+    </Frame>
+
+    ## Adım 4: Kurulumu Doğrulama
+
+    1. Numaranıza bir test araması yapın
+    2. AI asistanın cevap verdiğini kontrol edin
+    3. Giden aramayı doğrulamak için test arama özelliğini kullanın
+  </Tab>
+</Tabs>
+
+## Güvenlik Gereksinimleri
+
+SIP kimlik bilgilerinizin güvenli olması gerekir:
+
+- **Kullanıcı adı**: Dahili hat numaranız veya sağlayıcı tarafından verilen kullanıcı adı
+- **Şifre şunlara sahip olmalı**:
+  - 12 veya daha fazla karakter
+  - Sayılar
+  - Büyük ve küçük harfler
+  - Özel karakterler önerilir
+
+## Arama Aktarma Sınırlamaları
+
+<Warning>
+**Zadarma SIP REFER'i desteklemez**, bu da standart soğuk aktarmanın kutudan çıktığı gibi çalışmayacağı anlamına gelir. Sıcak aktarma otomatik olarak çalışır — platform bunu SIP INVITE aracılığıyla yönetir.
+
+**Soğuk aktarma** için asistanınızın aktarma ayarlarındaki **Özel SIP Aktarma** seçeneğini kullanabilirsiniz. Özel SIP URI'yi şu şekilde ayarlayın:
+
+```
+sip:+HEDEF_NUMARA@sip.zadarma.com
+```
+
+Örneğin: `sip:+15557654321@sip.zadarma.com`
+
+Numaranın `+` öneki ile uluslararası E.164 formatında olduğundan emin olun. `tel:` URI formatını **kullanmayın**.
+</Warning>
+
+## Yaygın Sorunlar
+
+<AccordionGroup>
+  <Accordion title="Gelen aramalar çalışmıyor">
+    - **Harici Sunucu adresinizi kontrol edin** — formatın bağlantı türünüze uyduğundan emin olun:
+      - **PBX**: `+TELEFON_NUMARANIZ@5wed79aeavr.sip.livekit.cloud` (`+` ile telefon numarası)
+      - **SIP Direct**: `DAHILI_HATTINIZ@5wed79aeavr.sip.livekit.cloud` (dahili hat numarası)
+    - **Harici Sunucunun etkinleştirildiğini doğrulayın** Zadarma ayarlarında
+    - **Platformdaki "SIP Dahili Hattınız" alanının** eşleştiğini kontrol edin: PBX için telefon numarası, SIP Direct için dahili hat
+  </Accordion>
+
+  <Accordion title="Giden aramalar çalışmıyor">
+    - **Sunucu adresini kontrol edin** — PBX için `pbx.zadarma.com` veya SIP Direct için `sip.zadarma.com` olmalıdır
+    - **Kimlik bilgilerinizi doğrulayın** — kullanıcı adı ve şifrenin Zadarma SIP ayarlarınızda gösterilenle eşleştiğinden emin olun
+    - **Zadarma bakiyenizi kontrol edin** — giden aramalar yeterli kredi gerektirir
+  </Accordion>
+
+  <Accordion title="Soğuk aktarma çalışmıyor">
+    Zadarma SIP REFER'i desteklemez. Soğuk aktarmayı etkinleştirmek için:
+    1. Asistanınızın **Telefon Araması Aktarma** araç ayarlarına gidin
+    2. **"Özel SIP aktarma"**yı etkinleştirin (Gelişmiş altında)
+    3. SIP URI'yi `sip:+HEDEF_NUMARA@sip.zadarma.com` olarak ayarlayın
+
+    Soğuk aktarma hâlâ başarısız oluyorsa, hedef numaranın `+` ile uluslararası formatta olduğunu doğrulayın.
+  </Accordion>
+
+  <Accordion title="Hangi bağlantı türünü kullanmalıyım — PBX mi SIP Direct mi?">
+    - **PBX**, birden fazla dahili hat, arama yönlendirme kuralları, IVR menüleri veya Zadarma'daki diğer PBX özelliklerine ihtiyacınız varsa önerilir
+    - **SIP Direct**, PBX özellikleri olmadan sadece tek bir numara bağlamak istiyorsanız daha basittir
+
+    Her ikisi de gelen ve giden AI aramaları için eşit derecede iyi çalışır.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Note>
+  Kurulum konusunda yardıma mı ihtiyacınız var? Destek ekibimiz müşterilerin telefon
+  sistemlerini entegre etmelerine yardımcı olma konusunda uzmanlaşmıştır. Belirli telefon
+  sistemi yapılandırmanızla sorunsuz bir kurulum sağlayarak tüm süreç boyunca size rehberlik edeceğiz.
+</Note>

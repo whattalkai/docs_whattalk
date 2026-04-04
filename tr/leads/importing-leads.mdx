@@ -1,0 +1,185 @@
+---
+title: "Aday Iceri Aktarma"
+icon: "file-import"
+description: "CSV ve Excel dosyalarindan dogrulama ve hata yonetimi ile aday iceri aktarin"
+---
+
+Otomatik dogrulama, arka plan isleme ve kapsamli hata raporlama ile CSV veya Excel dosyalarindan cok sayida aday iceri aktarin.
+
+## Iceri Aktarma Sureci Genel Bakis
+
+Aday iceri aktarma sistemi sunlari destekler:
+- **CSV ve Excel dosyalari** (.csv, .xlsx, .xls)
+- Buyuk dosyalar icin **arka plan isleme**
+- Hata raporlama ile **otomatik dogrulama**
+- Ayni iceri aktarma icinde **ikincil iletisim kisileri**
+- Asistan yapilandirmasindan **degisken esleme**
+
+## Iceri Aktarma Dosyanizi Hazirlama
+
+### Gerekli Sutunlar
+Iceri aktarma dosyaniz sunlari icermelidir:
+- **phone_number:** Birincil iletisim telefon numarasi (zorunlu)
+- **Degiskenler:** [Asistaninizin yapilandirilmis degiskenlerine](/ai-assistants/settings/prompt-and-tools#call-variables) uyan sutunlar
+
+### Istege Bagli Sutunlar
+- **Ikincil iletisim sutunlari:** Ek telefon numaralari
+- **Degisken gecersiz kilmalari:** Belirli adaylar icin ozel degerler
+
+### Dosya Formati Ornegi
+```csv
+phone_number,customer_name,company,budget_range,secondary_phone_1,secondary_phone_2
++14155551234,John Smith,ABC Corp,10k-50k,+14155551235,+14155551236
++14155557890,Jane Doe,XYZ Inc,50k-100k,+14155557891,
++14155554567,Bob Johnson,Tech Start,5k-10k,,
+```
+
+## Iceri Aktarma Yapilandirmasi
+
+### 1. Kampanya Secimi
+Acilir listeden hedef kampanyayi secin. Asistanin degiskenleri, esleme sirasinda hangi sutunlarin beklenecegini belirleyecektir.
+
+### 2. Ikincil Iletisim Kisileri
+Aday basina kac ikincil telefon numarasi oldugunu secin (0-10). Dosyaniz birincil iletisim disinda ek telefon numaralari iceriyorsa, sayiyi burada belirtin.
+
+### 3. Telefon Numarasi Formati
+Telefon numaralarinizin formatini secin:
+
+**Uluslararasi Format (Onerilen)**
+- Numaralar zaten + oneki ile ulke kodunu icerir
+- Ornek: `+40741234567`, `+14155551234`
+- Ulke secimi gerekmez
+- Ayni dosyada birden fazla ulke karisttirilabilir
+
+**Ulusal Format**
+- Ulke kodu oneki olmayan numaralar
+- Ornek: `0741234567`, `7775551234`
+- Iceri aktarma sirasinda **ulke kodu secilmelidir**
+- **Onemli:** Dosyanizi ulkeye gore ayirin - dosya basina tum numaralar ayni ulkeden olmalidir
+- Sistem secilen ulke kodunu tum numaralara ekleyecektir
+
+<Warning>
+Ulusal format kullanirken, ulke basina bir dosya iceri aktarmaniz gerekir. Ayni dosyada farkli ulkelerden numaralari karistirmayin.
+</Warning>
+
+### 4. Ulke Kodu Secimi
+Yalnizca "Ulusal Format" secildiginde goruntulenir. Dosyanizda tum telefon numaralariyla eslesen ulkeyi secin. Sistem otomatik olarak tum numaralarin basina ulke kodunu ekleyecektir.
+
+## Iceri Aktarma Adimlari
+
+### 1. Iceri Aktarma Surecini Baslatin
+1. **Adaylar** bolumune veya Kampanya adaylari sekmesine gidin
+2. **"Aday Iceri Aktar"** dugmesine tiklayin
+3. Aday atamasi icin **kampanya secin**
+4. Beklenen formati gormek icin **ornek dosyayi indirin**
+
+### 2. Yukleme ve Sutun Esleme
+1. **Dosya secin:** CSV veya Excel dosyanizi secin
+2. **Sutun esleme:** Dosya sutunlarini sistem alanlarina esleyin:
+   - **Telefon Numarasi (zorunlu):** Telefon numaralarini iceren sutunu secin
+   - **Asistan degiskenleri:** Her degiskeni ilgili sutunla esleyin
+   - **Ikincil iletisim kisileri:** Yapilandirilmissa, ikincil telefon numaralarini ve degiskenleri esleyin
+3. **Otomatik algilama:** Sistem yaygin baslik adlarina dayali olarak eslemeleri otomatik algilar
+4. **Gozden gecirin ve iceri aktarin:** Eslemeleri onaylayin ve baslamak icin "Iceri Aktar"a tiklayin
+
+### 3. Arka Plan Isleme
+- **Sira isleme:** Buyuk dosyalar arka planda islenir
+- **Ilerleme takibi:** Iceri aktarma durumu otomatik olarak guncellenir
+- **Bildirim:** Iceri aktarma tamamlandiginda e-posta bildirimi
+- **Hata raporlama:** Basarisiz satirlarin raporunu indirin
+
+## Dogrulama Kurallari
+
+### Telefon Numarasi Dogrulamasi
+- **Format kontrolu:** Uluslararasi format tercih edilir (+1234567890)
+- **Tekrar algilama:** Tekrarlanan telefon numaralarini onler
+- **Gecersiz numaralar:** Otomatik olarak isaretlenir ve atlanir
+
+### Degisken Dogrulamasi
+- **Zorunlu alanlar:** Zorunlu olarak isaretlenen degiskenlerin degerleri olmalidir
+- **Veri turleri:** Uygun olan yerlerde metin, sayi, boolean dogrulamasi
+- **Uzunluk sinirlari:** Maksimum karakter sinirlari uygulanir
+
+### Ikincil Iletisim Kisisi Dogrulamasi
+- **Telefon formati:** Birincil numaralarla ayni dogrulama
+- **Benzersiz numaralar:** Ikincil iletisim kisileri birincilden farkli olmalidir
+- **Degisken tutarliligi:** Ikincil iletisim kisisi degiskenleri bagimsiz olarak dogrulanir
+
+## Hata Yonetimi
+
+### Otomatik Hata Yonetimi
+Iceri aktarma sistemi dogrulama hatalarini otomatik olarak yonetir:
+- **Gecerli satirlar iceri aktarilir:** Basariyla dogrulanan adaylar kampanyaya eklenir
+- **Gecersiz satirlar atlanir:** Dogrulamayi gecemeyen satirlar otomatik olarak haric tutulur
+- **Hata raporu olusturulur:** Tum basarisiz satirlarin ayrintili raporu olusturulur
+- **Kismi basari:** Iceri aktarma tum gecerli adaylarla basariyla tamamlanir, basarisiz satirlar kaydedilir
+
+### Yaygin Dogrulama Hatalari
+- **Gecersiz telefon numaralari:** Hatali format veya imkansiz numaralar
+- **Eksik zorunlu alanlar:** Zorunlu degiskenler icin bos degerler
+- **Tekrarlanan telefon numaralari:** Telefon numarasi zaten sistemde mevcut
+- **Dosya formati sorunlari:** Bozuk veya desteklenmeyen dosya formati
+
+### Hata Raporu Indirme
+Iceri aktarma tamamlandiktan sonra:
+- Bildirimde **indirme baglantisi** saglanir
+- Her basarisiz satir icin **ayrintili hata aciklamalari**
+- Sorunlarin duzeltilmesi icin **duzeltme rehberligi**
+- Duzeltilmis verilerle **yeniden iceri aktarma imkani**
+
+## Ikincil Iletisim Kisileri Iceri Aktarma
+
+### Aday Basina Birden Fazla Telefon Numarasi
+Ikincil iletisim kisileri icin ek sutunlar ekleyin:
+```csv
+phone_number,customer_name,secondary_phone_1,secondary_phone_2,secondary_phone_3
++14155551234,John Smith,+14155551235,+14155551236,+14155551237
+```
+
+### Ikincil Iletisim Kisisi Degiskenleri
+Ikincil iletisim kisilerine ozel degiskenler ekleyin:
+```csv
+phone_number,customer_name,secondary_phone_1,secondary_1_name,secondary_1_role
++14155551234,John Smith,+14155551235,Jane Smith,Decision Maker
+```
+
+### Iletisim Sirasi
+- **Birincil iletisim kisisi:** Her zaman ilk aranir
+- **Ikincil sira:** Sutun sirasina gore aranir (secondary_phone_1, sonra secondary_phone_2, vb.)
+- **Kampanya koordinasyonu:** Iletisim kisileri arasinda kampanya yeniden deneme ayarlarina uyar
+
+## Buyuk Dosya Yonetimi
+
+### Arka Plan Isleme
+- **Otomatik siralama:** 1000 satirdan fazla dosyalar arka planda islenir
+- **Bellek verimliligi:** Akis isleme zaman asimlarini onler
+- **Ilerleme takibi:** Gercek zamanli durum guncellemeleri
+- **Sistem performansi:** Iceri aktarma sirasinda platform performansi uzerinde etkisi yoktur
+
+### Bildirim Sistemi
+- **E-posta bildirimleri:** Iceri aktarma tamamlandiginda gonderilir
+- **Basari ozeti:** Basariyla iceri aktarilan aday sayisi
+- **Hata ozeti:** Basarisiz satirlarin sayisi ve ayrintilari
+- **Indirme baglantilari:** Hata raporlarina ve iceri aktarilan verilere erisim
+
+### Isleme Suresi
+- **Kucuk dosyalar (< 100 satir):** Genellikle 1 dakika icinde tamamlanir
+- **Orta dosyalar (100-1000 satir):** Tipik olarak 2-5 dakika
+- **Buyuk dosyalar (1000+ satir):** Karmasikliga bagli olarak 10-30 dakika
+- **Cok buyuk dosyalar (10bin+ satir):** Birkacc saat surebilir
+
+## En Iyi Uygulamalar
+
+- **Ornek dosya kullanin:** Dogru format icin saglanan sablonu indirin
+- **Telefon formati:** Ayirici olmadan uluslararasi format (+1234567890)
+- **Temiz veri:** Bos satirlari kaldirin ve icerigi dogrulayin
+- **Once test edin:** Formati dogrulamak icin kucuk bir partiyle baslayin
+- **Degiskenleri eslestirin:** Sutunlarin asistan yapilandirmasiyla uyumlu oldugundan emin olun
+
+<Note>
+Ayrintili sorun giderme ve yaygin iceri aktarma sorunlari icin [Aday Sorun Giderme](/troubleshooting/leads) sayfasina bakin.
+</Note>
+
+<Note>
+Iceri aktarilan adaylari yonetme hakkinda bilgi icin [Aday Yonetimi](/tr/leads/managing-leads) sayfasina bakin.
+</Note>

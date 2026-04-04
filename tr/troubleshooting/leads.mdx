@@ -1,0 +1,198 @@
+---
+title: "Potansiyel Müşteri Sorunları"
+icon: "user-gear"
+description: "Yaygın potansiyel müşteri yönetimi sorunlarını ve içe aktarma problemlerini çözme"
+---
+
+Yaygın potansiyel müşteri yönetimi sorunları ve içe aktarma problemleri için hızlı çözümler.
+
+## Potansiyel Müşteri İçe Aktarma Sorunları
+
+### İçe Aktarma Tamamen Başarısız
+**Hata:** "İçe aktarma başarısız" veya "Dosya formatı desteklenmiyor"
+
+**Çözümler:**
+1. **Dosya formatını kontrol edin:** Yalnızca CSV veya Excel dosyaları kullanın
+2. **Kampanya seçimini doğrulayın:** İçe aktarma için bir kampanyanın seçili olduğundan emin olun
+3. **Dosya boyutu limitleri:** Optimum performans için dosyaları 10MB altında tutun
+4. **Kodlama sorunları:** CSV'yi UTF-8 kodlamasıyla kaydedin
+
+### Potansiyel Müşteri İçe Aktarılmadı
+**Sorun:** İçe aktarma tamamlanıyor ancak potansiyel müşteriler görünmüyor
+
+**Çözümler:**
+1. **Sütun eşleme:** İçe aktarma sırasında telefon numarası sütununu eşlediğinizi doğrulayın
+2. **Veri doğrulama:** Telefon numaralarının doğru formatta olduğunu kontrol edin
+3. **Boş satırlar:** Dosyadan boş satırları kaldırın
+4. **Gerekli alanlar:** Telefon numarası sütununun geçerli veri içerdiğinden emin olun
+5. **Dosya başlıkları:** CSV/Excel dosyanızın bir başlık satırı olduğundan emin olun (herhangi bir isim çalışır)
+
+### Kısmi İçe Aktarma Başarısı
+**Sorun:** Bazı potansiyel müşteriler içe aktarıldı, diğerleri başarısız oldu
+
+**Çözümler:**
+1. **Hata raporunu indirin:** Belirli sorunlar için başarısız satırları kontrol edin
+2. **Telefon numarası formatı:** Uluslararası formatı sağlayın (+1234567890)
+3. **Yinelenen algılama:** Yinelenen telefon numaralarını kaldırın
+4. **Geçersiz veri:** Hatalı biçimlendirilmiş telefon numaralarını veya eksik gerekli verileri düzeltin
+
+### İşleme Gecikmeleri
+**Sorun:** İçe aktarma uzun süre işleniyor olarak görünüyor
+
+**Açıklama:**
+- Büyük dosyalar arka planda işlenir
+- İşleme süresi dosya boyutuyla artar
+- Sistem birden fazla içe aktarmayı sıraya koyar
+
+**Çözümler:**
+1. **Tamamlanmasını bekleyin:** Güncellemeler için bildirimleri kontrol edin
+2. **Büyük dosyaları bölün:** Daha küçük gruplara ayırın (500-1000 potansiyel müşteri)
+3. **Destek ile iletişim:** İşleme 30 dakikayı aşarsa
+
+## Potansiyel Müşteri Yönetimi Sorunları
+
+### Potansiyel Müşteri Kampanyada Görünmüyor
+**Sorun:** İçe aktarılan potansiyel müşteri kampanyada gösterilmiyor
+
+**Kontrol:**
+- Potansiyel müşteri durumu ("Oluşturuldu" veya "Planlandı" olmalı)
+- Kampanya filtreleri veya arama ayarları
+- Potansiyel müşterinin yanlışlıkla tamamlandı olarak işaretlenip işaretlenmediği
+
+**Çözümler:**
+1. **Potansiyel müşteri durumunu sıfırlayın:** Yeniden sıraya koymak için durumu "Oluşturuldu"ya değiştirin
+2. **Kampanya atamasını doğrulayın:** Potansiyel müşterinin doğru kampanyaya atandığını kontrol edin
+3. **Arayüzü yenileyin:** Kampanya sayfasını yeniden yükleyin
+
+### Geçersiz Telefon Numaraları
+**Sorun:** İçe aktarma sırasında telefon numaraları reddediliyor
+
+**Yaygın formatlar:**
+- **Doğru:** +1234567890 (uluslararası format)
+- **Yanlış:** (123) 456-7890, 123-456-7890, 1234567890
+
+**Çözümler:**
+1. **Formatı standartlaştırın:** Tüm numaraları +1234567890 formatına dönüştürün
+2. **Biçimlendirmeyi kaldırın:** Boşlukları, parantezleri, tireleri çıkarın
+3. **Ülke kodları:** Uygun ülke kodu öneki ekleyin
+4. **Doğrulama araçları:** İçe aktarmadan önce telefon doğrulaması kullanın
+
+### Yinelenen Potansiyel Müşteriler
+**Sorun:** Aynı kişi birden fazla kez görünüyor
+
+**Önleme:**
+1. **Veri temizliği:** İçe aktarmadan önce yinelenenleri kaldırın
+2. **Telefon doğrulaması:** Aynı numaranın format varyasyonlarını kontrol edin
+3. **İsim eşleştirme:** Ad + telefon ile potansiyel yinelenenleri belirleyin
+4. **Yineleme kaldırma:** Benzer girişleri tespit etmek için araçlar kullanın
+
+### İkincil Kişiler Çalışmıyor
+**Sorun:** İkincil kişiler aranmıyor
+
+**Gereksinimler:**
+- İkincil kişinin geçerli telefon numarası olmalıdır
+- Birincil kişi önce maksimum yeniden denemeye ulaşmalıdır
+- Kampanya ikincil kişiler için yapılandırılmalıdır
+
+**Çözümler:**
+1. **Kurulumu doğrulayın:** İkincil kişi yapılandırmasını kontrol edin
+2. **Potansiyel müşteri durumu:** Birincil kişinin denendiğinden emin olun
+3. **Kampanya ayarları:** İkincil kişi aramanın etkinleştirildiğini onaylayın
+
+## Değişken ve Veri Sorunları
+
+### Değişken Eşleme Hataları
+**Sorun:** Özel değişkenler doğru içe aktarılmıyor
+
+**Çözümler:**
+1. **Sütun eşleme:** İçe aktarma sırasında her değişkeni doğru sütununa eşlediğinizden emin olun
+2. **Otomatik algılama:** Sistem yaygın sütun adlarına göre eşlemeleri otomatik algılar
+3. **Veri türleri:** Verilerin beklenen değişken türleriyle eşleştiğinden emin olun
+4. **Gerekli değişkenler:** [Asistan yapılandırmasında](/ai-assistants/settings/prompt-and-tools#call-variables) tanımlanan tüm değişkenleri eşleyin
+5. **Varsayılan değerler:** Eşlenmemiş değişkenler asistanın varsayılan değerlerini kullanır
+
+### Eksik Potansiyel Müşteri Bilgileri
+**Sorun:** Potansiyel müşterilerde ad, e-posta veya özel veri eksik
+
+**Çözümler:**
+1. **Sütun eşleme:** Tüm sütunların doğru eşlendiğini doğrulayın
+2. **Opsiyonel alanlar:** Opsiyonel alanların içe aktarmaya dahil edildiğini onaylayın
+3. **Veri doğrulama:** Kaynak verilerin eksiksizliğini kontrol edin
+4. **Yeniden içe aktarma:** Gerekirse eksik verileri ekleyin ve yeniden içe aktarın
+
+## Kampanya Entegrasyon Sorunları
+
+### Potansiyel Müşteri Durum Sorunları
+**Sorun:** Potansiyel müşteriler yanlış durumda takılı kalmış
+
+**Durum anlamları:**
+- **Oluşturuldu:** Aranmaya hazır
+- **Planlandı:** Sonraki deneme için sıraya alındı
+- **İşleniyor:** Şu anda aranıyor
+- **Tamamlandı:** Bitmiş veya hedefe ulaşıldı
+- **Maks Yeniden Deneme:** Yeniden deneme limitine ulaştı
+
+**Çözümler:**
+1. **Manuel durum değişikliği:** Potansiyel müşteriler tablosunda durumu güncelleyin
+2. **Kampanya yeniden başlatma:** Gerekirse kampanyayı duraklatın ve yeniden başlatın
+3. **Yeniden deneme ayarları:** Maksimum yeniden deneme veya aralıkları ayarlayın
+
+### Değişken Miras Sorunları
+**Sorun:** Potansiyel müşteri değişkenleri aramalarda çalışmıyor
+
+**Çözümler:**
+1. **Asistan kurulumu:** [Asistan ayarlarında](/ai-assistants/settings/prompt-and-tools#call-variables) değişkenlerin tanımlandığını doğrulayın
+2. **Değişken adları:** Potansiyel müşteri verileri ile asistan değişkenleri arasında tam eşleşme sağlayın
+3. **Veri formatı:** Değişken verilerinin beklenen formatta olduğunu kontrol edin
+4. **Test aramaları:** Değişken iletimini doğrulamak için manuel test aramaları kullanın
+
+## Dosya Formatı Sorunları
+
+### CSV Sorunları
+**Yaygın sorunlar:**
+- Yanlış ayırıcı (noktalı virgül değil, virgül kullanın)
+- İlk satırda başlıklar eksik
+- Kaçış yapılmamış tırnak işaretli alanlar
+- Karışık kodlama (UTF-8 kullanın)
+
+**Çözümler:**
+1. **Standart format:** Virgülle ayrılmış değerler kullanın
+2. **Başlıklar gerekli:** İlk satır sütun adları içermelidir
+3. **Metin niteleme:** Metin alanları için çift tırnak kullanın
+4. **Kodlama:** UTF-8 kodlamalı CSV olarak kaydedin
+
+### Excel Sorunları
+**Yaygın sorunlar:**
+- Birden fazla sayfa (yalnızca ilk sayfa içe aktarılır)
+- Birleştirilmiş hücreler veri hizalamasını bozuyor
+- Değerler yerine formüller
+- Gizli karakterler veya biçimlendirme
+
+**Çözümler:**
+1. **Tek sayfa:** Yalnızca ilk çalışma sayfasını kullanın
+2. **Hücreleri birleştirmeyin:** Birleştirilmiş hücreleri ayırın
+3. **Yalnızca değerler:** Formülleri değerlere dönüştürün
+4. **Temiz format:** Özel biçimlendirmeyi kaldırın
+
+## Yardım Alma
+
+### Destek ile İletişim Öncesi
+1. **Hata raporunu indirin:** Belirli hata mesajlarını inceleyin
+2. **Dosya formatını kontrol edin:** CSV/Excel format uyumluluğunu doğrulayın
+3. **Küçük grup test edin:** Önce 5-10 potansiyel müşteri içe aktarmayı deneyin
+4. **Belgeleri inceleyin:** İçe aktarma gereksinimlerini kontrol edin
+
+### Sağlanacak Bilgiler
+- Alınan hata mesajları
+- İçe aktarma dosyasının örneği (hassas veriler kaldırılmış olarak)
+- Kampanya ayarları ve gereksinimleri
+- Beklenen ve gerçek davranış
+- Asistan değişken yapılandırması
+
+<Warning>
+**Veri gizliliği:** Destek ile paylaşmadan önce örnek dosyalardan hassas bilgileri kaldırın.
+</Warning>
+
+<Note>
+Potansiyel müşteri yönetimi en iyi uygulamaları için [Potansiyel Müşterileri Yönetme](/leads/managing-leads) ve [Kampanya Kurulumu](/campaigns/creating-campaigns) bölümlerine bakın.
+</Note>

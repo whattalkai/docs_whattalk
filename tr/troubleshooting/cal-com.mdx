@@ -1,0 +1,110 @@
+---
+title: "Cal.com Sorunları"
+icon: "calendar-days"
+description: "Yaygın Cal.com entegrasyon sorunlarını giderme"
+---
+
+Yaygın Cal.com entegrasyon sorunları için çözümler.
+
+## Bağlantı Sorunları
+
+### Geçersiz API Anahtarı
+
+**Sorun:** Etkinlikler yüklenmiyor veya senkronizasyon başarısız oluyor
+
+**Çözüm:**
+- API anahtarının Cal.com → Ayarlar → Geliştirici → API Anahtarları bölümünde aktif olduğunu doğrulayın
+- Anahtarın `cal_live_` öneki içerdiğinden emin olun
+- Gerekirse yeni bir API anahtarı oluşturun
+
+### Etkinlikler Yüklenmiyor
+
+**Sorun:** API anahtarını girdikten sonra etkinlik açılır menüsü boş
+
+**Çözüm:**
+- API anahtarının doğru olduğunu kontrol edin
+- Etkinlik yüklemesini tetiklemek için API anahtarı alanının dışına tıklayın
+- Etkinlikler hâlâ görünmüyorsa sayfayı yenileyin
+- Cal.com'da etkinlik oluşturduğunuzu doğrulayın
+
+## Senkronizasyon Sorunları
+
+### Etkinlik Senkronizasyonu Başarısız
+
+**Sorun:** "Etkinlik Senkronize Et" düğmesi başarısız oluyor veya hata gösteriyor
+
+**Çözüm:**
+1. Bunun yerine **"Sorun Gider"** düğmesine tıklayın
+2. Bu, tüm rezervasyon alanlarını doğru yapılandırmaya sıfırlar
+3. Cal.com etkinlik ayarlarında değişiklikleri doğrulayın
+
+### Alan Yapılandırma Hataları
+
+**Sorun:** Gerekli alanlar veya eksik alanlar hakkında hata alınması
+
+**Çözüm:**
+- Alanları sıfırlamak için **"Sorun Gider"**e tıklayın
+- Yalnızca ad, e-posta, telefon gerekli olmalıdır
+- Diğer tüm alanlar (konum, konuklar vb.) opsiyonel olmalıdır
+
+## Rezervasyon Hataları
+
+### Takvim Davetleri Gönderilmiyor
+
+**Sorun:** Rezervasyonlar başarılı oluyor ancak müşteri davet almıyor
+
+**Çözüm:**
+- [Asistan ayarlarında](/ai-assistants/settings/prompt-and-tools#call-variables) `email` değişkenini tanımlayın
+- Potansiyel müşteri oluştururken müşteri e-postasını iletin
+- E-posta formatının geçerli olduğunu doğrulayın
+
+### Telefon Numarası Eksik
+
+**Sorun:** Telefon numarası takvim etkinliklerinde görünmüyor
+
+**Çözüm:**
+- **"Etkinlik Senkronize Et"** veya **"Sorun Gider"** düğmesine tıklayın
+- Bu, telefon alanını otomatik olarak etkinliğe ekler
+- Senkronizasyon sonrası telefon numarası dahil edilir
+
+### Rezervasyon Saat Dilimi Sorunları
+
+**Sorun:** Randevular yanlış saatte planlanıyor
+
+**Çözüm:**
+- Cal.com etkinlik ayarlarındaki saat dilimini kontrol edin
+- Asistanın müşteriden doğru saati aldığını doğrulayın
+- Arama sırasında belirli saat ifadeleriyle test edin
+
+## Test Sorunları
+
+### Web Araması Rezervasyonları Başarısız
+
+**Sorun:** Rezervasyonlar web aramalarında tutarsız çalışıyor
+
+**Çözüm:**
+- Test için gerçek telefon aramaları kullanın (web aramaları değil)
+- Web aramaları telefon değişkenini doğru iletmeyebilir
+- Web aramaları kullanırken, telefonu + öneki ile uluslararası formatta verin (örn. "+1 555-123-4567")
+- Telefon aramaları tüm değişkenlerin doğru iletilmesini sağlar
+
+### Birden Fazla Takvim Çalışmıyor
+
+**Sorun:** Yalnızca bir takvim çalışıyor veya etkinlikler çakışıyor
+
+**Çözüm:**
+- Her takvimde farklı etkinlik seçili olmalıdır
+- Farklı etkinlik adları kullanın (örn. "15dk", "30dk")
+- Ekledikten sonra her etkinliği ayrı ayrı senkronize edin
+
+## Yardım Alma
+
+Sorunlar devam ederse:
+
+1. Rezervasyon girişimleri için arama transkriptlerini kontrol edin
+2. Cal.com etkinliğinin Cal.com kontrol panelinde göründüğünü doğrulayın
+3. Basit telefon araması ile rezervasyon test edin
+4. Desteğe şunlarla başvurun:
+   - Hata mesajı ekran görüntüsü
+   - Cal.com etkinlik ayarları ekran görüntüsü
+   - Rezervasyon girişimini gösteren arama transkripti

@@ -1,0 +1,27 @@
+---
+title: "Genel Kurulum Sorunları"
+icon: "wrench"
+description: "AI yanıt sorunları, OTP doğrulaması ve kimlik bilgisi hataları dahil yaygın kurulum problemlerini giderme"
+---
+
+WhatTalk.ai'yi ilk yapılandırırken bazı yaygın tuzaklar:
+
+## 1. AI Yanıt Vermiyor veya Arama Düşüyor
+
+- **Sistem Komutunu Kontrol Edin**: Muhtemelen talimatlar eksik.
+- **Ses Aktivite Algılama**: Çok düşük veya yüksek ayarlanmışsa, garip sessizliklere veya kesintilere neden olabilir.
+- **Bağlantı**: İnternetiniz veya SIP trunk'ınız kararsızsa, aramalar düşebilir.
+
+## 2. OTP Alınmıyor (Arayan Kimliği Doğrulaması İçin)
+
+- **Operatör Engelleri**: Bazı operatörler kısa kodları veya bilinmeyen uluslararası SMS'leri filtreler.
+- **Alternatif Yöntemi Deneyin**: Hızlı bir sesli arama veya başka bir telefon hattı ile doğrulama yapıp yapamayacağınızı desteğe sorun.
+
+## 3. Kimlik Bilgisi Hataları
+
+- **SIP**: Yanlış kullanıcı adı/şifre mi? PBX sağlayıcınızla tekrar kontrol edin.
+- **API/Webhook'lar**: Doğru token veya endpoint URL'sini kopyaladığınızdan emin olun.
+
+---
+
+**İpucu:** Bir arama başarısız olursa hata kodları için arama kayıtlarına bakın. Genellikle "Numara bulunamadı" veya "Ağ ulaşılamıyor" gibi bir neden gösterir.

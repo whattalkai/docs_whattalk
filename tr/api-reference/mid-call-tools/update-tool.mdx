@@ -1,0 +1,137 @@
+---
+title: "Arama içi aracı güncelle"
+api: "PUT /user/tools/{id}"
+description: "Mevcut bir arama içi aracı güncelleyin"
+---
+
+Bu endpoint, mevcut bir arama içi aracı güncellemenizi sağlar. Tüm alanlar isteğe bağlıdır - yalnızca güncellemek istediğiniz alanları sağlayın.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Güncellenecek aracın benzersiz tanımlayıcısı
+</ParamField>
+
+### Gövde Parametreleri
+
+<ParamField body="name" type="string" optional>
+  Araç adı - yalnızca küçük harfler ve alt çizgi içermeli ve bir harfle başlamalıdır
+</ParamField>
+
+<ParamField body="description" type="string" optional>
+  Yapay zekanın bu aracı ne zaman ve nasıl kullanması gerektiğinin ayrıntılı açıklaması (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="endpoint" type="string" optional>
+  Çağrılacak API endpoint'inin geçerli URL'si
+</ParamField>
+
+<ParamField body="method" type="string" optional>
+  HTTP yöntemi: `GET`, `POST`, `PUT`, `PATCH` veya `DELETE`
+</ParamField>
+
+<ParamField body="timeout" type="integer" optional>
+  Saniye cinsinden istek zaman aşımı (1-30)
+</ParamField>
+
+<ParamField body="headers" type="array" optional>
+  İstekle birlikte gönderilecek HTTP başlıkları (mevcut başlıkların yerini alır)
+  <Expandable title="başlık özellikleri">
+    <ParamField body="name" type="string" required>
+      Başlık adı
+    </ParamField>
+    <ParamField body="value" type="string" required>
+      Başlık değeri
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="schema" type="array" optional>
+  Parametreler şeması (mevcut şemanın yerini alır)
+  <Expandable title="şema özellikleri">
+    <ParamField body="name" type="string" required>
+      Parametre adı (2-32 karakter)
+    </ParamField>
+    <ParamField body="type" type="string" required>
+      Parametre türü: `string`, `number` veya `boolean`
+    </ParamField>
+    <ParamField body="description" type="string" required>
+      Parametre açıklaması (3-255 karakter)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Tüm mevcut değerleriyle güncellenen araç nesnesi
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "message": "Tool updated successfully",
+  "data": {
+    "id": 1,
+    "name": "update_customer_info",
+    "description": "Use this tool to update customer information in the system.",
+    "endpoint": "https://api.yourcompany.com/customers/update",
+    "method": "POST",
+    "timeout": 15,
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "schema": [
+      {
+        "name": "customer_name",
+        "type": "string",
+        "description": "Full name of the customer"
+      },
+      {
+        "name": "customer_age",
+        "type": "number",
+        "description": "Age of the customer"
+      },
+      {
+        "name": "newsletter_subscription",
+        "type": "boolean",
+        "description": "Whether customer wants to subscribe to newsletter"
+      }
+    ],
+    "created_at": "2025-10-10T12:00:00.000000Z",
+    "updated_at": "2025-10-10T14:30:00.000000Z"
+  }
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Tool not found"
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "Validation failed",
+  "errors": {
+    "name": ["Tool name must contain only lowercase letters and underscores, and start with a letter."]
+  }
+}
+```
+
+</ResponseExample>
+
+### Araç Atamalarını Yönetme
+
+Bu aracı asistanlara eklemek veya kaldırmak için Asistan API'sini kullanın:
+
+- **[Asistan Oluştur](/api-reference/assistants/create-assistant)** - Bir asistan oluştururken araçları eklemek için `tool_ids` parametresini kullanın
+- **[Asistan Güncelle](/api-reference/assistants/update-assistant)** - Bir asistana hangi araçların atandığını yönetmek için `tool_ids` parametresini kullanın

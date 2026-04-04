@@ -1,0 +1,253 @@
+---
+title: "Şablon Mesajı Gönder"
+api: "POST /user/whatsapp/send"
+description: "Onaylanmış bir şablon kullanarak WhatsApp mesajı gönderin"
+---
+
+Bu endpoint, önceden onaylanmış bir şablon kullanarak WhatsApp mesajı gönderir. Şablon mesajları, bir kullanıcıyla ilk kez konuşma başlatırken veya 24 saatlik mesajlaşma penceresi dışında mesaj gönderirken gereklidir.
+
+<Note>
+  Bu endpoint, kullanıcı başına **saniyede 5 istek** ile hız sınırlıdır.
+</Note>
+
+### İstek Gövdesi
+
+<ParamField body="sender_id" type="integer" required>
+  Mesajın gönderileceği WhatsApp göndereninin kimliği ([Gönderenleri Getir](/api-reference/whatsapp/get-senders) endpoint'inden elde edilir)
+</ParamField>
+
+<ParamField body="template_id" type="integer" required>
+  Kullanılacak mesaj şablonunun kimliği ([Şablonları Getir](/api-reference/whatsapp/get-templates) endpoint'inden elde edilir)
+</ParamField>
+
+<ParamField body="recipient_phone" type="string" required>
+  Alıcının uluslararası formattaki telefon numarası (ör. `+1234567890`)
+</ParamField>
+
+<ParamField body="recipient_name" type="string">
+  Alıcının adı, maksimum 255 karakter (konuşma takibi ve CRM amaçları için kullanılır)
+</ParamField>
+
+<ParamField body="variables" type="object">
+  Şablon değişkenleri için anahtar-değer çiftleri. Anahtarlar şablondaki değişken adlarıyla eşleşmelidir. Şablonda `{{1}}`, `{{2}}` vb. değişkenler varsa, bunları `{"1": "değer1", "2": "değer2"}` olarak veya şablonun `variables` dizisindeki adlandırılmış anahtarları kullanarak sağlayın.
+
+  <Expandable title="Örnek değişkenler">
+    <ParamField body="1" type="string">
+      İlk şablon değişkeninin değeri
+    </ParamField>
+
+    <ParamField body="2" type="string">
+      İkinci şablon değişkeninin değeri
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Yanıt Alanları
+
+<ResponseField name="success" type="boolean">
+  Mesajın başarıyla gönderilip gönderilmediği
+</ResponseField>
+
+<ResponseField name="conversation_id" type="integer">
+  Bu mesajla ilişkili konuşma kimliği (yeni veya mevcut)
+</ResponseField>
+
+<ResponseField name="message_id" type="integer">
+  Konuşma mesajı kaydının kimliği
+</ResponseField>
+
+<ResponseField name="whatsapp_message_id" type="integer">
+  WhatsApp mesaj kaydının kimliği
+</ResponseField>
+
+<ResponseField name="message_sid" type="string">
+  Teslimat takibi için Twilio mesaj SID'i
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  İlk mesaj teslim durumu (ör. `queued`, `sent`)
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="402 Insufficient Balance">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="success" type="boolean">`false`</ResponseField>
+    <ResponseField name="error" type="string">`Insufficient balance. Please top up your account.`</ResponseField>
+    <ResponseField name="error_code" type="string">`INSUFFICIENT_BALANCE`</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="success" type="boolean">`false`</ResponseField>
+    <ResponseField name="error" type="string">`Sender not found or does not belong to you` veya `Template not found or does not belong to this sender`</ResponseField>
+    <ResponseField name="error_code" type="string">`SENDER_NOT_FOUND` veya `TEMPLATE_NOT_FOUND`</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="422 Unprocessable Entity">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="success" type="boolean">`false`</ResponseField>
+    <ResponseField name="error" type="string">Ayrıntılı hata mesajı</ResponseField>
+    <ResponseField name="error_code" type="string">
+      Şunlardan biri: `SENDER_OFFLINE`, `TEMPLATE_NOT_APPROVED`, `TEMPLATE_NOT_SYNCED`, `TEMPLATE_MISMATCH`, `NO_ASSISTANT_CONFIGURED`, `INVALID_PHONE`, `MESSAGING_LIMIT_UNAVAILABLE`, `VOICE_CALL_LIMIT_NOT_MET`, `TWILIO_ERROR_{code}`, `UNKNOWN_ERROR`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://app.whattalk.ai/api/user/whatsapp/send" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sender_id": 12,
+    "template_id": 45,
+    "recipient_phone": "+1234567890",
+    "recipient_name": "John Doe",
+    "variables": {
+      "1": "John",
+      "2": "January 15, 2026",
+      "3": "2:00 PM"
+    }
+  }'
+```
+
+```bash Değişkensiz şablon
+curl -X POST "https://app.whattalk.ai/api/user/whatsapp/send" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sender_id": 12,
+    "template_id": 46,
+    "recipient_phone": "+1234567890"
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  'https://app.whattalk.ai/api/user/whatsapp/send',
+  {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sender_id: 12,
+      template_id: 45,
+      recipient_phone: '+1234567890',
+      recipient_name: 'John Doe',
+      variables: {
+        '1': 'John',
+        '2': 'January 15, 2026',
+        '3': '2:00 PM'
+      }
+    })
+  }
+);
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://app.whattalk.ai/api/user/whatsapp/send',
+    headers={
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    },
+    json={
+        'sender_id': 12,
+        'template_id': 45,
+        'recipient_phone': '+1234567890',
+        'recipient_name': 'John Doe',
+        'variables': {
+            '1': 'John',
+            '2': 'January 15, 2026',
+            '3': '2:00 PM'
+        }
+    }
+)
+
+print(response.json())
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Başarılı
+{
+  "success": true,
+  "conversation_id": 1234,
+  "message_id": 567,
+  "whatsapp_message_id": 890,
+  "message_sid": "SMxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "status": "queued"
+}
+```
+
+```json 402 Yetersiz Bakiye
+{
+  "success": false,
+  "error": "Insufficient balance. Please top up your account.",
+  "error_code": "INSUFFICIENT_BALANCE"
+}
+```
+
+```json 404 Gönderen Bulunamadı
+{
+  "success": false,
+  "error": "Sender not found or does not belong to you",
+  "error_code": "SENDER_NOT_FOUND"
+}
+```
+
+```json 404 Şablon Bulunamadı
+{
+  "success": false,
+  "error": "Template not found or does not belong to this sender",
+  "error_code": "TEMPLATE_NOT_FOUND"
+}
+```
+
+```json 422 Şablon Onaylanmadı
+{
+  "success": false,
+  "error": "Template is not approved. Current status: pending",
+  "error_code": "TEMPLATE_NOT_APPROVED"
+}
+```
+
+```json 422 Geçersiz Telefon
+{
+  "success": false,
+  "error": "Invalid phone number format. Use E.164 format (e.g., +14155551234).",
+  "error_code": "INVALID_PHONE"
+}
+```
+
+```json 422 Gönderen Çevrimdışı
+{
+  "success": false,
+  "error": "Sender is not online. Current status: Offline",
+  "error_code": "SENDER_OFFLINE"
+}
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Şablon mesajları **onaylanmış** şablonları kullanmalıdır. `pending` veya `rejected` durumundaki şablonlar başarısız olur.
+- Gönderen `online` olmalıdır. Çevrimdışı gönderenler mesaj gönderemez.
+- Mesaj maliyetleri otomatik olarak hesap bakiyenizden düşülür (kiracı kullanıcılar için kredi, doğrudan kullanıcılar için dakika).
+- Bir şablon mesajı gönderdikten sonra 24 saatlik mesajlaşma penceresi açılır. Bu pencere süresince şablon gerektirmeden [serbest form mesajlar](/api-reference/whatsapp/send-freeform) gönderebilirsiniz.
+- Alıcıyla zaten bir konuşma mevcutsa, mesaj mevcut konuşmaya eklenir.
+- Hız limiti: Kullanıcı başına saniyede 5 istek.

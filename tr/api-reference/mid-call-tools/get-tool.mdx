@@ -1,0 +1,145 @@
+---
+title: "Arama içi aracı getir"
+api: "GET /user/tools/{id}"
+description: "Kimliğe göre belirli bir arama içi aracı getirin"
+---
+
+Bu endpoint, belirli bir arama içi araç hakkında ayrıntılı bilgi almanızı sağlar.
+
+### Başlıklar
+
+<ParamField header="Authorization" type="string" required>
+  Kimlik doğrulama için Bearer token
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  `application/json` olmalıdır
+</ParamField>
+
+<ParamField header="Accept" type="string" required>
+  `application/json` olmalıdır
+</ParamField>
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Aracın benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="id" type="integer">
+  Aracın benzersiz tanımlayıcısı
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Aracın adı (alt çizgi ile küçük harfler)
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Yapay zekanın bu aracı ne zaman ve nasıl kullanması gerektiğinin ayrıntılı açıklaması
+</ResponseField>
+
+<ResponseField name="endpoint" type="string">
+  Çağrılacak API endpoint URL'si
+</ResponseField>
+
+<ResponseField name="method" type="string">
+  HTTP yöntemi (GET, POST, PUT, PATCH, DELETE)
+</ResponseField>
+
+<ResponseField name="timeout" type="integer">
+  Saniye cinsinden istek zaman aşımı (1-30)
+</ResponseField>
+
+<ResponseField name="headers" type="array">
+  İstekle birlikte gönderilecek HTTP başlıkları
+  <Expandable title="başlık özellikleri">
+    <ResponseField name="name" type="string">
+      Başlık adı
+    </ResponseField>
+    <ResponseField name="value" type="string">
+      Başlık değeri
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="schema" type="array">
+  Yapay zekanın çıkaracağı ve endpoint'e göndereceği parametreler
+  <Expandable title="şema özellikleri">
+    <ResponseField name="name" type="string">
+      Parametre adı
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      Parametre türü (string, number, boolean)
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      Yapay zekanın bu parametreyi nasıl çıkaracağını anlamasına yardımcı olan açıklama
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Aracın oluşturulma ISO 8601 zaman damgası
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  Aracın son güncellenme ISO 8601 zaman damgası
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "id": 1,
+  "name": "get_weather",
+  "description": "Use this tool to get the current weather in a specific city. Call this when the customer asks about weather conditions.",
+  "endpoint": "https://api.openweathermap.org/data/2.5/weather",
+  "method": "GET",
+  "timeout": 10,
+  "headers": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "name": "Authorization",
+      "value": "Bearer sk_..."
+    }
+  ],
+  "schema": [
+    {
+      "name": "city",
+      "type": "string",
+      "description": "The city name to get weather for"
+    },
+    {
+      "name": "temperature",
+      "type": "number",
+      "description": "Current temperature value"
+    },
+    {
+      "name": "is_raining",
+      "type": "boolean",
+      "description": "Whether it is currently raining"
+    }
+  ],
+  "created_at": "2025-10-10T12:00:00.000000Z",
+  "updated_at": "2025-10-10T12:00:00.000000Z"
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Tool not found"
+}
+```
+
+</ResponseExample>
+
+### Araçları Asistanlara Atama
+
+Bu aracı bir asistanla kullanmak için bakınız:
+
+- **[Asistan Oluştur](/api-reference/assistants/create-assistant)** - `tool_ids` parametresini kullanarak araçları ekleyin
+- **[Asistan Güncelle](/api-reference/assistants/update-assistant)** - `tool_ids` parametresini kullanarak araç atamalarını yönetin

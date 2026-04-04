@@ -1,0 +1,192 @@
+---
+title: "Mesaj Gönder"
+api: "POST /conversations/{uuid}/messages"
+description: "Mevcut bir konuşmada mesaj gönderin ve asistanın yanıtını alın"
+---
+
+Bu endpoint, mevcut bir konuşmaya kullanıcı mesajı gönderir ve asistanın yanıtını döndürür. Asistan, yapılandırılmış yapay zeka modelini ve mevcut araçları kullanarak mesajı işler.
+
+### Yol Parametreleri
+
+<ParamField path="uuid" type="string" required>
+  Konuşmanın benzersiz UUID tanımlayıcısı
+</ParamField>
+
+### İstek Gövdesi
+
+<ParamField body="message" type="string" required>
+  Asistana gönderilecek kullanıcı mesajı. Maksimum uzunluk: 2000 karakter.
+</ParamField>
+
+### Yanıt Alanları
+
+<ResponseField name="status" type="boolean">
+  İsteğin başarılı olup olmadığını belirtir
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Asistanın kullanıcı mesajına verdiği yanıt
+</ResponseField>
+
+<ResponseField name="function_calls" type="array">
+  Mesajı işlerken asistan tarafından yapılan fonksiyon çağrılarının dizisi. Fonksiyon çağrılmadıysa boş dizi döner.
+
+  <Expandable title="Fonksiyon çağrısı nesnesi özellikleri">
+    <ResponseField name="name" type="string">
+      Çağrılan fonksiyonun adı
+    </ResponseField>
+    <ResponseField name="arguments" type="object">
+      Fonksiyona aktarılan argümanlar
+    </ResponseField>
+    <ResponseField name="result" type="object">
+      Fonksiyon tarafından döndürülen sonuç
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="status" type="boolean">
+  Bir hata oluştuğunda `false` olur
+</ResponseField>
+
+<ResponseField name="error" type="string">
+  Hata mesajı. Olası değerler:
+  - `Conversation not found` - Sağlanan UUID herhangi bir konuşmayla eşleşmiyor
+  - `Insufficient balance. Please top up your account.` - Asistan sahibinin hesap bakiyesi çok düşük
+  - `Failed to process message: [details]` - Mesaj işlenirken bir hata oluştu
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://app.whattalk.ai/api/conversations/7c9e6679-7425-40de-944b-e07fc1f90ae7/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "I would like to schedule a demo for next week"
+  }'
+```
+
+```javascript JavaScript
+const conversationId = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+
+const response = await fetch(
+  `https://app.whattalk.ai/api/conversations/${conversationId}/messages`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      message: 'I would like to schedule a demo for next week'
+    })
+  }
+);
+
+const data = await response.json();
+console.log(data.message);
+```
+
+```python Python
+import requests
+
+conversation_id = '7c9e6679-7425-40de-944b-e07fc1f90ae7'
+
+response = requests.post(
+    f'https://app.whattalk.ai/api/conversations/{conversation_id}/messages',
+    json={
+        'message': 'I would like to schedule a demo for next week'
+    }
+)
+
+data = response.json()
+print(data['message'])
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Başarılı
+{
+  "status": true,
+  "message": "I'd be happy to help you schedule a demo! I have availability on Monday at 2 PM, Wednesday at 10 AM, or Friday at 3 PM. Which time works best for you?",
+  "function_calls": []
+}
+```
+
+```json 200 Başarılı (Fonksiyon Çağrıları İle)
+{
+  "status": true,
+  "message": "I've checked our calendar and found several available slots for next week. I can offer you Monday at 2 PM, Wednesday at 10 AM, or Friday at 3 PM. Which would you prefer?",
+  "function_calls": [
+    {
+      "name": "check_calendar_availability",
+      "arguments": {
+        "start_date": "2025-01-13",
+        "end_date": "2025-01-17"
+      },
+      "result": {
+        "available_slots": [
+          "2025-01-13 14:00",
+          "2025-01-15 10:00",
+          "2025-01-17 15:00"
+        ]
+      }
+    }
+  ]
+}
+```
+
+```json 404 Bulunamadı
+{
+  "status": false,
+  "error": "Conversation not found"
+}
+```
+
+```json 400 Yetersiz Bakiye
+{
+  "status": false,
+  "error": "Insufficient balance. Please top up your account."
+}
+```
+
+```json 400 İşleme Hatası
+{
+  "status": false,
+  "error": "Failed to process message: Connection timeout"
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "The message field is required.",
+  "errors": {
+    "message": ["The message field is required."]
+  }
+}
+```
+
+</ResponseExample>
+
+## Fiyatlandırma
+
+Bir **widget** konuşmasındaki her kullanıcı mesajı **0,01 $** maliyetindedir. Test konuşmaları ücretsizdir.
+
+## Fonksiyon Çağrıları
+
+Asistan, mesaj işleme sırasında aşağıdaki gibi fonksiyonlar çalıştırabilir:
+
+- **Takvim işlemleri**: Uygunluk kontrolü, randevu oluşturma
+- **Bilgi bankası sorguları**: Dokümantasyon veya SSS araması
+- **Özel entegrasyonlar**: Yapılandırılmış webhook endpoint'lerinizi çağırma
+
+Fonksiyon çağrı sonuçları, kullanıcıya ilgili bilgileri gösterebilmeniz veya gerçekleştirilen eylemleri takip edebilmeniz için yanıta dahil edilir.
+
+## En İyi Uygulamalar
+
+1. **Hataları zarif bir şekilde yönetin**: Hatalar oluştuğunda kullanıcı dostu mesajlar gösterin
+2. **Yükleme durumlarını gösterin**: Asistan, özellikle fonksiyon çalıştırırken yanıt vermesi birkaç saniye sürebilir
+3. **Konuşma kimliğini saklayın**: Kullanıcıların konuşmaları devam ettirmesine izin vermek için konuşma UUID'sini saklayın
+4. **Hız sınırlarına uyun**: Gerekirse mesajlar arasında uygun gecikmeleri uygulayın

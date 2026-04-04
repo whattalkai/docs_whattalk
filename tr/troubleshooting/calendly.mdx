@@ -1,0 +1,84 @@
+---
+title: "Calendly Sorunları"
+icon: "calendar-days"
+description: "Yaygın Calendly entegrasyon sorunlarını giderme"
+---
+
+Yaygın Calendly entegrasyon sorunları için çözümler.
+
+## Bağlantı Sorunları
+
+### OAuth Yetkilendirmesi Başarısız
+
+**Sorun:** Calendly hesabı bağlanamıyor
+
+**Çözüm:**
+- Gizli/özel tarayıcı penceresinde bağlanmayı deneyin
+- Calendly hesabınıza yönetici erişiminiz olduğunu doğrulayın
+- Calendly'de üçüncü taraf uygulama izinlerinin etkinleştirildiğini kontrol edin
+
+### Etkinlikler Yüklenmiyor
+
+**Sorun:** Bağlandıktan sonra etkinlik açılır menüsü boş
+
+**Çözüm:**
+- Etkinlik türlerini getirmek için **"Etkinlikleri Yükle"** düğmesine tıklayın
+- Senkronizasyonun tamamlanmasını bekleyin (birkaç saniye sürebilir)
+- Etkinlikler hâlâ görünmüyorsa sayfayı yenileyin
+- Calendly hesabınızda aktif etkinlik türlerinin olduğunu doğrulayın
+
+## Rezervasyon Hataları
+
+### Konum Türü Hatası
+
+**Sorun:** "Randevu rezervasyonu yapılamadı: Belirtilen konum türü bu etkinlik türü için yapılandırılmamış"
+
+**Neden:** Calendly etkinlik türünüzün, sesli asistanın rezervasyon yaparken kullandığıyla eşleşmeyen bir konum ayarı (örn. Google Meet, Zoom) var.
+
+**Çözüm:**
+1. [calendly.com](https://calendly.com) adresinden Calendly hesabınıza giriş yapın
+2. **Etkinlik Türleri**'ne gidin ve asistanınıza bağlı etkinlik türüne tıklayın
+3. O etkinlik türünde **Düzenle**'ye tıklayın
+4. **Konum** bölümüne gidin
+5. Konumu şu seçeneklerden birine değiştirin:
+   - **"Özel"** — bu en güvenli seçenektir ve tüm durumlarda çalışır
+   - **"Telefon Araması" → "Gelen arama"** — sesli AI kullanım durumları için de iyi çalışır
+   - Birden fazla konumunuz varsa, seçeneklerden biri olarak **"Özel"**in dahil edildiğinden emin olun
+6. Etkinlik türünü **Kaydedin**
+7. Asistan üzerinden tekrar rezervasyon yapmayı deneyin
+
+<Warning>
+Etkinlik türünüz yalnızca video konferans konumuna (Google Meet, Zoom, Microsoft Teams) ayarlanmışsa, sesli asistan toplantı bağlantıları oluşturmadığı için rezervasyonlar başarısız olur. Ya "Özel"e geçin ya da ek konum seçeneği olarak "Özel" ekleyin.
+</Warning>
+
+### Rezervasyon Saat Dilimi Sorunları
+
+**Sorun:** Randevular yanlış saatte planlanıyor
+
+**Çözüm:**
+- Calendly etkinlik ayarlarınızdaki saat dilimini kontrol edin
+- Asistanın saat diliminin doğru yapılandırıldığını doğrulayın
+- Arama sırasında belirli saat ifadeleriyle test edin
+
+## Test Sorunları
+
+### Web Araması Rezervasyonları Başarısız
+
+**Sorun:** Rezervasyonlar web aramalarında tutarsız çalışıyor
+
+**Çözüm:**
+- Test için gerçek telefon aramaları kullanın (web aramaları değil)
+- Web aramaları telefon değişkenini doğru iletmeyebilir
+- Web aramaları kullanırken, telefon numarasını + öneki ile uluslararası formatta verin (örn. "+1 555-123-4567")
+
+## Yardım Alma
+
+Sorunlar devam ederse:
+
+1. Rezervasyon girişimleri için arama transkriptlerini kontrol edin
+2. Etkinlik türünün Calendly kontrol panelinizde doğru göründüğünü doğrulayın
+3. Basit telefon araması ile rezervasyon test edin
+4. Desteğe şunlarla başvurun:
+   - Hata mesajı ekran görüntüsü
+   - Calendly etkinlik türü ayarları ekran görüntüsü (özellikle Konum bölümü)
+   - Rezervasyon girişimini gösteren arama transkripti

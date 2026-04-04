@@ -1,0 +1,191 @@
+---
+title: "Potansiyel müşterileri listele"
+api: "GET /user/leads"
+description: "Kimliği doğrulanmış kullanıcının tüm potansiyel müşterilerini filtreleme ve sayfalama seçenekleriyle listeleyin"
+---
+
+Bu endpoint, kimliği doğrulanmış kullanıcıya ait tüm potansiyel müşterileri çeşitli filtreleme ve sayfalama seçenekleriyle listelemenizi sağlar.
+
+### Sorgu Parametreleri
+
+<ParamField query="status" type="string" optional>
+  Potansiyel müşterileri duruma göre filtreleyin. Olası değerler: `created`, `scheduled`, `processing`, `completed`, `rescheduled`, `reached-max-retries`, `blacklisted`
+</ParamField>
+
+<ParamField query="campaign_id" type="integer" optional>
+  Potansiyel müşterileri kampanya kimliğine göre filtreleyin
+</ParamField>
+
+<ParamField query="phone_number" type="string" optional>
+  Potansiyel müşterileri telefon numarasına göre filtreleyin (kısmi eşleşme desteklenir)
+</ParamField>
+
+<ParamField query="date_from" type="string" optional>
+  Bu tarihten itibaren oluşturulan potansiyel müşterileri filtreleyin (YYYY-MM-DD formatı)
+</ParamField>
+
+<ParamField query="date_to" type="string" optional>
+  Bu tarihe kadar oluşturulan potansiyel müşterileri filtreleyin (YYYY-MM-DD formatı)
+</ParamField>
+
+<ParamField query="per_page" type="integer" optional>
+  Sayfa başına potansiyel müşteri sayısı (1-100, varsayılan: 15)
+</ParamField>
+
+<ParamField query="page" type="integer" optional>
+  Sayfa numarası (varsayılan: 1)
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="data" type="array">
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      Potansiyel müşterinin kimliği
+    </ResponseField>
+
+    <ResponseField name="campaign_id" type="integer">
+      Bu potansiyel müşterinin ait olduğu kampanyanın kimliği
+    </ResponseField>
+
+    <ResponseField name="phone_number" type="string">
+      Potansiyel müşterinin E.164 formatındaki telefon numarası
+    </ResponseField>
+
+    <ResponseField name="variables" type="object">
+      Potansiyel müşteriyle ilişkili değişkenler
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Potansiyel müşterinin durumu
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Potansiyel müşterinin oluşturulma tarihi
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      Potansiyel müşterinin güncellenme tarihi
+    </ResponseField>
+
+    <ResponseField name="campaign" type="object">
+      Kampanya bilgileri
+      <Expandable title="kampanya özellikleri">
+        <ResponseField name="id" type="integer">
+          Kampanyanın kimliği
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          Kampanyanın adı
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="secondary_contacts" type="array">
+      Bu potansiyel müşteriyle ilişkili ikincil iletişim kişileri dizisi
+      <Expandable title="secondary_contacts özellikleri">
+        <ResponseField name="id" type="integer">
+          İkincil iletişim kişisinin kimliği
+        </ResponseField>
+        <ResponseField name="phone_number" type="string">
+          İkincil iletişim kişisinin E.164 formatındaki telefon numarası
+        </ResponseField>
+        <ResponseField name="variables" type="object">
+          İkincil iletişim kişisiyle ilişkili değişkenler
+        </ResponseField>
+        <ResponseField name="status" type="string">
+          İkincil iletişim kişisinin durumu
+        </ResponseField>
+        <ResponseField name="created_at" type="string">
+          İkincil iletişim kişisinin oluşturulma tarihi
+        </ResponseField>
+        <ResponseField name="updated_at" type="string">
+          İkincil iletişim kişisinin güncellenme tarihi
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="current_page" type="integer">
+  Mevcut sayfa numarası
+</ResponseField>
+
+<ResponseField name="per_page" type="integer">
+  Sayfa başına öğe sayısı
+</ResponseField>
+
+<ResponseField name="total" type="integer">
+  Kriterlere uyan toplam potansiyel müşteri sayısı
+</ResponseField>
+
+<ResponseField name="last_page" type="integer">
+  Son sayfa numarası
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "current_page": 1,
+  "data": [
+    {
+      "id": 1,
+      "campaign_id": 1,
+      "phone_number": "+1234567890",
+      "variables": {
+        "customer_name": "John Doe",
+        "email": "john.doe@example.com"
+      },
+      "status": "created",
+      "created_at": "2025-06-30 11:18:04",
+      "updated_at": "2025-06-30 11:18:04",
+      "campaign": {
+        "id": 1,
+        "name": "My new campaign"
+      },
+      "secondary_contacts": [
+        {
+          "id": 2,
+          "phone_number": "+1234567899",
+          "variables": {
+            "customer_name": "Jane Doe Secondary",
+            "email": "jane.doe.secondary@example.com"
+          },
+          "status": "created",
+          "created_at": "2025-06-30 11:18:04",
+          "updated_at": "2025-06-30 11:18:04"
+        }
+      ]
+    }
+  ],
+  "first_page_url": "https://app.whattalk.ai/api/user/leads?page=1",
+  "from": 1,
+  "last_page": 10,
+  "last_page_url": "https://app.whattalk.ai/api/user/leads?page=10",
+  "links": [
+    {
+      "url": null,
+      "label": "&laquo; Previous",
+      "active": false
+    },
+    {
+      "url": "https://app.whattalk.ai/api/user/leads?page=1",
+      "label": "1",
+      "active": true
+    },
+    {
+      "url": "https://app.whattalk.ai/api/user/leads?page=2",
+      "label": "2",
+      "active": false
+    }
+  ],
+  "next_page_url": "https://app.whattalk.ai/api/user/leads?page=2",
+  "path": "https://app.whattalk.ai/api/user/leads",
+  "per_page": 15,
+  "prev_page_url": null,
+  "to": 15,
+  "total": 150
+}
+```
+
+</ResponseExample>

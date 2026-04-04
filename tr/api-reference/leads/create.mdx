@@ -1,0 +1,195 @@
+---
+title: "Potansiyel müşteri oluştur"
+api: "POST /user/lead"
+description: "WhatTalk sisteminde yeni bir potansiyel müşteri oluşturun"
+---
+
+Bu endpoint, WhatTalk sisteminde yeni bir potansiyel müşteri oluşturmanızı sağlar.
+
+### İstek gövdesi
+
+<ParamField body="phone_number" type="string" required>
+  Potansiyel müşterinin E.164 formatındaki telefon numarası (ör. +1234567890)
+</ParamField>
+
+<ParamField body="campaign_id" type="integer" required>
+  Potansiyel müşterinin oluşturulacağı kampanyanın kimliği
+</ParamField>
+
+<ParamField body="variables" type="object">
+  Potansiyel müşteriye aktarılacak özel değişkenler. **Asistanınızda tanımlı olan herhangi bir değişkeni** ekleyebilirsiniz (bkz. [Arama değişkenleri](/ai-assistants/settings/prompt-and-tools#call-variables)). Aşağıdaki örnekler yalnızca gösterim amaçlıdır — asistan ayarlarında yapılandırdığınız kendi değişken adlarınızı kullanın.
+
+  <Expandable title="Örnek değişkenler (kendinizinkini ekleyin)">
+    <ParamField body="customer_name" type="string">
+      ör. müşterinin adı
+    </ParamField>
+
+    <ParamField body="email" type="string">
+      ör. müşterinin e-postası
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="allow_dupplicate" type="boolean">
+  Bir kampanyada mükerrer potansiyel müşterilere izin verilip verilmeyeceği.
+</ParamField>
+
+<ParamField body="secondary_contacts" type="array">
+  Ana potansiyel müşteriyle birlikte oluşturulacak ikincil iletişim kişileri dizisi
+  
+  <Expandable title="secondary_contacts özellikleri">
+    <ParamField body="phone_number" type="string" required>
+      İkincil iletişim kişisinin E.164 formatındaki telefon numarası
+    </ParamField>
+    
+    <ParamField body="variables" type="object">
+      İkincil iletişim kişisine aktarılacak değişkenler
+      
+      <Expandable title="değişken özellikleri">
+        <ParamField body="customer_name" type="string" default="<string>">
+          İkincil iletişim kişisinin adı
+        </ParamField>
+        
+        <ParamField body="email" type="string" default="<string>">
+          İkincil iletişim kişisinin e-postası
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string" default="Lead created successfully">
+  Yanıtın mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Potansiyel müşteri veri nesnesi
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Oluşturulan potansiyel müşterinin benzersiz kimliği
+    </ResponseField>
+    
+    <ResponseField name="campaign_id" type="integer">
+      Bu potansiyel müşterinin ait olduğu kampanyanın kimliği
+    </ResponseField>
+
+    <ResponseField name="phone_number" type="string">
+      Potansiyel müşterinin E.164 formatındaki telefon numarası
+    </ResponseField>
+    
+    <ResponseField name="variables" type="object">
+      Potansiyel müşteriyle ilişkili değişkenler
+      
+      <Expandable title="değişken özellikleri">
+        <ResponseField name="customer_name" type="string" default="<string>">
+          Müşterinin adı
+        </ResponseField>
+        
+        <ResponseField name="email" type="string" default="<string>">
+          Müşterinin e-postası
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    
+    <ResponseField name="status" type="string" default="created">
+      Potansiyel müşterinin durumu
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Potansiyel müşterinin oluşturulma zaman damgası
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Potansiyel müşterinin son güncellenme zaman damgası
+    </ResponseField>
+
+    <ResponseField name="campaign" type="object">
+      Kampanya bilgileri
+      <Expandable title="kampanya özellikleri">
+        <ResponseField name="id" type="integer">
+          Kampanyanın kimliği
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          Kampanyanın adı
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="secondary_contacts" type="array">
+      Bu potansiyel müşteriyle ilişkili ikincil iletişim kişileri dizisi
+      <Expandable title="secondary_contacts özellikleri">
+        <ResponseField name="id" type="integer">
+          İkincil iletişim kişisinin kimliği
+        </ResponseField>
+        <ResponseField name="phone_number" type="string">
+          İkincil iletişim kişisinin E.164 formatındaki telefon numarası
+        </ResponseField>
+        <ResponseField name="variables" type="object">
+          İkincil iletişim kişisiyle ilişkili değişkenler
+        </ResponseField>
+        <ResponseField name="status" type="string">
+          İkincil iletişim kişisinin durumu
+        </ResponseField>
+        <ResponseField name="created_at" type="string">
+          İkincil iletişim kişisinin oluşturulma tarihi
+        </ResponseField>
+        <ResponseField name="updated_at" type="string">
+          İkincil iletişim kişisinin güncellenme tarihi
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "message": "Lead created successfully",
+  "data": {
+    "id": 1,
+    "campaign_id": 1,
+    "phone_number": "+1234567890",
+    "variables": {
+      "customer_name": "John Doe",
+      "email": "john.doe@example.com"
+    },
+    "status": "created",
+    "created_at": "2025-06-30 11:53:20",
+    "updated_at": "2025-06-30 11:53:20",
+    "campaign": {
+      "id": 1,
+      "name": "My new campaign"
+    },
+    "secondary_contacts": [
+      {
+        "id": 2,
+        "phone_number": "+1234567891",
+        "variables": {
+          "customer_name": "Jane Doe Secondary",
+          "email": "jane.doe.secondary@example.com"
+        },
+        "status": "created",
+        "created_at": "2025-06-30 11:53:20",
+        "updated_at": "2025-06-30 11:53:20"
+      },
+      {
+        "id": 3,
+        "phone_number": "+1234567892",
+        "variables": {
+          "customer_name": "Bob Doe Office",
+          "email": "bob.doe.office@example.com"
+        },
+        "status": "created",
+        "created_at": "2025-06-30 11:53:20",
+        "updated_at": "2025-06-30 11:53:20"
+      }
+    ]
+  }
+}
+```
+
+</ResponseExample>

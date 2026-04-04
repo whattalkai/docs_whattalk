@@ -1,0 +1,19 @@
+---
+title: "Potansiyel müşteriyi sil"
+api: "DELETE /user/leads/{id}"
+description: "WhatTalk sisteminden bir potansiyel müşteriyi silin"
+---
+
+Bu endpoint, WhatTalk sisteminden bir potansiyel müşteriyi silmenizi sağlar.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Silinecek potansiyel müşterinin kimliği
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Yanıtın mesajı
+</ResponseField>

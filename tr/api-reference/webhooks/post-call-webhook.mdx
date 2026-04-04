@@ -1,0 +1,282 @@
+---
+title: "Arama Sonrası Webhook"
+icon: "webhook"
+description: "Bir arama tamamlandıktan sonra çıkarılan değişkenler ve arama verilerini içeren webhook"
+---
+
+Arama Sonrası Webhook, her arama tamamlandıktan sonra belirttiğiniz webhook URL'sine otomatik olarak gönderilir. Bu webhook, arama detaylarını, çıkarılan değişkenleri, transkripti ve isteğe bağlı olarak kayıt URL'sini içerir.
+
+## Webhook Yapılandırması
+
+Arama sonrası webhook'ları etkinleştirmek için:
+1. [Asistan ayarlarında](/ai-assistants/settings/post-call-actions#webhook-configuration) asistanınızın webhook URL'sini yapılandırın
+2. [Asistan yapılandırmasında](/ai-assistants/settings/post-call-actions#webhook-configuration) "Post call webhook" seçeneğini etkinleştirin
+3. Yapay zekanın çıkarması gereken arama sonrası değişkenleri tanımlayın
+
+## İstek Formatı
+
+Webhook, yapılandırılmış URL'nize aşağıdaki JSON yüküyle POST isteği olarak gönderilir:
+
+### Yük Yapısı
+
+<ResponseField name="id" type="integer">
+  Aramanın benzersiz tanımlayıcısı
+</ResponseField>
+
+<ResponseField name="customer_phone" type="string">
+  Müşterinin E.164 formatındaki telefon numarası (ör. "+1234567890") veya mevcut değilse null
+</ResponseField>
+
+<ResponseField name="assistant_phone" type="string">
+  Asistanın kullandığı E.164 formatındaki telefon numarası veya mevcut değilse null
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Aramanın saniye cinsinden süresi
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Aramanın son durumu (ör. "completed", "busy", "failed")
+</ResponseField>
+
+<ResponseField name="extracted_variables" type="object">
+  Arama sonrası şema yapılandırmanıza göre yapay zeka tarafından çıkarılan değişkenler
+  <Expandable title="Örnek çıkarılan değişkenler">
+    <ResponseField name="status" type="boolean">
+      Arama hedefinin gerçekleştirilip gerçekleştirilmediği
+    </ResponseField>
+    <ResponseField name="summary" type="string">
+      Birkaç kelimelik arama özeti
+    </ResponseField>
+    <ResponseField name="custom_variable" type="string|number|boolean">
+      Asistan yapılandırmasında tanımladığınız herhangi bir özel değişken
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="input_variables" type="object">
+  Arama başlamadan önce asistana aktarılan değişkenler
+</ResponseField>
+
+<ResponseField name="transcript" type="string">
+  Konuşmanın tam transkripti
+</ResponseField>
+
+<ResponseField name="recording_url" type="string">
+  Arama kaydını indirmek için URL (yalnızca [asistan ayarlarında](/ai-assistants/settings/post-call-actions#webhook-configuration) "Include recording in webhook" etkinleştirildiyse dahil edilir)
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Aramanın başlatıldığı ISO 8601 zaman damgası
+</ResponseField>
+
+<ResponseField name="finished_at" type="string">
+  Aramanın tamamlandığı ISO 8601 zaman damgası (arama kaydındaki updated_at değerini kullanır)
+</ResponseField>
+
+<ResponseField name="lead" type="object">
+  Potansiyel müşteri bilgileri (yalnızca kampanya aramaları için dahil edilir)
+  <Expandable title="Potansiyel müşteri özellikleri">
+    <ResponseField name="id" type="integer">
+      Potansiyel müşterinin benzersiz tanımlayıcısı
+    </ResponseField>
+    <ResponseField name="phone_number" type="string">
+      Potansiyel müşterinin telefon numarası
+    </ResponseField>
+    <ResponseField name="variables" type="object">
+      Potansiyel müşteriyle ilişkili değişkenler
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Potansiyel müşterinin mevcut durumu
+    </ResponseField>
+    <ResponseField name="call_tries" type="integer">
+      Bu potansiyel müşteriye yapılan arama denemesi sayısı
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      Potansiyel müşterinin oluşturulma tarihi
+    </ResponseField>
+    <ResponseField name="updated_at" type="string">
+      Potansiyel müşterinin son güncellenme tarihi
+    </ResponseField>
+    <ResponseField name="campaign" type="object">
+      Kampanya bilgileri (mevcutsa)
+      <Expandable title="Kampanya özellikleri">
+        <ResponseField name="id" type="integer">
+          Kampanya kimliği
+        </ResponseField>
+        <ResponseField name="name" type="string">
+          Kampanya adı
+        </ResponseField>
+        <ResponseField name="status" type="string">
+          Kampanya durumu
+        </ResponseField>
+        <ResponseField name="allowed_hours_start_time" type="string">
+          Kampanyanın izin verilen başlangıç saati
+        </ResponseField>
+        <ResponseField name="allowed_hours_end_time" type="string">
+          Kampanyanın izin verilen bitiş saati
+        </ResponseField>
+        <ResponseField name="allowed_days" type="array">
+          Kampanyanın izin verilen günleri
+        </ResponseField>
+        <ResponseField name="max_calls_in_parallel" type="integer">
+          Kampanya için maksimum eşzamanlı arama sayısı
+        </ResponseField>
+        <ResponseField name="max_retries" type="integer">
+          Potansiyel müşteriler için maksimum yeniden deneme sayısı
+        </ResponseField>
+        <ResponseField name="retry_interval" type="integer">
+          Dakika cinsinden yeniden deneme aralığı
+        </ResponseField>
+        <ResponseField name="created_at" type="string">
+          Kampanyanın oluşturulma tarihi
+        </ResponseField>
+        <ResponseField name="updated_at" type="string">
+          Kampanyanın son güncellenme tarihi
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="transfers" type="array">
+  Bu arama sırasında yapılan aktarım aramalarının listesi (yalnızca aramada aktarımlar varsa dahil edilir)
+  <Expandable title="Aktarım özellikleri">
+    <ResponseField name="id" type="integer">
+      Aktarım aramasının benzersiz tanımlayıcısı
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Aktarım aramasının son durumu (ör. "completed", "busy", "failed")
+    </ResponseField>
+    <ResponseField name="transfer_to" type="string">
+      Aramanın aktarıldığı E.164 formatındaki telefon numarası
+    </ResponseField>
+    <ResponseField name="duration" type="integer">
+      Aktarım aramasının saniye cinsinden süresi
+    </ResponseField>
+    <ResponseField name="carrier_cost" type="number">
+      Aktarım aramasının USD cinsinden operatör maliyeti
+    </ResponseField>
+    <ResponseField name="transcript" type="array">
+      Aktarım aramasının ham transkripti (mevcut değilse null)
+    </ResponseField>
+    <ResponseField name="formatted_transcript" type="string">
+      Aktarım aramasının okunabilir biçimlendirilmiş transkripti
+    </ResponseField>
+    <ResponseField name="recording_url" type="string">
+      Aktarım araması kaydını indirmek için URL (yalnızca "Include recording in webhook" etkinleştirildiyse ve kayıt varsa dahil edilir)
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      Aktarımın başlatıldığı ISO 8601 zaman damgası
+    </ResponseField>
+    <ResponseField name="finished_at" type="string">
+      Aktarımın tamamlandığı ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json 200 Arama Sonrası Webhook İsteği
+{
+  "id": 12345,
+  "customer_phone": "+1234567890",
+  "assistant_phone": "+1987654321",
+  "duration": 125,
+  "status": "completed",
+  "extracted_variables": {
+    "status": true,
+    "summary": "Customer interested in product demo",
+    "lead_quality": "high",
+    "next_action": "schedule_demo"
+  },
+  "input_variables": {
+    "customer_name": "John Doe",
+    "product_interest": "Pro Plan"
+  },
+  "transcript": [
+    {
+      "text": "Hello! This is Sarah from WhatTalk. How are you today?",
+      "type": "transcript",
+      "sender": "bot",
+      "timestamp": 1756812511.315143
+    },
+    {
+      "text": "Hi, I'm doing well, thanks for calling.",
+      "type": "transcript",
+      "sender": "human",
+      "timestamp": 1756812514.104436
+    },
+    {
+      "text": "I'm calling to tell you about our new product features.",
+      "type": "transcript",
+      "sender": "bot",
+      "timestamp": 1756812522.918859
+    },
+    {
+      "text": "That sounds interesting, tell me more.",
+      "type": "transcript",
+      "sender": "human",
+      "timestamp": 1756812525.234567
+    }
+  ],
+  "formatted_transcript": "AI: Hello! This is Sarah from WhatTalk. How are you today?\nCustomer: Hi, I'm doing well, thanks for calling.\nAI: I'm calling to tell you about our new product features.\nCustomer: That sounds interesting, tell me more.",
+  "recording_url": "https://app.whattalk.ai/storage/recordings/call-12345.mp4",
+  "created_at": "2025-01-15T10:30:00.000000Z",
+  "finished_at": "2025-01-15T10:32:05.000000Z",
+  "transfers": [
+    {
+      "id": 12346,
+      "status": "completed",
+      "transfer_to": "+1555123456",
+      "duration": 85,
+      "carrier_cost": 0.0156,
+      "transcript": null,
+      "formatted_transcript": "",
+      "created_at": "2025-01-15T10:31:00.000000Z",
+      "finished_at": "2025-01-15T10:32:25.000000Z"
+    }
+  ],
+  "lead": {
+    "id": 789,
+    "phone_number": "+1234567890",
+    "variables": {
+      "source": "website",
+      "interest_level": "high"
+    },
+    "status": "contacted",
+    "call_tries": 2,
+    "created_at": "2025-01-15T09:00:00.000000Z",
+    "updated_at": "2025-01-15T10:32:05.000000Z",
+    "campaign": {
+      "id": 456,
+      "name": "Product Demo Campaign",
+      "status": "active",
+      "allowed_hours_start_time": "09:00",
+      "allowed_hours_end_time": "17:00",
+      "allowed_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+      "max_calls_in_parallel": 5,
+      "max_retries": 3,
+      "retry_interval": 60,
+      "created_at": "2025-01-15T08:00:00.000000Z",
+      "updated_at": "2025-01-15T08:00:00.000000Z"
+    }
+  }
+}
+```
+</ResponseExample>
+
+## Webhook Ayarları
+
+Arama sonrası webhook'unuz için aşağıdaki seçenekleri yapılandırabilirsiniz:
+
+- **Yalnızca tamamlanan aramalarda webhook gönder**: Webhook'u yalnızca başarıyla tamamlanan aramalar için gönder
+- **Webhook'a kayıt dahil et**: Yüke `recording_url` alanını dahil et
+- **Özel değişkenler**: Yapay zekanın konuşmadan çıkarması gereken özel değişkenleri tanımlayın
+
+## Önemli Notlar
+
+- `customer_phone` ve `assistant_phone` alanları, bilgi mevcut değilse `null` olabilir
+- `recording_url` alanı yalnızca [asistan ayarlarınızda](/ai-assistants/settings/post-call-actions#webhook-configuration) "Include recording in webhook" seçeneğini etkinleştirdiyseniz dahil edilir
+- `lead` nesnesi yalnızca bir kampanyanın parçası olan aramalar için dahil edilir
+- `transfers` dizisi yalnızca ilişkili aktarım aramaları olan aramalar için dahil edilir
+- `extracted_variables` nesnesi, asistanınızın arama sonrası şema yapılandırmasında tanımladığınız değişkenleri içerir

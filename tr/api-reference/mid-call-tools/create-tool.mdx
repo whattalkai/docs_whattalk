@@ -1,0 +1,178 @@
+---
+title: "Arama içi araç oluştur"
+api: "POST /user/tools"
+description: "Yeni bir arama içi araç oluşturun"
+---
+
+Bu endpoint, yapay zeka asistanlarınızın aramalar sırasında harici API'lerle etkileşim kurması için kullanılabilecek yeni bir arama içi araç oluşturmanızı sağlar.
+
+### Gövde Parametreleri
+
+<ParamField body="name" type="string" required>
+  Araç adı - yalnızca küçük harfler ve alt çizgi içermeli ve bir harfle başlamalıdır (ör. `get_weather`, `book_appointment`)
+</ParamField>
+
+<ParamField body="description" type="string" required>
+  Yapay zekanın bu aracı ne zaman ve nasıl kullanması gerektiğinin ayrıntılı açıklaması (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="endpoint" type="string" required>
+  Çağrılacak API endpoint'inin geçerli URL'si
+</ParamField>
+
+<ParamField body="method" type="string" required>
+  HTTP yöntemi: `GET`, `POST`, `PUT`, `PATCH` veya `DELETE`
+</ParamField>
+
+<ParamField body="timeout" type="integer" optional>
+  Saniye cinsinden istek zaman aşımı (1-30, varsayılan: 10)
+</ParamField>
+
+<ParamField body="headers" type="array" optional>
+  İstekle birlikte gönderilecek HTTP başlıkları
+  <Expandable title="başlık özellikleri">
+    <ParamField body="name" type="string" required>
+      Başlık adı
+    </ParamField>
+    <ParamField body="value" type="string" required>
+      Başlık değeri
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="schema" type="array" optional>
+  Yapay zekanın konuşmadan çıkaracağı ve endpoint'e göndereceği parametreler
+  <Expandable title="şema özellikleri">
+    <ParamField body="name" type="string" required>
+      Parametre adı (2-32 karakter, bir harfle başlamalı, harf ve alt çizgi içerebilir)
+    </ParamField>
+    <ParamField body="type" type="string" required>
+      Parametre türü: `string`, `number` veya `boolean`
+    </ParamField>
+    <ParamField body="description" type="string" required>
+      Yapay zekanın bu parametreyi nasıl çıkaracağını anlamasına yardımcı olan açıklama (3-255 karakter)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Yanıt alanları
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Oluşturulan araç nesnesi
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Aracın benzersiz tanımlayıcısı
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Aracın adı
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Araç açıklaması
+    </ResponseField>
+
+    <ResponseField name="endpoint" type="string">
+      API endpoint URL'si
+    </ResponseField>
+
+    <ResponseField name="method" type="string">
+      HTTP yöntemi
+    </ResponseField>
+
+    <ResponseField name="timeout" type="integer">
+      Saniye cinsinden istek zaman aşımı
+    </ResponseField>
+
+    <ResponseField name="headers" type="array">
+      HTTP başlıkları
+    </ResponseField>
+
+    <ResponseField name="schema" type="array">
+      Parametre şeması
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      ISO 8601 zaman damgası
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 201 Created
+{
+  "message": "Tool created successfully",
+  "data": {
+    "id": 1,
+    "name": "check_order_status",
+    "description": "Use this tool to check the status of a customer's order.",
+    "endpoint": "https://api.yourstore.com/orders/status",
+    "method": "GET",
+    "timeout": 10,
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      },
+      {
+        "name": "Authorization",
+        "value": "Bearer sk_..."
+      }
+    ],
+    "schema": [
+      {
+        "name": "order_id",
+        "type": "string",
+        "description": "The customer's order ID"
+      },
+      {
+        "name": "order_number",
+        "type": "number",
+        "description": "The numeric order number"
+      },
+      {
+        "name": "priority_order",
+        "type": "boolean",
+        "description": "Whether this is a priority order"
+      }
+    ],
+    "created_at": "2025-10-10T12:00:00.000000Z",
+    "updated_at": "2025-10-10T12:00:00.000000Z"
+  }
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "The name field must contain only lowercase letters and underscores, and start with a letter.",
+  "errors": {
+    "name": [
+      "Tool name must contain only lowercase letters and underscores, and start with a letter."
+    ]
+  }
+}
+```
+
+```json 422 Plan Limiti Aşıldı
+{
+  "message": "You have reached your plan limit of 5 mid call tools. Please upgrade your plan to create more tools."
+}
+```
+
+</ResponseExample>
+
+### Araçları Asistanlara Ekleme
+
+Bir araç oluşturduktan sonra, aramalar sırasında kullanmak için onu bir asistana eklemeniz gerekir. Araçlar Asistan API'si aracılığıyla yönetilir:
+
+- **[Asistan Oluştur](/api-reference/assistants/create-assistant)** - Bir asistan oluştururken araçları eklemek için `tool_ids` parametresini kullanın
+- **[Asistan Güncelle](/api-reference/assistants/update-assistant)** - Mevcut bir asistanda araçları eklemek, kaldırmak veya değiştirmek için `tool_ids` parametresini kullanın

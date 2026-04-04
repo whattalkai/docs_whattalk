@@ -1,0 +1,99 @@
+---
+title: "Bilgi bankalarını getir"
+api: "GET /user/knowledgebases"
+description: "Kimliği doğrulanmış kullanıcının tüm bilgi bankalarını getirin"
+---
+
+Bu endpoint, hesabınızla ilişkili tüm bilgi bankalarının listesini döndürür. Bilgi bankaları, yapay zeka asistanlarınıza bağlam ve bilgi sağlayan belgeleri depolamak için kullanılır.
+
+### Yanıt
+
+<ResponseField name="data" type="array">
+  Bilgi bankası nesneleri dizisi
+  
+  <Expandable title="bilgi bankası özellikleri">
+    <ResponseField name="id" type="integer">
+      Bilgi bankasının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Bilgi bankasının adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Bilgi bankasının isteğe bağlı açıklaması
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      Mevcut durum: `empty`, `processing`, `active` veya `failed`
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="documents_count" type="integer">
+      Bu bilgi bankasındaki belge sayısı
+    </ResponseField>
+    
+    <ResponseField name="assistants_count" type="integer">
+      Bu bilgi bankasını kullanan asistan sayısı
+    </ResponseField>
+    
+    <ResponseField name="created_at" type="string">
+      Oluşturulma ISO 8601 zaman damgası
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Son güncelleme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Product Documentation",
+      "description": "Technical documentation for our products",
+      "status": "active",
+      "status_label": "Active",
+      "documents_count": 5,
+      "assistants_count": 2,
+      "created_at": "2025-01-05T10:30:00.000000Z",
+      "updated_at": "2025-01-08T14:20:00.000000Z"
+    },
+    {
+      "id": 2,
+      "name": "FAQ Knowledge",
+      "description": "Frequently asked questions and answers",
+      "status": "processing",
+      "status_label": "Processing",
+      "documents_count": 1,
+      "assistants_count": 0,
+      "created_at": "2025-01-08T09:00:00.000000Z",
+      "updated_at": "2025-01-08T09:05:00.000000Z"
+    }
+  ]
+}
+```
+
+```json 200 Boş Yanıt
+{
+  "data": []
+}
+```
+
+</ResponseExample>
+
+### Bilgi Bankası Durumları
+
+| Durum | Açıklama |
+|-------|----------|
+| `empty` | Bilgi bankasında belge yok |
+| `processing` | Bir veya daha fazla belge işleniyor |
+| `active` | Tüm belgeler işlendi ve hazır |
+| `failed` | Bir veya daha fazla belge işlenemedi |

@@ -1,0 +1,197 @@
+---
+title: "Ozel Kontrol Panelleri"
+icon: "chart-line"
+description: "Arama metriklerinizi ve performansinizi takip etmek icin widget'larla kisisellesmis kontrol panelleri olusturun"
+---
+
+Ozel Kontrol Panelleri, surukle-birak widget'lariyla ozellestirilmis analitik gorunumleri olusturmanizi saglar. Isletmeniz icin en onemli metrikleri istatistikler, grafikler ve tablolarla takip edin.
+
+## Ozel Kontrol Panelleri Nedir?
+
+Arama verilerinizi gosteren widget'larla olusturdunuz kisisellesmis analitik sayfalar. Her kontrol paneli, farkli veri gorunumlerini gosteren birden fazla widget icerir.
+
+<CardGroup cols={3}>
+  <Card title="Istatistik Widget'lari" icon="chart-simple">
+    Toplam arama, ortalama veya basari oranlari gibi tek metrikler
+  </Card>
+
+  <Card title="Grafik Widget'lari" icon="chart-line">
+    8 grafik turuyle (cizgi, cubuk, pasta, vb.) gorsel trendler
+  </Card>
+
+  <Card title="Tablo Widget'lari" icon="table">
+    Ozel sutunlar ve filtrelerle ayrintili kayitlar
+  </Card>
+</CardGroup>
+
+## Hizli Baslangic
+
+### Kontrol Paneli Olusturma
+
+1. Kenar cubugunda **"Ozel Kontrol Paneli Olustur"** a tiklayin
+2. Ad girin (ornegin, "Satis Performansi")
+3. Simge secin
+4. **"Kontrol Paneli Olustur"** a tiklayin
+
+### Widget Ekleme
+
+**Secenek 1: Hazir Sablonlari Kullanin** (21 hazir widget)
+1. **"Ozellestirmek icin kilidi ac"** a tiklayin
+2. **"Ekle"** dugmesine tiklayin
+3. Hazir widget secin (emoji ile isaretli)
+4. **"Kaydet"** e tiklayin
+
+**Secenek 2: Ozel Widget Olusturun**
+1. **"Widget'lari Yonet"** -> **"Yeni Widget Olustur"** a tiklayin
+2. Tur secin: Istatistik, Grafik veya Tablo
+3. Veri kaynagini ve secenekleri yapilandirin
+4. Widget'i kaydedin
+5. Kontrol paneline ekleyin
+
+## Widget Turleri
+
+### Istatistik Widget'i
+
+Istege bagli karsilastirma ve mini grafik iceren tek sayi.
+
+**Ornek kullanimlar:**
+- Bu ayki toplam aramalar
+- Ortalama arama suresi
+- Basari orani yuzdesi
+
+**Temel secenekler:**
+- Veri kaynagi: aramalar, adaylar, kampanyalar, asistanlar, telefon_numaralari, sms
+- Toplama: COUNT, SUM, AVG, MAX, MIN
+- Renk: Birincil (Mavi), Basari (Yesil), Uyari (Turuncu), Tehlike (Kirmizi), Bilgi (Camgobegi), Gri
+- Etiket ve aciklama metni
+- Mini grafik goster (gunluk trend)
+- Onceki donemle karsilastir (yuzde degisimi)
+- Tarih araligi: Bugun, Dun, Son 7/14/30/60/90 gun, Son 6 ay, Son yil
+- Kosullar (filtreler)
+
+### Grafik Widget'i
+
+Trendleri ve dagilimalri gorsellestirir.
+
+**Grafik turleri:**
+- **Cizgi** - Zaman icerisindeki trendler
+- **Cubuk** - Kategorileri veya zaman dilimlerini karsilastirin
+- **Alan** - Doldurulmus trend grafigi
+- **Pasta** - Oranlar (Gruplama gerektirir)
+- **Halka** - Merkezde delikli pasta (Gruplama gerektirir)
+- **Kutupsal Alan** - Degisen yaricapli dairesel (Gruplama gerektirir)
+- **Radar** - Cok eksenli karsilastirma
+- **Radyal Cubuk** - Tek ilerleme/yuzde gostergesi
+
+**Temel secenekler:**
+- Veri kaynagi: aramalar, adaylar, kampanyalar, asistanlar, telefon_numaralari, sms
+- Toplama: COUNT, SUM, AVG, MAX, MIN
+- Grafik turu: Cizgi Grafik, Cubuk Grafik, Alan Grafik, Pasta Grafik, Halka Grafik, Kutupsal Alan, Radar, Radyal Cubuk
+- Renk: Birincil (Mavi), Basari (Yesil), Uyari (Turuncu), Tehlike (Kirmizi), Bilgi (Camgobegi), Gri
+- Doneme gore gruplama: Saatlik, Gunluk, Haftalik, Aylik (zaman serisi icin)
+- Alana gore gruplama: durum, kampanya, asistan, herhangi bir sutun (kategoriler icin)
+- Grafik yuksekligi: 200-800px
+- Izgara cizgilerini, gostergeyi, ipuclarini, veri etiketlerini, arac cubugunu goster
+- Cizgi egrisi: yumusak, duz, basamak
+- Cizgi kalinligi: 1-10px
+- Degrade (yalnizca radialBar)
+- Tarih araligi: Bugun, Dun, Son 7/14/30/60/90 gun, Son 6 ay, Son yil
+- Kosullar (filtreler)
+
+### Tablo Widget'i
+
+Siralanabilir sutunlarla ayrintili kayitlar.
+
+**Ornek kullanimlar:**
+- Ayrintili son aramalar
+- Inceleme icin basarisiz aramalar
+- Aday iletisim gecmisi
+
+**Temel secenekler:**
+- Veri kaynagi: aramalar, adaylar, kampanyalar, asistanlar, telefon_numaralari, sms
+- Kampanya filtresi (adaylar icin - degisken sutunlarini etkinlestirir)
+- Asistan filtresi (aramalar icin - degerlendirme alani sutunlarini etkinlestirir)
+- Sutun secimi: temel, iliskiler, degerlendirme alanlari, aday degiskenleri
+- Siralama: herhangi bir temel sutun
+- Siralama yonu: azalan (en yeni once), artan (en eski once)
+- Sayfa basina satir: 1-100
+- Tarih araligi: Bugun, Dun, Son 7/14/30/60/90 gun, Son 6 ay, Son yil
+- Kosullar (filtreler)
+
+## Verileri Filtreleme
+
+Tum widget'lar guclu filtreleri destekler:
+
+**Tarih araliklari:** Bugun, Dun, Son 7/14/30/60/90 gun, Son 6 ay, Son yil
+
+**Kosullar:** Birden fazla VE filtresi
+- Durum esittir "tamamlandi"
+- Sure 60 saniyeden buyuk
+- Asistan adi esittir "Satis Botu"
+
+**Degerlendirme alanlari:** Arama sonrasi degerlendirme degerlerine gore filtreleme
+- Sutun: Cikarilan Degiskenler
+- Cikarilan Degisken Adi: Ozel degisken
+- Ozel Degisken Adi: appointment_booked
+- Operator: =
+- Degisken Degeri: true
+
+## Duzenleme Yonetimi
+
+### Duzenleme Modu
+
+1. **"Ozellestirmek icin kilidi ac"** a tiklayin
+2. Widget'lari yeniden siralamak icin surukleyin
+3. Widget'lari yeniden boyutlandirin (1-12 sutun genisliginde)
+4. X dugmesiyle widget'lari kaldirin
+5. Kalici hale getirmek icin **"Kaydet"** e tiklayin
+6. Duzenleme modundan cikmak icin **"Kilitle"** ye tiklayin
+
+### En Iyi Uygulamalar
+
+**Widget boyutlandirma:**
+- Istatistikler: 3-4 sutun (satirda 3-4 siga)
+- Grafikler: 6-12 sutun
+- Tablolar: 12 sutun (tam genislik)
+
+**Duzenleme ipuclari:**
+- KPI'lari uste koyun
+- Ilgili metrikleri gruplayin
+- Tablolari en alta yerlestirin
+
+## Yaygin Kullanim Alanlari
+
+### Satis Kontrol Paneli
+- Istatistik: Basarili aramalar ("appointment_booked" degerlendirme alanina gore filtre)
+- Grafik: Basarili aramalarin gunluk trendi
+- Tablo: Randevu ayrintilariyla son basarili aramalar
+
+### Destek Kalitesi
+- Istatistik: Ortalama arama suresi
+- Grafik: Arama durumu dagilimi (pasta grafik)
+- Tablo: Degerlendirme puanlariyla son aramalar
+
+### Kampanya Performansi
+- Istatistik: Toplam kampanya aramalari
+- Grafik: Kampanya basina aramalar (cubuk grafik)
+- Tablo: En iyi performans gosteren kampanyalar
+
+## Sorun Giderme
+
+**Widget "Veri yok" gosteriyor:**
+- Tarih araligini genisletin
+- Filtrelerin cok kisitlayici olmadigini kontrol edin
+- Kayitlarinizin oldugunu dogrulayin
+
+**Yavas yukleme:**
+- Widget sayisini azaltin (20'nin altinda tutun)
+- Tarih araligi filtreleri kullanin
+- Tarayici onbellegini temizleyin
+
+**Kontrol paneli kenar cubugunda gorunmuyor:**
+- Sayfayi yenileyin
+- Planin bu ozelligi icerip icermerdigini kontrol edin
+
+<Note>
+Ayrintili yapilandirma icin bireysel widget turu rehberlerine bakin.
+</Note>

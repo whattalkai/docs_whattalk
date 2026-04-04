@@ -1,0 +1,192 @@
+---
+title: "DIDLogic Entegrasyonu"
+description: "DIDLogic hesabınızı SIP trunking ile bağlamak için adım adım kılavuz"
+---
+
+<Steps titleSize="h2">
+  <Step title="Telefon Numarası Satın Alın">
+    [app.didlogic.com](https://app.didlogic.com) adresinden DIDLogic kontrol panelinize giriş yapın ve **BUY** sekmesine gidin. Ülke ve alan koduna göre arayın, sepetinize bir numara ekleyin ve ödemeyi tamamlayın. Yeni numaranız **PURCHASED** sekmesinde görünecektir.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-buy-number.png"
+        alt="Ülke aramalı DIDLogic BUY sekmesi"
+      />
+    </Frame>
+  </Step>
+
+  <Step title="SIP Hesabınızı Yapılandırın (Giden)">
+    **SIP** sekmesine gidin ve SIP hesabınızda **Edit**'e tıklayın.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-sip-tab.png"
+        alt="Hesap listesini gösteren DIDLogic SIP sekmesi"
+      />
+    </Frame>
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-sip-edit.png"
+        alt="DIDLogic SIP hesabını düzenleme"
+      />
+    </Frame>
+
+    **SIP hesap numarasını** not edin (örn. `12345`) — bu WhatTalk'ta kullanacağınız **kullanıcı adınızdır**. **Password** ve **Confirm Password** alanlarına bir şifre belirleyin — numarayı WhatTalk'a aktarırken aynı şifreyi kullanacaksınız.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-sip-password.png"
+        alt="DIDLogic SIP şifre alanları"
+      />
+    </Frame>
+
+    **"Restrict to authorized IPs"**'i etkinleştirin ve `34.195.177.252` IP adresini ekleyin, ardından **Add** ve **Update**'e tıklayın.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-sip-restrict-ip.png"
+        alt="34.195.177.252 eklenmiş DIDLogic Yetkili IP'lerle Kısıtlama"
+      />
+    </Frame>
+
+    Aşağı kaydırarak bölgenizi bulun ve bölgesel ağ geçidi listesinden **SIP URI**'yi kopyalayın. WhatTalk'taki giden ayarlar için buna ihtiyacınız olacak.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-sip-region.png"
+        alt="DIDLogic bölgesel SIP URI seçimi"
+      />
+    </Frame>
+  </Step>
+
+  <Step title="Gelen Yönlendirmeyi Yapılandırın (DIDLogic'te)">
+    **PURCHASED** sekmesine gidin ve telefon numaranızın yanındaki **Destination**'a tıklayın.
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-purchased-tab.png"
+        alt="DIDLogic Satın alınan numaralar listesi"
+      />
+    </Frame>
+
+  Mevcut hedefi silin, ardından seçiciyi "SIP device"dan **"SIP URI"**'ye değiştirin.
+
+
+    <Frame>
+      <img
+        src="/resources/did-logic/didlogic-destination-select.png"
+        alt="DIDLogic SIP URI türü seçimi"
+      />
+    </Frame>
+
+    SIP URI'yi aşağıdaki formatta girin:
+
+    ```
+    <artı_işareti_olmadan_numara>@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    Örneğin, numaranız `+15551234567` ise, şunu girin:
+
+    ```
+    15551234567@5wed79aeavr.sip.livekit.cloud
+    ```
+
+    **Add**'a tıklayın.
+  </Step>
+
+  <Step title="Numarayı WhatTalk'a Aktarın">
+    WhatTalk kontrol panelinize gidin → **Telefon Numaralarınız** → **"SIP trunk entegre et"** ve bilgilerinizi doldurun:
+
+    ```
+    Telefon numarası: DIDLogic numaranız E.164 formatında (örn. +15551234567)
+    Kullanıcı adı: Adım 2'deki SIP hesap numarası (örn. 12345)
+    Şifre: Adım 2'de belirlediğiniz şifre
+    ```
+
+    <Frame>
+      <img
+        src="/resources/did-logic/sip-integration-sip-type.png"
+        alt="SIP entegrasyon detaylarını doldurun"
+      />
+    </Frame>
+
+    **Giden ayarlar** altında, Adım 2'de kopyaladığınız bölgesel SIP URI'yi yapıştırın. **Numara formatını** **"Başında + ile Uluslararası"** olarak ayarlayın ve **"Giden arama sabit IP adresinden gelecek"**i etkinleştirin.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/sip-integration-outbound.png"
+        alt="Giden SIP ayarları"
+      />
+    </Frame>
+
+    **Gelen ayarlar** altında, yetkilendirme türü olarak **"IP Adresi"**'ni seçin. Aşağıdaki tablodan seçtiğiniz DIDLogic bölgesel ağ geçidinin IP adresini ekleyin:
+
+    | Ağ Geçidi | IP Adresi |
+    |---------|-----------|
+    | sip.nl.didlogic.net | 89.149.192.7 |
+    | sip.uk.didlogic.net | 23.19.63.1 |
+    | sip.se.didlogic.net | 5.150.254.205 |
+    | sip.de.didlogic.net | 157.230.96.24 |
+    | sip.fr.didlogic.net | 159.8.84.235 |
+    | sip.hk.didlogic.net | 188.42.84.76 |
+    | sip.sg.didlogic.net | 188.42.84.76 |
+    | sip.au.didlogic.net | 119.9.12.222 |
+    | sip.nz.didlogic.net | 131.203.181.17 |
+    | sip.ir.didlogic.net | 161.202.135.82 |
+    | sip.ca.didlogic.net | 138.197.143.154 |
+    | sip.lax.didlogic.net | 185.118.62.77 |
+    | sip.nyc.didlogic.net | 192.241.183.87 |
+    | sip.za.didlogic.net | 102.130.116.205 |
+    | sip.br.didlogic.net | 169.57.132.146 |
+
+    <Frame>
+      <img
+        src="/resources/did-logic/sip-integration-inbound.png"
+        alt="Gelen SIP ayarları"
+      />
+    </Frame>
+
+    SIP trunk'ınızın bulunduğu **Ülkeyi** seçin.
+
+    <Frame>
+      <img
+        src="/resources/did-logic/sip-integration-country.png"
+        alt="SIP ülke seçimi"
+      />
+    </Frame>
+  </Step>
+
+  <Step title="Kurulumu Doğrulayın">
+    Gelen aramayı doğrulamak için numaranıza bir test araması yapın, ardından giden aramayı doğrulamak için test arama özelliğini kullanın.
+  </Step>
+</Steps>
+
+## Güvenlik Gereksinimleri
+
+<Warning>
+  SIP kimlik bilgilerinizin güvenli olması gerekir. Şifreniz en az 12 karakter içermeli, sayılar, büyük ve küçük harfler içermeli ve özel karakterler önerilir.
+</Warning>
+
+## Yaygın Sorunlar
+
+<AccordionGroup>
+  <Accordion title="Giden aramalar çalışmıyor mu?">
+    - **SIP URI'yi doğrulayın** — Adım 2'den doğru bölgesel SIP URI'yi kopyaladığınızdan emin olun. Sondaki boşlukları kaldırın.
+    - **Kullanıcı adınızı kontrol edin** — Kullanıcı adı sayısal SIP hesap numarasıdır (örn. `12345`), e-posta adresiniz veya hesap adınız değil.
+    - **Şifrenizi kontrol edin** — WhatTalk'taki şifrenin DIDLogic SIP hesap ayarlarında belirlediğinizle tam olarak eşleştiğinden emin olun.
+    - **IP beyaz listesini doğrulayın** — DIDLogic SIP hesabınızdaki yetkili IP'lere `34.195.177.252`'nin eklendiğinden emin olun.
+  </Accordion>
+
+  <Accordion title="Gelen aramalar çalışmıyor mu?">
+    - **SIP URI hedefini doğrulayın** — DIDLogic'te, hedefin SIP URI olarak (SIP device değil) ayarlandığından ve formatın doğru olduğundan emin olun: `<artı_işareti_olmadan_numara>@5wed79aeavr.sip.livekit.cloud`
+    - **WhatTalk'taki IP beyaz listesini kontrol edin** — WhatTalk gelen ayarlarında eklediğiniz IP adresinin kullandığınız bölgesel ağ geçidiyle eşleştiğinden emin olun. Adım 4'teki ağ geçidi IP tablosuna bakın.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Note>
+  Kurulum konusunda yardıma mı ihtiyacınız var? Destek ekibimiz müşterilerin telefon
+  sistemlerini entegre etmelerine yardımcı olma konusunda uzmanlaşmıştır. Belirli telefon
+  sistemi yapılandırmanızla sorunsuz bir kurulum sağlayarak tüm süreç boyunca size rehberlik edeceğiz.
+</Note>

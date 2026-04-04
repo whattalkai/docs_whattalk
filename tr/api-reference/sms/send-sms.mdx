@@ -1,0 +1,166 @@
+---
+title: "SMS Gönder"
+api: "POST /user/sms"
+description: "Telefon numaranızı kullanarak SMS mesajı gönderin"
+---
+
+Bu endpoint, satın aldığınız telefon numaralarını kullanarak SMS mesajları göndermenizi sağlar. SMS, Twilio aracılığıyla gönderilir ve maliyetler otomatik olarak hesap bakiyenizden düşülür.
+
+### İstek Gövdesi
+
+<ParamField body="from" type="integer" required>
+  SMS'in gönderileceği telefon numaranızın kimliği (SMS özellikli olmalıdır)
+</ParamField>
+
+<ParamField body="to" type="string" required>
+  Alıcının uluslararası formattaki telefon numarası (ör. "+1234567890")
+</ParamField>
+
+<ParamField body="body" type="string" required>
+  SMS mesaj içeriği (maksimum 300 karakter)
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  SMS'in gönderildiğini onaylayan başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="özellikler">
+    <ResponseField name="id" type="integer">
+      SMS kaydının benzersiz tanımlayıcısı
+    </ResponseField>
+
+    <ResponseField name="phone_number_id" type="integer">
+      SMS göndermek için kullanılan telefon numarasının kimliği
+    </ResponseField>
+
+    <ResponseField name="to" type="string">
+      Alıcının E.164 formatındaki telefon numarası
+    </ResponseField>
+
+    <ResponseField name="body" type="string">
+      SMS mesaj içeriği
+    </ResponseField>
+
+    <ResponseField name="user_id" type="integer">
+      SMS'i gönderen kullanıcının kimliği
+    </ResponseField>
+
+    <ResponseField name="segments" type="integer">
+      SMS segment sayısı (faturalandırma amaçlı)
+    </ResponseField>
+
+    <ResponseField name="segment_price" type="number">
+      SMS segment başına maliyet
+    </ResponseField>
+
+    <ResponseField name="total_cost" type="number">
+      SMS'in toplam maliyeti (segment_price * segments)
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      SMS'in mevcut durumu
+    </ResponseField>
+
+    <ResponseField name="sms_sid" type="string">
+      İzleme için Twilio SMS SID'i
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      SMS'in oluşturulma tarihi ve saati
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      SMS'in son güncellenme tarihi ve saati
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### Hata Yanıtları
+
+<ResponseField name="400 Bad Request">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      Sorunu açıklayan hata mesajı (geçersiz telefon numarası, yetersiz bakiye vb.)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="500 Internal Server Error">
+  <Expandable title="Hata Yanıtı">
+    <ResponseField name="message" type="string">
+      SMS gönderme başarısızlığını belirten hata mesajı
+    </ResponseField>
+    <ResponseField name="error" type="string">
+      Ayrıntılı hata bilgileri
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 201 Başarılı Yanıt
+{
+  "message": "SMS sent successfully",
+  "data": {
+    "id": 456,
+    "phone_number_id": 78,
+    "to": "+1234567890",
+    "body": "Hello! This is a test message from Your Company. How can we help you today?",
+    "user_id": 1,
+    "segments": 1,
+    "segment_price": 0.0075,
+    "total_cost": 0.0075,
+    "status": "sent",
+    "sms_sid": "SM1234567890abcdef1234567890abcdef",
+    "created_at": "2025-08-04 15:30:00",
+    "updated_at": "2025-08-04 15:30:02"
+  }
+}
+```
+
+```json 400 Bad Request
+{
+  "message": "From number not found"
+}
+```
+
+```json 400 Bad Request
+{
+  "message": "Invalid to phone number"
+}
+```
+
+```json 400 Bad Request
+{
+  "message": "Insufficient balance"
+}
+```
+
+```json 400 Bad Request
+{
+  "message": "From number is not SMS capable"
+}
+```
+
+```json 500 Internal Server Error
+{
+  "message": "Failed to send SMS",
+  "error": "Twilio API error details"
+}
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Gönderen telefon numarası kimliği doğrulanmış kullanıcıya ait olmalıdır
+- Gönderen telefon numarası SMS özellikli olmalıdır
+- Telefon numarası aboneliği aktif olmalıdır (süresi dolmamış)
+- SMS maliyetlerini karşılamak için yeterli hesap bakiyesi gereklidir
+- Telefon numaraları otomatik olarak E.164 formatına dönüştürülür
+- SMS maliyetleri hedef ülkeye göre değişir ve segment başına ücretlendirilir
+- Uzun mesajlar birden fazla segmente bölünebilir, bu da maliyeti artırır
+- Alıcı telefon numarası uluslararası standartlara göre geçerli olmalıdır

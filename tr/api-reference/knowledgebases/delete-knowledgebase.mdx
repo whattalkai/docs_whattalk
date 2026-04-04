@@ -1,0 +1,51 @@
+---
+title: "Bilgi bankasını sil"
+api: "DELETE /user/knowledgebases/{id}"
+description: "Bir bilgi bankasını ve tüm belgelerini silin"
+---
+
+Bu endpoint, bir bilgi bankasını ve ilişkili tüm belgelerini kalıcı olarak siler. Bu işlem geri alınamaz.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Silinecek bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "message": "Knowledgebase deleted successfully."
+}
+```
+
+```json 404 Not Found
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+</ResponseExample>
+
+### Neler Silinir
+
+Bir bilgi bankasını sildiğinizde:
+
+- Bilgi bankasındaki **tüm belgeler** kalıcı olarak silinir
+- **Vektör gömmeleri** vektör veritabanından kaldırılır
+- **Belge deposu verileri** harici servislerden temizlenir
+
+### Bağlı Asistanlara Ne Olur
+
+Bu bilgi bankasını kullanan tüm asistanların bilgi bankası referansı kaldırılır. Çalışmaya devam edecekler ancak bilgi bankası bağlamı olmadan.
+
+<Warning>
+Bu işlem geri alınamaz. Tüm belgeler ve işlenmiş içerikleri kalıcı olarak silinecektir. Devam etmeden önce bu bilgi bankasını silmek istediğinizden emin olun.
+</Warning>

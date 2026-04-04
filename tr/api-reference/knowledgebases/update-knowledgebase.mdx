@@ -1,0 +1,98 @@
+---
+title: "Bilgi bankasını güncelle"
+api: "PUT /user/knowledgebases/{id}"
+description: "Mevcut bir bilgi bankasını güncelleyin"
+---
+
+Bu endpoint, mevcut bir bilgi bankasının adını ve/veya açıklamasını günceller.
+
+### Yol Parametreleri
+
+<ParamField path="id" type="integer" required>
+  Güncellenecek bilgi bankasının benzersiz tanımlayıcısı
+</ParamField>
+
+### İstek Gövdesi
+
+<ParamField body="name" type="string">
+  Bilgi bankasının yeni adı (maksimum 255 karakter)
+</ParamField>
+
+<ParamField body="description" type="string">
+  Bilgi bankasının yeni açıklaması (maksimum 255 karakter)
+</ParamField>
+
+### Yanıt
+
+<ResponseField name="message" type="string">
+  Başarı mesajı
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Güncellenen bilgi bankası nesnesi
+  
+  <Expandable title="veri özellikleri">
+    <ResponseField name="id" type="integer">
+      Bilgi bankasının benzersiz tanımlayıcısı
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      Bilgi bankasının adı
+    </ResponseField>
+    
+    <ResponseField name="description" type="string">
+      Bilgi bankasının açıklaması
+    </ResponseField>
+    
+    <ResponseField name="status" type="string">
+      Mevcut durum
+    </ResponseField>
+    
+    <ResponseField name="status_label" type="string">
+      Okunabilir durum etiketi
+    </ResponseField>
+    
+    <ResponseField name="updated_at" type="string">
+      Son güncelleme ISO 8601 zaman damgası
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Yanıt
+{
+  "message": "Knowledgebase updated successfully.",
+  "data": {
+    "id": 1,
+    "name": "Updated Product Documentation",
+    "description": "Updated description for our technical docs",
+    "status": "active",
+    "status_label": "Active",
+    "updated_at": "2025-01-08T15:45:00.000000Z"
+  }
+}
+```
+
+```json 404 Not Found
+{
+  "error": "Knowledgebase not found."
+}
+```
+
+```json 422 Doğrulama Hatası
+{
+  "message": "The name may not be greater than 255 characters.",
+  "errors": {
+    "name": [
+      "The name may not be greater than 255 characters."
+    ]
+  }
+}
+```
+
+</ResponseExample>
+
+<Note>
+Bir bilgi bankasının adını veya açıklamasını güncellemek, belgelerini veya işleme durumunu etkilemez.
+</Note>

@@ -1,0 +1,287 @@
+---
+title: "Genel Bakış"
+description: "Mevcut telefon sisteminizi ve numaralarınızı WhatTalk.ai'ye bağlayın"
+---
+
+<Note>
+  Bu kılavuz SIP entegrasyonunu anlamanıza ve kurmanıza yardımcı olacaktır. Kurulum sırasında
+  açıklamaya ihtiyacınız olursa, destek ekibimiz yardımcı olmaya hazırdır.
+</Note>
+
+## SIP Entegrasyonu Nedir?
+
+SIP (Oturum Başlatma Protokolü) entegrasyonu, mevcut telefon sisteminizi WhatTalk.ai'ye bağlamanıza olanak tanır. Mevcut telefon kurulumunuz ile AI platformumuz arasında bir köprü inşa etmek gibi düşünün. Bu sayede:
+
+- Mevcut telefon numaralarınızı AI asistanlarımızla kullanabilirsiniz
+- Mevcut telefon sisteminizi ve sağlayıcınızı koruyabilirsiniz
+- Mevcut kurulumunuz üzerinden arama yapıp alabilirsiniz
+- Numaralarınızın tam kontrolünü elinizde tutabilirsiniz
+- Daha iyi tarifelere sahip yerel VoIP sağlayıcıları kullanarak operatör maliyetlerini azaltabilirsiniz
+
+## Nasıl Çalışır
+
+Telefon sisteminizi WhatTalk.ai ile entegre ettiğinizde:
+
+1. **Gelen Aramalar**: Numaralarınıza yapılan aramalar telefon sisteminiz üzerinden AI asistanlarımıza yönlendirilir
+2. **Giden Aramalar**: AI asistanlarımız numaralarınızdan geliyormuş gibi görünen aramalar yapabilir
+3. **Yönetim**: Numaralarınızı mevcut sağlayıcınız üzerinden yönetmeye devam edersiniz
+4. **Maliyet Verimliliği**: Arama sonlandırma için VoIP sağlayıcınızın rekabetçi tarifelerinden yararlanın
+
+## Entegrasyon Seçenekleri
+
+Telefon sisteminizi WhatTalk.ai'ye iki şekilde bağlayabilirsiniz:
+
+### 1. PBX Dahili Hat Entegrasyonu
+
+Bu, AI platformumuza telefon sisteminizde bir "dahili hat" vermek gibidir:
+
+- **Nedir**: PBX/telefon sisteminizden belirli bir dahili hattı bağlama
+- **İdeal kullanım**:
+  - Entegrasyonu test etme
+  - Belirli dahili hatları AI'ya yönlendirme
+  - Mevcut telefon sistemleriyle basit kurulum
+- **İhtiyacınız olacak**:
+  - Dahili hat numaranız (örn. 1000)
+  - Dahili hat kullanıcı adı ve şifresi
+  - PBX sunucu adresiniz (örn. pbx.sirketiniz.com)
+
+**Gerçek dünya örneği**:
+
+```
+Ofisiniz personel için 1001-1010 dahili hatlarını kullanıyor
+AI asistan için 1011 dahili hattını kurarsınız
+1011'e yapılan aramalar AI'ya gider
+AI, 1011 dahili hattından geliyormuş gibi arama yapabilir
+```
+
+### 2. Doğrudan Numara Entegrasyonu
+
+Bu, belirli telefon numaralarını platformumuza bağlar:
+
+- **Nedir**: Bir veya daha fazla telefon numaranızı AI'mıza yönlendirme
+- **İdeal kullanım**:
+  - Özel AI telefon hatları
+  - Müşteri hizmetleri numaraları
+  - Satış veya destek hatları
+- **İhtiyacınız olacak**:
+  - Telefon numaranız (örn. +1 555 0123)
+  - Sağlayıcınızdan SIP kimlik bilgileri
+  - Sağlayıcının SIP sunucu adresi
+
+**Gerçek dünya örneği**:
+
+```
+Bir destek numaranız var: +1 555 0123
+Bu numarayı AI'mıza bağlarsınız
++1 555 0123'e yapılan tüm aramalar AI asistan tarafından yönetilir
+AI, +1 555 0123 göstererek giden aramalar yapar
+```
+
+## Kimlik Doğrulama ve Arama Akışı
+
+### Çift Yönlü Yapılandırma
+
+SIP entegrasyonu hem gelen hem de giden aramalar için aynı kimlik bilgilerini kullanır:
+
+- **Gelen Aramalar** (VoIP → WhatTalk.ai):
+
+  ```
+  VoIP sisteminiz kullanıcı adı/şifre ile kimlik doğrular
+  ↓
+  Aramalar platformumuza ulaşır
+  ↓
+  AI asistan cevaplar
+  ```
+
+- **Giden Aramalar** (WhatTalk.ai → VoIP):
+  ```
+  AI aramayı başlatır
+  ↓
+  Platformumuz aynı kullanıcı adı/şifre ile VoIP'unuza kimlik doğrular
+  ↓
+  Arama hedefe ulaşır
+  ```
+
+### Kimlik Bilgisi Senkronizasyonu
+
+Entegrasyonun düzgün çalışması için:
+
+1. WhatTalk.ai kontrol panelinde ayarladığınız kimlik bilgileri VoIP yapılandırmanızla tam olarak eşleşmelidir
+2. Her iki yön için de aynı kullanıcı adı/şifre kombinasyonu kullanılır
+3. Kimlik bilgilerinde yapılan herhangi bir değişiklik her iki sistemde de güncellenmelidir
+
+<Warning>
+  VoIP sisteminizde kimlik bilgilerini değiştirirseniz, bağlantıyı sürdürmek için
+  bunları WhatTalk.ai kontrol panelinde de güncellemeyi (ve tersi) unutmayın.
+</Warning>
+
+## Entegrasyonunuzu Kurma
+
+### Adım 1: Bilgilerinizi Toplayın
+
+PBX Dahili Hat için:
+
+```
+Dahili hat numarası: örn. 1000
+Sunucu adresi: örn. pbx.sirket.com
+Kullanıcı adı: Dahili hat kullanıcı adınız
+Şifre: Dahili hat şifreniz
+```
+
+Doğrudan Numara için:
+
+```
+Telefon numarası: örn. +1 555 0123
+SIP sunucusu: örn. sip.saglayici.com
+Kullanıcı adı: Telefon şirketiniz tarafından sağlanır
+Şifre: Telefon şirketiniz tarafından sağlanır
+```
+
+### Adım 2: Kontrol Panelinde Yapılandırma
+
+1. WhatTalk.ai kontrol panelinize gidin
+2. **Telefon Numaralarınız**'a gidin
+3. "SIP trunk entegre et"e tıklayın
+
+### Adım 3: SIP Trunk Türünü Seçin
+
+Formun üst kısmında şu trunk türlerinden birini seçin:
+
+- **SIP Dahili Hat** - VoIP sağlayıcınız tarafından sağlanan mevcut bir SIP kimlik bilginiz (dahili hat) varsa bunu kullanın.
+- **Telefon Numarası (DID)** - Genel bir SIP dahili hattı yerine özel bir Doğrudan İç Arama (DID) numarası entegre etmek istiyorsanız bunu kullanın.
+
+PBX Dahili Hat için:
+```
+Dahili hat numarası: örn. 1000
+Kullanıcı adı: Dahili hat kullanıcı adınız
+Şifre: Dahili hat şifreniz
+```
+<img height="200" src="/resources/sip-integration-sip-type.png" />
+
+Doğrudan Numara için:
+
+```
+Telefon numarası: örn. +1 555 0123
+Kullanıcı adı: Telefon şirketiniz tarafından sağlanır
+Şifre: Telefon şirketiniz tarafından sağlanır
+```
+<img height="200" src="/resources/sip-integration-did.png" />
+
+### Adım 4: Giden Ayarları
+
+Bu ayarlar WhatTalk.ai'nin SIP sağlayıcınız üzerinden giden aramaları nasıl göndereceğini kontrol eder.
+
+- **SIP Adresi** - Port olmadan SIP trunk'ın adresini/sunucusunu girin.
+- **Giden Proxy (Sabit IP)** - Bazı SIP sağlayıcıları aramaların tek, beyaz listeye alınmış bir IP adresinden gelmesini gerektirir. Bunu şu şekilde yapılandırın:
+  - **Açık** - SIP sağlayıcınız sabit bir kaynak IP gerektiriyorsa, Giden proxy'yi etkinleştirin ve sabit bir IP adresinden gelecektir. WhatTalk.ai tüm giden istekleri bilinen bir statik IP üzerinden gönderecektir.
+  Bu seçeneği yalnızca sağlayıcınız açıkça tek kaynak IP gerektiriyorsa kullanın.
+  - **Kapalı** - Sağlayıcınız herhangi bir IP'den aramaları kabul ediyorsa, bu seçeneği kapalı bırakın. Bu durumda WhatTalk.ai aramaları dinamik IP'lerden gönderecektir.
+
+```
+SIP adresi: (örn. pbx.sirket.com/sip.saglayici.com)
+```
+<img height="200" src="/resources/sip-integration-outbound.png" />
+
+### Adım 5: Numara Formatı Yapılandırması
+
+Bu, sistemimize arama yaparken telefon numaralarını nasıl biçimlendireceğini söyler. Sağlayıcınızın gereksinimlerine göre seçin:
+
+1. **+ ile Uluslararası**
+
+   ```
+   Format: +[ülke][numara]
+   Örnek: +1 202 555 0123
+   SIP İsteği: sip:+12025550123@sizin.pbx.com
+   ```
+
+2. **+ olmadan Uluslararası**
+
+   ```
+   Format: [ülke][numara]
+   Örnek: 1 202 555 0123
+   SIP İsteği: sip:12025550123@sizin.pbx.com
+   ```
+
+3. **Ulusal format**
+   ```
+   Format: [yerel numara]
+   Örnek: 0741926265
+   SIP İsteği: sip:0741926265@sizin.pbx.com
+   ```
+
+### Adım 6: Gelen Ayarları
+
+Bu ayarlar WhatTalk.ai'nin SIP sağlayıcınızdan gelen aramaları nasıl alacağını ve doğrulayacağını belirler.
+
+1. **SIP Adresimiz** - WhatTalk.ai benzersiz bir gelen SIP URI atar: ```5wed79aeavr.sip.livekit.cloud```. SIP sağlayıcınız, giden trunk'ını veya yönlendirme kuralını bu URI'ye yönlendirerek gelen aramaları bu adrese gönderecek şekilde yapılandırılmalıdır.
+2. **IP Adresi (IP Beyaz Listesi)** - SIP sağlayıcınız bilinen bir genel IP adresleri kümesinden arama gönderebiliyorsa, IP Adresi'ni seçin. Ardından Gelen Kimlik Doğrulama altındaki beyaz listeye her sağlayıcı IP'sini ekleyin.
+3. **Kullanıcı Adı ve Şifre** - Sağlayıcınız SIP kimlik doğrulamayı destekliyorsa, Kullanıcı adı ve şifre'yi seçin. Giden Ayarlar altında girdiğiniz aynı kimlik bilgileri gelen aramaları doğrulamak için kullanılacaktır. Sağlayıcınızın PBX'inin bu kimlik bilgilerini içerecek şekilde yapılandırıldığından emin olun.
+
+<img height="200" src="/resources/sip-integration-inbound.png" />
+
+### Adım 7: Ülke Seçimi
+SIP trunk'ınızın temin edildiği ülkeyi seçin.
+
+<img height="200" src="/resources/sip-integration-country.png" />
+
+### Adım 8: Kurulumu Doğrulama
+
+Yapılandırmadan sonra:
+
+1. Numaranıza/dahili hattınıza bir test araması yapın
+2. AI asistanın cevap verdiğini kontrol edin
+3. Giden aramayı doğrulamak için test arama özelliğini kullanın
+
+## Güvenlik Gereksinimleri
+
+SIP kimlik bilgilerinizin güvenli olması gerekir:
+
+- **Kullanıcı adı**: Dahili hat numaranız veya sağlayıcı tarafından verilen kullanıcı adı
+- **Şifre şunlara sahip olmalı**:
+  - 12 veya daha fazla karakter
+  - Sayılar
+  - Büyük ve küçük harfler
+  - Özel karakterler önerilir
+
+## Sık Sorulan Sorular
+
+<AccordionGroup>
+  <Accordion title="Birden fazla numara kullanabilir miyim?">
+    Evet! Platformumuzla birden fazla dahili hat veya doğrudan numara entegre edebilirsiniz.
+  </Accordion>
+
+{" "}
+
+<Accordion title="Numaralarımın kontrolünü kaybeder miyim?">
+  Hayır, mevcut sağlayıcınız üzerinden tam kontrolü sürdürürsünüz. Entegrasyon
+  yalnızca sisteminiz ile platformumuz arasında bir bağlantı kurar.
+</Accordion>
+
+{" "}
+
+<Accordion title="Numaralarımı normal aramalar için hâlâ kullanabilir miyim?">
+  Evet, telefon sisteminizde hangi aramaların AI'ya, hangilerinin normal telefon
+  sisteminize gideceğine karar vermek için yönlendirme kuralları ayarlayabilirsiniz.
+</Accordion>
+
+{" "}
+
+<Accordion title="Daha sonra ayarları değiştirmem gerekirse ne olur?">
+  Kontrol paneli üzerinden entegrasyon ayarlarınızı istediğiniz zaman güncelleyebilirsiniz.
+  Tüm yapılandırma seçenekleri ilk kurulumdan sonra erişilebilir kalır.
+</Accordion>
+
+  <Accordion title="Bu arama maliyetlerine nasıl yardımcı olur?">
+    Kendi VoIP sağlayıcınızı kullanarak, genellikle standart operatör tarifelerinden
+    daha rekabetçi olan yerel tarifeleri ve mevcut anlaşmalarını kullanabilirsiniz.
+    Bu özellikle uluslararası aramalar için faydalıdır.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Note>
+  Kurulum konusunda yardıma mı ihtiyacınız var? Destek ekibimiz müşterilerin telefon
+  sistemlerini entegre etmelerine yardımcı olma konusunda uzmanlaşmıştır. Belirli telefon
+  sistemi yapılandırmanızla sorunsuz bir kurulum sağlayarak tüm süreç boyunca size rehberlik edeceğiz.
+</Note>
