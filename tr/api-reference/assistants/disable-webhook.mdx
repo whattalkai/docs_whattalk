@@ -1,0 +1,88 @@
+---
+title: "Asistan webhook'unu devre disi birakma"
+api: "POST /user/assistants/disable-webhook"
+description: "Belirli bir asistan icin webhook bildirimlerini devre disi birakma"
+---
+
+Bu endpoint, bir asistan icin webhook bildirimlerini devre disi birakarak arama tamamlanmalari ve veriler hakkindaki tum gercek zamanli guncellemeleri durdurur.
+
+### Istek Govdesi
+
+<ParamField body="assistant_id" type="integer" required>
+  Webhook'u devre disi birakilacak asistanin kimlik numarasi
+</ParamField>
+
+### Yanit
+
+<ResponseField name="message" type="string">
+  Webhook'un devre disi birakildigini onaylayan basari mesaji
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Bos dizi (gelecekteki kullanim icin ayrilmistir)
+</ResponseField>
+
+### Hata Yanitlari
+
+<ResponseField name="404 Not Found">
+  <Expandable title="Hata Yaniti">
+    <ResponseField name="message" type="string">
+      Asistan bulunamadiginda veya kimlik dogrulamasi yapilmis kullaniciya ait olmadiginda donen hata mesaji
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="422 Validation Error">
+  <Expandable title="Hata Yaniti">
+    <ResponseField name="message" type="string">
+      Dogrulama hatasini belirten hata mesaji
+    </ResponseField>
+    <ResponseField name="errors" type="object">
+      Her alan icin ayrintili dogrulama hatalari
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Success Response
+{
+  "message": "Webhook disabled successfully",
+  "data": []
+}
+```
+
+```json 404 Not Found
+{
+  "message": "Assistant not found"
+}
+```
+
+```json 422 Validation Error
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "assistant_id": [
+      "The assistant id field is required."
+    ]
+  }
+}
+```
+
+</ResponseExample>
+
+### Webhook Davranisi
+
+Webhook devre disi birakildiginda:
+
+- Asistan, webhook URL'nize HTTP POST istekleri gondermeyi durduracaktir
+- Hem `is_webhook_active` degeri `false` olarak hem de `webhook_url` degeri `null` olarak ayarlanir
+- Devam eden aramalar normal sekilde tamamlanir, ancak hicbir webhook bildirimi gonderilmez
+- Arama verileri, API arama endpointleri araciligiyla hala erisilebilir olacaktir
+
+### Notlar
+
+- Asistan, kimlik dogrulamasi yapilmis kullaniciya ait olmalidir
+- Bu islem, webhook yapilandirmasini asistandan tamamen kaldirir
+- Daha sonra yeni bir URL ile webhook etkinlestirme endpointini kullanarak webhook'lari yeniden etkinlestirebilirsiniz
+- Webhook'lari devre disi birakmak, arama kaydini veya veri toplamayı etkilemez

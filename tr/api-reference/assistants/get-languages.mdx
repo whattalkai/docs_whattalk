@@ -1,0 +1,66 @@
+---
+title: "Mevcut dilleri getirme"
+api: "GET /user/assistants/languages"
+description: "Asistan yapilandirmasi icin mevcut tum dilleri alma"
+---
+
+Bu endpoint, asistan olusturulurken veya guncellenirken kullanilabilecek tum mevcut dillerin listesini dondurur.
+
+### Yanit alanlari
+
+<ResponseField name="data" type="array">
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">
+      Dilin benzersiz tanimlayicisi
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Dilin gorunen adi
+    </ResponseField>
+
+    <ResponseField name="iso_2" type="string">
+      ISO 639-1 iki harfli dil kodu
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+
+```json 200 Response
+[
+  {
+    "id": 1,
+    "name": "English",
+    "iso_2": "en"
+  },
+  {
+    "id": 2,
+    "name": "Romanian",
+    "iso_2": "ro"
+  },
+  {
+    "id": 3,
+    "name": "French",
+    "iso_2": "fr"
+  },
+  {
+    "id": 4,
+    "name": "Spanish",
+    "iso_2": "es"
+  },
+  {
+    "id": 5,
+    "name": "German",
+    "iso_2": "de"
+  }
+]
+```
+
+</ResponseExample>
+
+### Notlar
+
+- Asistan olusturulurken veya guncellenirken `id` alanini `language_id` olarak kullanin
+- Cok dilli asistanlar icin `secondary_language_ids` dizisinde `id` alanini kullanin
+- `iso_2` kodu, dile ozgu islevsellik icin faydali olabilir
+- Mevcut tum diller tek bir istekte dondurulur
