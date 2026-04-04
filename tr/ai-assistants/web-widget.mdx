@@ -1,0 +1,288 @@
+---
+title: "Web Widget"
+icon: "code"
+description: "AI asistanınızı sesli ve sohbet özellikleriyle web sitenize yerleştirin"
+---
+
+Sesli aramalar, metin sohbeti veya her ikisini destekleyen özelleştirilebilir bir widget ile AI asistanınızı herhangi bir web sitesine ekleyin.
+
+## Genel Bakış
+
+Web Widget, web sitesi ziyaretçilerinin AI asistanınızla doğrudan etkileşim kurmasını sağlar:
+- **Sesli konuşmalar:** Tarayıcıda gerçek zamanlı sesli aramalar
+- **Metin sohbeti:** Metin tabanlı etkileşimler için mesajlaşma arayüzü
+- **Hibrit mod:** Ses ve sohbet arasında sorunsuz geçiş
+
+## Widget Yapılandırmasına Erişim
+
+1. Asistanınızın düzenleme sayfasına gidin
+2. **"Web widget"** düğmesine (sarı/uyarı rengi) tıklayın
+3. Canlı önizlemeli widget yapılandırma paneli açılır
+
+<Frame>
+  <img src="/resources/web-widget-button.png" alt="Web Widget Düğmesi Konumu" />
+</Frame>
+
+<Note>
+Web Widget premium bir özelliktir. Yapılandırmadan önce planınızın web widget erişimini içerdiğinden emin olun.
+</Note>
+
+## Widget Modları
+
+Ziyaretçilerin asistanınızla nasıl etkileşim kuracağını seçin:
+
+### Ses ve Sohbet (Önerilen)
+Kullanıcılar konuşmalar sırasında ses ve metin arasında sorunsuz geçiş yapabilir.
+
+**Şunlar için en uygun:**
+- Kullanıcılar için maksimum esneklik
+- Erişilebilirlik (mobilde ses, sessiz ortamlarda sohbet)
+- Her iki modu gerektiren karmaşık etkileşimler
+
+### Yalnızca Sohbet
+Yalnızca metin tabanlı mesajlaşma arayüzü.
+
+**Şunlar için en uygun:**
+- Müşteri desteği ve SSS
+- Sesin uygun olmadığı ortamlar
+- Potansiyel müşteri yakalama ve değerlendirme formları
+
+### Yalnızca Ses
+Yalnızca gerçek zamanlı sesli konuşmalar.
+
+**Şunlar için en uygun:**
+- Web sitesinde telefon benzeri deneyim
+- Ses öncelikli kullanım alanları
+- Eller serbest etkileşimler
+
+## Yapılandırma Seçenekleri
+
+### Genel Sekmesi
+
+<Frame>
+  <img src="/resources/widget-tab-general.png" alt="Widget Genel Sekmesi" />
+</Frame>
+
+**Widget Modu:** Ses, Sohbet veya Ses ve Sohbet
+
+**Widget Boyutu:** Standart veya **ekstra büyük** düzen arasından seçin
+- **Standart**: Çoğu kullanım alanına uygun kompakt yüzen widget
+- **Ekstra Büyük**: Masaüstünde yarım ekran panel, mobilde tam ekran — ayrıntılı konuşmalar için ideal
+
+**Konum:** 8 konumdan birini seçin (sağ-alt, sol-alt, orta-alt, sağ-orta, sol-orta, sağ-üst, sol-üst, orta-üst)
+
+**Ana Renk:** Düğmeler ve vurgular için marka rengi
+
+**Açma/Kapama Düğmesi Boyutu:** Küçük veya Normal
+
+**Açma/Kapama Düğmesi Stili:** Animasyonlu (cam morfizm) veya Basit (düz tasarım)
+
+**Sayfa Yüklendiğinde Otomatik Aç:** Etkinleştirildiğinde, widget sayfa yüklendiğinde otomatik olarak genişler — ziyaretçinin tıklamasına gerek yoktur.
+
+### Düğme Sekmesi
+
+<Frame>
+  <img src="/resources/widget-tab-button.png" alt="Widget Düğme Sekmesi" />
+</Frame>
+
+**Özel Avatar:** Varsayılan widget simgesini değiştirmek için kendi avatar resminizi yükleyin. Açma/kapama düğmesinde ve sohbet başlığında görünür. Maksimum dosya boyutu: 512KB, 1:1 en-boy oranı (kare).
+
+**Düğme Ana Metni** (varsayılan: "Need help?") — widget düğmesindeki birincil metin
+
+**Düğme Alt Metni** (varsayılan: "Chat with us") — ikincil metin, küçük düğme boyutu kullanıldığında gizlenir
+
+**Sekme Etiketleri (yalnızca Ses ve Sohbet modu):**
+- Ses Sekmesi Etiketi (varsayılan: "Voice") — marka dilinize uyacak şekilde yeniden adlandırın (örn. "Bizi Arayın", "Konuşun")
+- Sohbet Sekmesi Etiketi (varsayılan: "Chat") — marka dilinize uyacak şekilde yeniden adlandırın (örn. "Mesaj", "Yazın")
+
+### Başlık ve Modal Sekmesi
+
+<Frame>
+  <img src="/resources/widget-tab-header-modal.png" alt="Widget Başlık ve Modal Sekmesi" />
+</Frame>
+
+**Başlık** (varsayılan: "AI Assistant")
+
+**Alt Başlık** (varsayılan: "Ready to help you ✨")
+
+**Modal Başlığı** (varsayılan: "Ready to chat?")
+
+**Başlat Düğmesi Metni** (varsayılan: "Start Voice Chat")
+
+**Modal Açıklaması** (varsayılan: "Click below to start your conversation")
+
+### Sohbet Ayarları Sekmesi
+
+<Frame>
+  <img src="/resources/widget-tab-chat-settings.png" alt="Widget Sohbet Ayarları Sekmesi" />
+</Frame>
+
+<Note>
+Bu sekme yalnızca widget modu sohbet içerdiğinde görünür (Yalnızca Sohbet veya Ses ve Sohbet).
+</Note>
+
+**Sohbet Yer Tutucusu** (varsayılan: "Type your message...")
+
+**Gönder Düğmesi Etiketi** (varsayılan: "Send message") — gönder düğmesi için erişilebilirlik etiketi
+
+**Fonksiyon Çağrılarını Göster:** Devre dışı bırakıldığında (varsayılan), LLM araç çağrıları (örn. takvim aramaları, bilgi bankası sorguları) sohbette gizlenir ve son kullanıcılar için konuşma temiz tutulur. Araç kullanım ayrıntılarını göstermek için etkinleştirin.
+
+### Sohbette Tıklanabilir Bağlantılar
+
+Sohbet widget'ı **markdown biçimlendirmesini** destekler, böylece AI asistanınız tıklanabilir bağlantılar, kalın metin, listeler ve daha fazlasını gönderebilir.
+
+Sohbet mesajlarına tıklanabilir URL'ler eklemek için asistanınızın talimatında veya ilk mesajında markdown bağlantı biçimini kullanın:
+
+```
+En son [tekliflerimize](https://example.com/offers) göz atın veya [yardım merkezimizi](https://example.com/help) ziyaret edin.
+```
+
+<Tip>
+Asistanınızın talimatına şu şekilde bir yönerge ekleyin: *"Bağlantı veya URL paylaşırken, bunları her zaman tıklanabilir markdown bağlantıları olarak biçimlendirin: [bağlantı metni](url)"* — bu, AI'ın düz metin URL'ler yerine tutarlı olarak tıklanabilir bağlantılar üretmesini sağlar.
+</Tip>
+
+### Ses Ayarları Sekmesi
+
+<Frame>
+  <img src="/resources/widget-tab-voice-settings.png" alt="Widget Ses Ayarları Sekmesi" />
+</Frame>
+
+<Note>
+Bu sekme yalnızca widget modu ses içerdiğinde görünür (Yalnızca Ses veya Ses ve Sohbet).
+</Note>
+
+**Bağlanıyor Metni** (varsayılan: "Connecting...")
+
+**Bağlantıyı Kes Metni** (varsayılan: "Disconnect")
+
+**Hata Metni** (varsayılan: "Connection failed. Please try again.")
+
+### Sohbet Öncesi Form
+
+<Frame>
+  <img src="/resources/widget-pre-chat-form.png" alt="Sohbet Öncesi Form Yapılandırması" />
+</Frame>
+
+Konuşmalara başlamadan önce bilgi toplayın:
+
+**Form Yapılandırması:**
+- Ön Form Başlığı (varsayılan: "Before we start...")
+- Ön Form Açıklaması (varsayılan: "Please provide some information to help us assist you better")
+- Gönder Düğmesi Metni (varsayılan: "Continue")
+
+**Form Alanları:**
+Veri toplamak için özel alanlar ekleyin:
+- **Değişken Adı:** Dahili değişken adı (asistan değişkenlerine eşlenir). Yalnızca harfler, sayılar, tireler ve alt çizgiler kullanılabilir.
+- **Alan Etiketi:** Kullanıcılara gösterilen görüntüleme etiketi
+- **Alan Türü:** Metin, E-posta, Telefon veya Metin Alanı
+- **Zorunlu:** Alanı zorunlu yapın
+- **Yer Tutucu:** Alanda gösterilen yer tutucu metin
+- **Yardımcı Metin:** Alanın altında isteğe bağlı açıklama
+
+**Değişken Eşleme:**
+Form alan adları otomatik olarak asistanınızın değişkenlerine eşlenir ve toplanan verilerin konuşmalar sırasında kullanılabilir olmasını sağlar.
+
+**Örnek Form Alanları:**
+```
+Ad: Tam Ad (zorunlu, metin)
+E-posta: E-posta Adresi (zorunlu, e-posta)
+Şirket: Şirket Adı (isteğe bağlı, metin)
+Mesaj: Size nasıl yardımcı olabiliriz? (isteğe bağlı, metin alanı)
+```
+
+### AI Yanıt Ayarları
+
+<Frame>
+  <img src="/resources/widget-ai-response-settings.png" alt="Widget AI Yanıt Ayarları" />
+</Frame>
+
+**AI Etkin:** Açık konuma getirildiğinde (varsayılan), AI asistanı gelen mesajlara otomatik olarak yanıt verir. Widget'ı yalnızca manuel konuşmalar için kullanmak istiyorsanız kapatın — mesajlar toplanır ancak AI yanıt vermez.
+
+### Konuşma Webhook
+
+<Frame>
+  <img src="/resources/widget-conversation-webhook.png" alt="Widget Konuşma Webhook" />
+</Frame>
+
+**Webhook URL:** Widget üzerinden yeni bir konuşma başladığında webhook bildirimi almak için bir URL girin. Bunu otomasyon akışlarını tetiklemek, olayları CRM'inize kaydetmek veya ekibinizi gerçek zamanlı bilgilendirmek için kullanın.
+
+### Widget Görüntüleme
+
+<Frame>
+  <img src="/resources/widget-display-toggle.png" alt="Widget Görüntüleme Düğmesi" />
+</Frame>
+
+**Widget'ı Etkinleştir:** Widget'ın web sitenizde yüklenip yüklenmeyeceğini kontrol eden ana anahtar. Devre dışı bırakıldığında, yerleştirme kodu sitenize yüklenmiş olsa bile widget görünmez. Web sitenizden kod kaldırmadan widget'ı geçici olarak gizlemek için bunu kullanın.
+
+
+## Canlı Widget Önizleme
+
+<Frame>
+  <img src="/resources/widget-live-preview.png" alt="Widget Canlı Önizleme" />
+</Frame>
+
+Yapılandırma panelinin üst kısmında, canlı bir önizleme widget'ınızın bir web sitesinde tam olarak nasıl görüneceğini ve davranacağını gösterir. Önizleme, herhangi bir ayarı değiştirdiğinizde gerçek zamanlı olarak güncellenir.
+
+**Önizleme URL'sini Kopyala** — önizleme URL'sini panonuza kopyalar, böylece ayrı bir tarayıcı sekmesinde açabilir veya inceleme için ekibinizle paylaşabilirsiniz.
+
+**Verileri Sıfırla** — önizlemedeki tüm saklanan konuşma geçmişini, form gönderimlerini ve tercihleri temizler. Test ettikten sonra ilk kez ziyaretçi deneyimini simüle etmek için bunu kullanın.
+
+<Tip>
+Önizleme tamamen etkileşimlidir — widget düğmesine tıklayabilir, sohbet öncesi formu doldurabilir ve dağıtmadan önce yapılandırmanızı test etmek için gerçek bir konuşma başlatabilirsiniz.
+</Tip>
+
+### Yerleştirme Kodu
+
+<Frame>
+  <img src="/resources/widget-embed-code.png" alt="Widget Yerleştirme Kodu" />
+</Frame>
+
+Yerleştirme kodu bölümü, kopyalamaya hazır bir script etiketi sağlar. Panonuza kopyalamak için **Kopyala** düğmesine tıklayın, ardından web sitenizde kapanış `</body>` etiketinden önce yapıştırın:
+
+```html
+<script src="https://app.whattalk.ai/embed.js"
+        data-assistant-id="your-assistant-id">
+</script>
+```
+
+<Warning>
+Yerleştirme kodunu kopyalamadan **önce** widget ayarlarınızı kaydedin. Script tüm yapılandırmayı sunucudan yükler, bu nedenle kaydedilmemiş değişiklikler web sitenizde görünmez.
+</Warning>
+
+## Kurulum
+
+1. Widget ayarlarınızı yapılandırın ve kaydedin
+2. **Yerleştirme Kodu** bölümünden yerleştirme kodunu kopyalayın
+3. Script etiketini web sitenizde kapanış `</body>` etiketinden önce yapıştırın
+4. Web sitenizi ziyaret edin ve widget'ın yapılandırılan konumda göründüğünü doğrulayın
+5. Ses/sohbet işlevselliğini ve sohbet öncesi formu (yapılandırıldıysa) test edin
+
+## Widget Davranışı
+
+### İlk Ziyaret
+- Widget düğmesi yapılandırılan konumda görünür
+- Tıklama modal/sohbet arayüzünü açar
+- Sohbet öncesi form görüntülenir (yapılandırıldıysa)
+- Form gönderildikten sonra konuşma başlar
+
+### Tekrar Ziyaretler
+- Önceki konuşma durumu geri yüklenebilir
+- Form verileri hatırlanır (ziyaretçi çerezleri temizlemediyse)
+- Destek deneyiminin sorunsuz devamı
+
+### Konuşma Takibi
+Tüm widget konuşmaları inceleme ve analiz için [Konuşmalar](/tr/conversations/overview) sayfanızda görünür.
+
+<Warning>
+Ses işlevselliği için HTTPS (SSL sertifikası) gereklidir. HTTP siteler, tarayıcı güvenlik kısıtlamaları nedeniyle yalnızca sohbet modunu kullanabilir.
+</Warning>
+
+## Sorun Giderme
+
+Kurulum ve yapılandırma sorunları için [Web Widget Sorun Giderme](/tr/troubleshooting/web-widget) sayfasına bakın.
+
+## Sonraki Adımlar
+
+- Canlı önizlemeyi kullanarak widget'ı test edin
+- Yerleştirme kodunu web sitenize ekleyin
+- [Konuşmalar](/tr/conversations/overview) sayfasında konuşmaları izleyin
