@@ -1,8 +1,0 @@
-/* Move language selector to the right side of the navbar */
-[class*="LanguageSelect"],
-[class*="language-select"],
-nav [class*="locale"],
-header [class*="locale"] {
-  order: 999 !important;
-  margin-left: auto !important;
-}
