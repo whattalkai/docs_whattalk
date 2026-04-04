@@ -8,11 +8,7 @@
   "colors": {
     "primary": "#6C2BD9",
     "light": "#8B5CF6",
-    "dark": "#6C2BD9",
-    "anchors": {
-      "from": "#6C2BD9",
-      "to": "#8B5CF6"
-    }
+    "dark": "#6C2BD9"
   },
   "sidebar": {
     "items": "card"
