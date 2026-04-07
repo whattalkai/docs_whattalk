@@ -4,287 +4,287 @@ icon: "phone"
 description: "AI destekli mesajlaşma için WhatsApp Business göndericileri oluşturun ve yönetin"
 ---
 
-A WhatsApp Sender is a phone number registered with WhatsApp Business API that can send and receive messages. Each sender is connected to an AI assistant for automated responses.
+WhatsApp Gönderici, WhatsApp Business API'ye kayıtlı ve mesaj gönderip alabilen bir telefon numarasıdır. Her gönderici, otomatik yanıtlar için bir AI asistana bağlanır.
 
 ## WhatsApp Gönderici Nedir?
 
-A WhatsApp Sender is:
+Bir WhatsApp Gönderici:
 
-- A dedicated phone number connected to WhatsApp Business
-- Connected to an AI assistant for automated responses
-- Capable of sending template messages and free-form replies
+- WhatsApp Business'a bağlı özel bir telefon numarasıdır
+- Otomatik yanıtlar için bir AI asistana bağlıdır
+- Şablon mesajları ve serbest formatlı yanıtlar gönderebilir
 
 ## Numara Türü Seçenekleri
 
-When creating a WhatsApp sender, you can choose between two types of phone numbers:
+WhatsApp gönderici oluştururken iki telefon numarası türünden birini seçebilirsiniz:
 
 <CardGroup cols={2}>
-  <Card title="Platform Numbers" icon="building">
-    Use phone numbers purchased through our platform. We handle verification automatically using AI-assisted voice verification.
+  <Card title="Platform Numaraları" icon="building">
+    Platformumuz üzerinden satın alınan telefon numaralarını kullanın. Doğrulamayı AI destekli sesli doğrulama ile otomatik olarak yapıyoruz.
 
-    **Best for:** Businesses wanting a dedicated business line with automated setup
+    **En uygun:** Otomatik kurulumla özel bir iş hattı isteyen işletmeler
   </Card>
-  <Card title="External Numbers" icon="mobile">
-    Use your own mobile number. You verify ownership by receiving an SMS or voice call with a verification code.
+  <Card title="Harici Numaralar" icon="mobile">
+    Kendi cep telefonu numaranızı kullanın. SMS veya sesli arama ile doğrulama kodu alarak sahipliği doğrularsınız.
 
-    **Best for:** Businesses wanting to use an existing number they already own
+    **En uygun:** Zaten sahip oldukları mevcut bir numarayı kullanmak isteyen işletmeler
   </Card>
 </CardGroup>
 
 ## WhatsApp Gönderici Oluşturma
 
-Creating a WhatsApp sender starts with choosing your number type, then following the appropriate setup flow.
+WhatsApp gönderici oluşturmak, numara türünüzü seçip ardından uygun kurulum akışını takip etmekle başlar.
 
-### Step 1: Choose Your Number Type
+### Adım 1: Numara Türünüzü Seçin
 
-Navigate to **WhatsApp Senders** → **Create Sender** and select your preferred number type:
+**WhatsApp Göndericiler** → **Gönderici Oluştur** bölümüne gidin ve tercih ettiğiniz numara türünü seçin:
 
-- **Platform Number** — Use a number purchased from our platform (automated AI verification)
-- **External Number** — Use your own mobile number (SMS/voice code verification)
+- **Platform Numarası** — Platformumuzdan satın alınan bir numara kullanın (otomatik AI doğrulaması)
+- **Harici Numara** — Kendi cep telefonu numaranızı kullanın (SMS/sesli kod doğrulaması)
 
 ---
 
 ## Platform Numarası Kurulumu
 
-If you selected **Platform Number**, follow these steps:
+**Platform Numarası** seçtiyseniz şu adımları izleyin:
 
-### Step 2: Pre-Verify Your Phone Number
+### Adım 2: Telefon Numaranızı Ön Doğrulama
 
-Before connecting to WhatsApp, your phone number must be verified with Meta.
+WhatsApp'a bağlanmadan önce, telefon numaranızın Meta tarafından doğrulanması gerekir.
 
 <Warning>
-**Call Interception Warning** — During verification, ALL inbound calls to the selected phone number will be intercepted by our verification system for up to 5 minutes.
+**Arama Engelleme Uyarısı** — Doğrulama sırasında, seçilen telefon numarasına gelen TÜM aramalar doğrulama sistemimiz tarafından 5 dakikaya kadar engellenecektir.
 
-This means:
-- Your normal AI assistant will NOT answer calls during this time
-- All calls will go to a silent verification listener
-- Regular customers calling this number will experience disrupted service
+Bu şu anlama gelir:
+- Normal AI asistanınız bu süre zarfında aramaları YANITLAMAYACAKTIR
+- Tüm aramalar sessiz bir doğrulama dinleyicisine yönlendirilecektir
+- Bu numarayı arayan müşteriler hizmet kesintisi yaşayacaktır
 
-**DO NOT run this on a production phone number that is actively receiving customer calls!**
+**Aktif olarak müşteri aramaları alan bir üretim telefon numarasında bunu ÇALIŞTIRMAYIN!**
 </Warning>
 
-1. Select an available phone number (only "normal" type numbers not already used for WhatsApp are shown)
-2. Enter a **Display Name** for your business (this will be shown to customers)
-3. Optionally add business profile information (about, description, address, category)
-4. Click **Start Verification**
+1. Mevcut bir telefon numarası seçin (yalnızca WhatsApp için kullanılmayan "normal" tipteki numaralar gösterilir)
+2. İşletmeniz için bir **Görünen Ad** girin (bu müşterilere gösterilecektir)
+3. İsteğe bağlı olarak işletme profil bilgilerini ekleyin (hakkında, açıklama, adres, kategori)
+4. **Doğrulamayı Başlat** butonuna tıklayın
 
-The system will automatically verify your number with Meta using AI-assisted voice verification. This typically takes 1-2 minutes.
+Sistem, AI destekli sesli doğrulama kullanarak numaranızı Meta ile otomatik olarak doğrulayacaktır. Bu işlem genellikle 1-2 dakika sürer.
 
-### Step 3: Select Your Verified Number
+### Adım 3: Doğrulanmış Numaranızı Seçin
 
-Once verification completes:
+Doğrulama tamamlandığında:
 
-1. You'll see your verified number in the "Verified Numbers Ready" section
-2. Select the number you want to connect
-3. Click **Continue to WhatsApp Connection**
+1. Doğrulanmış numaranızı "Hazır Doğrulanmış Numaralar" bölümünde göreceksiniz
+2. Bağlamak istediğiniz numarayı seçin
+3. **WhatsApp Bağlantısına Devam Et** butonuna tıklayın
 
-### Step 4: Connect to WhatsApp Business
+### Adım 4: WhatsApp Business'a Bağlanın
 
-This step connects your verified number to WhatsApp through Meta's Embedded Signup flow.
+Bu adım, doğrulanmış numaranızı Meta'nın Gömülü Kayıt akışı üzerinden WhatsApp'a bağlar.
 
 <Warning>
-**CRITICAL: Create a NEW Account** — During the Facebook signup flow, you MUST create a brand new WhatsApp Business Account. Do NOT select an existing WhatsApp Business Account — this will cause the integration to fail.
+**KRİTİK: YENİ Hesap Oluşturun** — Facebook kayıt akışı sırasında, yepyeni bir WhatsApp Business Hesabı oluşturmanız GEREKİR. Mevcut bir WhatsApp Business Hesabı SEÇMEYİN — bu entegrasyonun başarısız olmasına neden olur.
 </Warning>
 
 <Frame>
-  <img src="/resources/whatsapp/step-add-number.png" alt="Click Add New Number in Meta signup" />
+  <img src="/resources/whatsapp/step-add-number.png" alt="Meta kayıt ekranında Yeni Numara Ekle'ye tıklayın" />
 </Frame>
 
-**Step A: Click "Add new number"**
+**A Adımı: "Yeni numara ekle" butonuna tıklayın**
 
-When the Meta popup appears, look for the "Add new number" option. Do NOT enter a phone number manually.
+Meta açılır penceresi göründüğünde, "Yeni numara ekle" seçeneğini bulun. Telefon numarasını manuel olarak GİRMEYİN.
 
 <Frame>
-  <img src="/resources/whatsapp/step-select-number.png" alt="Select your pre-verified number" />
+  <img src="/resources/whatsapp/step-select-number.png" alt="Önceden doğrulanmış numaranızı seçin" />
 </Frame>
 
-**Step B: Select your pre-verified number**
+**B Adımı: Önceden doğrulanmış numaranızı seçin**
 
-From the dropdown, select the phone number you just verified. It will appear in the list because Meta already knows about it from the verification step.
+Açılır listeden az önce doğruladığınız telefon numarasını seçin. Meta doğrulama adımından numaranızı zaten bildiği için listede görünecektir.
 
-After selecting your number, complete the remaining steps in Facebook's flow (business verification, permissions, etc.) and you'll be redirected back automatically.
+Numaranızı seçtikten sonra, Facebook akışındaki kalan adımları (işletme doğrulaması, izinler vb.) tamamlayın; otomatik olarak geri yönlendirileceksiniz.
 
 ---
 
 ## Harici Numara Kurulumu
 
-If you selected **External Number**, follow these steps to connect your own mobile number.
+**Harici Numara** seçtiyseniz, kendi cep telefonu numaranızı bağlamak için şu adımları izleyin.
 
-### Requirements Before You Begin
+### Başlamadan Önce Gereksinimler
 
 <Info>
-Make sure you have the following ready:
+Aşağıdakilerin hazır olduğundan emin olun:
 
-- **Phone accessible** — You must have your phone nearby to receive a verification code
-- **SMS or calls enabled** — Your number must be able to receive SMS messages or voice calls
-- **Not already on WhatsApp** — This number must not be registered with WhatsApp or WhatsApp Business app
-- **Facebook account** — You'll need a Facebook account to complete the setup
+- **Telefon erişilebilir olmalı** — Doğrulama kodu almak için telefonunuz yanınızda olmalıdır
+- **SMS veya aramalar etkin olmalı** — Numaranız SMS veya sesli arama alabilmelidir
+- **WhatsApp'ta kayıtlı olmamalı** — Bu numara WhatsApp veya WhatsApp Business uygulamasına kayıtlı olmamalıdır
+- **Facebook hesabı** — Kurulumu tamamlamak için bir Facebook hesabına ihtiyacınız olacaktır
 </Info>
 
-### Step 2: Enter Your Phone Number
+### Adım 2: Telefon Numaranızı Girin
 
-1. Enter your phone number in international format (e.g., +1 555 123 4567)
-2. Enter a **Display Name** for your business
-3. Click **Continue**
+1. Telefon numaranızı uluslararası formatta girin (ör. +90 555 123 4567)
+2. İşletmeniz için bir **Görünen Ad** girin
+3. **Devam Et** butonuna tıklayın
 
 <Tip>
-**Phone Number Format** — Enter your number starting with + and your country code:
-- US: +1 555 123 4567
-- UK: +44 7911 123456
-- Germany: +49 151 12345678
+**Telefon Numarası Formatı** — Numaranızı + ve ülke kodunuzla başlayarak girin:
+- Türkiye: +90 555 123 4567
+- ABD: +1 555 123 4567
+- Almanya: +49 151 12345678
 </Tip>
 
-### Step 3: Connect to WhatsApp Business
+### Adım 3: WhatsApp Business'a Bağlanın
 
-Click **Login with Facebook** to open Meta's Embedded Signup flow. Follow these steps:
+Meta'nın Gömülü Kayıt akışını açmak için **Facebook ile Giriş Yap** butonuna tıklayın. Şu adımları izleyin:
 
 <Steps>
-  <Step title="Login with Facebook">
-    A popup will open. Make sure popups are allowed for this site.
+  <Step title="Facebook ile giriş yapın">
+    Bir açılır pencere açılacaktır. Bu site için açılır pencerelere izin verildiğinden emin olun.
   </Step>
-  <Step title="Create a WhatsApp Business Account">
-    Follow the prompts to create a **new** WhatsApp Business Account. Don't select an existing one.
+  <Step title="WhatsApp Business Hesabı oluşturun">
+    **Yeni** bir WhatsApp Business Hesabı oluşturmak için yönergeleri izleyin. Mevcut bir hesabı seçmeyin.
   </Step>
-  <Step title="Enter Your Phone Number">
-    When prompted, enter the same phone number you provided in Step 2.
+  <Step title="Telefon numaranızı girin">
+    İstendiğinde, Adım 2'de girdiğiniz telefon numarasını girin.
   </Step>
-  <Step title="Verify with SMS or Voice Call">
-    You'll receive a 6-digit code via SMS or voice call. Enter it to verify your number.
-    <Tip>If you don't receive an SMS within 60 seconds, choose the voice call option.</Tip>
+  <Step title="SMS veya sesli arama ile doğrulayın">
+    SMS veya sesli arama ile 6 haneli bir kod alacaksınız. Numaranızı doğrulamak için bu kodu girin.
+    <Tip>60 saniye içinde SMS almazsanız, sesli arama seçeneğini deneyin.</Tip>
   </Step>
-  <Step title="Complete the Setup">
-    Grant the required permissions and close the popup when finished. You'll be redirected automatically.
+  <Step title="Kurulumu tamamlayın">
+    Gerekli izinleri verin ve işlem tamamlandığında açılır pencereyi kapatın. Otomatik olarak geri yönlendirileceksiniz.
   </Step>
 </Steps>
 
-### Sorun Giderme External Numbers
+### Harici Numara Sorun Giderme
 
 <AccordionGroup>
-  <Accordion title="Popup blocked?">
-    Allow popups for this site in your browser settings, then try again.
+  <Accordion title="Açılır pencere engellendi mi?">
+    Tarayıcı ayarlarınızda bu site için açılır pencerelere izin verin, ardından tekrar deneyin.
   </Accordion>
-  <Accordion title="Not receiving verification code?">
-    Wait 60 seconds, then try the voice call option. Make sure your phone has signal.
+  <Accordion title="Doğrulama kodu almıyor musunuz?">
+    60 saniye bekleyin, ardından sesli arama seçeneğini deneyin. Telefonunuzun sinyali olduğundan emin olun.
   </Accordion>
-  <Accordion title="Number already registered?">
-    If this number is already on WhatsApp, you'll need to delete that WhatsApp account first before you can use it with WhatsApp Business API.
+  <Accordion title="Numara zaten kayıtlı mı?">
+    Bu numara zaten WhatsApp'ta kayıtlıysa, WhatsApp Business API ile kullanabilmek için önce o WhatsApp hesabını silmeniz gerekir.
   </Accordion>
-  <Accordion title="Facebook login issues?">
-    Make sure you're logged into the correct Facebook account, or try a different browser.
+  <Accordion title="Facebook giriş sorunları mı var?">
+    Doğru Facebook hesabına giriş yaptığınızdan emin olun veya farklı bir tarayıcı deneyin.
   </Accordion>
 </AccordionGroup>
 
 ## Gönderici Durumu
 
-Your sender can have different statuses during operation:
+Göndericiniz işlem sırasında farklı durumlara sahip olabilir:
 
-| Status | Description |
-|--------|-------------|
-| <span style={{color: '#22c55e'}}>**Online**</span> | Fully operational. You can send and receive messages. |
-| <span style={{color: '#3b82f6'}}>**Connecting**</span> | Being initialized. Usually takes a few seconds. |
-| <span style={{color: '#f59e0b'}}>**Pending**</span> | Awaiting verification or approval. |
-| <span style={{color: '#6b7280'}}>**Offline**</span> | Manually disabled. Messages cannot be sent or received. |
-| <span style={{color: '#ef4444'}}>**Suspended**</span> | Suspended by Meta due to policy violations. |
-| <span style={{color: '#ef4444'}}>**Failed**</span> | Setup failed. Check error message for details. |
+| Durum | Açıklama |
+|-------|----------|
+| <span style={{color: '#22c55e'}}>**Çevrimiçi**</span> | Tam işlevsel. Mesaj gönderebilir ve alabilirsiniz. |
+| <span style={{color: '#3b82f6'}}>**Bağlanıyor**</span> | Başlatılıyor. Genellikle birkaç saniye sürer. |
+| <span style={{color: '#f59e0b'}}>**Beklemede**</span> | Doğrulama veya onay bekleniyor. |
+| <span style={{color: '#6b7280'}}>**Çevrimdışı**</span> | Manuel olarak devre dışı bırakıldı. Mesaj gönderilemez veya alınamaz. |
+| <span style={{color: '#ef4444'}}>**Askıya Alındı**</span> | Politika ihlalleri nedeniyle Meta tarafından askıya alındı. |
+| <span style={{color: '#ef4444'}}>**Başarısız**</span> | Kurulum başarısız oldu. Ayrıntılar için hata mesajını kontrol edin. |
 
 ## Gönderici Yapılandırması
 
-### Connect an AI Assistant
+### AI Asistan Bağlama
 
-Once your sender is online, connect an AI assistant to handle incoming messages automatically:
+Göndericiniz çevrimiçi olduktan sonra, gelen mesajları otomatik olarak yanıtlamak için bir AI asistan bağlayın:
 
-1. Edit your WhatsApp sender
-2. Select an assistant from the dropdown
-3. Enable **AI Enabled** toggle
-4. Save changes
+1. WhatsApp göndericinizi düzenleyin
+2. Açılır listeden bir asistan seçin
+3. **AI Etkin** geçiş düğmesini etkinleştirin
+4. Değişiklikleri kaydedin
 
-All incoming messages will now be routed to your AI assistant for responses.
+Tüm gelen mesajlar artık yanıtlar için AI asistanınıza yönlendirilecektir.
 
-### Business Profile
+### İşletme Profili
 
-Customize how your business appears to customers:
+İşletmenizin müşterilere nasıl göründüğünü özelleştirin:
 
-- **Display Name** — Your business name shown in WhatsApp
-- **About** — Short description (max 139 characters)
-- **Description** — Detailed description of your business
-- **Address** — Business address
-- **Business Category** — Industry category (Automotive, Medical, Retail, etc.)
-- **Logo** — Business logo image
-- **Banner** — Banner image for your profile
-- **Websites** — Links to your websites
-- **Contact Information** — Additional email and phone contacts
+- **Görünen Ad** — WhatsApp'ta gösterilen işletme adınız
+- **Hakkında** — Kısa açıklama (maks. 139 karakter)
+- **Açıklama** — İşletmenizin detaylı açıklaması
+- **Adres** — İşletme adresi
+- **İşletme Kategorisi** — Sektör kategorisi (Otomotiv, Sağlık, Perakende vb.)
+- **Logo** — İşletme logosu
+- **Banner** — Profiliniz için banner görseli
+- **Web Siteleri** — Web sitelerinize bağlantılar
+- **İletişim Bilgileri** — Ek e-posta ve telefon iletişim bilgileri
 
 ## Kalite Puanı ve Mesajlaşma Limitleri
 
-Meta tracks your messaging quality and adjusts your limits accordingly.
+Meta, mesajlaşma kalitenizi takip eder ve limitlerinizi buna göre ayarlar.
 
-### Understanding Quality Rating
+### Kalite Puanını Anlama
 
-Your quality rating is based on:
-- Block rates (customers blocking your number)
-- Spam reports
-- Response rates
-- Customer feedback
+Kalite puanınız şunlara dayanır:
+- Engelleme oranları (numaranızı engelleyen müşteriler)
+- Spam raporları
+- Yanıt oranları
+- Müşteri geri bildirimleri
 
-### Messaging Limits
+### Mesajlaşma Limitleri
 
-New senders start with limited capacity that increases with good quality:
+Yeni göndericiler sınırlı kapasiteyle başlar ve iyi kaliteyle artar:
 
-| Tier | Daily Limit | How to Reach |
-|------|-------------|--------------|
-| Tier 1 | ~250 messages | New sender |
-| Tier 2 | 1,000 messages | Maintain quality for 7 days |
-| Tier 3 | 10,000 messages | Consistent high quality |
-| Tier 4 | 100,000+ messages | Enterprise-level quality |
+| Seviye | Günlük Limit | Nasıl Ulaşılır |
+|--------|-------------|----------------|
+| Seviye 1 | ~250 mesaj | Yeni gönderici |
+| Seviye 2 | 1.000 mesaj | 7 gün kaliteyi koruyun |
+| Seviye 3 | 10.000 mesaj | Sürekli yüksek kalite |
+| Seviye 4 | 100.000+ mesaj | Kurumsal düzey kalite |
 
 <Tip>
-**Build Quality First** — Focus on quality conversations before scaling up. Send relevant, requested content to maintain a high quality rating.
+**Önce Kaliteye Odaklanın** — Ölçeklendirmeden önce kaliteli görüşmelere odaklanın. Yüksek kalite puanını korumak için alakalı, talep edilen içerik gönderin.
 </Tip>
 
 ## En İyi Uygulamalar
 
-### 1. Choose the Right Number
+### 1. Doğru Numarayı Seçin
 
-Select a phone number from a country that matches your target audience. Customers are more likely to engage with local or familiar area codes.
+Hedef kitlenizle eşleşen bir ülkeden telefon numarası seçin. Müşteriler yerel veya tanıdık alan kodlarıyla etkileşime girme olasılıkları daha yüksektir.
 
-### 2. Set Up Your Display Name Carefully
+### 2. Görünen Adınızı Dikkatli Belirleyin
 
-Your display name appears in customer chats. Use your business name or a clear identifier that customers will recognize and trust.
+Görünen adınız müşteri sohbetlerinde görünür. Müşterilerin tanıyacağı ve güveneceği işletme adınızı veya net bir tanımlayıcı kullanın.
 
-### 3. Connect an AI Assistant
+### 3. AI Asistan Bağlayın
 
-Link an AI assistant to handle incoming messages automatically. This ensures customers get instant responses 24/7.
+Gelen mesajları otomatik olarak yanıtlamak için bir AI asistan bağlayın. Bu, müşterilerin 7/24 anında yanıt almasını sağlar.
 
-### 4. Create Templates Early
+### 4. Şablonları Erkenden Oluşturun
 
-Message templates require Meta approval which can take up to 24 hours. Create and submit your templates before you need them.
+Mesaj şablonları, 24 saate kadar sürebilen Meta onayı gerektirir. Şablonlarınızı ihtiyacınız olmadan önce oluşturup gönderin.
 
-### 5. Start with Quality Conversations
+### 5. Kaliteli Görüşmelerle Başlayın
 
-New senders have messaging limits that increase over time. Focus on quality conversations to build your sender reputation before scaling up.
+Yeni göndericilerin zaman içinde artan mesajlaşma limitleri vardır. Ölçeklendirmeden önce gönderici itibarınızı oluşturmak için kaliteli görüşmelere odaklanın.
 
 ## Sorun Giderme
 
-### Verification Failed
+### Doğrulama Başarısız Oldu
 
-If verification fails, Meta may have temporarily blocked requests. Wait a few minutes before retrying, or try a different phone number.
+Doğrulama başarısız olursa, Meta istekleri geçici olarak engellemiş olabilir. Tekrar denemeden önce birkaç dakika bekleyin veya farklı bir telefon numarası deneyin.
 
-### Sender Stuck in Pending
+### Gönderici Beklemede Takılı Kaldı
 
-If your sender stays in "Pending" status for more than a few minutes:
-1. Check if you completed the Meta signup flow
-2. Ensure you selected the correct pre-verified number
-3. Contact support if the issue persists
+Göndericiniz birkaç dakikadan fazla "Beklemede" durumunda kalırsa:
+1. Meta kayıt akışını tamamlayıp tamamlamadığınızı kontrol edin
+2. Doğru önceden doğrulanmış numarayı seçtiğinizden emin olun
+3. Sorun devam ederse destek ekibiyle iletişime geçin
 
-### Sender Suspended
+### Gönderici Askıya Alındı
 
-If Meta suspends your sender:
-1. Review the suspension reason in your sender details
-2. Address any policy violations
-3. Contact Meta support for appeals
+Meta göndericinizi askıya alırsa:
+1. Gönderici ayrıntılarınızda askıya alma nedenini inceleyin
+2. Politika ihlallerini giderin
+3. İtiraz için Meta destek ile iletişime geçin
 
 ## Sonraki Adımlar
 
-- Learn about [message templates](/whatsapp/templates) and the approval process
-- Set up [automation triggers](/whatsapp/automation) for WhatsApp conversations
-- Review [AI assistant configuration](/ai-assistants/what-is-ai-assistant) for optimal responses
+- [Mesaj şablonları](/tr/whatsapp/templates) ve onay süreci hakkında bilgi edinin
+- WhatsApp görüşmeleri için [otomasyon tetikleyicileri](/tr/whatsapp/automation) kurun
+- Optimum yanıtlar için [AI asistan yapılandırmasını](/tr/ai-assistants/what-is-ai-assistant) inceleyin
