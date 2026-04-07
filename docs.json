@@ -52,13 +52,6 @@
                 ]
               },
               {
-                "group": "Nas\u0131l Yap\u0131l\u0131r?",
-                "pages": [
-                  "tr/guides/api-lead-import-and-automatic-calling",
-                  "tr/guides/excel-lead-import-and-automatic-calling"
-                ]
-              },
-              {
                 "group": "AI Asistanlara Genel Bak\u0131\u015f",
                 "pages": [
                   "tr/ai-assistants/what-is-ai-assistant",
@@ -221,6 +214,19 @@
                   "tr/troubleshooting/voice-problems",
                   "tr/troubleshooting/web-widget",
                   "tr/troubleshooting/whatsapp"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Nas\u0131l Yap\u0131l\u0131r?",
+            "url": "tr/guides/api-lead-import-and-automatic-calling",
+            "groups": [
+              {
+                "group": "Nas\u0131l Yap\u0131l\u0131r?",
+                "pages": [
+                  "tr/guides/api-lead-import-and-automatic-calling",
+                  "tr/guides/excel-lead-import-and-automatic-calling"
                 ]
               }
             ]
@@ -426,13 +432,6 @@
                 ]
               },
               {
-                "group": "How-To Guides",
-                "pages": [
-                  "guides/api-lead-import-and-automatic-calling",
-                  "guides/excel-lead-import-and-automatic-calling"
-                ]
-              },
-              {
                 "group": "AI Assistants Overview",
                 "pages": [
                   "ai-assistants/what-is-ai-assistant",
@@ -595,6 +594,19 @@
                   "troubleshooting/voice-problems",
                   "troubleshooting/web-widget",
                   "troubleshooting/whatsapp"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "How-To Guides",
+            "url": "guides/api-lead-import-and-automatic-calling",
+            "groups": [
+              {
+                "group": "How-To Guides",
+                "pages": [
+                  "guides/api-lead-import-and-automatic-calling",
+                  "guides/excel-lead-import-and-automatic-calling"
                 ]
               }
             ]
