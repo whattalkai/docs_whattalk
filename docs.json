@@ -34,6 +34,7 @@
         "tabs": [
           {
             "tab": "Platform Rehberi",
+            "url": "tr/introduction/what-is-whattalk",
             "groups": [
               {
                 "group": "Giri\u015f",
@@ -400,6 +401,7 @@
         "tabs": [
           {
             "tab": "Platform Guide",
+            "url": "introduction/what-is-whattalk",
             "groups": [
               {
                 "group": "Introduction",
