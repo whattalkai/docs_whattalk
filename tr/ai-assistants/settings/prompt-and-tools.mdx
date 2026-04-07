@@ -4,372 +4,372 @@ icon: "wrench"
 description: "Asistanınızın bilgi tabanını, araçlarını, değişkenlerini ve sistem promptunu yapılandırarak yeteneklerini ve davranışını tanımlayın."
 ---
 
-Configure the objective of the assistant and the tools it can use during calls.
+Asistanın amacını ve aramalar sırasında kullanabileceği araçları yapılandırın.
 
-## Knowledge Base
+## Bilgi Tabanı
 
-Give information to the assistant to use as a knowledge base when responding to customers. From website contents, documents, etc.
+Müşterilere yanıt verirken asistanın bilgi tabanı olarak kullanması için bilgi sağlayın. Web sitesi içerikleri, belgeler vb.
 
-### Knowledge Base Selection
+### Bilgi Tabanı Seçimi
 
 <AccordionGroup>
-  <Accordion title="Choose Knowledge Base" icon="book-open">
-    Select a knowledge base store containing relevant information for the assistant to use.
+  <Accordion title="Bilgi Tabanı Seçin" icon="book-open">
+    Asistanın kullanması için ilgili bilgileri içeren bir bilgi tabanı deposu seçin.
     
-    **Requirements:**
-    - Must be created in your [Knowledge Bases](/knowledgebases) section first
-    - Shows status (Active, Processing, etc.) and description
-    - Only your own knowledge bases are available
+    **Gereksinimler:**
+    - Önce [Bilgi Tabanları](/knowledgebases) bölümünüzde oluşturulmuş olmalıdır
+    - Durum (Aktif, İşleniyor vb.) ve açıklama gösterir
+    - Yalnızca kendi bilgi tabanlarınız kullanılabilir
     
     <Tip>
-    Create knowledge bases from website content, PDFs, or custom documents to give your assistant domain-specific information. For comprehensive setup guide including content types, processing status, website scraping, and troubleshooting, see the complete [Knowledge Base Guide](/conversation-design/knowledge-bases).
+    Asistanınıza alana özgü bilgi vermek için web sitesi içeriği, PDF'ler veya özel belgelerden bilgi tabanları oluşturun. İçerik türleri, işleme durumu, web sitesi tarama ve sorun giderme dahil kapsamlı kurulum kılavuzu için eksiksiz [Bilgi Tabanı Kılavuzu](/conversation-design/knowledge-bases)'na bakın.
     </Tip>
   </Accordion>
   
-  <Accordion title="Knowledge Base Mode" icon="brain">
-    Choose how the AI will use the knowledge base.
+  <Accordion title="Bilgi Tabanı Modu" icon="brain">
+    Yapay zekanın bilgi tabanını nasıl kullanacağını seçin.
     
     <CardGroup cols={2}>
-      <Card title="Function Call" icon="function">
-        **Recommended for most cases**
+      <Card title="Fonksiyon Çağrısı" icon="function">
+        **Çoğu durum için önerilir**
         
-        Uses a function call to search for information in the knowledgebase, only when needed. More accurate and efficient.
+        Yalnızca gerektiğinde bilgi tabanında bilgi aramak için bir fonksiyon çağrısı kullanır. Daha doğru ve verimlidir.
       </Card>
       
-      <Card title="Prompt Injection" icon="syringe">
-        **For simple use cases**
+      <Card title="Prompt Enjeksiyonu" icon="syringe">
+        **Basit kullanım durumları için**
         
-        Performs a search after every customer speech. More accurate but can be slower without filler audios.
+        Her müşteri konuşmasından sonra bir arama yapar. Daha doğrudur ancak dolgu sesleri olmadan daha yavaş olabilir.
       </Card>
     </CardGroup>
     
     <Note>
-    **Mode availability:** Speech-to-Speech and Dualplex modes only support Function Call mode.
+    **Mod kullanılabilirliği:** Speech-to-Speech ve Dualplex modları yalnızca Fonksiyon Çağrısı modunu destekler.
     </Note>
   </Accordion>
 </AccordionGroup>
 
-## Custom Mid-Call Tools
+## Özel Arama İçi Araçlar
 
-Create and assign your own custom tools that AI can use **mid-call** with the customer.
+Yapay zekanın müşteriyle **arama sırasında** kullanabileceği kendi özel araçlarınızı oluşturun ve atayın.
 
 <CardGroup cols={2}>
-  <Card title="Create Custom Tools" icon="plus">
-    Build tools tailored to your specific business needs: API integrations, database queries, custom workflows, and external service calls.
+  <Card title="Özel Araçlar Oluşturun" icon="plus">
+    Özel iş ihtiyaçlarınıza uygun araçlar oluşturun: API entegrasyonları, veritabanı sorguları, özel iş akışları ve harici servis çağrıları.
     
-    **Quick action:** Direct link to tool creation page.
+    **Hızlı işlem:** Araç oluşturma sayfasına doğrudan bağlantı.
   </Card>
   
-  <Card title="Assign to Assistant" icon="link">
-    Select which custom tools this assistant can use with multiple selection, search by name/description, and real-time assignment.
+  <Card title="Asistana Atayın" icon="link">
+    Bu asistanın hangi özel araçları kullanabileceğini çoklu seçim, ad/açıklama ile arama ve gerçek zamanlı atama ile belirleyin.
     
-    **Scope:** Only your own tools are available.
+    **Kapsam:** Yalnızca kendi araçlarınız kullanılabilir.
   </Card>
 </CardGroup>
 
 <Tip>
-Read the [Custom Tools documentation](/ai-assistants/custom-tools) for detailed guides on creating and configuring custom tools.
+Özel araçlar oluşturma ve yapılandırma hakkında ayrıntılı kılavuzlar için [Özel Araçlar belgelerini](/ai-assistants/custom-tools) okuyun.
 </Tip>
 
-## Default Tools
+## Varsayılan Araçlar
 
-Choose built-in tools that AI can use **mid-call** with the customer.
+Yapay zekanın müşteriyle **arama sırasında** kullanabileceği yerleşik araçları seçin.
 
 <AccordionGroup>
-  <Accordion title="Multi Call Transfer" icon="phone-arrow-right">
-    Route calls to multiple destination phone numbers like different people or departments according to your flow.
+  <Accordion title="Çoklu Arama Transferi" icon="phone-arrow-right">
+    Akışınıza göre aramaları farklı kişiler veya departmanlar gibi birden fazla hedef telefon numarasına yönlendirin.
 
-    **Use cases:**
-    - Escalation to human agents
-    - Department routing
-    - Specialist handoffs
+    **Kullanım durumları:**
+    - İnsan temsilcilere yönlendirme
+    - Departman yönlendirme
+    - Uzman aktarımları
 
-    **Configuration options:**
-    - **Standard mode:** Use regular phone numbers (e.g., +1234567890)
-    - **Advanced mode:** Use SIP URI format for SIP providers (e.g., sip:+1234567890@sip-server)
+    **Yapılandırma seçenekleri:**
+    - **Standart mod:** Normal telefon numaraları kullanın (ör. +1234567890)
+    - **Gelişmiş mod:** SIP sağlayıcıları için SIP URI formatını kullanın (ör. sip:+1234567890@sip-server)
 
-    **For SIP integrations:**
-    - Set transfer to "Advanced" mode
-    - Use SIP URI format: `sip:number@sip-server`
-    - Verify your SIP provider supports SIP REFER
-    - Test with different URI formats if transfers fail
+    **SIP entegrasyonları için:**
+    - Transferi "Gelişmiş" moda ayarlayın
+    - SIP URI formatını kullanın: `sip:number@sip-server`
+    - SIP sağlayıcınızın SIP REFER desteklediğini doğrulayın
+    - Transferler başarısız olursa farklı URI formatlarını deneyin
 
     <Note>
-    **Prompt instruction:** Include in your system prompt something like "call the transfer function when the user requests to speak with someone else" to ensure the AI uses this tool appropriately.
+    **Prompt talimatı:** Yapay zekanın bu aracı uygun şekilde kullanmasını sağlamak için sistem promptunuza "kullanıcı başka biriyle konuşmak istediğinde transfer fonksiyonunu çağır" gibi bir ifade ekleyin.
     </Note>
 
     <Tip>
-    If transfers aren't working, see our [SIP Integration troubleshooting guide](/troubleshooting/sip-integration#transfer-phone-call-not-working) for detailed solutions.
+    Transferler çalışmıyorsa, ayrıntılı çözümler için [SIP Entegrasyonu sorun giderme kılavuzumuza](/troubleshooting/sip-integration#transfer-phone-call-not-working) bakın.
     </Tip>
   </Accordion>
   
-  <Accordion title="End Call" icon="phone-slash">
-    Ends the call when the conversation is complete.
+  <Accordion title="Aramayı Sonlandır" icon="phone-slash">
+    Konuşma tamamlandığında aramayı sonlandırır.
     
-    **Use cases:**
-    - Natural conversation conclusion
-    - Objective achieved
-    - Customer satisfaction confirmed
+    **Kullanım durumları:**
+    - Doğal konuşma sonucu
+    - Hedefe ulaşıldı
+    - Müşteri memnuniyeti onaylandı
     
     <Note>
-    **Prompt instruction:** If the AI doesn't call the end call function automatically, include in your system prompt "call the hang_up function to close the call" when the conversation should end.
+    **Prompt talimatı:** Yapay zeka aramayı sonlandırma fonksiyonunu otomatik olarak çağırmıyorsa, konuşma sona ermesi gerektiğinde sistem promptunuza "aramayı kapatmak için hang_up fonksiyonunu çağır" ifadesini ekleyin.
     </Note>
   </Accordion>
   
-  <Accordion title="DTMF Input" icon="hashtag">
-    Easily send keypad inputs during outbound calls, enabling smooth navigation through IVR menus and automated workflows. The AI navigates using keypad buttons when calling and responding to prompts.
+  <Accordion title="DTMF Girişi" icon="hashtag">
+    Giden aramalar sırasında kolayca tuş takımı girişleri göndererek IVR menüleri ve otomatik iş akışlarında sorunsuz gezinmeyi sağlayın. Yapay zeka, arama yaparken ve istemlere yanıt verirken tuş takımı düğmelerini kullanarak gezinir.
     
-    **Use cases:**
-    - Navigate phone menus
-    - Enter extension numbers
-    - Input security codes
-    - IVR system navigation
+    **Kullanım durumları:**
+    - Telefon menülerinde gezinme
+    - Dahili numaraları girme
+    - Güvenlik kodlarını girme
+    - IVR sistemi navigasyonu
     
     <Note>
-    **Prompt instruction:** Include in your system prompt instructions about when to use DTMF input, such as "use the send_dtmf tool to navigate phone menus when needed to reach the right person."
+    **Prompt talimatı:** Sistem promptunuza DTMF girişinin ne zaman kullanılacağına dair talimatlar ekleyin, örneğin "doğru kişiye ulaşmak için gerektiğinde telefon menülerinde gezinmek için send_dtmf aracını kullan."
     </Note>
     
-    For detailed information about DTMF capabilities, see [Tools & Functions](/ai-assistants/tools-and-functions#4-dtmf-input).
+    DTMF özellikleri hakkında ayrıntılı bilgi için [Araçlar ve Fonksiyonlar](/ai-assistants/tools-and-functions#4-dtmf-input) bölümüne bakın.
   </Accordion>
   
-  <Accordion title="Appointment Scheduling" icon="calendar">
-    Real-time booking scheduling integration with multiple calendar platforms.
+  <Accordion title="Randevu Planlama" icon="calendar">
+    Birden fazla takvim platformuyla gerçek zamanlı rezervasyon planlama entegrasyonu.
 
-    **Available integrations:**
-    - **Cal.com:** Full setup guide available at [Cal.com Scheduling](/ai-assistants/cal-com-scheduling)
-    - **GoHighLevel:** Complete integration guide at [GoHighLevel Scheduling](/ai-assistants/gohighlevel-scheduling)
-    - **Calendly:** Full setup guide available at [Calendly Scheduling](/ai-assistants/calendly-scheduling)
+    **Mevcut entegrasyonlar:**
+    - **Cal.com:** Tam kurulum kılavuzu [Cal.com Planlama](/ai-assistants/cal-com-scheduling) adresinde mevcuttur
+    - **GoHighLevel:** Eksiksiz entegrasyon kılavuzu [GoHighLevel Planlama](/ai-assistants/gohighlevel-scheduling) adresindedir
+    - **Calendly:** Tam kurulum kılavuzu [Calendly Planlama](/ai-assistants/calendly-scheduling) adresinde mevcuttur
 
-    **Use cases:**
-    - Book appointments with calendars
-    - Check real-time availability
-    - Send automatic confirmation details
-    - Sync with existing calendar systems
+    **Kullanım durumları:**
+    - Takvimlerle randevu alma
+    - Gerçek zamanlı müsaitlik kontrolü
+    - Otomatik onay detayları gönderme
+    - Mevcut takvim sistemleriyle senkronizasyon
 
-    **Setup:**
-    1. Select your calendar provider (Cal.com, GoHighLevel, or Calendly)
-    2. Authenticate with your calendar account
-    3. Choose the event type/calendar to use for bookings
-    4. The AI will automatically check availability and book appointments
+    **Kurulum:**
+    1. Takvim sağlayıcınızı seçin (Cal.com, GoHighLevel veya Calendly)
+    2. Takvim hesabınızla kimlik doğrulaması yapın
+    3. Rezervasyonlar için kullanılacak etkinlik türünü/takvimi seçin
+    4. Yapay zeka otomatik olarak müsaitliği kontrol edecek ve randevuları planlayacaktır
 
     <Note>
-    Available when calendar integration is enabled in your platform settings.
+    Platform ayarlarınızda takvim entegrasyonu etkinleştirildiğinde kullanılabilir.
     </Note>
   </Accordion>
 </AccordionGroup>
 
-## Call Variables
+## Arama Değişkenleri
 
-Define variables that can be passed **before** making the call and used in the prompt **like {variable_name}**.
+Arama yapmadan **önce** iletebileceğiniz ve promptta **{variable_name} gibi** kullanılabilen değişkenleri tanımlayın.
 
-### Variable Configuration
+### Değişken Yapılandırması
 
 <AccordionGroup>
-  <Accordion title="Variable Definition" icon="code">
-    Create call variables to pass information to your assistant before the call starts.
+  <Accordion title="Değişken Tanımı" icon="code">
+    Arama başlamadan önce asistanınıza bilgi iletmek için arama değişkenleri oluşturun.
     
-    **Setup process:**
-    - Define variable names and default values
-    - Pass values when creating calls/leads or importing clients
-    - Variables available immediately in prompts and during calls
-    - Use for personalization and context
+    **Kurulum süreci:**
+    - Değişken adlarını ve varsayılan değerleri tanımlayın
+    - Arama/müşteri adayı oluştururken veya müşterileri içe aktarırken değerleri iletin
+    - Değişkenler promptlarda ve aramalar sırasında anında kullanılabilir
+    - Kişiselleştirme ve bağlam için kullanın
     
-    **Configuration:**
-    - **Variable name:** The identifier (e.g., `customer_name`)
-    - **Default value:** Used when not passed (e.g., "John")
+    **Yapılandırma:**
+    - **Değişken adı:** Tanımlayıcı (ör. `customer_name`)
+    - **Varsayılan değer:** İletilmediğinde kullanılır (ör. "John")
   </Accordion>
   
-  <Accordion title="Variable Usage" icon="code">
-    How to use call variables in your assistant:
+  <Accordion title="Değişken Kullanımı" icon="code">
+    Asistanınızda arama değişkenlerini nasıl kullanacağınız:
     
-    **In system prompts:**
-    - Reference variables with `{variable_name}` syntax
-    - Personalize conversations dynamically
-    - Provide context-specific information
+    **Sistem promptlarında:**
+    - Değişkenlere `{variable_name}` söz dizimiyle başvurun
+    - Konuşmaları dinamik olarak kişiselleştirin
+    - Bağlama özgü bilgiler sağlayın
     
-    **Examples:**
-    - `{customer_name}` for personalization ("Hello {customer_name}")
-    - `{email}` for calendar integrations
-    - `{account_type}` for tailored responses
-    - `{company}` for business context
+    **Örnekler:**
+    - Kişiselleştirme için `{customer_name}` ("Merhaba {customer_name}")
+    - Takvim entegrasyonları için `{email}`
+    - Özelleştirilmiş yanıtlar için `{account_type}`
+    - İş bağlamı için `{company}`
   </Accordion>
   
-  <Accordion title="Data Sources" icon="database">
-    Ways to populate call variables:
+  <Accordion title="Veri Kaynakları" icon="database">
+    Arama değişkenlerini doldurma yolları:
     
-    **Manual entry:**
-    - When creating individual calls
-    - Through campaign lead creation
+    **Manuel giriş:**
+    - Bireysel aramalar oluştururken
+    - Kampanya müşteri adayı oluşturma yoluyla
     
-    **Import methods:**
-    - CSV import with variable columns
-    - API integration with client data
-    - Direct CRM synchronization
+    **İçe aktarma yöntemleri:**
+    - Değişken sütunlarıyla CSV içe aktarma
+    - Müşteri verileriyle API entegrasyonu
+    - Doğrudan CRM senkronizasyonu
     
-    **Automation platform integrations:**
-    - **GoHighLevel (GHL):** Automatically pull contact data and custom fields
-    - **Google Sheets:** Import leads with variables from spreadsheet columns
-    - **Connect with 250+ popular tools** and platforms using our no-code platform
-    - **Any other platform** through webhooks for custom integrations
-    
-    **Platform integration:**
-    - Automatically populated from client profiles
-    - Connected to existing customer databases
-    - No-code automation workflows
+    **Otomasyon platformu entegrasyonları:**
+    - **GoHighLevel (GHL):** Kişi verilerini ve özel alanları otomatik olarak çekin
+    - **Google Sheets:** Müşteri adaylarını elektronik tablo sütunlarındaki değişkenlerle içe aktarın
+    - **No-code platformumuz ile 250'den fazla popüler araç** ve platformla bağlantı kurun
+    - **Diğer herhangi bir platform** ile webhook'lar aracılığıyla özel entegrasyonlar
+
+    **Platform entegrasyonu:**
+    - Müşteri profillerinden otomatik olarak doldurulur
+    - Mevcut müşteri veritabanlarına bağlıdır
+    - No-code otomasyon iş akışları
   </Accordion>
 </AccordionGroup>
 
 <Note>
-Call variables are essential for personalizing AI conversations. They allow the AI to use specific customer information during calls, making interactions more relevant and effective.
+Arama değişkenleri, yapay zeka konuşmalarını kişiselleştirmek için önemlidir. Yapay zekanın aramalar sırasında belirli müşteri bilgilerini kullanmasına olanak tanıyarak etkileşimleri daha ilgili ve etkili hale getirir.
 </Note>
 
-## Call Flow Configuration
+## Arama Akışı Yapılandırması
 
-### Who Speaks First?
+### İlk Kim Konuşur?
 
-Control whether your assistant or the customer initiates the conversation.
+Konuşmayı asistanınızın mı yoksa müşterinin mi başlatacağını kontrol edin.
 
 <CardGroup cols={2}>
-  <Card title="AI Assistant" icon="robot">
-    **Default behavior:** Assistant starts the conversation
+  <Card title="Yapay Zeka Asistanı" icon="robot">
+    **Varsayılan davranış:** Asistan konuşmayı başlatır
     
-    The AI will immediately greet the caller and begin the conversation flow as soon as the call connects.
+    Yapay zeka, arama bağlandığında hemen arayanı selamlar ve konuşma akışını başlatır.
     
-    **Best for:** Most outbound scenarios, sales calls, appointment reminders
+    **En uygun:** Çoğu giden arama senaryosu, satış aramaları, randevu hatırlatmaları
   </Card>
   
-  <Card title="Customer" icon="user">
-    **Wait for customer:** Assistant listens first
+  <Card title="Müşteri" icon="user">
+    **Müşteriyi bekle:** Asistan önce dinler
     
-    If you choose "Customer", the AI will wait for the customer to speak first before responding.
+    "Müşteri"yi seçerseniz, yapay zeka yanıt vermeden önce müşterinin ilk konuşmasını bekler.
     
-    **Best for:** Inbound support calls, reception scenarios, reactive assistance
+    **En uygun:** Gelen destek aramaları, resepsiyon senaryoları, reaktif yardım
   </Card>
 </CardGroup>
 
-### Initial Message
+### İlk Mesaj
 
-Configure the first thing your assistant says when the call begins.
+Arama başladığında asistanınızın söyleyeceği ilk şeyi yapılandırın.
 
 <AccordionGroup>
-  <Accordion title="Initial Message Text" icon="message">
-    Write the opening message your assistant will speak at the start of each call.
+  <Accordion title="İlk Mesaj Metni" icon="message">
+    Asistanınızın her aramanın başında söyleyeceği açılış mesajını yazın.
     
-    **Best practices:**
-    - Keep it concise and friendly
-    - Introduce your company/purpose clearly
-    - Set expectations for the conversation
-    - Use variables for personalization (e.g., `{customer_name}`)
+    **En iyi uygulamalar:**
+    - Kısa ve samimi tutun
+    - Şirketinizi/amacınızı açıkça tanıtın
+    - Konuşma için beklentileri belirleyin
+    - Kişiselleştirme için değişkenler kullanın (ör. `{customer_name}`)
     
-    **Example:** "Hi {customer_name}, this is Sarah from ABC Company. I'm calling to follow up on your recent inquiry about our services. Do you have a moment to chat?"
+    **Örnek:** "Merhaba {customer_name}, ben ABC Şirketi'nden Sarah. Hizmetlerimiz hakkındaki son sorgunuzla ilgili sizi aramıştım. Sohbet etmek için bir dakikanız var mı?"
   </Accordion>
   
-  <Accordion title="Initial Audio File" icon="volume">
-    **Optional:** Upload a custom audio file instead of text-to-speech
+  <Accordion title="İlk Ses Dosyası" icon="volume">
+    **İsteğe bağlı:** Metin okuma yerine özel bir ses dosyası yükleyin
     
-    **Requirements:**
-    - MP3 or WAV format
-    - Clear, high-quality recording
-    - Professional voice and tone
-    - Matches your assistant's voice if using voice cloning
+    **Gereksinimler:**
+    - MP3 veya WAV formatı
+    - Net, yüksek kaliteli kayıt
+    - Profesyonel ses ve ton
+    - Ses klonlama kullanıyorsanız asistanınızın sesiyle eşleşmeli
     
-    **Benefits:**
-    - Perfect pronunciation and delivery
-    - Consistent brand voice
-    - Professional first impression
-    - No text-to-speech latency for opening
+    **Avantajlar:**
+    - Mükemmel telaffuz ve sunum
+    - Tutarlı marka sesi
+    - Profesyonel ilk izlenim
+    - Açılış için metin okuma gecikmesi yok
     
     <Tip>
-    This works best if the AI voice is cloned using the same voice used in the initial audio.
+    Bu, yapay zeka sesinin ilk seste kullanılan aynı sesle klonlanması durumunda en iyi şekilde çalışır.
     </Tip>
   </Accordion>
 </AccordionGroup>
 
 <Note>
-See our [Initial Message guide](/ai-assistants/initial-message) for detailed best practices and examples.
+Ayrıntılı en iyi uygulamalar ve örnekler için [İlk Mesaj kılavuzumuza](/ai-assistants/initial-message) bakın.
 </Note>
 
-## System Prompt
+## Sistem Promptu
 
-Define the assistant's personality, objectives, and behavior guidelines.
+Asistanın kişiliğini, hedeflerini ve davranış kurallarını tanımlayın.
 
-### Editing Tools
+### Düzenleme Araçları
 
-Choose the editing experience that works best for you:
+Sizin için en uygun düzenleme deneyimini seçin:
 
 <CardGroup cols={2}>
-  <Card title="AI Prompt Editor" icon="sparkles" href="/ai-assistants/ai-prompt-editor">
-    **Chat-based editing with AI assistance**
+  <Card title="Yapay Zeka Prompt Editörü" icon="sparkles" href="/ai-assistants/ai-prompt-editor">
+    **Yapay zeka destekli sohbet tabanlı düzenleme**
 
-    Describe changes in plain language and let AI suggest intelligent modifications. Review and accept/reject each change individually.
+    Değişiklikleri günlük dilde tanımlayın ve yapay zekanın akıllı öneriler sunmasını sağlayın. Her değişikliği ayrı ayrı inceleyin ve kabul edin/reddedin.
 
-    **Best for:** Quick iterations, improving existing prompts, text-focused editing
+    **En uygun:** Hızlı düzenlemeler, mevcut promptları iyileştirme, metin odaklı düzenleme
   </Card>
 
-  <Card title="Flow Builder" icon="share-nodes" href="/ai-assistants/flow-builder">
-    **Visual drag-and-drop editor**
+  <Card title="Akış Oluşturucu" icon="share-nodes" href="/ai-assistants/flow-builder">
+    **Görsel sürükle-bırak editörü**
 
-    Design conversation flows by connecting nodes on a canvas. Create branching logic and multi-path decision trees visually.
+    Bir tuval üzerinde düğümleri bağlayarak konuşma akışları tasarlayın. Dallanma mantığı ve çok yollu karar ağaçlarını görsel olarak oluşturun.
 
-    **Best for:** Complex call flows, structured scripts, visual thinkers
+    **En uygun:** Karmaşık arama akışları, yapılandırılmış senaryolar, görsel düşünenler
   </Card>
 </CardGroup>
 
 <Note>
-Both tools store the prompt in the same field - switching between them is possible but may require adjustments.
+Her iki araç da promptu aynı alanda saklar - aralarında geçiş yapılabilir ancak ayarlamalar gerekebilir.
 </Note>
 
-### Prompt Configuration
+### Prompt Yapılandırması
 
 <CardGroup cols={2}>
-  <Card title="Custom Prompt" icon="pencil">
-    Write your own system prompt from scratch
+  <Card title="Özel Prompt" icon="pencil">
+    Kendi sistem promptunuzu sıfırdan yazın
 
-    - Full control over assistant behavior
-    - Tailored to specific use cases
-    - Markdown formatting supported
+    - Asistan davranışı üzerinde tam kontrol
+    - Belirli kullanım durumlarına uyarlanmış
+    - Markdown biçimlendirmesi desteklenir
   </Card>
 
-  <Card title="Template Library" icon="folder">
-    Start with pre-built templates
+  <Card title="Şablon Kütüphanesi" icon="folder">
+    Hazır şablonlarla başlayın
 
-    - Multiple languages available
-    - Different conversation types
-    - Proven effective prompts
+    - Birden fazla dil mevcut
+    - Farklı konuşma türleri
+    - Kanıtlanmış etkili promptlar
   </Card>
 </CardGroup>
 
-### Best Practices
+### En İyi Uygulamalar
 
 <AccordionGroup>
-  <Accordion title="Be Specific" icon="bullseye">
-    Clearly define the assistant's role, objectives, and constraints.
+  <Accordion title="Spesifik Olun" icon="bullseye">
+    Asistanın rolünü, hedeflerini ve kısıtlamalarını açıkça tanımlayın.
     
-    **Include:**
-    - Who the assistant represents
-    - What they're trying to achieve
-    - What they should/shouldn't do
+    **Dahil edin:**
+    - Asistanın kimi temsil ettiği
+    - Ne başarmaya çalıştığı
+    - Ne yapması/yapmaması gerektiği
   </Accordion>
   
-  <Accordion title="Set Boundaries" icon="shield">
-    Define what topics and actions are off-limits.
+  <Accordion title="Sınırlar Belirleyin" icon="shield">
+    Hangi konuların ve eylemlerin yasak olduğunu tanımlayın.
     
-    **Consider:**
-    - Data privacy requirements
-    - Legal compliance
-    - Brand guidelines
+    **Göz önünde bulundurun:**
+    - Veri gizliliği gereksinimleri
+    - Yasal uyumluluk
+    - Marka yönergeleri
   </Accordion>
   
-  <Accordion title="Use Examples" icon="lightbulb">
-    Provide sample conversations to guide behavior.
+  <Accordion title="Örnekler Kullanın" icon="lightbulb">
+    Davranışı yönlendirmek için örnek konuşmalar sağlayın.
     
-    **Examples help with:**
-    - Tone and style
-    - Response length
-    - Handling objections
+    **Örnekler şu konularda yardımcı olur:**
+    - Ton ve üslup
+    - Yanıt uzunluğu
+    - İtirazların ele alınması
   </Accordion>
 </AccordionGroup>
 
 <Tip>
-See our [System Prompt guide](/ai-assistants/system-prompt) for detailed best practices and examples.
+Ayrıntılı en iyi uygulamalar ve örnekler için [Sistem Promptu kılavuzumuza](/ai-assistants/system-prompt) bakın.
 </Tip>
