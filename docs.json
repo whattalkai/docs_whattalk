@@ -200,6 +200,12 @@
                 ]
               },
               {
+                "group": "Rehberler",
+                "pages": [
+                  "tr/guides/api-lead-import-and-auto-call"
+                ]
+              },
+              {
                 "group": "Sorun Giderme ve SSS",
                 "pages": [
                   "tr/troubleshooting/ai-behavior",
@@ -564,6 +570,12 @@
                 "group": "Settings",
                 "pages": [
                   "settings/data-retention"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  "guides/api-lead-import-and-auto-call"
                 ]
               },
               {
