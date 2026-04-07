@@ -1,0 +1,201 @@
+---
+title: "Excel ile Müşteri Ekleme ve Otomatik Arama Başlatma"
+icon: "file-excel"
+description: "Excel veya CSV dosyasından toplu müşteri ekleyin ve otomatik arama kampanyası başlatın"
+---
+
+Bu rehberde, Excel veya CSV dosyasındaki müşteri listenizi panelden bir kampanyaya nasıl yükleyeceğinizi ve otomatik aramaları nasıl başlatacağınızı adım adım öğreneceksiniz.
+
+## Genel Bakış
+
+Tüm işlem 3 adımdan oluşur:
+
+<Steps>
+  <Step title="Kampanya oluşturun (veya mevcut kampanyayı kullanın)">
+    Panelden bir kampanya oluşturun veya mevcut kampanyanızı kullanın.
+  </Step>
+  <Step title="Excel/CSV dosyanızı yükleyin">
+    Müşteri listenizi kampanyaya içe aktarın.
+  </Step>
+  <Step title="Kampanyayı başlatın">
+    Kampanyayı çalıştırın — sistem otomatik aramaya başlar.
+  </Step>
+</Steps>
+
+<Note>
+  Kampanyanız zaten **"Devam ediyor" (in-progress)** durumdaysa, dosyayı yükledikten sonra eklenen müşteriler otomatik olarak arama sırasına girer. Kampanyayı tekrar başlatmanıza gerek yoktur.
+</Note>
+
+## Ön Gereksinimler
+
+Başlamadan önce aşağıdakilerin hazır olduğundan emin olun:
+
+- **Kampanya** — Panelden oluşturulmuş bir kampanya. Kampanya ID'nizi bulmak için kampanyanızı açın, tarayıcı adres çubuğundaki linkten ID'yi görebilirsiniz. Örnek: `app.whattalk.ai/campaigns/1050` → Kampanya ID'niz **1050**'dir.
+- **AI Asistan** — Kampanyaya atanmış, giden arama için yapılandırılmış bir asistan
+- **Telefon Numarası** — Kampanyaya atanmış bir telefon numarası
+- **Excel veya CSV dosyası** — Müşteri bilgilerinizi içeren dosya
+
+---
+
+## Adım 1: Excel/CSV Dosyanızı Hazırlayın
+
+### Zorunlu Sütunlar
+
+Dosyanızda en az şu sütun olmalıdır:
+
+| Sütun | Açıklama | Örnek |
+|-------|----------|-------|
+| `phone_number` | Telefon numarası (zorunlu) | `+905551234567` |
+
+### Opsiyonel Sütunlar
+
+Asistanınızda tanımlı değişkenlere göre ek sütunlar ekleyebilirsiniz:
+
+| Sütun | Açıklama | Örnek |
+|-------|----------|-------|
+| `customer_name` | Müşteri adı | `Ayşe` |
+| `company` | Şirket adı | `ABC Teknoloji` |
+| `email` | E-posta adresi | `ayse@abc.com` |
+
+<Tip>
+  Sütun adları, asistanınızın **Prompt ve Araçlar** ayarlarındaki değişken adlarıyla aynı olmalıdır. Örneğin asistanda `{customer_name}` kullanıyorsanız, Excel'de de sütun başlığı `customer_name` olmalıdır.
+</Tip>
+
+### Örnek Dosya
+
+```csv
+phone_number,customer_name,company
++905551234567,Ayşe Yılmaz,ABC Teknoloji
++905559876543,Mehmet Kaya,XYZ Ltd
++905553334455,Fatma Demir,123 Yazılım
++905557778899,Ali Öztürk,Demo AŞ
+```
+
+<Warning>
+  **Telefon numarası formatı:** Uluslararası format önerilir — başında `+` ve ülke kodu olmalıdır (ör. `+905551234567`). Ulusal format kullanıyorsanız (ör. `05551234567`), yükleme sırasında ülke kodunu seçmeniz gerekir ve tüm numaralar aynı ülkeden olmalıdır.
+</Warning>
+
+### İkincil İletişim Kişileri (Opsiyonel)
+
+Bir müşteri için birden fazla telefon numarası varsa, ek sütunlar ekleyebilirsiniz:
+
+```csv
+phone_number,customer_name,secondary_phone_1,secondary_phone_2
++905551234567,Ayşe Yılmaz,+905551234568,+905551234569
+```
+
+Sistem birincil numarayı önce arar, ulaşamazsa ikincil numaralara geçer.
+
+---
+
+## Adım 2: Dosyayı Panelden Yükleyin
+
+<Steps>
+  <Step title="Müşteriler sayfasına gidin">
+    Panelden **Müşteriler (Leads)** bölümüne veya kampanyanızın müşteriler sekmesine gidin.
+  </Step>
+  <Step title="İçe Aktarma butonuna tıklayın">
+    **"Müşteri İçe Aktar" (Import Leads)** butonuna tıklayın.
+  </Step>
+  <Step title="Kampanya seçin">
+    Açılır listeden müşterilerin ekleneceği kampanyayı seçin.
+  </Step>
+  <Step title="Örnek dosyayı indirin (önerilir)">
+    Doğru formatı görmek için **örnek dosyayı indirin**. Dosyanızın bu formata uygun olduğundan emin olun.
+  </Step>
+  <Step title="Dosyanızı yükleyin">
+    CSV veya Excel (.xlsx, .xls) dosyanızı seçin.
+  </Step>
+  <Step title="Sütunları eşleyin">
+    Sistem sütunlarınızı otomatik algılamaya çalışır. Kontrol edin ve gerekirse düzeltin:
+    - **Telefon Numarası** → `phone_number` sütunu
+    - **Asistan değişkenleri** → İlgili sütunlarla eşleyin (ör. `customer_name`, `company`)
+  </Step>
+  <Step title="Telefon formatını seçin">
+    - **Uluslararası Format:** Numaralar `+` ile başlıyorsa bunu seçin
+    - **Ulusal Format:** Ülke kodu yoksa bunu seçin ve ülkeyi belirtin
+  </Step>
+  <Step title="İçe aktarımı başlatın">
+    Eşlemeleri onaylayın ve **"İçe Aktar"** butonuna tıklayın.
+  </Step>
+</Steps>
+
+### İşleme Süresi
+
+| Dosya Boyutu | Tahmini Süre |
+|-------------|-------------|
+| < 100 satır | 1 dakikadan az |
+| 100-1.000 satır | 2-5 dakika |
+| 1.000+ satır | 10-30 dakika |
+| 10.000+ satır | Birkaç saat |
+
+<Note>
+  Büyük dosyalar arka planda işlenir. İçe aktarma tamamlandığında e-posta bildirimi alırsınız.
+</Note>
+
+---
+
+## Adım 3: Kampanyayı Başlatın
+
+Müşteriler yüklendikten sonra:
+
+1. **Kampanyalar** sayfasına gidin
+2. İlgili kampanyayı bulun
+3. Kampanya **"Taslak" (Draft)** durumdaysa, **"Başlat" (Start)** butonuna tıklayın
+4. Kampanya durumu **"Devam Ediyor" (In Progress)** olur ve aramalar başlar
+
+<Note>
+  Kampanyanız zaten **"Devam Ediyor"** durumdaysa, yüklenen müşteriler otomatik olarak sıraya girer. Ek bir işlem gerekmez.
+</Note>
+
+---
+
+## Doğrulama ve Hata Yönetimi
+
+Yükleme sırasında sistem otomatik doğrulama yapar:
+
+- **Geçerli satırlar** kampanyaya eklenir
+- **Geçersiz satırlar** atlanır (hatalı telefon numarası, eksik zorunlu alan vb.)
+- **Tekrarlanan numaralar** engellenir
+- İşlem sonunda **hata raporu** oluşturulur — indirebilirsiniz
+
+### Sık Karşılaşılan Hatalar
+
+| Hata | Çözüm |
+|------|-------|
+| Geçersiz telefon numarası | E.164 formatında olmalı: `+905551234567` |
+| Tekrarlanan numara | Aynı numara zaten kampanyada mevcut |
+| Eksik zorunlu alan | Telefon numarası sütunu boş bırakılamaz |
+| Dosya formatı hatası | .csv, .xlsx veya .xls formatı kullanın |
+
+---
+
+## Sık Sorulan Sorular
+
+<AccordionGroup>
+  <Accordion title="Hangi dosya formatları destekleniyor?">
+    CSV (.csv), Excel (.xlsx) ve eski Excel (.xls) formatları desteklenir.
+  </Accordion>
+
+  <Accordion title="Kampanya çalışırken yeni dosya yükleyebilir miyim?">
+    Evet. Kampanya "Devam Ediyor" durumdayken yüklenen yeni müşteriler otomatik olarak arama sırasına girer. Kampanyayı tekrar başlatmanıza gerek yoktur.
+  </Accordion>
+
+  <Accordion title="Dosyadaki sütun sırası önemli mi?">
+    Hayır. Sistem sütun adlarına göre eşleme yapar, sırası önemli değildir.
+  </Accordion>
+
+  <Accordion title="Farklı ülkelerden numaralar aynı dosyada olabilir mi?">
+    Uluslararası format kullanıyorsanız (`+` ile başlayan) evet, karıştırabilirsiniz. Ulusal format kullanıyorsanız, ülke başına ayrı dosya yüklemeniz gerekir.
+  </Accordion>
+
+  <Accordion title="Kaç müşteri yükleyebilirim?">
+    Dosya başına bir sınır yoktur, ancak büyük dosyalar (10.000+ satır) arka planda işlenir ve birkaç saat sürebilir. İlk denemede küçük bir dosyayla (10-20 satır) test etmenizi öneririz.
+  </Accordion>
+
+  <Accordion title="API ile mi yoksa Excel ile mi eklemek daha iyi?">
+    **Excel/CSV:** Tek seferlik toplu yükleme, teknik bilgi gerektirmez. Panelden yapılır.
+    **API:** Otomatik entegrasyon, CRM'den veya kendi sisteminizden sürekli müşteri akışı. Teknik bilgi gerektirir.
+    Detaylar için [API ile Müşteri İletme ve Otomatik Arama Başlatma](/tr/guides/api-lead-import-and-automatic-calling) rehberine bakın.
+  </Accordion>
+</AccordionGroup>

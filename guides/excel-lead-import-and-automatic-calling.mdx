@@ -1,0 +1,201 @@
+---
+title: "Import Leads from Excel and Start Auto-Calling"
+icon: "file-excel"
+description: "Import leads in bulk from Excel or CSV files and launch automated calling campaigns"
+---
+
+This guide walks you through how to upload your lead list from an Excel or CSV file to a campaign and start automated calls.
+
+## Overview
+
+The entire process consists of 3 steps:
+
+<Steps>
+  <Step title="Create a campaign (or use an existing one)">
+    Create a campaign from the dashboard or use an existing one.
+  </Step>
+  <Step title="Upload your Excel/CSV file">
+    Import your lead list into the campaign.
+  </Step>
+  <Step title="Start the campaign">
+    Run the campaign — the system begins calling automatically.
+  </Step>
+</Steps>
+
+<Note>
+  If your campaign is already **"in-progress"**, newly uploaded leads are automatically queued for calling. You don't need to restart the campaign.
+</Note>
+
+## Prerequisites
+
+Before you begin, make sure the following are ready:
+
+- **Campaign** — A campaign created from the dashboard. To find your Campaign ID, open your campaign and check the browser address bar. Example: `app.whattalk.ai/campaigns/1050` → Your Campaign ID is **1050**.
+- **AI Assistant** — An assistant assigned to the campaign, configured for outbound calls
+- **Phone Number** — A phone number assigned to the campaign
+- **Excel or CSV file** — A file containing your lead information
+
+---
+
+## Step 1: Prepare Your Excel/CSV File
+
+### Required Columns
+
+Your file must contain at least this column:
+
+| Column | Description | Example |
+|--------|-------------|---------|
+| `phone_number` | Phone number (required) | `+905551234567` |
+
+### Optional Columns
+
+Add additional columns matching the variables defined in your assistant:
+
+| Column | Description | Example |
+|--------|-------------|---------|
+| `customer_name` | Customer name | `Ayse` |
+| `company` | Company name | `ABC Tech` |
+| `email` | Email address | `ayse@abc.com` |
+
+<Tip>
+  Column names must match the variable names in your assistant's **Prompt & Tools** settings. For example, if your assistant uses `{customer_name}`, the Excel column header must be `customer_name`.
+</Tip>
+
+### Example File
+
+```csv
+phone_number,customer_name,company
++905551234567,Ayse Yilmaz,ABC Tech
++905559876543,Mehmet Kaya,XYZ Ltd
++905553334455,Fatma Demir,123 Software
++905557778899,Ali Ozturk,Demo Inc
+```
+
+<Warning>
+  **Phone number format:** International format is recommended — must start with `+` and country code (e.g., `+905551234567`). If using national format (e.g., `05551234567`), you must select the country code during upload, and all numbers must be from the same country.
+</Warning>
+
+### Secondary Contacts (Optional)
+
+If a lead has multiple phone numbers, add additional columns:
+
+```csv
+phone_number,customer_name,secondary_phone_1,secondary_phone_2
++905551234567,Ayse Yilmaz,+905551234568,+905551234569
+```
+
+The system calls the primary number first, then moves to secondary numbers if unreachable.
+
+---
+
+## Step 2: Upload the File from the Dashboard
+
+<Steps>
+  <Step title="Go to the Leads page">
+    Navigate to the **Leads** section or your campaign's leads tab.
+  </Step>
+  <Step title="Click the Import button">
+    Click the **"Import Leads"** button.
+  </Step>
+  <Step title="Select a campaign">
+    Choose the campaign to add the leads to from the dropdown.
+  </Step>
+  <Step title="Download the sample file (recommended)">
+    Download the **sample file** to see the correct format. Make sure your file matches this format.
+  </Step>
+  <Step title="Upload your file">
+    Select your CSV or Excel (.xlsx, .xls) file.
+  </Step>
+  <Step title="Map columns">
+    The system will attempt to auto-detect your columns. Review and correct if needed:
+    - **Phone Number** → `phone_number` column
+    - **Assistant variables** → Map each to the relevant column (e.g., `customer_name`, `company`)
+  </Step>
+  <Step title="Select phone format">
+    - **International Format:** Select this if numbers start with `+`
+    - **National Format:** Select this if there's no country code, and specify the country
+  </Step>
+  <Step title="Start the import">
+    Confirm the mappings and click **"Import"**.
+  </Step>
+</Steps>
+
+### Processing Time
+
+| File Size | Estimated Time |
+|-----------|---------------|
+| < 100 rows | Less than 1 minute |
+| 100-1,000 rows | 2-5 minutes |
+| 1,000+ rows | 10-30 minutes |
+| 10,000+ rows | Several hours |
+
+<Note>
+  Large files are processed in the background. You'll receive an email notification when the import is complete.
+</Note>
+
+---
+
+## Step 3: Start the Campaign
+
+After the leads are uploaded:
+
+1. Go to the **Campaigns** page
+2. Find your campaign
+3. If the campaign is in **"Draft"** status, click the **"Start"** button
+4. The campaign status changes to **"In Progress"** and calls begin
+
+<Note>
+  If your campaign is already **"In Progress"**, uploaded leads are automatically queued. No additional action is needed.
+</Note>
+
+---
+
+## Validation and Error Handling
+
+The system automatically validates during upload:
+
+- **Valid rows** are added to the campaign
+- **Invalid rows** are skipped (bad phone number, missing required field, etc.)
+- **Duplicate numbers** are blocked
+- An **error report** is generated after processing — you can download it
+
+### Common Errors
+
+| Error | Solution |
+|-------|----------|
+| Invalid phone number | Must be in E.164 format: `+905551234567` |
+| Duplicate number | The same number already exists in the campaign |
+| Missing required field | Phone number column cannot be empty |
+| File format error | Use .csv, .xlsx, or .xls format |
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Which file formats are supported?">
+    CSV (.csv), Excel (.xlsx), and legacy Excel (.xls) formats are supported.
+  </Accordion>
+
+  <Accordion title="Can I upload a new file while the campaign is running?">
+    Yes. Leads uploaded while the campaign is "In Progress" are automatically queued for calling. You don't need to restart the campaign.
+  </Accordion>
+
+  <Accordion title="Does the column order matter?">
+    No. The system maps by column names, not by order.
+  </Accordion>
+
+  <Accordion title="Can I mix numbers from different countries in the same file?">
+    If using international format (starting with `+`), yes. If using national format, you need a separate file per country.
+  </Accordion>
+
+  <Accordion title="How many leads can I upload?">
+    There's no per-file limit, but large files (10,000+ rows) are processed in the background and may take several hours. We recommend testing with a small file (10-20 rows) first.
+  </Accordion>
+
+  <Accordion title="Should I use API or Excel to add leads?">
+    **Excel/CSV:** One-time bulk upload, no technical knowledge required. Done from the dashboard.
+    **API:** Automated integration, continuous lead flow from your CRM or system. Requires technical knowledge.
+    For details, see [Import Leads via API and Start Auto-Calling](/guides/api-lead-import-and-automatic-calling).
+  </Accordion>
+</AccordionGroup>

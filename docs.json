@@ -202,7 +202,8 @@
               {
                 "group": "Rehberler",
                 "pages": [
-                  "tr/guides/api-lead-import-and-automatic-calling"
+                  "tr/guides/api-lead-import-and-automatic-calling",
+                  "tr/guides/excel-lead-import-and-automatic-calling"
                 ]
               },
               {
@@ -575,7 +576,8 @@
               {
                 "group": "Guides",
                 "pages": [
-                  "guides/api-lead-import-and-automatic-calling"
+                  "guides/api-lead-import-and-automatic-calling",
+                  "guides/excel-lead-import-and-automatic-calling"
                 ]
               },
               {
