@@ -1,0 +1,331 @@
+---
+title: "Import Leads via API and Start Auto-Calling"
+icon: "phone-arrow-up-right"
+description: "Add leads in bulk using the API and launch automated calling campaigns"
+---
+
+This guide walks you through how to add your lead list to a campaign using the WhatTalk.ai API and start automated calls.
+
+## Overview
+
+The entire process consists of 3 steps:
+
+<Steps>
+  <Step title="Create a campaign (or use an existing one)">
+    Create a campaign from the dashboard or via the API.
+  </Step>
+  <Step title="Add leads to the campaign via API">
+    Send an API request for each lead.
+  </Step>
+  <Step title="Start the campaign">
+    Set the campaign status to "start" — the system begins calling automatically.
+  </Step>
+</Steps>
+
+<Note>
+  If your campaign is already **"in-progress"**, step 3 is not needed. Newly added leads are automatically queued for calling.
+</Note>
+
+## Prerequisites
+
+Before you begin, make sure the following are ready:
+
+- **API Key** — Create one from `Settings > API Keys` in the dashboard
+- **Campaign ID** — An existing campaign ID or create a new one
+- **AI Assistant** — An assistant assigned to the campaign, configured for outbound calls
+- **Phone Number** — A phone number assigned to the campaign
+
+## Authentication
+
+All API requests use a Bearer token in the `Authorization` header:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+**Base URL:** `https://app.whattalk.ai/api`
+
+---
+
+## Step 1: Create a Campaign (Optional)
+
+If you already have a campaign, skip to [Step 2](#step-2-add-leads-to-the-campaign).
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/campaign" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Customer Satisfaction Call",
+    "assistant_id": 12,
+    "timezone": "Europe/Istanbul",
+    "allowed_hours_start_time": "09:00",
+    "allowed_hours_end_time": "18:00",
+    "allowed_days": ["monday","tuesday","wednesday","thursday","friday"],
+    "max_retries": 3,
+    "retry_interval": 60,
+    "max_calls_in_parallel": 3
+  }'
+```
+
+<Accordion title="Campaign parameters explained">
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `name` | Campaign name | Required |
+| `assistant_id` | AI assistant ID | Required |
+| `timezone` | Timezone (e.g., `Europe/Istanbul`) | Optional |
+| `allowed_hours_start_time` | Calling window start time | `00:00` |
+| `allowed_hours_end_time` | Calling window end time | `23:59` |
+| `allowed_days` | Days of the week to make calls | All days |
+| `max_retries` | Retry attempts for unanswered calls (1-5) | `3` |
+| `retry_interval` | Minutes between retries (10-4320) | `60` |
+| `max_calls_in_parallel` | Concurrent calls (1-10) | `3` |
+| `retry_on_voicemail` | Retry if voicemail detected | `false` |
+
+</Accordion>
+
+Note the `campaign_id` from the response — you'll need it in the next step.
+
+```json
+{
+  "data": {
+    "id": 1050,
+    "name": "Customer Satisfaction Call",
+    "status": "draft"
+  }
+}
+```
+
+<Warning>
+  Newly created campaigns start in **"draft"** status. You must explicitly start the campaign for calls to begin (Step 3).
+</Warning>
+
+---
+
+## Step 2: Add Leads to the Campaign
+
+Send a separate API request for each lead. Phone numbers must be in **E.164 format** (e.g., `+905551234567`).
+
+### Add a Single Lead
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/lead" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "phone_number": "+905551234567",
+    "campaign_id": 1050,
+    "variables": {
+      "customer_name": "Ayse",
+      "company": "ABC Tech"
+    }
+  }'
+```
+
+### Successful Response
+
+```json
+{
+  "message": "Lead created successfully",
+  "data": {
+    "id": 5001,
+    "campaign_id": 1050,
+    "phone_number": "+905551234567",
+    "variables": {
+      "customer_name": "Ayse",
+      "company": "ABC Tech"
+    },
+    "status": "created"
+  }
+}
+```
+
+### Bulk Lead Import (100 leads)
+
+There is no bulk endpoint — send a request per lead. Here are loop examples in different languages:
+
+<CodeGroup>
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+CAMPAIGN_ID = 1050
+BASE_URL = "https://app.whattalk.ai/api"
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+leads = [
+    {"phone": "+905551234567", "name": "Ayse", "company": "ABC Tech"},
+    {"phone": "+905559876543", "name": "Mehmet", "company": "XYZ Ltd"},
+    # ... more leads
+]
+
+for lead in leads:
+    response = requests.post(f"{BASE_URL}/user/lead", headers=headers, json={
+        "phone_number": lead["phone"],
+        "campaign_id": CAMPAIGN_ID,
+        "variables": {
+            "customer_name": lead["name"],
+            "company": lead["company"]
+        }
+    })
+    result = response.json()
+    print(f"{lead['name']}: {result['message']}")
+```
+
+```javascript Node.js
+const API_KEY = "YOUR_API_KEY";
+const CAMPAIGN_ID = 1050;
+const BASE_URL = "https://app.whattalk.ai/api";
+
+const leads = [
+  { phone: "+905551234567", name: "Ayse", company: "ABC Tech" },
+  { phone: "+905559876543", name: "Mehmet", company: "XYZ Ltd" },
+  // ... more leads
+];
+
+for (const lead of leads) {
+  const response = await fetch(`${BASE_URL}/user/lead`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      phone_number: lead.phone,
+      campaign_id: CAMPAIGN_ID,
+      variables: {
+        customer_name: lead.name,
+        company: lead.company
+      }
+    })
+  });
+  const result = await response.json();
+  console.log(`${lead.name}: ${result.message}`);
+}
+```
+
+```bash Bash (loop)
+API_KEY="YOUR_API_KEY"
+CAMPAIGN_ID=1050
+
+# Read from CSV file (format: phone,name,company)
+while IFS=',' read -r phone name company; do
+  curl -s -X POST "https://app.whattalk.ai/api/user/lead" \
+    -H "Authorization: Bearer $API_KEY" \
+    -H "Content-Type: application/json" \
+    -d "{
+      \"phone_number\": \"$phone\",
+      \"campaign_id\": $CAMPAIGN_ID,
+      \"variables\": {
+        \"customer_name\": \"$name\",
+        \"company\": \"$company\"
+      }
+    }"
+  echo ""
+done < leads.csv
+```
+
+</CodeGroup>
+
+<Tip>
+  The field names in `variables` must match the variable names in your assistant's **Prompt & Tools** settings. For example, if your assistant uses `{customer_name}`, send `"customer_name"` in the API.
+</Tip>
+
+---
+
+## Step 3: Start the Campaign
+
+After adding leads, start the campaign:
+
+### Start Campaign
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/campaigns/update-status" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaign_id": 1050,
+    "action": "start"
+  }'
+```
+
+```json
+{
+  "message": "Campaign started successfully.",
+  "success": true,
+  "data": {
+    "campaign_id": 1050,
+    "status": "in-progress"
+  }
+}
+```
+
+### Stop Campaign
+
+To pause calls:
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/campaigns/update-status" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaign_id": 1050,
+    "action": "stop"
+  }'
+```
+
+### Campaign Statuses
+
+| Status | Description |
+|--------|-------------|
+| `draft` | Created, not yet started |
+| `in-progress` | Active — calls are being made |
+| `stopped` | Manually paused |
+| `completed` | All leads have been called |
+
+---
+
+## Lead Statuses
+
+While the campaign is running, each lead's status is updated automatically:
+
+| Status | Description |
+|--------|-------------|
+| `created` | Created, waiting to be called |
+| `scheduled` | Queued for calling |
+| `processing` | Currently being called |
+| `completed` | Successfully reached |
+| `rescheduled` | Retry scheduled |
+| `reached-max-retries` | Maximum retry attempts reached |
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I add new leads while the campaign is running?">
+    Yes. Leads added while the campaign is "in-progress" are automatically queued for calling. You don't need to restart the campaign.
+  </Accordion>
+
+  <Accordion title="Is there a bulk import endpoint?">
+    There is currently no bulk endpoint. You need to send a separate `POST /user/lead` request for each lead. This can be easily automated using the loop examples above.
+  </Accordion>
+
+  <Accordion title="What phone number format is required?">
+    E.164 format is required. It must start with `+` followed by the country code. Examples: `+905551234567` (Turkey), `+14155551234` (US).
+  </Accordion>
+
+  <Accordion title="Do I need to set up an automation workflow?">
+    No. You can manage leads and campaigns directly via the API. The automation platform is only needed for additional scenarios like CRM integration or post-call actions.
+  </Accordion>
+
+  <Accordion title="Can I add the same number again?">
+    By default, duplicate numbers are blocked. To allow duplicates, use the `"allow_dupplicate": true` parameter.
+  </Accordion>
+</AccordionGroup>

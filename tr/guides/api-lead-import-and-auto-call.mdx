@@ -1,0 +1,331 @@
+---
+title: "API ile Müşteri İletme ve Otomatik Arama Başlatma"
+icon: "phone-arrow-up-right"
+description: "API kullanarak toplu müşteri ekleyin ve otomatik arama kampanyası başlatın"
+---
+
+Bu rehberde, WhatTalk.ai API'sini kullanarak müşteri listenizi bir kampanyaya nasıl ekleyeceğinizi ve otomatik aramaları nasıl başlatacağınızı adım adım öğreneceksiniz.
+
+## Genel Bakış
+
+Tüm işlem 3 adımdan oluşur:
+
+<Steps>
+  <Step title="Kampanya oluşturun (veya mevcut kampanyayı kullanın)">
+    Panelden veya API ile bir kampanya oluşturun.
+  </Step>
+  <Step title="Müşterileri API ile kampanyaya ekleyin">
+    Her müşteri için bir API isteği gönderin.
+  </Step>
+  <Step title="Kampanyayı başlatın">
+    Kampanya durumunu "start" yapın — sistem otomatik aramaya başlar.
+  </Step>
+</Steps>
+
+<Note>
+  Kampanyanız zaten **"Devam ediyor" (in-progress)** durumdaysa, 3. adıma gerek yoktur. Eklenen müşteriler otomatik olarak arama sırasına girer.
+</Note>
+
+## Ön Gereksinimler
+
+Başlamadan önce aşağıdakilerin hazır olduğundan emin olun:
+
+- **API Anahtarı** — Panelden `Ayarlar > API Anahtarları` bölümünden oluşturabilirsiniz
+- **Kampanya ID** — Mevcut bir kampanyanın ID'si veya yeni bir kampanya oluşturun
+- **AI Asistan** — Kampanyaya atanmış, giden arama için yapılandırılmış bir asistan
+- **Telefon Numarası** — Kampanyaya atanmış bir telefon numarası
+
+## Kimlik Doğrulama
+
+Tüm API isteklerinde `Authorization` başlığında Bearer token kullanılır:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+**Base URL:** `https://app.whattalk.ai/api`
+
+---
+
+## Adım 1: Kampanya Oluşturma (İsteğe Bağlı)
+
+Zaten bir kampanyanız varsa bu adımı atlayıp doğrudan [Adım 2'ye](#adım-2-müşterileri-kampanyaya-ekleme) geçebilirsiniz.
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/campaign" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Müşteri Memnuniyet Araması",
+    "assistant_id": 12,
+    "timezone": "Europe/Istanbul",
+    "allowed_hours_start_time": "09:00",
+    "allowed_hours_end_time": "18:00",
+    "allowed_days": ["monday","tuesday","wednesday","thursday","friday"],
+    "max_retries": 3,
+    "retry_interval": 60,
+    "max_calls_in_parallel": 3
+  }'
+```
+
+<Accordion title="Kampanya parametreleri açıklaması">
+
+| Parametre | Açıklama | Varsayılan |
+|-----------|----------|------------|
+| `name` | Kampanya adı | Zorunlu |
+| `assistant_id` | AI asistanın ID'si | Zorunlu |
+| `timezone` | Saat dilimi (ör. `Europe/Istanbul`) | Opsiyonel |
+| `allowed_hours_start_time` | Arama başlangıç saati | `00:00` |
+| `allowed_hours_end_time` | Arama bitiş saati | `23:59` |
+| `allowed_days` | Arama yapılacak günler | Tüm günler |
+| `max_retries` | Cevapsız aramalarda tekrar deneme sayısı (1-5) | `3` |
+| `retry_interval` | Tekrar denemeler arası süre (dakika, 10-4320) | `60` |
+| `max_calls_in_parallel` | Aynı anda yapılacak arama sayısı (1-10) | `3` |
+| `retry_on_voicemail` | Sesli mesaja düşerse tekrar dene | `false` |
+
+</Accordion>
+
+Dönen yanıtta `campaign_id` değerini not edin — bir sonraki adımda kullanacaksınız.
+
+```json
+{
+  "data": {
+    "id": 1050,
+    "name": "Müşteri Memnuniyet Araması",
+    "status": "draft"
+  }
+}
+```
+
+<Warning>
+  Yeni oluşturulan kampanyalar **"draft"** durumunda başlar. Aramaların başlaması için kampanyayı ayrıca başlatmanız gerekir (Adım 3).
+</Warning>
+
+---
+
+## Adım 2: Müşterileri Kampanyaya Ekleme
+
+Her müşteri için ayrı bir API isteği gönderin. Telefon numarası **E.164 formatında** olmalıdır (ör. `+905551234567`).
+
+### Tek Müşteri Ekleme
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/lead" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "phone_number": "+905551234567",
+    "campaign_id": 1050,
+    "variables": {
+      "customer_name": "Ayşe",
+      "company": "ABC Teknoloji"
+    }
+  }'
+```
+
+### Başarılı Yanıt
+
+```json
+{
+  "message": "Lead created successfully",
+  "data": {
+    "id": 5001,
+    "campaign_id": 1050,
+    "phone_number": "+905551234567",
+    "variables": {
+      "customer_name": "Ayşe",
+      "company": "ABC Teknoloji"
+    },
+    "status": "created"
+  }
+}
+```
+
+### Toplu Müşteri Ekleme (100 adet)
+
+Toplu ekleme endpoint'i bulunmadığından, her müşteri için ayrı istek gönderilir. Aşağıda farklı dillerde örnek döngüler:
+
+<CodeGroup>
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+CAMPAIGN_ID = 1050
+BASE_URL = "https://app.whattalk.ai/api"
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+leads = [
+    {"phone": "+905551234567", "name": "Ayşe", "company": "ABC Teknoloji"},
+    {"phone": "+905559876543", "name": "Mehmet", "company": "XYZ Ltd"},
+    # ... diğer müşteriler
+]
+
+for lead in leads:
+    response = requests.post(f"{BASE_URL}/user/lead", headers=headers, json={
+        "phone_number": lead["phone"],
+        "campaign_id": CAMPAIGN_ID,
+        "variables": {
+            "customer_name": lead["name"],
+            "company": lead["company"]
+        }
+    })
+    result = response.json()
+    print(f"{lead['name']}: {result['message']}")
+```
+
+```javascript Node.js
+const API_KEY = "YOUR_API_KEY";
+const CAMPAIGN_ID = 1050;
+const BASE_URL = "https://app.whattalk.ai/api";
+
+const leads = [
+  { phone: "+905551234567", name: "Ayşe", company: "ABC Teknoloji" },
+  { phone: "+905559876543", name: "Mehmet", company: "XYZ Ltd" },
+  // ... diğer müşteriler
+];
+
+for (const lead of leads) {
+  const response = await fetch(`${BASE_URL}/user/lead`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      phone_number: lead.phone,
+      campaign_id: CAMPAIGN_ID,
+      variables: {
+        customer_name: lead.name,
+        company: lead.company
+      }
+    })
+  });
+  const result = await response.json();
+  console.log(`${lead.name}: ${result.message}`);
+}
+```
+
+```bash Bash (döngü)
+API_KEY="YOUR_API_KEY"
+CAMPAIGN_ID=1050
+
+# CSV dosyasından okuma (format: telefon,isim,şirket)
+while IFS=',' read -r phone name company; do
+  curl -s -X POST "https://app.whattalk.ai/api/user/lead" \
+    -H "Authorization: Bearer $API_KEY" \
+    -H "Content-Type: application/json" \
+    -d "{
+      \"phone_number\": \"$phone\",
+      \"campaign_id\": $CAMPAIGN_ID,
+      \"variables\": {
+        \"customer_name\": \"$name\",
+        \"company\": \"$company\"
+      }
+    }"
+  echo ""
+done < leads.csv
+```
+
+</CodeGroup>
+
+<Tip>
+  `variables` içindeki alan adları, asistanınızın **Prompt ve Araçlar** ayarlarındaki değişken adlarıyla aynı olmalıdır. Örneğin asistanda `{customer_name}` kullanıyorsanız, API'de de `"customer_name"` göndermelisiniz.
+</Tip>
+
+---
+
+## Adım 3: Kampanyayı Başlatma
+
+Müşterileri ekledikten sonra kampanyayı başlatın:
+
+### Kampanyayı Başlat
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/campaigns/update-status" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaign_id": 1050,
+    "action": "start"
+  }'
+```
+
+```json
+{
+  "message": "Campaign started successfully.",
+  "success": true,
+  "data": {
+    "campaign_id": 1050,
+    "status": "in-progress"
+  }
+}
+```
+
+### Kampanyayı Durdur
+
+Aramaları durdurmak isterseniz:
+
+```bash
+curl -X POST "https://app.whattalk.ai/api/user/campaigns/update-status" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaign_id": 1050,
+    "action": "stop"
+  }'
+```
+
+### Kampanya Durumları
+
+| Durum | Açıklama |
+|-------|----------|
+| `draft` | Oluşturuldu, henüz başlatılmadı |
+| `in-progress` | Aktif — aramalar yapılıyor |
+| `stopped` | Manuel olarak durduruldu |
+| `completed` | Tüm müşteriler arandı, kampanya tamamlandı |
+
+---
+
+## Müşteri Durumları
+
+Kampanya çalışırken her müşterinin durumu otomatik güncellenir:
+
+| Durum | Açıklama |
+|-------|----------|
+| `created` | Oluşturuldu, aranmayı bekliyor |
+| `scheduled` | Sıraya alındı |
+| `processing` | Şu anda aranıyor |
+| `completed` | Başarıyla ulaşıldı |
+| `rescheduled` | Tekrar arama planlandı |
+| `reached-max-retries` | Maksimum deneme sayısına ulaşıldı |
+
+---
+
+## Sık Sorulan Sorular
+
+<AccordionGroup>
+  <Accordion title="Kampanya çalışırken yeni müşteri ekleyebilir miyim?">
+    Evet. Kampanya "in-progress" durumdayken eklenen yeni müşteriler otomatik olarak arama sırasına girer. Kampanyayı tekrar başlatmanıza gerek yoktur.
+  </Accordion>
+
+  <Accordion title="Toplu ekleme (bulk) endpoint var mı?">
+    Şu anda toplu ekleme endpoint'i bulunmamaktadır. Her müşteri için ayrı bir `POST /user/lead` isteği göndermeniz gerekir. Yukarıdaki kod örneklerindeki döngülerle bu işlem kolayca otomatikleştirilebilir.
+  </Accordion>
+
+  <Accordion title="Telefon numarası formatı ne olmalı?">
+    E.164 formatı zorunludur. Başında `+` işareti ve ülke kodu olmalıdır. Örnek: `+905551234567` (Türkiye), `+14155551234` (ABD).
+  </Accordion>
+
+  <Accordion title="Otomasyon akışı (workflow) kurmam gerekiyor mu?">
+    Hayır. API ile doğrudan müşteri ekleme ve kampanya yönetimi yapabilirsiniz. Otomasyon platformu yalnızca CRM entegrasyonu, arama sonrası işlemler gibi ek senaryolar için gereklidir.
+  </Accordion>
+
+  <Accordion title="Aynı numarayı tekrar ekleyebilir miyim?">
+    Varsayılan olarak mükerrer numaralar engellenir. Mükerrer eklemeye izin vermek için `"allow_dupplicate": true` parametresini kullanabilirsiniz.
+  </Accordion>
+</AccordionGroup>
