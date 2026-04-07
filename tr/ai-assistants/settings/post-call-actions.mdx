@@ -4,178 +4,178 @@ icon: "webhook"
 description: "Aramadan veri çıkarın ve otomasyon iş akışları için bir uygulamaya/webhook'a gönderin."
 ---
 
-Configure what happens after calls end - extract specific information from conversations and send it to external systems for further processing.
+Aramaların sona erdikten sonra ne olacağını yapılandırın - konuşmalardan belirli bilgileri çıkarın ve daha fazla işlem için harici sistemlere gönderin.
 
-## Overview
+## Genel Bakış
 
-Post-call actions automatically:
-- Extract structured data from conversations using AI
-- Send extracted variables to webhooks for automation
-- Trigger workflows in connected platforms
-- Update CRM records and databases
-- Enable complex automation scenarios
+Arama sonrası işlemler otomatik olarak:
+- Yapay zeka kullanarak konuşmalardan yapılandırılmış veri çıkarır
+- Çıkarılan değişkenleri otomasyon için webhook'lara gönderir
+- Bağlı platformlarda iş akışlarını tetikler
+- CRM kayıtlarını ve veritabanlarını günceller
+- Karmaşık otomasyon senaryolarını mümkün kılar
 
-## Post-call Variables
+## Arama Sonrası Değişkenler
 
-Define the variables that the AI will extract from the call and send to a webhook.
+Yapay zekanın aramadan çıkaracağı ve bir webhook'a göndereceği değişkenleri tanımlayın.
 
-### Variable Configuration
+### Değişken Yapılandırması
 
-Configure which information the AI should extract from each conversation:
+Yapay zekanın her konuşmadan hangi bilgileri çıkarması gerektiğini yapılandırın:
 
 <AccordionGroup>
-  <Accordion title="Variable Definition" icon="code">
-    Create variables that the AI will identify and extract from conversations.
+  <Accordion title="Değişken Tanımı" icon="code">
+    Yapay zekanın konuşmalardan tanımlayıp çıkaracağı değişkenler oluşturun.
     
-    **How extraction works:**
-    The AI analyzes the complete call transcript and considers your system prompt context to extract the requested variables. It understands what was discussed during the call and extracts relevant information based on your variable descriptions.
+    **Çıkarma nasıl çalışır:**
+    Yapay zeka, tüm arama transkriptini analiz eder ve istenen değişkenleri çıkarmak için sistem promptu bağlamını dikkate alır. Arama sırasında nelerin tartışıldığını anlar ve değişken açıklamalarınıza göre ilgili bilgileri çıkarır.
     
-    **Configuration:**
-    - **Name:** Variable identifier (3-16 characters, lowercase, alphanumeric)
-    - **Type:** Data type for the extracted value
-    - **Description:** Clear explanation so AI understands what to extract from the conversation
+    **Yapılandırma:**
+    - **Ad:** Değişken tanımlayıcısı (3-16 karakter, küçük harf, alfanümerik)
+    - **Tür:** Çıkarılan değer için veri türü
+    - **Açıklama:** Yapay zekanın konuşma transkriptinden ne çıkaracağını anlaması için net açıklama
     
-    **Variable Types:**
-    - **String:** Text values (names, addresses, comments)
-    - **Number:** Numeric values (quantities, prices, scores)
-    - **True/False:** Boolean values (yes/no answers, objectives achieved)
+    **Değişken Türleri:**
+    - **String:** Metin değerleri (isimler, adresler, yorumlar)
+    - **Number:** Sayısal değerler (miktarlar, fiyatlar, puanlar)
+    - **True/False:** Boolean değerler (evet/hayır cevapları, hedeflerin gerçekleşip gerçekleşmediği)
   </Accordion>
   
-  <Accordion title="Default Variables" icon="list">
-    Every assistant includes these essential variables by default:
+  <Accordion title="Varsayılan Değişkenler" icon="list">
+    Her asistan varsayılan olarak bu temel değişkenleri içerir:
     
-    **Status (True/False):** Whether the call objective was achieved or not
+    **Durum (True/False):** Arama hedefinin gerçekleşip gerçekleşmediği
     
-    **Summary (String):** Call summary in a few words
+    **Özet (String):** Birkaç kelimelik arama özeti
     
-    You can add custom variables based on your specific use case.
+    Özel kullanım durumunuza göre özel değişkenler ekleyebilirsiniz.
   </Accordion>
   
-  <Accordion title="Variable Examples" icon="lightbulb">
-    Common variables for different scenarios:
+  <Accordion title="Değişken Örnekleri" icon="lightbulb">
+    Farklı senaryolar için yaygın değişkenler:
     
-    **Sales qualification:**
-    - `budget` (Number): Customer's budget range
-    - `decision_maker` (True/False): Is caller the decision maker
-    - `timeline` (String): When they need the solution
-    - `pain_points` (String): Main challenges mentioned
+    **Satış nitelendirme:**
+    - `budget` (Number): Müşterinin bütçe aralığı
+    - `decision_maker` (True/False): Arayan kişi karar verici mi
+    - `timeline` (String): Çözüme ne zaman ihtiyaç duyuyorlar
+    - `pain_points` (String): Bahsedilen temel zorluklar
     
-    **Appointment booking:**
-    - `appointment_date` (String): Preferred appointment date
-    - `service_type` (String): Type of service requested
-    - `contact_method` (String): Preferred contact method
+    **Randevu alma:**
+    - `appointment_date` (String): Tercih edilen randevu tarihi
+    - `service_type` (String): Talep edilen hizmet türü
+    - `contact_method` (String): Tercih edilen iletişim yöntemi
     
-    **Support calls:**
-    - `issue_type` (String): Category of the problem
-    - `urgency_level` (Number): Priority score (1-10)
-    - `resolution_status` (True/False): Was issue resolved
+    **Destek aramaları:**
+    - `issue_type` (String): Sorunun kategorisi
+    - `urgency_level` (Number): Öncelik puanı (1-10)
+    - `resolution_status` (True/False): Sorun çözüldü mü
   </Accordion>
 </AccordionGroup>
 
-### Extraction Process
+### Çıkarma Süreci
 
 <AccordionGroup>
-  <Accordion title="How AI Extracts Variables" icon="brain">
-    The AI uses sophisticated analysis to extract variables from your calls:
+  <Accordion title="Yapay Zeka Değişkenleri Nasıl Çıkarır" icon="brain">
+    Yapay zeka, aramalarınızdan değişkenleri çıkarmak için gelişmiş analiz kullanır:
     
-    **Data sources:**
-    - **Complete call transcript:** Everything said by both the AI and the customer
-    - **System prompt context:** Your assistant's objectives and instructions help guide extraction
-    - **Variable descriptions:** Clear descriptions you provide for each variable
+    **Veri kaynakları:**
+    - **Tam arama transkripti:** Hem yapay zeka hem de müşteri tarafından söylenen her şey
+    - **Sistem promptu bağlamı:** Asistanınızın hedefleri ve talimatları çıkarma sürecini yönlendirir
+    - **Değişken açıklamaları:** Her değişken için sağladığınız net açıklamalar
     
-    **Analysis method:**
-    1. AI reviews the entire conversation transcript
-    2. Considers the system prompt and call objectives
-    3. Identifies relevant information based on variable descriptions
-    4. Extracts and formats data according to specified types
-    5. Validates extracted values before sending to webhook
+    **Analiz yöntemi:**
+    1. Yapay zeka tüm konuşma transkriptini inceler
+    2. Sistem promptunu ve arama hedeflerini değerlendirir
+    3. Değişken açıklamalarına göre ilgili bilgileri belirler
+    4. Belirtilen türlere göre verileri çıkarır ve biçimlendirir
+    5. Webhook'a göndermeden önce çıkarılan değerleri doğrular
   </Accordion>
 </AccordionGroup>
 
-### Best Practices
+### En İyi Uygulamalar
 
 <Warning>
-**Variable naming:** Use lowercase, alphanumeric characters only. No spaces or special characters except underscores.
+**Değişken adlandırma:** Yalnızca küçük harf ve alfanümerik karakterler kullanın. Alt çizgi dışında boşluk veya özel karakter kullanmayın.
 </Warning>
 
 <Tip>
-**Clear descriptions:** Write descriptions that clearly explain what the AI should look for in the conversation transcript. The more specific and context-aware, the better the extraction accuracy.
+**Net açıklamalar:** Yapay zekanın konuşma transkriptinde neyi araması gerektiğini açıkça belirten açıklamalar yazın. Ne kadar spesifik ve bağlama uygun olursa, çıkarma doğruluğu o kadar yüksek olur.
 </Tip>
 
 <Note>
-**System prompt synergy:** Your variable descriptions work best when they align with your system prompt objectives. If your assistant is designed for lead qualification, your variables should reflect that purpose.
+**Sistem promptu uyumu:** Değişken açıklamalarınız, sistem promptu hedeflerinizle uyumlu olduğunda en iyi sonucu verir. Asistanınız potansiyel müşteri nitelendirmesi için tasarlandıysa, değişkenleriniz bu amacı yansıtmalıdır.
 </Note>
 
-## Webhook Configuration
+## Webhook Yapılandırması
 
-Make a request to a URL that sends the extracted variables to external systems.
+Çıkarılan değişkenleri harici sistemlere gönderen bir URL'ye istek yapın.
 
-### Webhook Settings
+### Webhook Ayarları
 
 <AccordionGroup>
-  <Accordion title="Webhook Status" icon="check">
-    **Enabled/Disabled:** Control whether webhooks are sent after calls
+  <Accordion title="Webhook Durumu" icon="check">
+    **Etkin/Devre Dışı:** Aramalardan sonra webhook gönderilip gönderilmeyeceğini kontrol edin
     
-    **Default:** Disabled - Enable only when you have a webhook endpoint ready to receive data
+    **Varsayılan:** Devre dışı - Yalnızca veri almaya hazır bir webhook uç noktanız olduğunda etkinleştirin
   </Accordion>
   
-  <Accordion title="Webhook URL" icon="link">
-    **URL endpoint:** Where to send the extracted data
+  <Accordion title="Webhook URL'si" icon="link">
+    **URL uç noktası:** Çıkarılan verilerin gönderileceği adres
     
-    **Format:** Must be a valid URL
+    **Biçim:** Geçerli bir URL olmalıdır
 
-    **Example:** `https://automate.whattalk.ai/api/v1/webhooks/your-webhook-id`
+    **Örnek:** `https://automate.whattalk.ai/api/v1/webhooks/your-webhook-id`
     
-    **Test functionality:** Built-in test feature sends sample data to verify connectivity
+    **Test işlevi:** Bağlantıyı doğrulamak için örnek veri gönderen yerleşik test özelliği
   </Accordion>
   
-  <Accordion title="Delivery Options" icon="gear">
-    **Send webhook only on completed:** 
-    - **Yes (Default):** Only send data for completed calls
-    - **No:** Send data for all calls regardless of completion status
+  <Accordion title="Teslimat Seçenekleri" icon="gear">
+    **Webhook'u yalnızca tamamlananlarda gönder:** 
+    - **Evet (Varsayılan):** Yalnızca tamamlanan aramalar için veri gönder
+    - **Hayır:** Tamamlanma durumundan bağımsız olarak tüm aramalar için veri gönder
     
-    **Include recording in webhook:**
-    - **Yes (Default):** Include recording URL in the webhook payload
-    - **No:** Send only extracted variables without recording link
+    **Webhook'a kaydı dahil et:**
+    - **Evet (Varsayılan):** Webhook yüküne kayıt URL'sini dahil et
+    - **Hayır:** Kayıt bağlantısı olmadan yalnızca çıkarılan değişkenleri gönder
   </Accordion>
 </AccordionGroup>
 
-### Webhook Payload
+### Webhook Yükü
 
-The webhook will receive a comprehensive JSON payload containing call details, extracted variables, and transcript. For complete API documentation, see [Post-Call Webhook API](/api-reference/webhooks/post-call-webhook).
+Webhook, arama ayrıntılarını, çıkarılan değişkenleri ve transkripti içeren kapsamlı bir JSON yükü alacaktır. Tam API dokümantasyonu için [Arama Sonrası Webhook API](/api-reference/webhooks/post-call-webhook) sayfasına bakın.
 
-**Key payload fields:**
+**Temel yük alanları:**
 
 <AccordionGroup>
-  <Accordion title="Call Information" icon="phone">
-    - **id:** Unique call identifier
-    - **customer_phone:** Customer's phone number (E.164 format)
-    - **assistant_phone:** Assistant's phone number
-    - **duration:** Call duration in seconds
-    - **status:** Call status (initiated, ringing, busy, in-progress, ended, completed, ended_by_customer, ended_by_assistant, unanswered, failed)
-    - **created_at/finished_at:** ISO 8601 timestamps
+  <Accordion title="Arama Bilgileri" icon="phone">
+    - **id:** Benzersiz arama tanımlayıcısı
+    - **customer_phone:** Müşterinin telefon numarası (E.164 formatı)
+    - **assistant_phone:** Asistanın telefon numarası
+    - **duration:** Arama süresi (saniye cinsinden)
+    - **status:** Arama durumu (initiated, ringing, busy, in-progress, ended, completed, ended_by_customer, ended_by_assistant, unanswered, failed)
+    - **created_at/finished_at:** ISO 8601 zaman damgaları
   </Accordion>
   
-  <Accordion title="Extracted Variables" icon="code">
-    - **extracted_variables:** AI-extracted data based on your post-call schema configuration (see [Post-call Variables](#post-call-variables) section above)
-    - **input_variables:** Variables passed before the call (see [Call Variables](/ai-assistants/settings/prompt-and-tools#call-variables))
-    - Includes default variables (status, summary) plus your custom variables
+  <Accordion title="Çıkarılan Değişkenler" icon="code">
+    - **extracted_variables:** Arama sonrası şema yapılandırmanıza göre yapay zeka tarafından çıkarılan veriler (yukarıdaki [Arama Sonrası Değişkenler](#arama-sonrası-değişkenler) bölümüne bakın)
+    - **input_variables:** Arama öncesinde iletilen değişkenler ([Arama Değişkenleri](/ai-assistants/settings/prompt-and-tools#call-variables) sayfasına bakın)
+    - Varsayılan değişkenleri (durum, özet) ve özel değişkenlerinizi içerir
   </Accordion>
   
-  <Accordion title="Conversation Data" icon="message">
-    - **transcript:** Detailed conversation transcript with timestamps
-    - **formatted_transcript:** Human-readable conversation format
-    - **recording_url:** Call recording URL (if enabled)
+  <Accordion title="Konuşma Verileri" icon="message">
+    - **transcript:** Zaman damgalı ayrıntılı konuşma transkripti
+    - **formatted_transcript:** Okunabilir konuşma formatı
+    - **recording_url:** Arama kaydı URL'si (etkinleştirildiyse)
   </Accordion>
   
-  <Accordion title="Campaign & Lead Data" icon="users">
-    - **lead:** Lead information (for campaign calls)
-    - **campaign:** Campaign details and settings
-    - Only included for calls that are part of campaigns
+  <Accordion title="Kampanya ve Potansiyel Müşteri Verileri" icon="users">
+    - **lead:** Potansiyel müşteri bilgileri (kampanya aramaları için)
+    - **campaign:** Kampanya ayrıntıları ve ayarları
+    - Yalnızca kampanyaların parçası olan aramalar için dahil edilir
   </Accordion>
 </AccordionGroup>
 
-**Example webhook payload:**
+**Örnek webhook yükü:**
 
 ```json
 {
@@ -215,153 +215,153 @@ The webhook will receive a comprehensive JSON payload containing call details, e
 }
 ```
 
-### Testing Webhooks
+### Webhook'ları Test Etme
 
 <Tip>
-**Test before going live:** Use the "Make test request" button to send sample data to your webhook endpoint and verify it's working correctly.
+**Yayına almadan önce test edin:** Webhook uç noktanıza örnek veri göndermek ve düzgün çalıştığını doğrulamak için "Test isteği gönder" düğmesini kullanın.
 </Tip>
 
-**Test process:**
-1. Configure your variables and webhook URL
-2. Save your assistant settings
-3. Click "Make test request" 
-4. Check your webhook endpoint receives the test data
-5. Verify the payload structure matches your expectations
+**Test süreci:**
+1. Değişkenlerinizi ve webhook URL'sini yapılandırın
+2. Asistan ayarlarınızı kaydedin
+3. "Test isteği gönder" düğmesine tıklayın
+4. Webhook uç noktanızın test verilerini aldığını kontrol edin
+5. Yük yapısının beklentilerinizle eşleştiğini doğrulayın
 
-## Integration Examples
+## Entegrasyon Örnekleri
 
-### Our Automation Platform
+### Otomasyon Platformumuz
 
-**Primary integration:** Use our built-in no-code automation platform for seamless workflows:
+**Birincil entegrasyon:** Sorunsuz iş akışları için yerleşik kodsuz otomasyon platformumuzu kullanın:
 
-- **Direct webhook processing:** No external setup required
-- **250+ app integrations:** Connect to CRM, email, calendars, and more
-- **Visual workflow builder:** Create complex automation without code
-- **Real-time data sync:** Instant processing of extracted variables
-- **Pre-built templates:** Ready-to-use workflows for common scenarios
+- **Doğrudan webhook işleme:** Harici kurulum gerekmez
+- **250+ uygulama entegrasyonu:** CRM, e-posta, takvimler ve daha fazlasına bağlanın
+- **Görsel iş akışı oluşturucu:** Kod yazmadan karmaşık otomasyonlar oluşturun
+- **Gerçek zamanlı veri senkronizasyonu:** Çıkarılan değişkenlerin anında işlenmesi
+- **Hazır şablonlar:** Yaygın senaryolar için kullanıma hazır iş akışları
 
-**Common automation workflows:**
-- **CRM updates:** Automatically update contact records in HubSpot, Salesforce, Pipedrive
-- **Email follow-ups:** Send personalized emails based on call outcomes
-- **Lead scoring:** Update lead scores based on extracted variables
-- **Calendar booking:** Schedule follow-up meetings automatically
-- **Team notifications:** Alert team members about important calls
+**Yaygın otomasyon iş akışları:**
+- **CRM güncellemeleri:** HubSpot, Salesforce, Pipedrive'daki iletişim kayıtlarını otomatik olarak güncelleyin
+- **E-posta takipleri:** Arama sonuçlarına göre kişiselleştirilmiş e-postalar gönderin
+- **Potansiyel müşteri puanlama:** Çıkarılan değişkenlere göre potansiyel müşteri puanlarını güncelleyin
+- **Takvim rezervasyonu:** Takip toplantılarını otomatik olarak planlayın
+- **Ekip bildirimleri:** Önemli aramalar hakkında ekip üyelerini uyarın
 
-### External Platforms
+### Harici Platformlar
 
-**Any platform with webhook support:**
-- Receive webhook data from our platform
-- Process extracted variables in your own systems
-- Create custom automation workflows
-- Integrate with any API or service that accepts webhooks
+**Webhook desteği olan herhangi bir platform:**
+- Platformumuzdan webhook verilerini alın
+- Çıkarılan değişkenleri kendi sistemlerinizde işleyin
+- Özel otomasyon iş akışları oluşturun
+- Webhook kabul eden herhangi bir API veya hizmetle entegre edin
 
-**Use cases:**
-- Connect to any CRM, email platform, or business tool
-- Send data to custom applications
-- Trigger workflows in third-party automation platforms
-- Store data in external databases or systems
+**Kullanım senaryoları:**
+- Herhangi bir CRM, e-posta platformu veya iş aracına bağlanın
+- Özel uygulamalara veri gönderin
+- Üçüncü taraf otomasyon platformlarında iş akışlarını tetikleyin
+- Harici veritabanlarında veya sistemlerde veri depolayın
 
-### Custom Development
+### Özel Geliştirme
 
-**API endpoints:** Build custom receivers for webhook data
+**API uç noktaları:** Webhook verileri için özel alıcılar oluşturun
 
-**Database integration:** Store call data in your own systems
+**Veritabanı entegrasyonu:** Arama verilerini kendi sistemlerinizde depolayın
 
-**Business logic:** Trigger complex workflows based on extracted variables
+**İş mantığı:** Çıkarılan değişkenlere göre karmaşık iş akışlarını tetikleyin
 
-## Testing Your Assistant
+## Asistanınızı Test Etme
 
-After configuring your assistant settings, it's important to test thoroughly before deploying to production.
+Asistan ayarlarınızı yapılandırdıktan sonra, üretime dağıtmadan önce kapsamlı bir şekilde test etmeniz önemlidir.
 
-### Testing Methods
+### Test Yöntemleri
 
 <AccordionGroup>
-  <Accordion title="Speak with Your Assistant" icon="microphone">
-    **Web-based testing:** Use the "Speak with your assistant" button to test directly from your browser
+  <Accordion title="Asistanınızla Konuşun" icon="microphone">
+    **Web tabanlı test:** Doğrudan tarayıcınızdan test etmek için "Asistanınızla konuşun" düğmesini kullanın
     
-    **Features:**
-    - Real-time voice conversation through your web browser
-    - Test all assistant capabilities including tools and knowledge base
-    - No phone required - perfect for quick iterations
-    - Immediate feedback on responses and behavior
+    **Özellikler:**
+    - Web tarayıcınız üzerinden gerçek zamanlı sesli konuşma
+    - Araçlar ve bilgi tabanı dahil tüm asistan yeteneklerini test edin
+    - Telefon gerekmez - hızlı yinelemeler için mükemmel
+    - Yanıtlar ve davranış hakkında anında geri bildirim
     
-    **Best for:** Quick testing during development and configuration
+    **En uygun kullanım:** Geliştirme ve yapılandırma sırasında hızlı test
   </Accordion>
   
-  <Accordion title="Phone Call Testing" icon="phone">
-    **Real phone call testing:** Call your assistant from any phone number
+  <Accordion title="Telefon Araması Testi" icon="phone">
+    **Gerçek telefon araması testi:** Asistanınızı herhangi bir telefon numarasından arayın
     
-    **Outbound assistants:**
-    - If no specific number is set: Assistant calls from a random number
-    - If caller ID is configured: Assistant calls from your specified number
-    - Test the complete outbound flow including dialing and initial message
+    **Giden aramalar için asistanlar:**
+    - Belirli bir numara ayarlanmadıysa: Asistan rastgele bir numaradan arar
+    - Arayan kimliği yapılandırıldıysa: Asistan belirttiğiniz numaradan arar
+    - Arama ve ilk mesaj dahil tüm giden arama akışını test edin
     
-    **Inbound assistants:**
-    - Call the assigned phone number directly
-    - Test how the assistant handles incoming calls
-    - Verify call routing and response quality
+    **Gelen aramalar için asistanlar:**
+    - Atanan telefon numarasını doğrudan arayın
+    - Asistanın gelen aramaları nasıl ele aldığını test edin
+    - Arama yönlendirme ve yanıt kalitesini doğrulayın
     
-    **Best for:** Final testing with real phone conditions and audio quality
+    **En uygun kullanım:** Gerçek telefon koşulları ve ses kalitesiyle son test
   </Accordion>
 </AccordionGroup>
 
-### Testing Checklist
+### Test Kontrol Listesi
 
 <Tip>
-**Comprehensive testing:** Test all configured features including tools, knowledge base queries, variable extraction, and webhook delivery.
+**Kapsamlı test:** Araçlar, bilgi tabanı sorguları, değişken çıkarma ve webhook teslimi dahil tüm yapılandırılmış özellikleri test edin.
 </Tip>
 
-**Essential tests:**
-- Voice clarity and response speed
-- Knowledge base integration (if configured)
-- Tool functionality (transfer, scheduling, etc.)
-- Variable extraction accuracy
-- Webhook delivery (check your endpoint receives data)
-- Edge cases and error handling
+**Temel testler:**
+- Ses netliği ve yanıt hızı
+- Bilgi tabanı entegrasyonu (yapılandırıldıysa)
+- Araç işlevselliği (aktarma, planlama vb.)
+- Değişken çıkarma doğruluğu
+- Webhook teslimi (uç noktanızın veri aldığını kontrol edin)
+- Uç durumlar ve hata yönetimi
 
-## Web Widget Integration
+## Web Widget Entegrasyonu
 
-Configure your assistant to work as a web widget on your website for seamless customer interactions.
+Sorunsuz müşteri etkileşimleri için asistanınızı web sitenizde bir web widget olarak çalışacak şekilde yapılandırın.
 
-### Widget Configuration
+### Widget Yapılandırması
 
 <AccordionGroup>
-  <Accordion title="Widget Setup" icon="code">
-    **Easy integration:** Add your AI assistant to any website with a simple code snippet
+  <Accordion title="Widget Kurulumu" icon="code">
+    **Kolay entegrasyon:** Basit bir kod parçacığıyla yapay zeka asistanınızı herhangi bir web sitesine ekleyin
     
-    **Features:**
-    - **Voice chat:** Customers can speak directly to your assistant
-    - **Text fallback:** Option for text-based conversations
-    - **Customizable appearance:** Match your brand colors and styling
-    - **Mobile responsive:** Works on all devices and screen sizes
+    **Özellikler:**
+    - **Sesli sohbet:** Müşteriler asistanınızla doğrudan konuşabilir
+    - **Metin alternatifi:** Metin tabanlı konuşmalar için seçenek
+    - **Özelleştirilebilir görünüm:** Marka renklerinize ve stilinize uygun
+    - **Mobil uyumlu:** Tüm cihazlarda ve ekran boyutlarında çalışır
   </Accordion>
   
-  <Accordion title="Widget Behavior" icon="gear">
-    **Smart interactions:** The widget adapts to your assistant configuration
+  <Accordion title="Widget Davranışı" icon="gear">
+    **Akıllı etkileşimler:** Widget, asistan yapılandırmanıza uyum sağlar
     
-    **Capabilities:**
-    - Uses same knowledge base and tools as phone assistant
-    - Supports all configured languages
-    - Extracts same post-call variables
-    - Sends webhooks for web conversations
-    - Respects same system prompt and personality
+    **Yetenekler:**
+    - Telefon asistanıyla aynı bilgi tabanını ve araçları kullanır
+    - Yapılandırılmış tüm dilleri destekler
+    - Aynı arama sonrası değişkenleri çıkarır
+    - Web konuşmaları için webhook gönderir
+    - Aynı sistem promptu ve kişiliğe uyar
   </Accordion>
   
-  <Accordion title="Use Cases" icon="lightbulb">
-    **Common applications:**
+  <Accordion title="Kullanım Senaryoları" icon="lightbulb">
+    **Yaygın uygulamalar:**
     
-    **Customer support:** 24/7 automated support on your website
-    **Lead qualification:** Qualify visitors before they contact sales
-    **Appointment booking:** Allow visitors to schedule directly through the widget
-    **FAQ handling:** Answer common questions instantly
-    **Product demos:** Guide visitors through your product features
+    **Müşteri desteği:** Web sitenizde 7/24 otomatik destek
+    **Potansiyel müşteri nitelendirme:** Ziyaretçileri satışa yönlendirmeden önce nitelendirin
+    **Randevu alma:** Ziyaretçilerin widget üzerinden doğrudan randevu almasına olanak tanıyın
+    **SSS yönetimi:** Sık sorulan soruları anında yanıtlayın
+    **Ürün demoları:** Ziyaretçilere ürün özelliklerinizi tanıtın
   </Accordion>
 </AccordionGroup>
 
 <Note>
-For detailed testing guides and widget integration instructions, see our [Testing Your Assistant](/ai-assistants/testing) documentation.
+Ayrıntılı test kılavuzları ve widget entegrasyon talimatları için [Asistanınızı Test Etme](/ai-assistants/testing) dokümantasyonumuza bakın.
 </Note>
 
 <Note>
-For detailed webhook integration guides and examples, see our [Automation documentation](/automation/overview).
+Ayrıntılı webhook entegrasyon kılavuzları ve örnekler için [Otomasyon dokümantasyonu](/automation/overview) sayfamıza bakın.
 </Note>
