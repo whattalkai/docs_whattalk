@@ -202,7 +202,7 @@
               {
                 "group": "Rehberler",
                 "pages": [
-                  "tr/guides/automatic-calling"
+                  "tr/guides/api-lead-import-and-automatic-calling"
                 ]
               },
               {
@@ -575,7 +575,7 @@
               {
                 "group": "Guides",
                 "pages": [
-                  "guides/automatic-calling"
+                  "guides/api-lead-import-and-automatic-calling"
                 ]
               },
               {
