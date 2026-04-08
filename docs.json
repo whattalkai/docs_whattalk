@@ -90,7 +90,7 @@
                 ]
               },
               {
-                "group": "Potansiyel M\u00fc\u015fteriler",
+                "group": "M\u00fc\u015fteriler",
                 "pages": [
                   "tr/leads/index",
                   "tr/leads/managing-leads",
@@ -323,7 +323,7 @@
                 ]
               },
               {
-                "group": "Potansiyel M\u00fc\u015fteriler",
+                "group": "M\u00fc\u015fteriler",
                 "pages": [
                   "tr/api-reference/leads/get-lead",
                   "tr/api-reference/leads/create",

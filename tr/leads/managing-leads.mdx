@@ -1,17 +1,17 @@
 ---
-title: "Aday Yonetimi"
+title: "Müşteri Yönetimi"
 icon: "user-gear"
-description: "Ozel degiskenler ve ikincil iletisim kisileriyle adaylari olusturun, duzenleyin ve organize edin"
+description: "Ozel degiskenler ve ikincil iletisim kisileriyle müşterileri olusturun, duzenleyin ve organize edin"
 ---
 
-Kampanyalariniz icin adaylari etkili bir sekilde olusturmayi, duzenlemeyi ve yonetmeyi, uygun degisken kurulumu ve ikincil iletisim kisisi yonetimiyle birlikte ogrenin.
+Kampanyalariniz icin müşterileri etkili bir sekilde olusturmayi, duzenlemeyi ve yonetmeyi, uygun degisken kurulumu ve ikincil iletisim kisisi yonetimiyle birlikte ogrenin.
 
-## Yeni Aday Olusturma
+## Yeni Müşteri Olusturma
 
 ### Temel Bilgiler
 1. **Telefon Numarasi:** Birincil iletisim numarasini uluslararasi formatta girin
-2. **Kampanya Atamasi:** Bu adayin hangi kampanyaya ait oldugunu secin
-3. **Durum:** Yeni adaylar icin otomatik olarak "Olusturuldu" ayarlanir
+2. **Kampanya Atamasi:** Bu müşterinin hangi kampanyaya ait oldugunu secin
+3. **Durum:** Yeni müşteriler icin otomatik olarak "Olusturuldu" ayarlanir
 
 <Note>
 **Telefon numarasi formati:** Otomasyon iceri aktarmalari ve dosya yuklemeleri icin bosluk veya parantez olmadan uluslararasi format kullanin (+1234567890).
@@ -20,9 +20,9 @@ Kampanyalariniz icin adaylari etkili bir sekilde olusturmayi, duzenlemeyi ve yon
 ### Degisken Kurulumu
 
 #### Asistan Varsayilan Degiskenleri
-Bir kampanya sectiginizde, aday otomatik olarak [asistan yapilandirmasindan](/ai-assistants/settings/prompt-and-tools#call-variables) degiskenleri devralir:
+Bir kampanya sectiginizde, müşteri otomatik olarak [asistan yapilandirmasindan](/ai-assistants/settings/prompt-and-tools#call-variables) degiskenleri devralir:
 - **Onceden doldurulmus degerler:** Asistanin varsayilan degiskenleri formda goruntulenir
-- **Ozellestirme:** Bu adaya ozel degerleri degistirin
+- **Ozellestirme:** Bu müşteriye ozel degerleri degistirin
 - **Zorunlu alanlar:** Bazi degiskenler kampanya islevseligi icin zorunlu olabilir
 
 #### Ozel Degiskenler
@@ -48,7 +48,7 @@ Yapay zeka asistaninizin kullanmasi icin kisisellesmis bilgiler ekleyin:
 
 ### Ikincil Iletisim Kisileri
 
-Ayni adaya ulasmak icin birden fazla yolunuz oldugunda ek telefon numaralari ekleyin.
+Ayni müşteriye ulasmak icin birden fazla yolunuz oldugunda ek telefon numaralari ekleyin.
 
 #### Ikincil Iletisim Kisilerini Ne Zaman Kullanmali
 - **Karar vericiler:** Karara dahil olan birden fazla kisi
@@ -89,9 +89,9 @@ Her ikincil iletisim kisisinin benzersiz degiskenleri olabilir:
 }
 ```
 
-## Mevcut Adaylari Duzenleme
+## Mevcut Müşterileri Duzenleme
 
-### Aday Bilgilerini Degistirme
+### Müşteri Bilgilerini Degistirme
 - **Telefon numarasi:** Iletisim bilgileri degisirse guncelleyin
 - **Kampanya:** Gerekirse adayi farkli kampanyaya tasyin
 - **Durum:** Kampanya kontrolu icin durumu manuel olarak degistirin
@@ -111,28 +111,28 @@ Her ikincil iletisim kisisinin benzersiz degiskenleri olabilir:
 - **Kisi siralama:** Arama sirasi onceligini degistirin
 - **Degisken guncelleme:** Kisiye ozel bilgileri degistirin
 
-## Aday Durumu Yonetimi
+## Müşteri Durumu Yonetimi
 
 ### Durum Degisikliklerini Anlama
-Aday durumu, kampanya faaliyetine dayali olarak otomatik olarak guncellenir:
+Müşteri durumu, kampanya faaliyetine dayali olarak otomatik olarak guncellenir:
 - **Olusturuldu -> Isleniyor:** Kampanya aramayi baslattiginda
 - **Isleniyor -> Tamamlandi:** Arama basarili oldugunda veya hedefe ulasildiginda
 - **Isleniyor -> Yeniden Planlandi:** Arama yeniden deneme gerektirdiginde
 - **Yeniden Planlandi -> Maksimum Deneme:** Yeniden deneme sinirana ulasildiginda
 
 ### Manuel Durum Kontrolu
-Gerektiginde aday durumunu manuel olarak degistirebilirsiniz:
+Gerektiginde müşteri durumunu manuel olarak degistirebilirsiniz:
 
 #### Tekrar Aranmak Icin Sifirlama
 **"Olusturuldu" olarak ayarla:** Adayi tekrar aranmak uzere sifirlar
-- **Kullanim alani:** Aday belirli bir zamanda geri aranma talep etti
-- **Etki:** Aday kampanya sirasina yeniden katilir
+- **Kullanim alani:** Müşteri belirli bir zamanda geri aranma talep etti
+- **Etki:** Müşteri kampanya sirasina yeniden katilir
 - **Dikkat edilmesi gerekenler:** Kampanya yeniden deneme sinirlarına uyar
 
 #### Tamamlandi Olarak Isaretleme
 **"Tamamlandi" olarak ayarla:** Kampanyanin bu adayi aramasini durdurur
 - **Kullanim alani:** Hedefe baska kanallar araciligiyla ulasildi
-- **Etki:** Aday gelecekteki kampanya aramalarindan haric tutulur
+- **Etki:** Müşteri gelecekteki kampanya aramalarindan haric tutulur
 - **Dikkat edilmesi gerekenler:** Kampanya tarafindan otomatik olarak sifirlanamaz
 
 #### Diger Durum Degisiklikleri
@@ -147,26 +147,26 @@ Gerektiginde aday durumunu manuel olarak degistirebilirsiniz:
 ## Toplu Islemler
 
 ### Toplu Silme
-Birden fazla aday secin ve silin:
-1. **Adaylari filtreleyin:** Belirli adaylari secmek icin tablo filtrelerini kullanin
-2. **Adaylari secin:** Silinecek adaylarin onay kutularini isaretleyin
+Birden fazla müşteri secin ve silin:
+1. **Müşterileri filtreleyin:** Belirli müşterileri secmek icin tablo filtrelerini kullanin
+2. **Müşterileri secin:** Silinecek müşterilerin onay kutularini isaretleyin
 3. **Toplu sil:** Toplu islemler menusunden silme islemini secin
 4. **Onaylayin:** Uygulamadan once degisiklikleri gozden gecirin
 
 ### Toplu Disa Aktarma
-Harici isleme icin filtrelenmis aday verilerini disa aktarin:
+Harici isleme icin filtrelenmis müşteri verilerini disa aktarin:
 - **Filtre uygulayin:** Kampanya, durum, tarih araligina gore filtreleyin
 - **Sutun secin:** Hangi verilerin disa aktarilacagini secin
 - **Ikincil dahil et:** Ikincil iletisim kisilerini dahil etme secenegi
 - **Indirin:** Elektronik tablo uyumlulugu icin CSV formati
 
-## Aday Organizasyonu
+## Müşteri Organizasyonu
 
-Adaylari kampanya, durum, tarih araligi veya degisken icerigine gore organize etmek icin tablo filtrelerini, siralamayi ve aramayi kullanin.
+Müşterileri kampanya, durum, tarih araligi veya degisken icerigine gore organize etmek icin tablo filtrelerini, siralamayi ve aramayi kullanin.
 
 ## Kampanya Entegrasyonu
 
-- Aday basina **tek kampanya** atamasi
+- Müşteri basina **tek kampanya** atamasi
 - Asistan yapilandirmasindan **degisken devralma**
 - Kampanya zamanlama ve yeniden deneme mantigi ile **otomatik koordinasyon**
 
@@ -179,9 +179,9 @@ Adaylari kampanya, durum, tarih araligi veya degisken icerigine gore organize et
 - **Gizlilik:** Veri koruma gereksinimlerine uyun
 
 <Note>
-Yaygin aday sorunlarinin giderilmesi icin [Aday Sorun Giderme](/troubleshooting/leads) sayfasina bakin.
+Yaygin müşteri sorunlarinin giderilmesi icin [Müşteri Sorun Giderme](/troubleshooting/leads) sayfasina bakin.
 </Note>
 
 <Note>
-Toplu aday iceri aktarma hakkinda bilgi icin [Aday Iceri Aktarma](/tr/leads/importing-leads) sayfasina bakin.
+Toplu müşteri iceri aktarma hakkinda bilgi icin [Müşteri İçe Aktarma](/tr/leads/importing-leads) sayfasina bakin.
 </Note>

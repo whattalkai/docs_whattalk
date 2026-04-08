@@ -1,20 +1,20 @@
 ---
 title: "Kampanyalara Genel Bakis"
 icon: "bullhorn"
-description: "Birden fazla adaya verimli bir sekilde ulasmak icin otomatik arama kampanyalari olusturmayi ve yonetmeyi ogrenin"
+description: "Birden fazla müşteriye verimli bir sekilde ulasmak icin otomatik arama kampanyalari olusturmayi ve yonetmeyi ogrenin"
 ---
 
-Kampanyalar, yapay zeka asistaninizi kullanarak birden fazla adayi otomatik olarak aramanizi saglar. Verimli giden arama operasyonlari yonetmek icin zamanlama, yeniden deneme mantigi ve aday yonetimini yapilandirin.
+Kampanyalar, yapay zeka asistaninizi kullanarak birden fazla adayi otomatik olarak aramanizi saglar. Verimli giden arama operasyonlari yonetmek icin zamanlama, yeniden deneme mantigi ve müşteri yonetimini yapilandirin.
 
 ## Kampanya Nedir?
 
 Kampanya, yapilandirilmis bir yapay zeka asistani kullanarak sizin adiniza birden fazla adayi arayan otomatik bir sistemdir. Her kampanya sunlari icerir:
 
 <CardGroup cols={2}>
-  <Card title="Aday Yonetimi" icon="users">
+  <Card title="Müşteri Yönetimi" icon="users">
     **Birincil ve ikincil iletisim kisileri** ile kapsamli erisim
     
-    CSV, entegrasyonlar veya manuel olarak aday iceri aktarin
+    CSV, entegrasyonlar veya manuel olarak müşteri iceri aktarin
   </Card>
   
   <Card title="Zamanlama Kontrolu" icon="calendar">
@@ -32,7 +32,7 @@ Kampanya, yapilandirilmis bir yapay zeka asistani kullanarak sizin adiniza birde
   <Card title="Hedef Takibi" icon="bullseye">
     **Tamamlama degiskenleriyle basari olcumu**
     
-    Kampanya hedeflerini ve aday donusumunu takip edin
+    Kampanya hedeflerini ve müşteri donusumunu takip edin
   </Card>
 </CardGroup>
 
@@ -40,7 +40,7 @@ Kampanya, yapilandirilmis bir yapay zeka asistani kullanarak sizin adiniza birde
 
 <AccordionGroup>
   <Accordion title="Taslak" icon="file">
-    Kampanya yapilandiriliyor ancak henuz aktif degil. Adaylari ekleyin ve ayarlari yapilandirin.
+    Kampanya yapilandiriliyor ancak henuz aktif degil. Müşterileri ekleyin ve ayarlari yapilandirin.
   </Accordion>
   
   <Accordion title="Devam Ediyor" icon="play">
@@ -70,10 +70,10 @@ Kampanya, yapilandirilmis bir yapay zeka asistani kullanarak sizin adiniza birde
 - **Sesli mesajda yeniden deneme:** Bir kisi cevaplayana kadar aramaya devam edin
 - **Hedefe dayali yeniden deneme:** Hedef gerceklesene kadar aramaya devam edin (boolean turunde [arama sonrasi degiskenleri](/ai-assistants/settings/post-call-actions#post-call-variables) gerektirir)
 
-### Aday Turleri
-- **Birincil adaylar:** Kampanyaya iceri aktarilan veya eklenen ana iletisim kisileri
+### Müşteri Turleri
+- **Birincil müşteriler:** Kampanyaya iceri aktarilan veya eklenen ana iletisim kisileri
 - **Ikincil iletisim kisileri:** Birincil adaylara bagli ek iletisim kisileri
-- **Aday durumu takibi:** Arama ilerlemesini ve sonuclarini izleyin
+- **Müşteri durumu takibi:** Arama ilerlemesini ve sonuclarini izleyin
 
 ## Gereksinimler
 
@@ -85,15 +85,15 @@ Bir kampanya baslatmadan once:
 
 - Giden arama ozelligi olan **yapilandirilmis yapay zeka asistani**
 - Arama maliyetleri icin **yeterli hesap bakiyesi**
-- Kampanyaya **eklenenmis adaylar** (manuel, iceri aktarma veya entegrasyon)
-- Tum adaylar icin **gecerli telefon numaralari**
+- Kampanyaya **eklenenmis müşteriler** (manuel, iceri aktarma veya entegrasyon)
+- Tum müşteriler icin **gecerli telefon numaralari**
 
 ## Hizli Baslangic
 
 1. **Kampanya Olusturun:** Bir ad secin ve yapay zeka asistaninizi belirleyin
 2. **Zamanlama Ayarlayin:** Izin verilen arama saatlerini ve gunlerini tanimlayin
 3. **Yeniden Denemeleri Yapilandirin:** Yeniden deneme sayilarini ve araliklerini belirleyin
-4. **Aday Ekleyin:** CSV'den iceri aktarin veya manuel olarak ekleyin
+4. **Müşteri Ekleyin:** CSV'den iceri aktarin veya manuel olarak ekleyin
 5. **Kampanyayi Baslatin:** Aramaya baslamaya hazir oldugunuzda baslat'a tiklayin
 
 <Note>
@@ -102,8 +102,8 @@ Ayrintili kurulum talimatlari icin [Kampanya Olusturma](/tr/campaigns/creating-c
 
 ## Kampanya Izleme
 
-### Aday Durumu Takibi
-Kampanya boyunca bireysel aday ilerlemesini izleyin:
+### Müşteri Durumu Takibi
+Kampanya boyunca bireysel müşteri ilerlemesini izleyin:
 - **Olusturuldu:** Aranmaya hazir
 - **Planlanmis:** Sonraki arama denemesi icin siraya alindi
 - **Isleniyor:** Su anda araniyor
@@ -111,7 +111,7 @@ Kampanya boyunca bireysel aday ilerlemesini izleyin:
 - **Yeniden Planlandi:** Yeniden deneme icin planlanmis
 - **Maksimum Deneme:** Maksimum yeniden deneme sayisina ulasildi
 
-**Manuel aday yonetimi:** Adaylar tablosunda aday durumunu degistirebilirsiniz:
+**Manuel müşteri yonetimi:** Müşteriler tablosunda müşteri durumunu degistirebilirsiniz:
 - **"Olusturuldu" olarak ayarla:** Adayi tekrar aranmak uzere sifirlayin
 - **"Tamamlandi" olarak ayarla:** Aramayi durdurmak icin adayi tamamlanmis olarak isaretleyin
 
@@ -130,13 +130,13 @@ Ayrintili durumlu bireysel arama sonuclari:
 **Kampanya baslamiyor:**
 - Asistanin yapilandirilmis telefon numarasinin olup olmadigini kontrol edin
 - Yeterli hesap bakiyesini dogrulayin
-- Kampanyaya aday eklendiginden emin olun
+- Kampanyaya müşteri eklendiginden emin olun
 
 **Arama yapilmiyor:**
 - Baslatiktan sonra 10-15 dakika bekleyin - kampanyalarin baslatilmasi zaman alir
 - Mevcut saatin izin verilen arama saatleri icinde olup olmadigini kontrol edin
 - Izin verilen gunlerin bugunun gununu icerigini dogrulayin
-- Adaylarin gecerli telefon numaralarina sahip oldugundan emin olun
+- Müşterilerin gecerli telefon numaralarina sahip oldugundan emin olun
 
 **Cok fazla/az yeniden deneme:**
 - Maksimum yeniden deneme ayarini duzenleyin (1-5 deneme)

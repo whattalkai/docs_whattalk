@@ -1,14 +1,14 @@
 ---
-title: "Aday Iceri Aktarma"
+title: "Müşteri İçe Aktarma"
 icon: "file-import"
-description: "CSV ve Excel dosyalarindan dogrulama ve hata yonetimi ile aday iceri aktarin"
+description: "CSV ve Excel dosyalarindan dogrulama ve hata yonetimi ile müşteri iceri aktarin"
 ---
 
-Otomatik dogrulama, arka plan isleme ve kapsamli hata raporlama ile CSV veya Excel dosyalarindan cok sayida aday iceri aktarin.
+Otomatik dogrulama, arka plan isleme ve kapsamli hata raporlama ile CSV veya Excel dosyalarindan cok sayida müşteri iceri aktarin.
 
 ## Iceri Aktarma Sureci Genel Bakis
 
-Aday iceri aktarma sistemi sunlari destekler:
+Müşteri iceri aktarma sistemi sunlari destekler:
 - **CSV ve Excel dosyalari** (.csv, .xlsx, .xls)
 - Buyuk dosyalar icin **arka plan isleme**
 - Hata raporlama ile **otomatik dogrulama**
@@ -24,7 +24,7 @@ Iceri aktarma dosyaniz sunlari icermelidir:
 
 ### Istege Bagli Sutunlar
 - **Ikincil iletisim sutunlari:** Ek telefon numaralari
-- **Degisken gecersiz kilmalari:** Belirli adaylar icin ozel degerler
+- **Degisken gecersiz kilmalari:** Belirli müşteriler icin ozel degerler
 
 ### Dosya Formati Ornegi
 ```csv
@@ -40,7 +40,7 @@ phone_number,customer_name,company,budget_range,secondary_phone_1,secondary_phon
 Acilir listeden hedef kampanyayi secin. Asistanin degiskenleri, esleme sirasinda hangi sutunlarin beklenecegini belirleyecektir.
 
 ### 2. Ikincil Iletisim Kisileri
-Aday basina kac ikincil telefon numarasi oldugunu secin (0-10). Dosyaniz birincil iletisim disinda ek telefon numaralari iceriyorsa, sayiyi burada belirtin.
+Müşteri basina kac ikincil telefon numarasi oldugunu secin (0-10). Dosyaniz birincil iletisim disinda ek telefon numaralari iceriyorsa, sayiyi burada belirtin.
 
 ### 3. Telefon Numarasi Formati
 Telefon numaralarinizin formatini secin:
@@ -68,9 +68,9 @@ Yalnizca "Ulusal Format" secildiginde goruntulenir. Dosyanizda tum telefon numar
 ## Iceri Aktarma Adimlari
 
 ### 1. Iceri Aktarma Surecini Baslatin
-1. **Adaylar** bolumune veya Kampanya adaylari sekmesine gidin
-2. **"Aday Iceri Aktar"** dugmesine tiklayin
-3. Aday atamasi icin **kampanya secin**
+1. **Müşteriler** bolumune veya Kampanya müşterileri sekmesine gidin
+2. **"Müşteri İçe Aktar"** dugmesine tiklayin
+3. Müşteri atamasi icin **kampanya secin**
 4. Beklenen formati gormek icin **ornek dosyayi indirin**
 
 ### 2. Yukleme ve Sutun Esleme
@@ -109,7 +109,7 @@ Yalnizca "Ulusal Format" secildiginde goruntulenir. Dosyanizda tum telefon numar
 
 ### Otomatik Hata Yonetimi
 Iceri aktarma sistemi dogrulama hatalarini otomatik olarak yonetir:
-- **Gecerli satirlar iceri aktarilir:** Basariyla dogrulanan adaylar kampanyaya eklenir
+- **Gecerli satirlar iceri aktarilir:** Basariyla dogrulanan müşteriler kampanyaya eklenir
 - **Gecersiz satirlar atlanir:** Dogrulamayi gecemeyen satirlar otomatik olarak haric tutulur
 - **Hata raporu olusturulur:** Tum basarisiz satirlarin ayrintili raporu olusturulur
 - **Kismi basari:** Iceri aktarma tum gecerli adaylarla basariyla tamamlanir, basarisiz satirlar kaydedilir
@@ -129,7 +129,7 @@ Iceri aktarma tamamlandiktan sonra:
 
 ## Ikincil Iletisim Kisileri Iceri Aktarma
 
-### Aday Basina Birden Fazla Telefon Numarasi
+### Müşteri Basina Birden Fazla Telefon Numarasi
 Ikincil iletisim kisileri icin ek sutunlar ekleyin:
 ```csv
 phone_number,customer_name,secondary_phone_1,secondary_phone_2,secondary_phone_3
@@ -158,7 +158,7 @@ phone_number,customer_name,secondary_phone_1,secondary_1_name,secondary_1_role
 
 ### Bildirim Sistemi
 - **E-posta bildirimleri:** Iceri aktarma tamamlandiginda gonderilir
-- **Basari ozeti:** Basariyla iceri aktarilan aday sayisi
+- **Basari ozeti:** Basariyla iceri aktarilan müşteri sayisi
 - **Hata ozeti:** Basarisiz satirlarin sayisi ve ayrintilari
 - **Indirme baglantilari:** Hata raporlarina ve iceri aktarilan verilere erisim
 
@@ -177,9 +177,9 @@ phone_number,customer_name,secondary_phone_1,secondary_1_name,secondary_1_role
 - **Degiskenleri eslestirin:** Sutunlarin asistan yapilandirmasiyla uyumlu oldugundan emin olun
 
 <Note>
-Ayrintili sorun giderme ve yaygin iceri aktarma sorunlari icin [Aday Sorun Giderme](/troubleshooting/leads) sayfasina bakin.
+Ayrintili sorun giderme ve yaygin iceri aktarma sorunlari icin [Müşteri Sorun Giderme](/troubleshooting/leads) sayfasina bakin.
 </Note>
 
 <Note>
-Iceri aktarilan adaylari yonetme hakkinda bilgi icin [Aday Yonetimi](/tr/leads/managing-leads) sayfasina bakin.
+Iceri aktarilan müşterileri yonetme hakkinda bilgi icin [Müşteri Yönetimi](/tr/leads/managing-leads) sayfasina bakin.
 </Note>

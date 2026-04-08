@@ -4,7 +4,7 @@ icon: "plus"
 description: "Ilk otomatik arama kampanyanizi kurmak icin adim adim rehber"
 ---
 
-Yapay zeka asistaninizla birden fazla adaya verimli bir sekilde ulasmak icin otomatik arama kampanyalari olusturun ve yapilandirin.
+Yapay zeka asistaninizla birden fazla müşteriye verimli bir sekilde ulasmak icin otomatik arama kampanyalari olusturun ve yapilandirin.
 
 ## On Kosullar
 
@@ -12,7 +12,7 @@ Bir kampanya olusturmadan once sunlara sahip oldugunuzdan emin olun:
 - Giden aramalar icin yapilandirilmis **yapay zeka asistani**
 - Asistaniniza atanmis **telefon numarasi**
 - Arama maliyetleri icin yeterli **hesap bakiyesi**
-- Iceri aktarmaya veya manuel olarak eklemeye hazir **adaylar**
+- Iceri aktarmaya veya manuel olarak eklemeye hazir **müşteriler**
 
 ## Kampanya Kurulumu
 
@@ -40,7 +40,7 @@ Hangi gunlerde arama yapilacagini secin:
 - **Ozel:** Belirli gunleri secin
 
 <Tip>
-**Oneri:** Is aramalari icin, potansiyel musterinin saat diliminde Pazartesi-Cuma 09:00 - 18:00 kullanin.
+**Oneri:** Is aramalari icin, müşterinin saat diliminde Pazartesi-Cuma 09:00 - 18:00 kullanin.
 </Tip>
 
 ### 3. Yeniden Deneme Ayarlari
@@ -58,33 +58,33 @@ Hangi gunlerde arama yapilacagini secin:
 **Hedef Tamamlanana Kadar Yeniden Deneme:**
 - **Etkin:** Hedefe ulasilana kadar aramaya devam eder
 - **Hedef degiskeni:** Asistanin arama sonrasi semasindan boolean degiskeni secin
-- **Kullanim alani:** Satis aramalari, randevu alma, aday yeterliligi
+- **Kullanim alani:** Satis aramalari, randevu alma, müşteri yeterliligi
 
 <Warning>
 **Hedefe dayali yeniden deneme**, asistaninizin boolean alanlariyla (dogru/yanlis) yapilandirilmis arama sonrasi degiskenlere sahip olmasini gerektirir.
 </Warning>
 
-### 4. Aday Yonetimi
+### 4. Müşteri Yönetimi
 
-#### Aday Ekleme
+#### Müşteri Ekleme
 
 **Manuel Giris:**
-- Telefon numaralariyla bireysel aday ekleyin
+- Telefon numaralariyla bireysel müşteri ekleyin
 - Isim ve ek iletisim bilgilerini dahil edin
 
 **CSV Iceri Aktarma:**
-- Aday bilgileriyle elektronik tablo yukleyin
+- Müşteri bilgileriyle elektronik tablo yukleyin
 - Gerekli: Telefon numarasi sutunu
 - Istege bagli: Isim, e-posta, ek alanlar
 
 **Entegrasyon Iceri Aktarma:**
 - GoHighLevel, Google Sheets veya diger bagli platformlardan iceri aktarin
-- Harici aday kaynaklariyla otomatik senkronizasyon
+- Harici müşteri kaynaklariyla otomatik senkronizasyon
 
 #### Ikincil Iletisim Kisileri
-Ayni aday icin ek telefon numaralari ekleyin:
+Ayni müşteri icin ek telefon numaralari ekleyin:
 - **Kullanim alani:** Birden fazla karar verici, yedek iletisim kisileri
-- **Mantik:** Kampanya her aday icin tum numaralari dener
+- **Mantik:** Kampanya her müşteri icin tum numaralari dener
 - **Durum:** Her iletisim kisisi icin bagimsiz takip
 
 ## Kampanyanizi Baslatma
@@ -92,7 +92,7 @@ Ayni aday icin ek telefon numaralari ekleyin:
 ### Lansman Oncesi Kontrol Listesi
 - [ ] Asistanin yapilandirilmis telefon numarasi var
 - [ ] Yeterli hesap bakiyesi
-- [ ] Gecerli telefon numaralariyla adaylar eklendi
+- [ ] Gecerli telefon numaralariyla müşteriler eklendi
 - [ ] Zamanlama uygun sekilde yapilandirildi
 - [ ] Yeniden deneme mantigi kampanya hedefleriyle uyumlu
 
@@ -107,11 +107,11 @@ Ayni aday icin ek telefon numaralari ekleyin:
 ### Gercek Zamanli Durum
 - **Devam eden aramalar:** Su anda aktif aramalar
 - **Tamamlanan aramalar:** Sonuclariyla bitmis aramalar
-- **Kalan adaylar:** Henuz aranmamis kisiler
+- **Kalan müşteriler:** Henuz aranmamis kisiler
 - **Sonraki arama zamani:** Sonraki aramanin ne zaman yapilacagi
 
 ### Ilerlemeyi Takip Etme
-Kampanya kontrol panelinde aday durumunu ve arama sonuclarini takip edin. Ayrintili durum aciklamalari icin [Kampanyalara Genel Bakis](/tr/campaigns/index#kampanya-izleme) sayfasina bakin.
+Kampanya kontrol panelinde müşteri durumunu ve arama sonuclarini takip edin. Ayrintili durum aciklamalari icin [Kampanyalara Genel Bakis](/tr/campaigns/index#kampanya-izleme) sayfasina bakin.
 
 ## Aktif Kampanyalari Yonetme
 
@@ -126,16 +126,16 @@ Kampanya kontrol panelinde aday durumunu ve arama sonuclarini takip edin. Ayrint
 3. **Degisiklikleri kaydedin**
 4. **Kampanyayi devam ettirin** yeni ayarlarla devam etmek icin
 
-### Daha Fazla Aday Ekleme
-- **Aktif kampanyaya ekleme:** Yeni adaylar mevcut yeniden deneme sirasina katilir
+### Daha Fazla Müşteri Ekleme
+- **Aktif kampanyaya ekleme:** Yeni müşteriler mevcut yeniden deneme sirasina katilir
 - **Ek iletisim kisilerini iceri aktarma:** CSV veya entegrasyon iceri aktarma
-- **Ikincil iletisim kisileri:** Mevcut adaylar icin yedek numaralar ekleyin
+- **Ikincil iletisim kisileri:** Mevcut müşteriler icin yedek numaralar ekleyin
 
 ## En Iyi Uygulamalar
 
 - **Tutucu zamanlama:** Is saatleri, saat dilimlerine saygi gosterin
 - **2-3 yeniden denemeyle baslayin:** Geri bildirimlere gore izleyin ve ayarlayin
-- **Temiz aday verileri:** Gecerli numaralar, tekrarlari kaldirin
+- **Temiz müşteri verileri:** Gecerli numaralar, tekrarlari kaldirin
 - **Uyumluluk:** Yerel yonetmeliklere ve abonelikten cikma taleplerine uyun
 
 <Note>

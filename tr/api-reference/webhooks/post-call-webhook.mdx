@@ -75,28 +75,28 @@ Webhook, yapılandırılmış URL'nize aşağıdaki JSON yüküyle POST isteği 
 </ResponseField>
 
 <ResponseField name="lead" type="object">
-  Potansiyel müşteri bilgileri (yalnızca kampanya aramaları için dahil edilir)
-  <Expandable title="Potansiyel müşteri özellikleri">
+  Müşteri bilgileri (yalnızca kampanya aramaları için dahil edilir)
+  <Expandable title="Müşteri özellikleri">
     <ResponseField name="id" type="integer">
-      Potansiyel müşterinin benzersiz tanımlayıcısı
+      Müşterinin benzersiz tanımlayıcısı
     </ResponseField>
     <ResponseField name="phone_number" type="string">
-      Potansiyel müşterinin telefon numarası
+      Müşterinin telefon numarası
     </ResponseField>
     <ResponseField name="variables" type="object">
-      Potansiyel müşteriyle ilişkili değişkenler
+      Müşteriyle ilişkili değişkenler
     </ResponseField>
     <ResponseField name="status" type="string">
-      Potansiyel müşterinin mevcut durumu
+      Müşterinin mevcut durumu
     </ResponseField>
     <ResponseField name="call_tries" type="integer">
-      Bu potansiyel müşteriye yapılan arama denemesi sayısı
+      Bu müşteriye yapılan arama denemesi sayısı
     </ResponseField>
     <ResponseField name="created_at" type="string">
-      Potansiyel müşterinin oluşturulma tarihi
+      Müşterinin oluşturulma tarihi
     </ResponseField>
     <ResponseField name="updated_at" type="string">
-      Potansiyel müşterinin son güncellenme tarihi
+      Müşterinin son güncellenme tarihi
     </ResponseField>
     <ResponseField name="campaign" type="object">
       Kampanya bilgileri (mevcutsa)
@@ -123,7 +123,7 @@ Webhook, yapılandırılmış URL'nize aşağıdaki JSON yüküyle POST isteği 
           Kampanya için maksimum eşzamanlı arama sayısı
         </ResponseField>
         <ResponseField name="max_retries" type="integer">
-          Potansiyel müşteriler için maksimum yeniden deneme sayısı
+          Müşteriler için maksimum yeniden deneme sayısı
         </ResponseField>
         <ResponseField name="retry_interval" type="integer">
           Dakika cinsinden yeniden deneme aralığı
