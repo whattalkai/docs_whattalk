@@ -4,311 +4,311 @@ icon: "file-lines"
 description: "İşletme tarafından başlatılan konuşmalar için WhatsApp mesaj şablonları oluşturun ve yönetin"
 ---
 
-Message templates are pre-approved message formats required by Meta for business-initiated conversations on WhatsApp. You must have approved templates before you can send outbound messages to customers.
+Mesaj şablonları, WhatsApp'ta işletme tarafından başlatılan konuşmalar için Meta tarafından onaylanması gereken önceden tanımlanmış mesaj formatlarıdır. Müşterilere giden mesaj göndermeden önce onaylanmış şablonlarınız olmalıdır.
 
 ## Mesaj Şablonları Nedir?
 
-Message templates are structured messages that:
+Mesaj şablonları, yapılandırılmış mesajlardır ve şu özelliklere sahiptir:
 
-- Must be submitted to Meta for approval before use
-- Allow you to start conversations with customers
-- Can include variables for personalization
-- Are required for messaging outside the 24-hour window
+- Kullanılmadan önce Meta'ya onay için gönderilmeleri gerekir
+- Müşterilerle konuşma başlatmanıza olanak tanır
+- Kişiselleştirme için değişkenler içerebilir
+- 24 saatlik pencere dışında mesajlaşma için zorunludur
 
 <Info>
-**Why Templates?** — WhatsApp requires templates to prevent spam and ensure businesses send valuable, relevant messages to customers. All business-initiated messages must use approved templates.
+**Neden Şablonlar?** — WhatsApp, spam'ı önlemek ve işletmelerin müşterilere değerli, alakalı mesajlar göndermesini sağlamak için şablonları zorunlu tutar. İşletme tarafından başlatılan tüm mesajlar onaylanmış şablonları kullanmalıdır.
 </Info>
 
 ## Şablonlara Ne Zaman İhtiyacınız Var?
 
-| Scenario | Template Required? |
-|----------|-------------------|
-| Customer messages you first | No — free-form reply allowed within 24 hours |
-| Replying within 24 hours | No — send any message |
-| Starting a new conversation | **Yes** |
-| Re-engaging after 24 hours | **Yes** |
-| Sending notifications/updates | **Yes** |
-| Marketing messages | **Yes** |
+| Senaryo | Şablon Gerekli mi? |
+|---------|-------------------|
+| Müşteri size önce mesaj gönderirse | Hayır — 24 saat içinde serbest formatlı yanıt verilebilir |
+| 24 saat içinde yanıt verme | Hayır — herhangi bir mesaj gönderilebilir |
+| Yeni bir konuşma başlatma | **Evet** |
+| 24 saat sonra tekrar etkileşim | **Evet** |
+| Bildirim/güncelleme gönderme | **Evet** |
+| Pazarlama mesajları | **Evet** |
 
 ## Şablon Kategorileri
 
-Templates are organized into categories that determine their approval requirements and use cases:
+Şablonlar, onay gereksinimlerini ve kullanım durumlarını belirleyen kategorilere ayrılmıştır:
 
-### Utility Templates
+### Hizmet Şablonları
 
-Transactional and service-related messages.
+İşlemsel ve hizmetle ilgili mesajlar.
 
-**Use for:**
-- Order confirmations
-- Shipping updates
-- Appointment reminders
-- Account notifications
-- Payment receipts
+**Kullanım alanları:**
+- Sipariş onayları
+- Kargo güncellemeleri
+- Randevu hatırlatmaları
+- Hesap bildirimleri
+- Ödeme makbuzları
 
-**Approval:** Usually approved within minutes
+**Onay:** Genellikle dakikalar içinde onaylanır
 
-### Marketing Templates
+### Pazarlama Şablonları
 
-Promotional and sales-related messages.
+Tanıtım ve satışla ilgili mesajlar.
 
-**Use for:**
-- Promotional offers
-- Product announcements
-- Newsletters
-- Sales campaigns
-- Re-engagement messages
+**Kullanım alanları:**
+- Promosyon teklifleri
+- Ürün duyuruları
+- Bültenler
+- Satış kampanyaları
+- Yeniden etkileşim mesajları
 
-**Approval:** May take longer, stricter review
+**Onay:** Daha uzun sürebilir, daha sıkı inceleme
 
 <Warning>
-**No Cross-Category Content** — Do not include promotional content in Utility templates. Meta will reject templates with mismatched category and content.
+**Kategoriler Arası İçerik Yok** — Hizmet şablonlarına tanıtım içeriği eklemeyin. Meta, kategori ve içerik uyuşmazlığı olan şablonları reddedecektir.
 </Warning>
 
-### Authentication Templates
+### Kimlik Doğrulama Şablonları
 
-Verification and security messages.
+Doğrulama ve güvenlik mesajları.
 
-**Use for:**
-- One-time passwords (OTP)
-- Verification codes
-- Login confirmations
-- Security alerts
+**Kullanım alanları:**
+- Tek kullanımlık şifreler (OTP)
+- Doğrulama kodları
+- Giriş onayları
+- Güvenlik uyarıları
 
-**Approval:** Standard review
+**Onay:** Standart inceleme
 
-### Voice Call Request Templates
+### Sesli Arama İsteği Şablonları
 
-Special templates to request permission for WhatsApp voice calls.
+WhatsApp sesli aramaları için izin istemek amacıyla kullanılan özel şablonlar.
 
-**Use for:**
-- Requesting permission to call customers via WhatsApp voice
-- Must include a voice call request button
+**Kullanım alanları:**
+- WhatsApp sesli arama yoluyla müşterileri aramak için izin isteme
+- Sesli arama isteği butonu içermelidir
 
-**Approval:** Automatic (when using standard format)
+**Onay:** Otomatik (standart format kullanıldığında)
 
 ## Şablon Oluşturma
 
-### Step 1: Navigate to Templates
+### Adım 1: Şablonlara Gidin
 
-1. Go to **WhatsApp Senders** → Select your sender → **Templates** tab
-2. Or go to **WhatsApp Templates** directly
-3. Click **Create Template**
+1. **WhatsApp Göndericiler** → Göndericinizi seçin → **Şablonlar** sekmesine gidin
+2. Veya doğrudan **WhatsApp Şablonları** bölümüne gidin
+3. **Şablon Oluştur** butonuna tıklayın
 
-### Step 2: Configure Basic Settings
+### Adım 2: Temel Ayarları Yapılandırın
 
-| Field | Description |
-|-------|-------------|
-| **Name** | Unique identifier (lowercase, underscores only). Example: `order_confirmation_v1` |
-| **Category** | Select Utility, Marketing, Authentication, or Voice Call Request |
-| **Language** | Template language (must match the content) |
+| Alan | Açıklama |
+|------|----------|
+| **Ad** | Benzersiz tanımlayıcı (küçük harf, yalnızca alt çizgi). Örnek: `siparis_onay_v1` |
+| **Kategori** | Hizmet, Pazarlama, Kimlik Doğrulama veya Sesli Arama İsteği seçin |
+| **Dil** | Şablon dili (içerikle eşleşmelidir) |
 
 <Tip>
-**Naming Best Practices:**
-- Use descriptive names: `appointment_reminder`, `order_shipped`
-- Include version numbers: `welcome_message_v2`
-- Avoid generic names: ~~`template1`~~, ~~`test`~~
+**Adlandırma En İyi Uygulamaları:**
+- Açıklayıcı adlar kullanın: `randevu_hatirlatma`, `siparis_kargolandi`
+- Sürüm numarası ekleyin: `hosgeldin_mesaji_v2`
+- Genel adlardan kaçının: ~~`sablon1`~~, ~~`test`~~
 </Tip>
 
-### Step 3: Write Template Content
+### Adım 3: Şablon İçeriğini Yazın
 
-Templates can include multiple components:
+Şablonlar birden fazla bileşen içerebilir:
 
-#### Header (Optional)
-- **Text Header**: Short headline (up to 60 characters)
-- **Media Header**: Image, video, or document (coming soon)
+#### Başlık (İsteğe Bağlı)
+- **Metin Başlığı**: Kısa başlık (en fazla 60 karakter)
+- **Medya Başlığı**: Görsel, video veya belge (yakında)
 
-#### Body (Required)
-The main message content. This is where you write your message.
+#### Gövde (Zorunlu)
+Ana mesaj içeriği. Mesajınızı buraya yazarsınız.
 
-**Using Variables:**
-Use `{{1}}`, `{{2}}`, etc. for dynamic content:
+**Değişken Kullanımı:**
+Dinamik içerik için `{{1}}`, `{{2}}` vb. kullanın:
 
 ```
-Hi {{1}}, your order {{2}} has been shipped!
+Merhaba {{1}}, {{2}} numaralı siparişiniz kargoya verildi!
 
-Expected delivery: {{3}}
-Track your package: {{4}}
+Tahmini teslimat: {{3}}
+Kargonuzu takip edin: {{4}}
 ```
 
 <Info>
-**Sample Values** — When creating templates, you must provide sample values for each variable. These help Meta understand your template's purpose and are required for approval.
+**Örnek Değerler** — Şablon oluştururken her değişken için örnek değerler sağlamalısınız. Bunlar Meta'nın şablonunuzun amacını anlamasına yardımcı olur ve onay için gereklidir.
 </Info>
 
-#### Footer (Optional)
-A short line at the bottom (up to 60 characters). Often used for opt-out info or disclaimers.
+#### Alt Bilgi (İsteğe Bağlı)
+Altta kısa bir satır (en fazla 60 karakter). Genellikle abonelikten çıkma bilgisi veya yasal uyarılar için kullanılır.
 
-#### Buttons (Optional)
-Add interactive buttons to your template:
+#### Butonlar (İsteğe Bağlı)
+Şablonunuza etkileşimli butonlar ekleyin:
 
-- **Quick Reply**: Pre-defined response buttons (e.g., "Yes", "No", "Learn More")
-- **Call to Action**: Link to website or phone number
-- **Voice Call Request**: Button to request voice call permission
+- **Hızlı Yanıt**: Önceden tanımlanmış yanıt butonları (ör. "Evet", "Hayır", "Daha Fazla Bilgi")
+- **Harekete Geçirici**: Web sitesine veya telefon numarasına bağlantı
+- **Sesli Arama İsteği**: Sesli arama izni istemek için buton
 
-### Step 4: Submit for Approval
+### Adım 4: Onaya Gönderin
 
-1. Review your template content
-2. Click **Submit for Approval**
-3. Template status changes to "Pending Approval"
-4. Wait for Meta review (minutes to 24 hours)
+1. Şablon içeriğinizi gözden geçirin
+2. **Onaya Gönder** butonuna tıklayın
+3. Şablon durumu "Onay Bekliyor" olarak değişir
+4. Meta incelemesini bekleyin (dakikalar ile 24 saat arası)
 
 ## Şablon Onay Süreci
 
 ```mermaid
 flowchart LR
-    A[Create Template] --> B[Submit for Review]
-    B --> C{Meta Reviews}
-    C -->|Approved| D[Ready to Use]
-    C -->|Rejected| E[Edit & Resubmit]
+    A[Şablon Oluştur] --> B[İncelemeye Gönder]
+    B --> C{Meta İnceler}
+    C -->|Onaylandı| D[Kullanıma Hazır]
+    C -->|Reddedildi| E[Düzenle ve Yeniden Gönder]
     E --> B
 ```
 
-### Approval Times
+### Onay Süreleri
 
-| Category | Typical Time |
-|----------|-------------|
-| Utility | Minutes to a few hours |
-| Marketing | Hours to 24 hours |
-| Authentication | Minutes to a few hours |
-| Voice Call Request | Usually instant |
+| Kategori | Tipik Süre |
+|----------|-----------|
+| Hizmet | Dakikalar ile birkaç saat |
+| Pazarlama | Saatler ile 24 saat |
+| Kimlik Doğrulama | Dakikalar ile birkaç saat |
+| Sesli Arama İsteği | Genellikle anında |
 
-### Template Statuses
+### Şablon Durumları
 
-| Status | Description |
-|--------|-------------|
-| <span style={{color: '#6b7280'}}>**Draft**</span> | Not yet submitted |
-| <span style={{color: '#f59e0b'}}>**Pending**</span> | Submitted, awaiting Meta review |
-| <span style={{color: '#22c55e'}}>**Approved**</span> | Ready to use |
-| <span style={{color: '#ef4444'}}>**Rejected**</span> | Review failed, see rejection reason |
-| <span style={{color: '#6b7280'}}>**Disabled**</span> | Disabled by Meta due to low quality |
+| Durum | Açıklama |
+|-------|----------|
+| <span style={{color: '#6b7280'}}>**Taslak**</span> | Henüz gönderilmedi |
+| <span style={{color: '#f59e0b'}}>**Beklemede**</span> | Gönderildi, Meta incelemesi bekleniyor |
+| <span style={{color: '#22c55e'}}>**Onaylandı**</span> | Kullanıma hazır |
+| <span style={{color: '#ef4444'}}>**Reddedildi**</span> | İnceleme başarısız, ret nedenine bakın |
+| <span style={{color: '#6b7280'}}>**Devre Dışı**</span> | Düşük kalite nedeniyle Meta tarafından devre dışı bırakıldı |
 
 ## Yaygın Ret Nedenleri
 
-Avoid these common mistakes to improve your approval rate:
+Onay oranınızı artırmak için bu yaygın hatalardan kaçının:
 
-### ❌ Promotional Content in Utility Templates
+### ❌ Hizmet Şablonlarında Tanıtım İçeriği
 
-**Problem:** Including discounts, offers, or marketing language in Utility templates.
+**Sorun:** Hizmet şablonlarına indirim, teklif veya pazarlama dili eklemek.
 
-**Solution:** Use Marketing category for promotional content.
+**Çözüm:** Tanıtım içeriği için Pazarlama kategorisini kullanın.
 
-### ❌ Missing or Unclear Variable Samples
+### ❌ Eksik veya Belirsiz Değişken Örnekleri
 
-**Problem:** Variables like `{{1}}` without clear sample values.
+**Sorun:** Açık örnek değerleri olmayan `{{1}}` gibi değişkenler.
 
-**Solution:** Provide realistic sample values that show the variable's purpose:
-- ✅ `{{1}}` = "John Smith"
+**Çözüm:** Değişkenin amacını gösteren gerçekçi örnek değerler sağlayın:
+- ✅ `{{1}}` = "Ahmet Yılmaz"
 - ✅ `{{2}}` = "#12345"
 - ❌ `{{1}}` = "test"
 
-### ❌ Aggressive or Threatening Language
+### ❌ Agresif veya Tehditkâr Dil
 
-**Problem:** Content that could be perceived as harassment, threats, or spam.
+**Sorun:** Taciz, tehdit veya spam olarak algılanabilecek içerik.
 
-**Solution:** Use professional, friendly language. Focus on value to the customer.
+**Çözüm:** Profesyonel, samimi bir dil kullanın. Müşteriye sağlanan değere odaklanın.
 
-### ❌ URL Shorteners
+### ❌ URL Kısaltıcılar
 
-**Problem:** Using bit.ly, tinyurl, or other URL shorteners.
+**Sorun:** bit.ly, tinyurl veya diğer URL kısaltıcıları kullanmak.
 
-**Solution:** Use full, branded URLs from your domain.
+**Çözüm:** Kendi alan adınızdan tam, markalı URL'ler kullanın.
 
-### ❌ Incorrect Category Selection
+### ❌ Yanlış Kategori Seçimi
 
-**Problem:** Choosing the wrong category for your content type.
+**Sorun:** İçerik türünüz için yanlış kategori seçmek.
 
-**Solution:** Match category to content purpose strictly.
+**Çözüm:** Kategoriyi içerik amacıyla kesinlikle eşleştirin.
 
-### ❌ Restricted Content
+### ❌ Kısıtlı İçerik
 
-**Problem:** Templates about alcohol, gambling, adult content, political messaging, or illegal activities.
+**Sorun:** Alkol, kumar, yetişkin içeriği, siyasi mesajlar veya yasadışı faaliyetlerle ilgili şablonlar.
 
-**Solution:** These are not allowed. Review Meta's commerce policies.
+**Çözüm:** Bunlara izin verilmez. Meta'nın ticaret politikalarını inceleyin.
 
 ## Şablonları Kullanma
 
-### Sending Template Messages
+### Şablon Mesajları Gönderme
 
-Once approved, you can send template messages:
+Onaylandıktan sonra şablon mesajları gönderebilirsiniz:
 
-1. **Via Automation Platform**: Use the "Send WhatsApp Template" action
-2. **Via API**: Call the send endpoint with template ID and variables
+1. **Otomasyon Platformu ile**: "WhatsApp Şablonu Gönder" eylemini kullanın
+2. **API ile**: Şablon ID'si ve değişkenlerle gönderme endpoint'ini çağırın
 
-### Variable Replacement
+### Değişken Değiştirme
 
-When sending, replace variables with actual values:
+Gönderirken değişkenleri gerçek değerlerle değiştirin:
 
-**Template:**
+**Şablon:**
 ```
-Hi {{1}}, your appointment is confirmed for {{2}} at {{3}}.
+Merhaba {{1}}, randevunuz {{2}} tarihinde saat {{3}}'da onaylanmıştır.
 ```
 
-**Sent Message:**
+**Gönderilen Mesaj:**
 ```
-Hi John, your appointment is confirmed for January 15th at 2:00 PM.
+Merhaba Ahmet, randevunuz 15 Ocak tarihinde saat 14:00'da onaylanmıştır.
 ```
 
 ## En İyi Uygulamalar
 
-### 1. Use Descriptive Names
+### 1. Açıklayıcı Adlar Kullanın
 
 ```
-✅ order_confirmation_v1
-✅ appointment_reminder
-✅ shipping_update_with_tracking
-❌ template1
+✅ siparis_onay_v1
+✅ randevu_hatirlatma
+✅ kargo_takip_guncelleme
+❌ sablon1
 ❌ test
-❌ message
+❌ mesaj
 ```
 
-### 2. Keep Messages Concise
+### 2. Mesajları Kısa Tutun
 
-WhatsApp users expect quick, clear messages. Get to the point and include a clear call-to-action.
+WhatsApp kullanıcıları hızlı, net mesajlar bekler. Konuya gelin ve net bir harekete geçirici mesaj ekleyin.
 
-### 3. Use Interactive Buttons
+### 3. Etkileşimli Butonlar Kullanın
 
-Add Quick Reply or Call-to-Action buttons to make it easy for customers to respond:
+Müşterilerin yanıt vermesini kolaylaştırmak için Hızlı Yanıt veya Harekete Geçirici butonlar ekleyin:
 
-- "Track Order"
-- "Contact Support"
-- "View Details"
-- "Confirm Appointment"
+- "Siparişi Takip Et"
+- "Destek İle İletişime Geç"
+- "Ayrıntıları Görüntüle"
+- "Randevuyu Onayla"
 
-### 4. Test Before Bulk Sending
+### 4. Toplu Gönderimden Önce Test Edin
 
-Always test your template with a single recipient before sending to a large audience. This helps catch formatting issues.
+Şablonunuzu büyük bir kitleye göndermeden önce her zaman tek bir alıcıyla test edin. Bu, biçimlendirme sorunlarını yakalamanıza yardımcı olur.
 
-### 5. Create Templates Early
+### 5. Şablonları Erkenden Oluşturun
 
-Approval can take up to 24 hours. Create and submit templates before you need them.
+Onay 24 saate kadar sürebilir. Şablonlarınızı ihtiyacınız olmadan önce oluşturup gönderin.
 
-### 6. Have Backup Templates
+### 6. Yedek Şablonlar Hazırlayın
 
-Create multiple versions of important templates. If one is rejected or disabled, you have alternatives ready.
+Önemli şablonların birden fazla versiyonunu oluşturun. Biri reddedilir veya devre dışı bırakılırsa, hazır alternatifleriniz olur.
 
 ## Şablonları Düzenleme
 
 <Warning>
-**Limited Editing** — Once a template is approved, you cannot edit it. To make changes, you must create a new template with a different name.
+**Sınırlı Düzenleme** — Bir şablon onaylandıktan sonra düzenlenemez. Değişiklik yapmak için farklı bir adla yeni bir şablon oluşturmanız gerekir.
 </Warning>
 
-**Can Edit:**
-- Draft templates (not yet submitted)
-- Rejected templates (fix issues and resubmit)
+**Düzenlenebilir:**
+- Taslak şablonlar (henüz gönderilmemiş)
+- Reddedilen şablonlar (sorunları düzeltin ve yeniden gönderin)
 
-**Cannot Edit:**
-- Approved templates
-- Pending templates (must wait for review)
+**Düzenlenemez:**
+- Onaylanmış şablonlar
+- Beklemedeki şablonlar (incelemeyi beklemeleri gerekir)
 
 ## Şablon Limitleri
 
-Meta enforces limits on template creation:
+Meta, şablon oluşturmada limitler uygular:
 
-- Maximum templates per WhatsApp Business Account: Varies by account tier
-- Template names must be unique per sender
-- Rejected templates count toward your limit
+- WhatsApp Business Hesabı başına maksimum şablon sayısı: Hesap seviyesine göre değişir
+- Şablon adları gönderici başına benzersiz olmalıdır
+- Reddedilen şablonlar da limitinize dahil edilir
 
 ## Sonraki Adımlar
 
-- Set up [automation triggers](/whatsapp/automation) to send templates automatically
-- Learn about [WhatsApp senders](/whatsapp/senders) and sender management
-- Review [AI assistant configuration](/ai-assistants/what-is-ai-assistant) for conversation responses
+- Şablonları otomatik göndermek için [otomasyon tetikleyicileri](/tr/whatsapp/automation) kurun
+- [WhatsApp göndericileri](/tr/whatsapp/senders) ve gönderici yönetimi hakkında bilgi edinin
+- Konuşma yanıtları için [AI asistan yapılandırmasını](/tr/ai-assistants/what-is-ai-assistant) inceleyin
