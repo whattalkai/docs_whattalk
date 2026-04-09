@@ -4,528 +4,528 @@ icon: "gear"
 description: "Arama yönü, telefon numaraları, ses ve gelişmiş ayarlar dahil AI asistanınız için temel yapılandırma ayarları."
 ---
 
-Configure the fundamental settings for your AI assistant including call direction, phone numbers, voice selection, and technical parameters.
+Arama yönü, telefon numaraları, ses seçimi ve teknik parametreler dahil olmak üzere AI asistanınız için temel ayarları yapılandırın.
 
-## Quick Start Guide
+## Hızlı Başlangıç Kılavuzu
 
-Ready to set up your first AI assistant? Here's the essential flow:
+İlk AI asistanınızı kurmaya hazır mısınız? İşte temel akış:
 
-1. **Choose Call Direction:** Inbound (answers calls) or Outbound (makes calls)
-2. **Set Assistant Name:** Internal label like "Support Bot" or "Sales Bot"
-3. **Configure Phone Numbers:** Assign platform numbers, SIP, or Caller ID
-4. **Select Voice & Language:** Choose from built-in voices or clone custom ones
-5. **Adjust Advanced Settings:** Fine-tune models, timing, and audio parameters
+1. **Arama Yönünü Seçin:** Gelen (aramaları yanıtlar) veya Giden (arama yapar)
+2. **Asistan Adını Belirleyin:** "Destek Botu" veya "Satış Botu" gibi dahili etiket
+3. **Telefon Numaralarını Yapılandırın:** Platform numaraları, SIP veya Arayan Kimliği atayın
+4. **Ses ve Dili Seçin:** Yerleşik seslerden seçin veya özel ses klonlayın
+5. **Gelişmiş Ayarları Düzenleyin:** Modelleri, zamanlama ve ses parametrelerini ince ayar yapın
 
 <Tip>
-**Always test your changes** by calling the assistant or running a small campaign to confirm it behaves as expected.
+**Değişikliklerinizi her zaman test edin** — asistanı arayarak veya küçük bir kampanya çalıştırarak beklenen şekilde çalıştığını doğrulayın.
 </Tip>
 
 <Note>
-Follow this page section by section to configure your assistant. Each setting includes detailed explanations and best practices to help you make the right choices.
+Asistanınızı yapılandırmak için bu sayfayı bölüm bölüm takip edin. Her ayar, doğru seçimler yapmanıza yardımcı olacak ayrıntılı açıklamalar ve en iyi uygulamaları içerir.
 </Note>
 
-## Call Direction & Basic Setup
+## Arama Yönü ve Temel Kurulum
 
-### Assistant Type
-Choose whether your assistant handles **inbound** or **outbound** calls. This fundamental choice affects which other options become available.
+### Asistan Türü
+Asistanınızın **gelen** mi yoksa **giden** aramaları mı yöneteceğini seçin. Bu temel seçim, hangi diğer seçeneklerin kullanılabilir olacağını etkiler.
 
-**Inbound (Receive calls):** Handles incoming calls from customers. See [Inbound calls overview](/inbound-calls/overview).
+**Gelen (Aramaları al):** Müşterilerden gelen aramaları yönetir. Bkz. [Gelen aramalar genel bakış](/inbound-calls/overview).
 
-**Outbound (Make calls):** Initiates calls to leads or customers. See [Outbound calls overview](/outbound-calls/overview).
+**Giden (Arama yap):** Potansiyel müşterilere veya müşterilere arama başlatır. Bkz. [Giden aramalar genel bakış](/outbound-calls/overview).
 
-### Assistant Name
-A descriptive name to identify your assistant in the dashboard. Use something memorable that describes the assistant's purpose (e.g. "Sales Qualifier", "Support Bot", "Appointment Scheduler").
+### Asistan Adı
+Asistanınızı panoda tanımlamak için açıklayıcı bir ad. Asistanın amacını tanımlayan akılda kalıcı bir isim kullanın (örn. "Satış Eleme", "Destek Botu", "Randevu Planlayıcı").
 
-## Phone Number Configuration
+## Telefon Numarası Yapılandırması
 
-Your assistant needs a phone number to operate. The available options depend on your call direction choice.
+Asistanınızın çalışması için bir telefon numarasına ihtiyacı vardır. Mevcut seçenekler, arama yönü tercihinize bağlıdır.
 
-### For Outbound Assistants
-You can use:
-- **Platform numbers:** Numbers rented directly from our platform
-- **SIP numbers:** Connect your existing VOIP/PBX system
-- **Caller ID only:** Verify ownership of an existing number to display it on outbound calls
+### Giden Asistanlar İçin
+Kullanabilirsiniz:
+- **Platform numaraları:** Doğrudan platformumuzdan kiralanan numaralar
+- **SIP numaraları:** Mevcut VOIP/PBX sisteminizi bağlayın
+- **Yalnızca Arayan Kimliği:** Giden aramalarda göstermek için mevcut bir numaranın sahipliğini doğrulayın
 
-### For Inbound Assistants  
-You can use:
-- **Platform numbers:** Numbers rented directly from our platform
-- **SIP numbers:** Connect your existing VOIP/PBX system
+### Gelen Asistanlar İçin  
+Kullanabilirsiniz:
+- **Platform numaraları:** Doğrudan platformumuzdan kiralanan numaralar
+- **SIP numaraları:** Mevcut VOIP/PBX sisteminizi bağlayın
 
-**Note:** Caller ID only numbers cannot handle inbound calls - they only display on outbound calls.
+**Not:** Yalnızca Arayan Kimliği numaraları gelen aramaları karşılayamaz - yalnızca giden aramalarda görüntülenir.
 
-### Pricing & Costs
-- **Platform numbers:** Monthly rental fees starting from $3.99/month. See [renting a dedicated number](/pricing/number-rentals#1-renting-a-dedicated-number) for detailed pricing.
-- **SIP integration:** No monthly fee, only $0.00045/min for AI bridging. See [SIP integration pricing](/pricing/number-rentals#2-sip-integration-no-monthly-fee).
-- **Caller ID:** No monthly fee, region-based per-minute rates (e.g., $0.01/min in the US). See [Caller ID pricing](/pricing/number-rentals#3-caller-id-no-monthly-fee).
+### Fiyatlandırma ve Maliyetler
+- **Platform numaraları:** Aylık 3,99$/ay'dan başlayan kiralama ücretleri. Ayrıntılı fiyatlandırma için bkz. [özel numara kiralama](/pricing/number-rentals#1-renting-a-dedicated-number).
+- **SIP entegrasyonu:** Aylık ücret yok, yalnızca AI köprüleme için 0,00045$/dk. Bkz. [SIP entegrasyon fiyatlandırması](/pricing/number-rentals#2-sip-integration-no-monthly-fee).
+- **Arayan Kimliği:** Aylık ücret yok, bölgeye dayalı dakika başı ücretler (örn. ABD'de 0,01$/dk). Bkz. [Arayan Kimliği fiyatlandırması](/pricing/number-rentals#3-caller-id-no-monthly-fee).
 
-See [Phone number types](/phone-numbers/types) for detailed explanations and [SIP integration guide](/provisioning/sip-trunking/sip-integration) for VOIP setup.
+Ayrıntılı açıklamalar için bkz. [Telefon numarası türleri](/phone-numbers/types) ve VOIP kurulumu için bkz. [SIP entegrasyon kılavuzu](/provisioning/sip-trunking/sip-integration).
 
-## Engine Type (Voice Processing Mode)
+## Motor Türü (Ses İşleme Modu)
 
-Choose how your AI processes speech and generates responses. Each mode is optimized for different use cases. See [Assistant modes](/ai-assistants/assistant-modes) for detailed comparisons.
+AI'nızın konuşmayı nasıl işleyeceğini ve yanıtları nasıl üreteceğini seçin. Her mod farklı kullanım senaryoları için optimize edilmiştir. Ayrıntılı karşılaştırmalar için bkz. [Asistan modları](/ai-assistants/assistant-modes).
 
-### Pipeline Mode
-Traditional Speech-to-Text → LLM → Text-to-Speech pipeline. Offers maximum control over voice selection and response generation.
+### Pipeline Modu
+Geleneksel Konuşmadan Metne → LLM → Metinden Konuşmaya iş akışı. Ses seçimi ve yanıt üretimi üzerinde maksimum kontrol sağlar.
 
-**Best for:** Complex reasoning, function calling, custom voice requirements
+**En uygun:** Karmaşık muhakeme, fonksiyon çağırma, özel ses gereksinimleri
 
-### Speech-to-Speech Mode  
-Direct speech-to-speech generation without intermediate text processing. Provides the most natural conversational flow.
+### Konuşmadan Konuşmaya Modu  
+Ara metin işleme olmadan doğrudan konuşmadan konuşmaya üretim. En doğal konuşma akışını sağlar.
 
-**Best for:** Quick conversations, natural back-and-forth dialogue
+**En uygun:** Hızlı konuşmalar, doğal karşılıklı diyalog
 
-### Dualplex Mode (Beta)
-Combines fast multimodal processing with premium ElevenLabs voice output.
+### Dualplex Modu (Beta)
+Hızlı çok modlu işlemeyi premium ElevenLabs ses çıkışıyla birleştirir.
 
-**Best for:** Most use cases - recommended default
+**En uygun:** Çoğu kullanım senaryosu - önerilen varsayılan
 
-## Language Configuration
+## Dil Yapılandırması
 
-### Primary Language
-The main language your assistant will use for speech recognition and synthesis. This affects:
-- Speech recognition accuracy
-- Available voice options  
-- Filler audio phrases
-- Voice model selection
+### Birincil Dil
+Asistanınızın konuşma tanıma ve sentez için kullanacağı ana dil. Bu şunları etkiler:
+- Konuşma tanıma doğruluğu
+- Mevcut ses seçenekleri  
+- Dolgu ses ifadeleri
+- Ses modeli seçimi
 
-See [Language support](/conversation-design/language-support) for all available languages and accents.
+Tüm mevcut diller ve aksanlar için bkz. [Dil desteği](/conversation-design/language-support).
 
-### Secondary Languages
-Additional languages your assistant can understand and speak. Useful for:
-- Multilingual customer support
-- International businesses
-- Code-switching conversations
+### İkincil Diller
+Asistanınızın anlayabileceği ve konuşabileceği ek diller. Şunlar için faydalıdır:
+- Çok dilli müşteri desteği
+- Uluslararası işletmeler
+- Diller arası geçişli konuşmalar
 
-**Note:** The AI can detect which language the customer is speaking and respond appropriately.
+**Not:** AI, müşterinin hangi dili konuştuğunu algılayabilir ve uygun şekilde yanıt verebilir.
 
-## TTS Provider & Voice Selection
+## TTS Sağlayıcı ve Ses Seçimi
 
-### TTS Provider
-Select your Text-to-Speech provider. Available in **Pipeline** and **Dualplex** modes.
+### TTS Sağlayıcı
+Metinden Konuşmaya sağlayıcınızı seçin. **Pipeline** ve **Dualplex** modlarında kullanılabilir.
 
-**Available Providers:**
-- **ElevenLabs** - High-quality voices
-- **Cartesia** - Fast, low-latency synthesis
+**Mevcut Sağlayıcılar:**
+- **ElevenLabs** - Yüksek kaliteli sesler
+- **Cartesia** - Hızlı, düşük gecikmeli sentez
 
-Your assistant can choose from existing voices, clone custom voices, or request voices from the ElevenLabs library.
+Asistanınız mevcut seslerden seçim yapabilir, özel sesler klonlayabilir veya ElevenLabs kütüphanesinden ses talep edebilir.
 
-### Voice Options
-You have three ways to get the perfect voice for your assistant:
+### Ses Seçenekleri
+Asistanınız için mükemmel sesi elde etmenin üç yolu vardır:
 
-**1. Choose from existing voices:**
-- **Professional voices:** Pre-trained, high-quality options from ElevenLabs
-- **Multiple accents:** Available for most languages
-- **Gender options:** Male and female voices for each language
-- **Tone variety:** From formal business to casual conversational
+**1. Mevcut seslerden seçin:**
+- **Profesyonel sesler:** ElevenLabs'dan önceden eğitilmiş, yüksek kaliteli seçenekler
+- **Çoklu aksanlar:** Çoğu dil için mevcuttur
+- **Cinsiyet seçenekleri:** Her dil için erkek ve kadın sesleri
+- **Ton çeşitliliği:** Resmi iş tonundan günlük konuşma tonuna kadar
 
-**2. Clone a custom voice:**
-Create a custom voice by uploading audio samples. Available in **Pipeline** and **Dualplex** modes.
+**2. Özel ses klonlayın:**
+Ses örnekleri yükleyerek özel bir ses oluşturun. **Pipeline** ve **Dualplex** modlarında kullanılabilir.
 
-**Requirements by provider:**
-- **Cartesia** - Single audio file, at least 10 seconds, 1 speaker, no background noise
-- **ElevenLabs** - Samples over 1 minute, 1 speaker, no background noise. Max 5 minutes total.
+**Sağlayıcıya göre gereksinimler:**
+- **Cartesia** - Tek ses dosyası, en az 10 saniye, 1 konuşmacı, arka plan gürültüsü yok
+- **ElevenLabs** - 1 dakikadan uzun örnekler, 1 konuşmacı, arka plan gürültüsü yok. Toplam maksimum 5 dakika.
 
-**Process:**
-1. Click "Clone voice" next to voice selector
-2. Select provider (Cartesia or ElevenLabs)
-3. Choose the voice language
-4. Enter a name for your voice
-5. Record or upload audio
-6. Wait for processing
-7. Select your new voice from dropdown
+**Süreç:**
+1. Ses seçicinin yanındaki "Ses klonla" düğmesine tıklayın
+2. Sağlayıcı seçin (Cartesia veya ElevenLabs)
+3. Ses dilini seçin
+4. Sesiniz için bir ad girin
+5. Ses kaydedin veya yükleyin
+6. İşlenmesini bekleyin
+7. Açılır menüden yeni sesinizi seçin
 
-**Use cases:**
-- Brand consistency with company spokesperson
-- Personal touch for customer relationships
-- Matching voice to specific business persona
+**Kullanım senaryoları:**
+- Şirket sözcüsüyle marka tutarlılığı
+- Müşteri ilişkilerinde kişisel dokunuş
+- Sesi belirli bir iş personasıyla eşleştirme
 
-**3. Request from ElevenLabs library:**
-You can request specific voices from the ElevenLabs public library - contact support to add them to your account. Browse the [ElevenLabs Voice Library](https://elevenlabs.io/docs/product-guides/voices/voice-library) to discover thousands of professional voices across different languages, accents, and use cases.
+**3. ElevenLabs kütüphanesinden talep edin:**
+ElevenLabs genel kütüphanesinden belirli sesleri talep edebilirsiniz - hesabınıza eklemek için destekle iletişime geçin. Farklı diller, aksanlar ve kullanım senaryolarında binlerce profesyonel sesi keşfetmek için [ElevenLabs Ses Kütüphanesi](https://elevenlabs.io/docs/product-guides/voices/voice-library)'ne göz atın.
 
-See [Voice selection guide](/ai-assistants/voice-selection) for detailed setup instructions.
+Ayrıntılı kurulum talimatları için bkz. [Ses seçimi kılavuzu](/ai-assistants/voice-selection).
 
-## Timezone Configuration
+## Saat Dilimi Yapılandırması
 
-### Timezone
-Set the timezone your assistant operates in. This affects:
-- Time-based variables in conversations
-- Appointment scheduling functions
-- "Current time" references in system prompts
-- Timestamps in call logs and data extraction
+### Saat Dilimi
+Asistanınızın çalıştığı saat dilimini ayarlayın. Bu şunları etkiler:
+- Konuşmalardaki zamana dayalı değişkenler
+- Randevu planlama fonksiyonları
+- Sistem istemlerindeki "geçerli saat" referansları
+- Arama günlüklerindeki ve veri çıkarmadaki zaman damgaları
 
-**Important:** Choose the timezone where your business operates or where most customers are located. The assistant will use this for any time-related calculations or scheduling.
+**Önemli:** İşletmenizin faaliyet gösterdiği veya çoğu müşterinizin bulunduğu saat dilimini seçin. Asistan, zamanla ilgili tüm hesaplamalar veya planlamalar için bunu kullanacaktır.
 
-## Audio Enhancement Settings
+## Ses Geliştirme Ayarları
 
-### Ambient Sound
-Optional background sound mixed under your assistant's voice to mask processing delays and create a more natural audio experience.
+### Ortam Sesi
+İşleme gecikmelerini maskelemek ve daha doğal bir ses deneyimi oluşturmak için asistanınızın sesinin altına karıştırılan isteğe bağlı arka plan sesi.
 
-**Options:**
-- **None:** No background sound (default)
-- **Office:** Subtle office environment sounds
+**Seçenekler:**
+- **Yok:** Arka plan sesi yok (varsayılan)
+- **Ofis:** Hafif ofis ortam sesleri
 
-**Volume control:** Adjust the level of ambient sound relative to the voice. Lower values are usually better - too much background sound can interfere with speech recognition.
+**Ses seviyesi kontrolü:** Ortam sesinin sese göre seviyesini ayarlayın. Düşük değerler genellikle daha iyidir - çok fazla arka plan sesi konuşma tanımayı engelleyebilir.
 
 <Tip>
-Turn off or lower volume if the assistant isn't hearing the customer clearly.
+Asistan müşteriyi net duyamıyorsa sesi kapatın veya seviyeyi düşürün.
 </Tip>
 
-### Filler Audio
-Short conversational phrases like "mhm", "okay", "I understand" that play during AI processing time. See [Filler audio guide](/ai-assistants/filler-audio) for full details.
+### Dolgu Sesi
+AI işleme süresi boyunca çalınan "mhm", "tamam", "anlıyorum" gibi kısa konuşma ifadeleri. Tüm ayrıntılar için bkz. [Dolgu sesi kılavuzu](/ai-assistants/filler-audio).
 
-<Card title="Benefits" icon="star">
-- Eliminates awkward silences during processing
-- Keeps callers engaged  
-- Creates more natural conversation flow
-- Reduces hang-up rates
+<Card title="Faydaları" icon="star">
+- İşleme sırasındaki rahatsız edici sessizlikleri ortadan kaldırır
+- Arayanların ilgisini canlı tutar  
+- Daha doğal konuşma akışı oluşturur
+- Telefon kapatma oranlarını azaltır
 </Card>
 
-**Language-aware configuration:** Filler phrases are automatically set for your selected language:
+**Dile duyarlı yapılandırma:** Dolgu ifadeleri seçtiğiniz dil için otomatik olarak ayarlanır:
 
 <AccordionGroup>
-  <Accordion title="Positive responses" icon="thumbs-up">
-    "Great!", "Perfect!", "Super!"
+  <Accordion title="Olumlu yanıtlar" icon="thumbs-up">
+    "Harika!", "Mükemmel!", "Süper!"
   </Accordion>
   
-  <Accordion title="Negative responses" icon="thumbs-down">
-    "Hmm.", "I see.", "Okay."
+  <Accordion title="Olumsuz yanıtlar" icon="thumbs-down">
+    "Hmm.", "Anlıyorum.", "Tamam."
   </Accordion>
   
-  <Accordion title="Question responses" icon="circle-question">
-    "Right?", "Really?", "How so?"
+  <Accordion title="Soru yanıtları" icon="circle-question">
+    "Öyle mi?", "Gerçekten mi?", "Nasıl yani?"
   </Accordion>
   
-  <Accordion title="Neutral responses" icon="circle">
-    "Okay.", "I understand.", "Got it."
+  <Accordion title="Nötr yanıtlar" icon="circle">
+    "Tamam.", "Anlıyorum.", "Anladım."
   </Accordion>
 </AccordionGroup>
 
-**Customization:** You can edit the default phrases for each category to match your brand voice or regional preferences.
+**Özelleştirme:** Marka sesinize veya bölgesel tercihlerinize uyması için her kategorideki varsayılan ifadeleri düzenleyebilirsiniz.
 
 <Note>
-Enable by default - most conversations benefit from fillers. Test with your target audience and adjust phrases to match your assistant's personality.
+Varsayılan olarak etkinleştirin - çoğu konuşma dolgu seslerinden faydalanır. Hedef kitlenizle test edin ve ifadeleri asistanınızın kişiliğine uyacak şekilde ayarlayın.
 </Note>
 
-## Advanced Settings
+## Gelişmiş Ayarlar
 
-### LLM Model Selection
-Choose the best language model for your assistant's mode. See [LLM model selection guide](/ai-assistants/assistant-configuration#3-select-an-llm-model) for detailed recommendations.
+### LLM Model Seçimi
+Asistanınızın modu için en iyi dil modelini seçin. Ayrıntılı öneriler için bkz. [LLM model seçim kılavuzu](/ai-assistants/assistant-configuration#3-select-an-llm-model).
 
-**Recommended models by mode:**
+**Moda göre önerilen modeller:**
 
-| Model | Strengths | Best for |
+| Model | Güçlü Yönleri | En Uygun |
 | --- | --- | --- |
-| **GPT-5 Mini** | Balanced reasoning with low latency | **Pipeline** mode for complex reasoning |
-| **GPT-5 Realtime** | Ultra-low-latency voice turns | **Speech-to-Speech** and **Dualplex** |
-| **GPT-4o** | Strong reasoning and multimodal understanding | Complex tasks (higher latency) |
-| **Gemini Flash 2.0/2.5** | Ultra-fast for voice turns | **Dualplex/Multimodal** for minimal latency |
+| **GPT-5 Mini** | Düşük gecikmeyle dengeli muhakeme | Karmaşık muhakeme için **Pipeline** modu |
+| **GPT-5 Realtime** | Ultra düşük gecikmeli ses dönüşleri | **Konuşmadan Konuşmaya** ve **Dualplex** |
+| **GPT-4o** | Güçlü muhakeme ve çok modlu anlama | Karmaşık görevler (daha yüksek gecikme) |
+| **Gemini Flash 2.0/2.5** | Ses dönüşleri için ultra hızlı | Minimum gecikme için **Dualplex/Multimodal** |
 
-**Quick selection guide:**
-- **Speed is critical:** Use GPT-5 Realtime or Gemini Flash 2.0/2.5
-- **Rich reasoning needed:** Use GPT-4o or GPT-5 Mini with filler audios to offset latency
+**Hızlı seçim kılavuzu:**
+- **Hız kritik:** GPT-5 Realtime veya Gemini Flash 2.0/2.5 kullanın
+- **Zengin muhakeme gerekli:** Gecikmeyi dengelemek için dolgu sesleriyle GPT-4o veya GPT-5 Mini kullanın
 
-### LLM Temperature
+### LLM Sıcaklığı
 
-**Range:** 0.0 - 1.0 | **Default:** 0.1
+**Aralık:** 0.0 - 1.0 | **Varsayılan:** 0.1
 
-Adjust the level of creativity of the AI when generating responses. Lower value yields better function call results.
+Yanıt üretirken AI'nın yaratıcılık seviyesini ayarlayın. Düşük değer, daha iyi fonksiyon çağrısı sonuçları verir.
 
 <CardGroup cols={2}>
-  <Card title="Lower (0.0-0.3)" icon="snowflake">
-    **More stable:** Predictable responses, better for function calling and business use cases
+  <Card title="Düşük (0.0-0.3)" icon="snowflake">
+    **Daha kararlı:** Öngörülebilir yanıtlar, fonksiyon çağırma ve iş kullanım senaryoları için daha iyi
   </Card>
   
-  <Card title="Higher (0.7-1.0)" icon="fire">
-    **More random:** Creative and varied responses, good for casual conversations
+  <Card title="Yüksek (0.7-1.0)" icon="fire">
+    **Daha rastgele:** Yaratıcı ve çeşitli yanıtlar, günlük konuşmalar için iyi
   </Card>
 </CardGroup>
 
 <Note>
-**Special behavior:** For GPT-5 Mini and GPT-5 Nano models in Pipeline mode, temperature is automatically set to 1.0 for optimal performance.
+**Özel davranış:** Pipeline modunda GPT-5 Mini ve GPT-5 Nano modelleri için sıcaklık, optimal performans için otomatik olarak 1.0'a ayarlanır.
 </Note>
 
-### Duration Settings
+### Süre Ayarları
 
-Control timing and call limits to optimize user experience and costs:
+Kullanıcı deneyimini ve maliyetleri optimize etmek için zamanlama ve arama limitlerini kontrol edin:
 
 <AccordionGroup>
-  <Accordion title="Re-engagement Interval" icon="clock">
-    **Range:** 7 - 600 seconds | **Default:** 30 seconds
+  <Accordion title="Yeniden Etkileşim Aralığı" icon="clock">
+    **Aralık:** 7 - 600 saniye | **Varsayılan:** 30 saniye
 
-    AI will try to re-engage the user if no reply is detected within this time.
+    Bu süre içinde yanıt algılanmazsa AI kullanıcıyla yeniden etkileşim kurmaya çalışır.
 
-    **Recommended:** 30-60 seconds for professional calls.
+    **Önerilen:** Profesyonel aramalar için 30-60 saniye.
   </Accordion>
 
-  <Accordion title="Re-engagement Prompt" icon="message">
-    Custom prompt used when the AI tries to re-engage the user after silence.
+  <Accordion title="Yeniden Etkileşim İstemi" icon="message">
+    AI sessizlik sonrası kullanıcıyla yeniden etkileşim kurmaya çalışırken kullanılan özel istem.
 
-    **Default:** Uses a standard re-engagement phrase like "Are you still there?"
+    **Varsayılan:** "Hâlâ orada mısınız?" gibi standart bir yeniden etkileşim ifadesi kullanır.
 
-    **Customization:** Write a prompt that instructs the AI how to re-engage.
+    **Özelleştirme:** AI'nın nasıl yeniden etkileşim kuracağını belirten bir istem yazın.
 
-    **Examples:**
-    - "Gently ask if they are still there and if they need more time."
-    - "Politely check if they have any questions."
+    **Örnekler:**
+    - "Nazikçe hâlâ orada olup olmadığını ve daha fazla zamana ihtiyaçları olup olmadığını sorun."
+    - "Kibarca herhangi bir soruları olup olmadığını kontrol edin."
 
     <Warning>
-    Variables like `{customer_name}` cannot be injected directly in this prompt. The AI has access to the conversation history and main system prompt, so it can reference information from there.
+    `{customer_name}` gibi değişkenler bu isteme doğrudan enjekte edilemez. AI, konuşma geçmişine ve ana sistem istemine erişebilir, bu nedenle oradan bilgilere başvurabilir.
     </Warning>
 
     <Tip>
-    Leave empty to use the default re-engagement behavior.
+    Varsayılan yeniden etkileşim davranışını kullanmak için boş bırakın.
     </Tip>
   </Accordion>
   
-  <Accordion title="Max Call Duration" icon="timer">
-    **Range:** 20 - 1200 seconds | **Default:** 600 seconds (10 minutes)
+  <Accordion title="Maksimum Arama Süresi" icon="timer">
+    **Aralık:** 20 - 1200 saniye | **Varsayılan:** 600 saniye (10 dakika)
     
-    Call will automatically end if this value is reached.
+    Bu değere ulaşılırsa arama otomatik olarak sona erer.
     
-    **Recommended:** 5-10 minutes for lead qualification to control costs.
+    **Önerilen:** Maliyetleri kontrol etmek için potansiyel müşteri değerlendirmesinde 5-10 dakika.
   </Accordion>
   
-  <Accordion title="Max Silence Duration" icon="volume-off">
-    **Range:** 1 - 120 seconds | **Default:** 40 seconds
+  <Accordion title="Maksimum Sessizlik Süresi" icon="volume-off">
+    **Aralık:** 1 - 120 saniye | **Varsayılan:** 40 saniye
     
-    Call will end if user doesn't reply within this time.
+    Kullanıcı bu süre içinde yanıt vermezse arama sona erer.
     
-    **Recommended:** 30-45 seconds to balance patience with efficiency.
+    **Önerilen:** Sabır ve verimlilik arasında denge için 30-45 saniye.
   </Accordion>
   
-  <Accordion title="Ringing Time" icon="phone">
-    **Range:** 1 - 60 seconds | **Default:** 30 seconds
+  <Accordion title="Çalma Süresi" icon="phone">
+    **Aralık:** 1 - 60 saniye | **Varsayılan:** 30 saniye
     
-    For how long the call will ring before marking as unanswered. **Good when you want to avoid voicemail by setting a lower value.**
+    Aramanın cevaplanmamış olarak işaretlenmeden önce ne kadar süre çalacağı. **Daha düşük bir değer ayarlayarak sesli mesajdan kaçınmak istediğinizde faydalıdır.**
   </Accordion>
 </AccordionGroup>
 
 <Tip>
-**Cost optimization:** Lower duration limits help control per-minute costs, especially important for high-volume campaigns.
+**Maliyet optimizasyonu:** Daha düşük süre limitleri, özellikle yüksek hacimli kampanyalar için önemli olan dakika başı maliyetleri kontrol etmeye yardımcı olur.
 </Tip>
 
-### Call Protection Settings
+### Arama Koruma Ayarları
 
 <AccordionGroup>
-  <Accordion title="Noise Cancellation" icon="shield">
-    **Default:** Enabled
+  <Accordion title="Gürültü Engelleme" icon="shield">
+    **Varsayılan:** Etkin
     
-    Filters caller background noise for clearer speech recognition. Turn OFF if experiencing audio clipping.
+    Daha net konuşma tanıma için arayanın arka plan gürültüsünü filtreler. Ses kırpılması yaşıyorsanız KAPATIN.
   </Accordion>
   
-  <Accordion title="End Call on Voicemail" icon="voicemail">
-    **Default:** Enabled
+  <Accordion title="Sesli Mesajda Aramayı Sonlandır" icon="voicemail">
+    **Varsayılan:** Etkin
 
-    Immediately ends call if voicemail is detected during outbound calls (saves costs).
+    Giden aramalarda sesli mesaj algılanırsa aramayı hemen sonlandırır (maliyet tasarrufu sağlar).
   </Accordion>
 
-  <Accordion title="Voicemail Message" icon="voicemail">
-    Prompt for the message the AI will say when voicemail is detected before ending the call.
+  <Accordion title="Sesli Mesaj Mesajı" icon="voicemail">
+    AI'nın sesli mesaj algılandığında aramayı sonlandırmadan önce söyleyeceği mesaj istemi.
 
-    **Default:** Empty (hangs up immediately without leaving a message)
+    **Varsayılan:** Boş (mesaj bırakmadan hemen kapatır)
 
-    **Use case:** Leave a brief message before hanging up so the recipient knows who called.
+    **Kullanım senaryosu:** Alıcının kimin aradığını bilmesi için kapatmadan önce kısa bir mesaj bırakın.
 
-    **Example:** "Leave a brief voicemail message saying you called and ask them to call back."
+    **Örnek:** "Aradığınızı belirten kısa bir sesli mesaj bırakın ve geri aramalarını isteyin."
 
     <Warning>
-    Variables like `{company_name}` cannot be injected directly in this prompt. The AI has access to the conversation history and main system prompt, so it can reference information from there.
+    `{company_name}` gibi değişkenler bu isteme doğrudan enjekte edilemez. AI, konuşma geçmişine ve ana sistem istemine erişebilir, bu nedenle oradan bilgilere başvurabilir.
     </Warning>
 
     <Note>
-    Only applies when "End Call on Voicemail" is enabled. Leave empty to hang up without a message.
+    Yalnızca "Sesli Mesajda Aramayı Sonlandır" etkinleştirildiğinde geçerlidir. Mesaj bırakmadan kapatmak için boş bırakın.
     </Note>
   </Accordion>
   
-  <Accordion title="Record Calls" icon="record-vinyl">
-    **Default:** Enabled
+  <Accordion title="Aramaları Kaydet" icon="record-vinyl">
+    **Varsayılan:** Etkin
     
-    Records call audio for review and analysis. **Ensure compliance with local recording laws.**
+    İnceleme ve analiz için arama sesini kaydeder. **Yerel kayıt yasalarına uygunluğu sağlayın.**
   </Accordion>
   
-  <Accordion title="Max Initial Silence" icon="timer">
-    **Range:** 1 - 120 seconds | **Default:** 20 seconds (when enabled)
+  <Accordion title="Maksimum Başlangıç Sessizliği" icon="timer">
+    **Aralık:** 1 - 120 saniye | **Varsayılan:** 20 saniye (etkinleştirildiğinde)
     
-    If enabled, end the call if no first user response within this time. Counts only from call start to first user response.
+    Etkinleştirilirse, bu süre içinde ilk kullanıcı yanıtı alınmazsa aramayı sonlandırır. Yalnızca arama başlangıcından ilk kullanıcı yanıtına kadar sayar.
     
-    **Use case:** Detect if anyone actually answered the phone.
+    **Kullanım senaryosu:** Telefonu gerçekten birinin açıp açmadığını tespit etme.
   </Accordion>
 </AccordionGroup>
 
-## Synthesizer Settings
+## Sentezleyici Ayarları
 
-Configure text-to-speech voice parameters for natural-sounding conversations.
+Doğal ses tonuna sahip konuşmalar için metinden konuşmaya ses parametrelerini yapılandırın.
 
-**Available for:** Pipeline and Dualplex modes only. Speech-to-Speech mode uses native voice generation.
+**Kullanılabilirlik:** Yalnızca Pipeline ve Dualplex modları. Konuşmadan Konuşmaya modu yerel ses üretimi kullanır.
 
-### Voice Tuning Parameters
+### Ses Ayarlama Parametreleri
 
-Fine-tune your assistant's voice characteristics for optimal performance:
+Optimal performans için asistanınızın ses özelliklerini ince ayar yapın:
 
 <AccordionGroup>
-  <Accordion title="TTS Emotion" icon="face-smile">
-    **Default:** Enabled
+  <Accordion title="TTS Duygu" icon="face-smile">
+    **Varsayılan:** Etkin
 
-    When enabled, the AI will add emotional cues to the synthesized speech based on the context of the conversation. This makes the voice sound more natural and expressive.
+    Etkinleştirildiğinde, AI konuşmanın bağlamına göre sentezlenen konuşmaya duygusal ipuçları ekler. Bu, sesin daha doğal ve ifadeli çıkmasını sağlar.
 
-    **Effects:**
-    - Adjusts tone based on conversation context (happy, concerned, empathetic)
-    - Adds natural inflections and emphasis
-    - Makes the assistant sound more human-like
+    **Etkileri:**
+    - Konuşma bağlamına göre tonu ayarlar (mutlu, endişeli, empatik)
+    - Doğal tonlama ve vurgu ekler
+    - Asistanın daha insana benzer çıkmasını sağlar
 
     <Note>
-    Disable if you prefer a more neutral, consistent tone across all conversations.
+    Tüm konuşmalarda daha nötr, tutarlı bir ton tercih ediyorsanız devre dışı bırakın.
     </Note>
   </Accordion>
 
-  <Accordion title="Voice Stability" icon="wave-square">
-    **Range:** 0.0 - 1.0 | **Default:** 0.7
+  <Accordion title="Ses Kararlılığı" icon="wave-square">
+    **Aralık:** 0.0 - 1.0 | **Varsayılan:** 0.7
     
-    Lower settings make the voice more expressive but less predictable, while higher settings make it steadier but less emotional.
+    Düşük ayarlar sesi daha ifadeli ancak daha az öngörülebilir yaparken, yüksek ayarlar sesi daha sabit ancak daha az duygusal yapar.
     
     <CardGroup cols={2}>
-      <Card title="More Expressive (0.0-0.3)" icon="sparkles">
-        Dynamic and varied delivery but less predictable
+      <Card title="Daha İfadeli (0.0-0.3)" icon="sparkles">
+        Dinamik ve çeşitli sunum ama daha az öngörülebilir
       </Card>
-      <Card title="More Stable (0.7-1.0)" icon="shield-check">
-        Consistent and steady but less emotional range
+      <Card title="Daha Kararlı (0.7-1.0)" icon="shield-check">
+        Tutarlı ve sabit ama daha az duygusal aralık
       </Card>
     </CardGroup>
   </Accordion>
   
-  <Accordion title="Voice Similarity" icon="fingerprint">
-    **Range:** 0.0 - 1.0 | **Default:** 0.5
+  <Accordion title="Ses Benzerliği" icon="fingerprint">
+    **Aralık:** 0.0 - 1.0 | **Varsayılan:** 0.5
     
-    Determines how closely the AI matches the original voice. Higher settings potentially include unwanted noise from the original recording.
+    AI'nın orijinal sese ne kadar yakın olduğunu belirler. Yüksek ayarlar, orijinal kayıttan istenmeyen gürültü içerebilir.
     
     <CardGroup cols={2}>
-      <Card title="More Stable (0.0-0.4)" icon="filter">
-        Cleaner audio but less accurate to original voice
+      <Card title="Daha Kararlı (0.0-0.4)" icon="filter">
+        Daha temiz ses ama orijinal sese daha az sadık
       </Card>
-      <Card title="More Similar (0.6-1.0)" icon="copy">
-        Accurate to original but may include background noise
+      <Card title="Daha Benzer (0.6-1.0)" icon="copy">
+        Orijinale sadık ama arka plan gürültüsü içerebilir
       </Card>
     </CardGroup>
     
     <Warning>
-    **For cloned voices:** Start at 0.5 and increase gradually. Higher similarity can introduce unwanted artifacts from the original recording.
+    **Klonlanmış sesler için:** 0.5'ten başlayın ve kademeli olarak artırın. Daha yüksek benzerlik, orijinal kayıttan istenmeyen artefaktlar oluşturabilir.
     </Warning>
   </Accordion>
   
-  <Accordion title="Speech Speed" icon="gauge">
-    **Range:** 0.7 - 1.2 | **Default:** 1.0
+  <Accordion title="Konuşma Hızı" icon="gauge">
+    **Aralık:** 0.7 - 1.2 | **Varsayılan:** 1.0
     
-    Adjust the speed of the AI's speech for optimal comprehension and user experience.
+    Optimal anlama ve kullanıcı deneyimi için AI'nın konuşma hızını ayarlayın.
     
     <CardGroup cols={3}>
-      <Card title="Slower (0.7-0.85)" icon="turtle">
-        Better for complex information or older demographics
+      <Card title="Daha Yavaş (0.7-0.85)" icon="turtle">
+        Karmaşık bilgiler veya ileri yaş grupları için daha iyi
       </Card>
       <Card title="Normal (0.9-1.1)" icon="clock">
-        Standard conversational pace for most use cases
+        Çoğu kullanım senaryosu için standart konuşma hızı
       </Card>
-      <Card title="Faster (1.15-1.2)" icon="rabbit">
-        Quick conversations or time-sensitive scenarios
+      <Card title="Daha Hızlı (1.15-1.2)" icon="rabbit">
+        Hızlı konuşmalar veya zamana duyarlı senaryolar
       </Card>
     </CardGroup>
   </Accordion>
 </AccordionGroup>
 
-## Transcriber Settings
+## Yazıya Dökücü Ayarları
 
-Configure speech-to-text recognition for optimal accuracy and speed.
+Optimal doğruluk ve hız için konuşmadan metne tanıma ayarlarını yapılandırın.
 
-**Available for:** Pipeline mode only. Speech-to-Speech and Dualplex modes use integrated transcription.
+**Kullanılabilirlik:** Yalnızca Pipeline modu. Konuşmadan Konuşmaya ve Dualplex modları entegre yazıya dökme kullanır.
 
-### Provider Selection
+### Sağlayıcı Seçimi
 
-Choose the best transcriber for your language and use case. The provider that will be used to transcribe the user speech.
+Diliniz ve kullanım senaryonuz için en iyi yazıya dökücüyü seçin. Kullanıcı konuşmasını yazıya dökmek için kullanılacak sağlayıcı.
 
 <CardGroup cols={3}>
   <Card title="Azure" icon="cloud">
-    **Accuracy:** ⭐⭐⭐⭐
-    **Latency:** Slower
+    **Doğruluk:** ⭐⭐⭐⭐
+    **Gecikme:** Daha yavaş
     
-    Best for highest transcription fidelity when accuracy is critical.
+    Doğruluğun kritik olduğu durumlarda en yüksek yazıya dökme sadakati için en iyisi.
   </Card>
   
   <Card title="Gladia" icon="bolt">
-    **Accuracy:** ⭐⭐⭐
-    **Latency:** Faster
+    **Doğruluk:** ⭐⭐⭐
+    **Gecikme:** Daha hızlı
     
-    Good all-rounder for most languages. Supports multilingual configurations.
+    Çoğu dil için iyi bir genel seçenek. Çok dilli yapılandırmaları destekler.
   </Card>
   
   <Card title="Deepgram" icon="waveform">
-    **Accuracy:** ⭐⭐⭐
-    **Latency:** Faster
+    **Doğruluk:** ⭐⭐⭐
+    **Gecikme:** Daha hızlı
     
-    Solid choice for English and major languages.
+    İngilizce ve başlıca diller için sağlam bir seçim.
   </Card>
 </CardGroup>
 
 <Note>
-Different languages, accents, or background noise can impact each provider differently. Test which performs better for your specific language and audio setup.
+Farklı diller, aksanlar veya arka plan gürültüsü her sağlayıcıyı farklı şekilde etkileyebilir. Belirli diliniz ve ses kurulumunuz için hangisinin daha iyi performans gösterdiğini test edin.
 </Note>
 
-### Endpoint Configuration
+### Uç Nokta Yapılandırması
 
 <CardGroup cols={2}>
-  <Card title="AI Turn Detection" icon="brain">
-    Uses AI to intelligently detect when the caller has finished speaking
+  <Card title="AI Sıra Algılama" icon="brain">
+    Arayanın konuşmayı bitirdiğini akıllıca algılamak için AI kullanır
   </Card>
   
-  <Card title="Voice Activity Detection (VAD)" icon="microphone">
-    **Default:** Traditional voice activity detection
+  <Card title="Ses Aktivite Algılama (VAD)" icon="microphone">
+    **Varsayılan:** Geleneksel ses aktivite algılama
     
-    Choose how the AI will detect the end of the user phrase
+    AI'nın kullanıcı ifadesinin sonunu nasıl algılayacağını seçin
   </Card>
 </CardGroup>
 
-### Voice Activity Detection (VAD)
+### Ses Aktivite Algılama (VAD)
 
-Control when your assistant starts and stops talking. See [Handling interruptions guide](/conversation-design/interruptions) for detailed VAD configuration.
+Asistanınızın ne zaman konuşmaya başlayıp durduğunu kontrol edin. Ayrıntılı VAD yapılandırması için bkz. [Kesinti yönetimi kılavuzu](/conversation-design/interruptions).
 
 <Warning>
-Fine-tune these settings if experiencing interruption issues or sluggish responses.
+Kesinti sorunları veya yavaş yanıtlar yaşıyorsanız bu ayarları ince ayar yapın.
 </Warning>
 
 <AccordionGroup>
-  <Accordion title="Endpoint Sensitivity" icon="microphone">
-    **Range:** 0 - 5 seconds | **Default:** 0.5
+  <Accordion title="Uç Nokta Hassasiyeti" icon="microphone">
+    **Aralık:** 0 - 5 saniye | **Varsayılan:** 0.5
 
-    Adjust the time the AI will wait for the user to speak after the last word. Lower values make the AI faster, higher values are better for long user phrases.
+    AI'nın son kelimeden sonra kullanıcının konuşmasını bekleyeceği süreyi ayarlayın. Düşük değerler AI'yı daha hızlı yapar, yüksek değerler uzun kullanıcı ifadeleri için daha iyidir.
 
-    - **0 (Faster):** Quick responses but may cut off callers
-    - **5 (Slower):** Waits longer, reduces interruptions
+    - **0 (Daha hızlı):** Hızlı yanıtlar ama arayanları kesebilir
+    - **5 (Daha yavaş):** Daha uzun bekler, kesintileri azaltır
   </Accordion>
 
-  <Accordion title="Interrupt Sensitivity" icon="volume-off">
-    How easily the assistant stops when caller talks over it. Controls the sensitivity for detecting when a caller is trying to interrupt.
+  <Accordion title="Kesinti Hassasiyeti" icon="volume-off">
+    Arayan üzerine konuştuğunda asistanın ne kadar kolay durduğu. Arayanın kesmeye çalışıp çalışmadığını algılama hassasiyetini kontrol eder.
   </Accordion>
 
-  <Accordion title="Minimum Interrupt Words" icon="list-ol">
-    Require at least N caller words before interrupting assistant.
-    **Use:** Prevents false triggers from background noise or brief sounds.
+  <Accordion title="Minimum Kesinti Kelime Sayısı" icon="list-ol">
+    Asistanı kesmeden önce en az N arayan kelimesi gerektirir.
+    **Kullanım:** Arka plan gürültüsünden veya kısa seslerden kaynaklanan yanlış tetiklemeleri önler.
   </Accordion>
 
-  <Accordion title="Turn Detection Threshold" icon="sliders">
-    **Available for:** Speech-to-Speech and Dualplex modes only
+  <Accordion title="Sıra Algılama Eşiği" icon="sliders">
+    **Kullanılabilirlik:** Yalnızca Konuşmadan Konuşmaya ve Dualplex modları
 
-    **Range:** 0 - 1 | **Default:** Auto (model decides)
+    **Aralık:** 0 - 1 | **Varsayılan:** Otomatik (model karar verir)
 
-    Controls how sensitive the multimodal model is to detecting when the caller has finished speaking. Lower values make the assistant respond faster, higher values wait longer for the caller to finish.
+    Çok modlu modelin, arayanın konuşmayı bitirdiğini algılama hassasiyetini kontrol eder. Düşük değerler asistanın daha hızlı yanıt vermesini sağlar, yüksek değerler arayanın bitirmesi için daha uzun bekler.
 
-    - **Lower (0.3-0.5):** Faster responses, good for quick conversations
-    - **Higher (0.7-0.9):** Waits longer, better for detailed responses
-    - **Auto:** Let the model decide based on conversation context
+    - **Düşük (0.3-0.5):** Daha hızlı yanıtlar, hızlı konuşmalar için iyi
+    - **Yüksek (0.7-0.9):** Daha uzun bekler, ayrıntılı yanıtlar için daha iyi
+    - **Otomatik:** Konuşma bağlamına göre modelin karar vermesine izin verin
 
     <Note>
-    Only visible when using Speech-to-Speech or Dualplex modes.
+    Yalnızca Konuşmadan Konuşmaya veya Dualplex modları kullanılırken görünür.
     </Note>
   </Accordion>
 </AccordionGroup>
 
 <Tip>
-**Pro tip:** Start with default VAD settings and adjust based on real call testing. Increase endpoint sensitivity if callers get cut off, decrease if responses feel slow.
+**İpucu:** Varsayılan VAD ayarlarıyla başlayın ve gerçek arama testlerine göre ayarlayın. Arayanlar kesiliyorsa uç nokta hassasiyetini artırın, yanıtlar yavaş hissediliyorsa azaltın.
 </Tip>
