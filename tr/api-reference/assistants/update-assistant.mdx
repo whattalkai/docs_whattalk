@@ -9,164 +9,164 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 ### Yol Parametreleri
 
 <ParamField path="id" type="integer" required>
-  The unique identifier of the assistant to update
+  Güncellenecek asistanın benzersiz tanımlayıcısı
 </ParamField>
 
 ### İstek Gövdesi
 
-#### Core Fields
+#### Temel Alanlar
 
 <ParamField body="name" type="string">
-  The name of the assistant (max 255 characters)
+  Asistanın adı (maks. 255 karakter)
 </ParamField>
 
 <ParamField body="voice_id" type="integer">
-  The voice ID to use for the assistant. Use the [Get Voices](/api-reference/assistants/get-voices) endpoint with the `mode` parameter to get compatible voices for your engine mode.
+  Asistan için kullanılacak ses ID'si. Motor modunuz ile uyumlu sesleri almak için `mode` parametresi ile [Get Voices](/api-reference/assistants/get-voices) endpoint'ini kullanın.
 </ParamField>
 
 <ParamField body="language_id" type="integer">
-  The language ID for the assistant. Use the [Get Languages](/api-reference/assistants/get-languages) endpoint to get available languages.
+  Asistanın dil ID'si. Mevcut dilleri almak için [Get Languages](/api-reference/assistants/get-languages) endpoint'ini kullanın.
 </ParamField>
 
 <ParamField body="type" type="string">
-  The assistant type. Options: `inbound`, `outbound`
+  Asistan türü. Seçenekler: `inbound`, `outbound`
 </ParamField>
 
 <ParamField body="mode" type="string">
-  The engine mode. Options: `pipeline`, `multimodal`, `dualplex`
+  Motor modu. Seçenekler: `pipeline`, `multimodal`, `dualplex`
 
   <Warning>
-    Changing the mode will reset mode-specific settings to defaults for the new mode.
+    Modun değiştirilmesi, moda özel ayarları yeni modun varsayılan değerlerine sıfırlar.
   </Warning>
 </ParamField>
 
 <ParamField body="timezone" type="string">
-  The timezone for the assistant (e.g., "Europe/Bucharest", "America/New_York")
+  Asistanın saat dilimi (ör. "Europe/Bucharest", "America/New_York")
 </ParamField>
 
 <ParamField body="initial_message" type="string">
-  The initial message the assistant will speak when the call starts (max 200 characters)
+  Arama başladığında asistanın söyleyeceği ilk mesaj (maks. 200 karakter)
 </ParamField>
 
 <ParamField body="system_prompt" type="string">
-  The system prompt that defines the assistant's behavior and personality
+  Asistanın davranışını ve kişiliğini tanımlayan sistem istemi
 </ParamField>
 
-#### Mode-Specific Fields
+#### Moda Özel Alanlar
 
 <ParamField body="llm_model_id" type="integer">
-  The LLM model ID to use. Only applies to `pipeline` mode.
+  Kullanılacak LLM model ID'si. Yalnızca `pipeline` modu için geçerlidir.
 
-  Use the [Get Models](/api-reference/assistants/get-models) endpoint to get available models.
+  Mevcut modelleri almak için [Get Models](/api-reference/assistants/get-models) endpoint'ini kullanın.
 </ParamField>
 
 <ParamField body="multimodal_model_id" type="integer">
-  The multimodal model ID. Only applies to `multimodal` and `dualplex` modes.
+  Multimodal model ID'si. Yalnızca `multimodal` ve `dualplex` modları için geçerlidir.
 
-  Use the [Get Models](/api-reference/assistants/get-models) endpoint to get available multimodal models.
+  Mevcut multimodal modelleri almak için [Get Models](/api-reference/assistants/get-models) endpoint'ini kullanın.
 </ParamField>
 
 <ParamField body="chat_llm_fallback_id" type="integer">
-  Fallback LLM model ID for tool calls in multimodal/dualplex modes. Set to `null` to remove.
+  Multimodal/dualplex modlarında araç çağrıları için yedek LLM model ID'si. Kaldırmak için `null` olarak ayarlayın.
 </ParamField>
 
 <ParamField body="turn_detection_threshold" type="number">
-  Turn detection sensitivity for multimodal/dualplex modes (0-1). Set to `null` for auto.
+  Multimodal/dualplex modları için konuşma sırası algılama hassasiyeti (0-1). Otomatik için `null` olarak ayarlayın.
 </ParamField>
 
-#### Secondary Languages
+#### İkincil Diller
 
 <ParamField body="secondary_language_ids" type="integer[]">
-  Array of additional language IDs the assistant can speak. Replaces existing secondary languages. Pass an empty array `[]` to remove all secondary languages.
+  Asistanın konuşabileceği ek dil ID'lerinin dizisi. Mevcut ikincil dilleri değiştirir. Tüm ikincil dilleri kaldırmak için boş bir dizi `[]` gönderin.
 
   ```json
   "secondary_language_ids": [2, 3, 4]
   ```
 </ParamField>
 
-#### Knowledgebase Settings
+#### Bilgi Bankası Ayarları
 
 <ParamField body="knowledgebase_id" type="integer">
-  The knowledgebase ID to attach. Set to `null` to remove knowledgebase.
+  Eklenecek bilgi bankası ID'si. Bilgi bankasını kaldırmak için `null` olarak ayarlayın.
 </ParamField>
 
 <ParamField body="knowledgebase_mode" type="string">
-  How to use the knowledgebase. Options:
-  - `function_call` - AI calls a function to search (required for multimodal/dualplex)
-  - `prompt` - Knowledge is injected into prompt (pipeline only)
+  Bilgi bankasının nasıl kullanılacağı. Seçenekler:
+  - `function_call` - AI arama yapmak için bir fonksiyon çağırır (multimodal/dualplex için zorunlu)
+  - `prompt` - Bilgi isteme enjekte edilir (yalnızca pipeline)
 </ParamField>
 
-#### Phone Number
+#### Telefon Numarası
 
 <ParamField body="phone_number_id" type="integer">
-  The ID of a phone number to assign. Set to `null` to unassign. Must belong to your account.
+  Atanacak telefon numarasının ID'si. Atamayı kaldırmak için `null` olarak ayarlayın. Hesabınıza ait olmalıdır.
 
   <Warning>
-    For `inbound` assistants, the phone number cannot be a Caller ID type and cannot be already assigned to another inbound assistant.
+    `inbound` asistanlar için telefon numarası Arayan Kimliği türünde olamaz ve başka bir inbound asistana zaten atanmış olamaz.
   </Warning>
 </ParamField>
 
-#### Custom Mid-Call Tools
+#### Özel Görüşme İçi Araçlar
 
 <ParamField body="tool_ids" type="integer[]">
-  Array of custom mid-call tool IDs to sync. **Replaces all existing tool assignments.** Pass an empty array `[]` to remove all tools. Each tool must belong to your account.
+  Senkronize edilecek özel görüşme içi araç ID'lerinin dizisi. **Mevcut tüm araç atamalarını değiştirir.** Tüm araçları kaldırmak için boş bir dizi `[]` gönderin. Her araç hesabınıza ait olmalıdır.
 
   ```json
   "tool_ids": [1, 5, 12]
   ```
 </ParamField>
 
-#### Built-in Tools
+#### Yerleşik Araçlar
 
 <ParamField body="tools" type="array">
-  Array of built-in tools. **Replaces all existing built-in tools.** Pass an empty array `[]` to remove all tools.
+  Yerleşik araçların dizisi. **Mevcut tüm yerleşik araçları değiştirir.** Tüm araçları kaldırmak için boş bir dizi `[]` gönderin.
 
-  <Expandable title="Tool types">
-    **call_transfer** - Transfer the call to another phone number
-    - `phone_number` (required): Phone number to transfer to
-    - `description`: When to transfer the call
-    - `custom`: If true, AI can determine transfer number dynamically
-    - `timezone`: Timezone for transfer availability
-    - `warm_transfer`: Send a message to the customer before transferring (default: `false`)
-    - `warm_transfer_message`: Prompt telling the AI what to say before transferring (e.g., "Tell the customer that the call is being transferred.")
+  <Expandable title="Araç türleri">
+    **call_transfer** - Aramayı başka bir telefon numarasına aktarır
+    - `phone_number` (zorunlu): Aktarılacak telefon numarası
+    - `description`: Aramanın ne zaman aktarılacağı
+    - `custom`: Doğru ise, AI aktarım numarasını dinamik olarak belirleyebilir
+    - `timezone`: Aktarım müsaitliği için saat dilimi
+    - `warm_transfer`: Aktarmadan önce müşteriye bir mesaj gönderir (varsayılan: `false`)
+    - `warm_transfer_message`: AI'ya aktarmadan önce ne söyleyeceğini bildiren istem (ör. "Tell the customer that the call is being transferred.")
 
-    **warm_call_transfer** - Warm transfer with supervisor briefing
-    - `supervisor_phone` (required): Phone number to dial for the warm transfer (e.g., "+14155552001"). If `custom_sip` is enabled, this is a SIP address or internal extension instead.
-    - `outbound_phone_id` (required): ID of the phone number used to dial the supervisor.
-    - `description` (required): **When to transfer** — describes when the AI should initiate the warm transfer (e.g., "Transfer the call to a human supervisor when the customer requests to speak with a real person.")
-    - `custom_sip`: Enable to enter a custom SIP address or internal extension instead of a phone number (default: `false`)
-    - `caller_id_mode`: What phone number the supervisor sees when receiving the call. Options: `outbound_number` (default — shows the outbound phone number), `customer_number` (shows the caller's number), `custom` (shows a custom number)
-    - `custom_caller_id`: Custom phone number shown to supervisor. Only used when `caller_id_mode` is `custom`.
-    - `hold_music`: Audio played to the caller while on hold. Options: `hold_music` (default — plays default hold music), `none` (silence, no music)
-    - `hold_music_volume`: Volume level for hold music, 0-100 (default: `80`)
-    - `hold_message`: Message spoken to caller before placing them on hold (default: "Please hold while I connect you with a supervisor.")
-    - `summary_instructions`: Instructions for how the AI should brief the supervisor about the call (default: "Introduce the conversation from your perspective:\n- WHO is calling (name, company if mentioned)\n- WHY they called (their goal or problem)\n- WHY a human is needed at this point\n\nKeep it brief (2-3 sentences).")
-    - `briefing_initial_message`: The first message the AI says to the supervisor when they answer (default: "Hello! I have a caller on the line who needs your assistance. May I brief you on the situation?")
-    - `connected_message`: Message spoken to caller after supervisor is connected (default: "You are now connected with a supervisor. I'll leave you to it.")
+    **warm_call_transfer** - Yönetici bilgilendirmeli sıcak aktarım
+    - `supervisor_phone` (zorunlu): Sıcak aktarım için aranacak telefon numarası (ör. "+14155552001"). `custom_sip` etkinleştirilmişse, bunun yerine bir SIP adresi veya dahili hat numarasıdır.
+    - `outbound_phone_id` (zorunlu): Yöneticiyi aramak için kullanılan telefon numarasının ID'si.
+    - `description` (zorunlu): **Ne zaman aktarılacağı** — AI'ın sıcak aktarımı ne zaman başlatması gerektiğini açıklar (ör. "Transfer the call to a human supervisor when the customer requests to speak with a real person.")
+    - `custom_sip`: Telefon numarası yerine özel bir SIP adresi veya dahili hat numarası girmek için etkinleştirin (varsayılan: `false`)
+    - `caller_id_mode`: Yöneticinin aramayı alırken gördüğü telefon numarası. Seçenekler: `outbound_number` (varsayılan — giden telefon numarasını gösterir), `customer_number` (arayanın numarasını gösterir), `custom` (özel bir numara gösterir)
+    - `custom_caller_id`: Yöneticiye gösterilen özel telefon numarası. Yalnızca `caller_id_mode` değeri `custom` olduğunda kullanılır.
+    - `hold_music`: Arayan beklemedeyken çalınan ses. Seçenekler: `hold_music` (varsayılan — varsayılan bekleme müziğini çalar), `none` (sessizlik, müzik yok)
+    - `hold_music_volume`: Bekleme müziği ses seviyesi, 0-100 (varsayılan: `80`)
+    - `hold_message`: Arayanı beklemeye almadan önce söylenen mesaj (varsayılan: "Please hold while I connect you with a supervisor.")
+    - `summary_instructions`: AI'ın yöneticiyi arama hakkında nasıl bilgilendirmesi gerektiğine dair talimatlar (varsayılan: "Introduce the conversation from your perspective:\n- WHO is calling (name, company if mentioned)\n- WHY they called (their goal or problem)\n- WHY a human is needed at this point\n\nKeep it brief (2-3 sentences).")
+    - `briefing_initial_message`: AI'ın yönetici cevapladığında söylediği ilk mesaj (varsayılan: "Hello! I have a caller on the line who needs your assistance. May I brief you on the situation?")
+    - `connected_message`: Yönetici bağlandıktan sonra arayana söylenen mesaj (varsayılan: "You are now connected with a supervisor. I'll leave you to it.")
 
-    **end_call** - End the call programmatically
-    - `description`: When the AI should end the call
+    **end_call** - Aramayı programlı olarak sonlandırır
+    - `description`: AI'ın aramayı ne zaman sonlandırması gerektiği
 
-    **dtmf_input** - Send DTMF tones (keypad input)
-    - `description`: When to use DTMF input (for IVR navigation)
+    **dtmf_input** - DTMF tonları gönderir (tuş takımı girişi)
+    - `description`: DTMF girişinin ne zaman kullanılacağı (IVR navigasyonu için)
 
-    **collect_keypad** - Collect keypad input from the caller
-    - `timeout`: Seconds to wait for input, 1-30 (default: 5)
-    - `stop_key`: Key that ends input. Options: `#` (default), `*`
+    **collect_keypad** - Arayandan tuş takımı girişi toplar
+    - `timeout`: Giriş için bekleme süresi (saniye), 1-30 (varsayılan: 5)
+    - `stop_key`: Girişi sonlandıran tuş. Seçenekler: `#` (varsayılan), `*`
 
-    **calendar_integration** - Schedule appointments via Cal.com
-    - `calcom_api_key` (required): Your Cal.com API key
-    - `calcom_event_slug` (required): The event type slug from Cal.com
-    - `calcom_team_slug`: Team slug if the event belongs to a Cal.com team
-    - `calcom_endpoint`: Cal.com API region. Options: `us` (default — `https://api.cal.com`), `eu` (`https://api.cal.eu`), `custom` (uses `calcom_custom_endpoint`)
-    - `calcom_custom_endpoint`: Custom Cal.com API base URL. Only used when `calcom_endpoint` is `custom` (e.g., `https://my-calcom-instance.com`).
-    - `calcom_booking_fields`: Array of custom booking fields for the event. Each field has:
-      - `slug` (required): Field identifier
-      - `type` (required): Field type (e.g., "text", "email", "phone", "select")
-      - `label` (required): Display label
-      - `required`: Whether the field is required (default: `false`)
-      - `options`: Array of options for select fields
-    - `description`: When to offer scheduling
+    **calendar_integration** - Cal.com üzerinden randevu planlar
+    - `calcom_api_key` (zorunlu): Cal.com API anahtarınız
+    - `calcom_event_slug` (zorunlu): Cal.com'dan etkinlik türü slug'ı
+    - `calcom_team_slug`: Etkinlik bir Cal.com takımına aitse takım slug'ı
+    - `calcom_endpoint`: Cal.com API bölgesi. Seçenekler: `us` (varsayılan — `https://api.cal.com`), `eu` (`https://api.cal.eu`), `custom` (`calcom_custom_endpoint` kullanır)
+    - `calcom_custom_endpoint`: Özel Cal.com API temel URL'si. Yalnızca `calcom_endpoint` değeri `custom` olduğunda kullanılır (ör. `https://my-calcom-instance.com`).
+    - `calcom_booking_fields`: Etkinlik için özel rezervasyon alanları dizisi. Her alanın özellikleri:
+      - `slug` (zorunlu): Alan tanımlayıcısı
+      - `type` (zorunlu): Alan türü (ör. "text", "email", "phone", "select")
+      - `label` (zorunlu): Görüntüleme etiketi
+      - `required`: Alanın zorunlu olup olmadığı (varsayılan: `false`)
+      - `options`: Seçim alanları için seçenek dizisi
+    - `description`: Randevu planlamanın ne zaman teklif edileceği
   </Expandable>
 
   ```json
@@ -202,57 +202,57 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
   ```
 </ParamField>
 
-#### Voice and TTS Settings
+#### Ses ve TTS Ayarları
 
 <ParamField body="tts_emotion_enabled" type="boolean">
-  Whether to enable emotional text-to-speech synthesis
+  Duygusal metin-konuşma sentezinin etkinleştirilip etkinleştirilmeyeceği
 </ParamField>
 
 <ParamField body="voice_stability" type="number">
-  Voice stability setting (0-1). Higher = more consistent voice
+  Ses kararlılık ayarı (0-1). Yüksek = daha tutarlı ses
 </ParamField>
 
 <ParamField body="voice_similarity" type="number">
-  Voice similarity setting (0-1). Higher = closer to original voice
+  Ses benzerlik ayarı (0-1). Yüksek = orijinal sese daha yakın
 </ParamField>
 
 <ParamField body="speech_speed" type="number">
-  Speech speed multiplier (0.7-1.2)
+  Konuşma hızı çarpanı (0.7-1.2)
 </ParamField>
 
 <ParamField body="llm_temperature" type="number">
-  LLM temperature setting (0-1). Lower = more deterministic
+  LLM sıcaklık ayarı (0-1). Düşük = daha belirleyici
 </ParamField>
 
 <ParamField body="synthesizer_provider_id" type="integer">
-  Custom TTS provider ID. Set to `null` to use language default. Use the [Get Synthesizer Providers](/api-reference/assistants/get-synthesizer-providers) endpoint to discover available providers.
+  Özel TTS sağlayıcı ID'si. Dil varsayılanını kullanmak için `null` olarak ayarlayın. Mevcut sağlayıcıları keşfetmek için [Get Synthesizer Providers](/api-reference/assistants/get-synthesizer-providers) endpoint'ini kullanın.
 </ParamField>
 
 <ParamField body="transcriber_provider_id" type="integer">
-  Custom STT provider ID. Pipeline mode only. Set to `null` to use language default. Use the [Get Transcriber Providers](/api-reference/assistants/get-transcriber-providers) endpoint to discover available providers.
+  Özel STT sağlayıcı ID'si. Yalnızca pipeline modu. Dil varsayılanını kullanmak için `null` olarak ayarlayın. Mevcut sağlayıcıları keşfetmek için [Get Transcriber Providers](/api-reference/assistants/get-transcriber-providers) endpoint'ini kullanın.
 </ParamField>
 
-#### Call Behavior Settings
+#### Arama Davranış Ayarları
 
 <ParamField body="allow_interruptions" type="boolean">
-  Whether to allow caller interruptions.
+  Arayan kişinin sözünü kesmesine izin verilip verilmeyeceği.
 
-  <Warning>Cannot be disabled for `multimodal` and `dualplex` modes.</Warning>
+  <Warning>`multimodal` ve `dualplex` modları için devre dışı bırakılamaz.</Warning>
 </ParamField>
 
 <ParamField body="fillers" type="boolean">
-  Whether to use filler audio during processing.
+  İşleme sırasında dolgu sesi kullanılıp kullanılmayacağı.
 
-  <Warning>Only available for `pipeline` mode.</Warning>
+  <Warning>Yalnızca `pipeline` modu için kullanılabilir.</Warning>
 </ParamField>
 
 <ParamField body="filler_config" type="object">
-  Custom filler word profiles per category. Replaces existing filler config. Each category is an array of short phrases.
+  Kategoriye göre özel dolgu kelime profilleri. Mevcut dolgu yapılandırmasını değiştirir. Her kategori kısa ifadelerden oluşan bir dizidir.
 
-  - `positive`: Filler words for positive/affirmative responses
-  - `negative`: Filler words for negative/neutral responses
-  - `question`: Filler words when processing a question
-  - `neutral`: Filler words for neutral acknowledgments
+  - `positive`: Olumlu/onaylayıcı yanıtlar için dolgu kelimeleri
+  - `negative`: Olumsuz/nötr yanıtlar için dolgu kelimeleri
+  - `question`: Bir soru işlenirken kullanılan dolgu kelimeleri
+  - `neutral`: Nötr onay için dolgu kelimeleri
 
   ```json
   "filler_config": {
@@ -265,127 +265,127 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 </ParamField>
 
 <ParamField body="record" type="boolean">
-  Whether to record the call
+  Aramanın kaydedilip kaydedilmeyeceği
 </ParamField>
 
 <ParamField body="enable_noise_cancellation" type="boolean">
-  Whether to enable noise cancellation
+  Gürültü engellemenin etkinleştirilip etkinleştirilmeyeceği
 </ParamField>
 
 <ParamField body="wait_for_customer" type="boolean">
-  If true, the assistant waits for the customer to speak first
+  Doğru ise, asistan müşterinin önce konuşmasını bekler
 </ParamField>
 
-#### Timing Settings
+#### Zamanlama Ayarları
 
 <ParamField body="max_duration" type="integer">
-  Maximum call duration in seconds (20-1200)
+  Saniye cinsinden maksimum arama süresi (20-1200)
 </ParamField>
 
 <ParamField body="max_silence_duration" type="integer">
-  Maximum silence duration before re-engagement in seconds (1-360)
+  Yeniden etkileşimden önce saniye cinsinden maksimum sessizlik süresi (1-360)
 </ParamField>
 
 <ParamField body="max_initial_silence_duration" type="integer">
-  Maximum silence at call start before ending (1-120 seconds). Set to `null` to disable.
+  Aramayı sonlandırmadan önce arama başlangıcındaki maksimum sessizlik (1-120 saniye). Devre dışı bırakmak için `null` olarak ayarlayın.
 </ParamField>
 
 <ParamField body="ringing_time" type="integer">
-  Maximum ringing time before giving up (1-60 seconds)
+  Vazgeçmeden önce maksimum çalma süresi (1-60 saniye)
 </ParamField>
 
-#### Re-engagement Settings
+#### Yeniden Etkileşim Ayarları
 
 <ParamField body="reengagement_interval" type="integer">
-  Re-engagement interval in seconds (7-600)
+  Saniye cinsinden yeniden etkileşim aralığı (7-600)
 </ParamField>
 
 <ParamField body="reengagement_prompt" type="string">
-  Custom prompt for re-engagement messages (max 1000 characters). Set to `null` to use default.
+  Yeniden etkileşim mesajları için özel istem (maks. 1000 karakter). Varsayılanı kullanmak için `null` olarak ayarlayın.
 </ParamField>
 
-#### Voicemail Settings
+#### Sesli Mesaj Ayarları
 
 <ParamField body="end_call_on_voicemail" type="boolean">
-  Whether to end call when voicemail is detected
+  Sesli mesaj algılandığında aramanın sonlandırılıp sonlandırılmayacağı
 </ParamField>
 
 <ParamField body="voice_mail_message" type="string">
-  Message to leave on voicemail before hanging up (max 1000 characters). Set to `null` to disable.
+  Kapatmadan önce sesli mesaja bırakılacak mesaj (maks. 1000 karakter). Devre dışı bırakmak için `null` olarak ayarlayın.
 </ParamField>
 
-#### Endpoint Detection
+#### Uç Nokta Algılama
 
 <ParamField body="endpoint_type" type="string">
-  Voice activity detection type. Options: `vad`, `ai`
+  Ses aktivite algılama türü. Seçenekler: `vad`, `ai`
 </ParamField>
 
 <ParamField body="endpoint_sensitivity" type="number">
-  Endpoint sensitivity level (0-5)
+  Uç nokta hassasiyet seviyesi (0-5)
 </ParamField>
 
 <ParamField body="interrupt_sensitivity" type="number">
-  Interrupt sensitivity level (0-5)
+  Kesinti hassasiyet seviyesi (0-5)
 </ParamField>
 
 <ParamField body="min_interrupt_words" type="integer">
-  Minimum words before interruption is allowed (0-10). Set to `null` to disable.
+  Kesintiye izin verilmeden önce minimum kelime sayısı (0-10). Devre dışı bırakmak için `null` olarak ayarlayın.
 </ParamField>
 
-#### Ambient Sound
+#### Ortam Sesi
 
 <ParamField body="ambient_sound" type="string">
-  Background ambient sound. Options: `off`, `office`, `city`, `forest`, `crowded_room`, `cafe`, `nature`
+  Arka plan ortam sesi. Seçenekler: `off`, `office`, `city`, `forest`, `crowded_room`, `cafe`, `nature`
 </ParamField>
 
 <ParamField body="ambient_sound_volume" type="number">
-  Ambient sound volume level (0-1)
+  Ortam sesi ses seviyesi (0-1)
 </ParamField>
 
-#### Webhook Configuration
+#### Webhook Yapılandırması
 
 <ParamField body="is_webhook_active" type="boolean">
-  Whether webhook notifications are enabled
+  Webhook bildirimlerinin etkin olup olmadığı
 </ParamField>
 
 <ParamField body="webhook_url" type="string">
-  The webhook URL for post-call notifications. Set to `null` to remove.
+  Arama sonrası bildirimler için webhook URL'si. Kaldırmak için `null` olarak ayarlayın.
 </ParamField>
 
 <ParamField body="send_webhook_only_on_completed" type="boolean">
-  Whether to send webhooks only on completed calls (not failed/no-answer)
+  Webhook'ların yalnızca tamamlanan aramalarda gönderilip gönderilmeyeceği (başarısız/cevaplanmayan aramalar hariç)
 </ParamField>
 
 <ParamField body="include_recording_in_webhook" type="boolean">
-  Whether to include recording URL in webhook payload
+  Webhook yüküne kayıt URL'sinin dahil edilip edilmeyeceği
 </ParamField>
 
-#### Post-Call Evaluation
+#### Arama Sonrası Değerlendirme
 
 <ParamField body="post_call_evaluation" type="boolean">
-  Whether to enable AI post-call evaluation
+  AI arama sonrası değerlendirmenin etkinleştirilip etkinleştirilmeyeceği
 </ParamField>
 
 <ParamField body="post_call_schema" type="array">
-  Schema definition for post-call data extraction. Replaces existing schema.
+  Arama sonrası veri çıkarma için şema tanımı. Mevcut şemayı değiştirir.
 
   <Expandable title="post_call_schema properties">
     <ParamField body="name" type="string" required>
-      Field name (3-16 chars, lowercase, alphanumeric and underscores only)
+      Alan adı (3-16 karakter, küçük harf, yalnızca alfanümerik ve alt çizgi)
     </ParamField>
     <ParamField body="type" type="string" required>
-      Data type. Options: `string`, `number`, `bool`
+      Veri türü. Seçenekler: `string`, `number`, `bool`
     </ParamField>
     <ParamField body="description" type="string" required>
-      Description of what this field represents (3-255 characters)
+      Bu alanın neyi temsil ettiğinin açıklaması (3-255 karakter)
     </ParamField>
   </Expandable>
 </ParamField>
 
-#### Variables
+#### Değişkenler
 
 <ParamField body="variables" type="object">
-  Key-value pairs of custom variables. **Replaces all existing variables.**
+  Özel değişkenlerin anahtar-değer çiftleri. **Mevcut tüm değişkenleri değiştirir.**
 
   ```json
   "variables": {
@@ -395,25 +395,25 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
   ```
 </ParamField>
 
-#### Conversation Ended Settings
+#### Görüşme Sona Erme Ayarları
 
 <ParamField body="conversation_inactivity_timeout" type="integer">
-  Minutes of chat inactivity before the conversation is considered ended (1-1440). Set to `null` to disable. Default: `30`
+  Görüşmenin sona ermiş sayılmasından önceki sohbet hareketsizlik süresi (dakika) (1-1440). Devre dışı bırakmak için `null` olarak ayarlayın. Varsayılan: `30`
 </ParamField>
 
 <ParamField body="conversation_ended_retrigger" type="boolean">
-  Whether to allow re-triggering the conversation after it ends due to inactivity
+  Hareketsizlik nedeniyle sona erdikten sonra görüşmenin yeniden tetiklenmesine izin verilip verilmeyeceği
 </ParamField>
 
 <ParamField body="conversation_ended_webhook_url" type="string">
-  Webhook URL called when a chat conversation ends due to inactivity. Set to `null` to remove. Separate from the main call webhook.
+  Sohbet görüşmesi hareketsizlik nedeniyle sona erdiğinde çağrılan webhook URL'si. Kaldırmak için `null` olarak ayarlayın. Ana arama webhook'undan bağımsızdır.
 </ParamField>
 
 ---
 
-## Example Requests
+## Örnek İstekler
 
-### Update Basic Settings
+### Temel Ayarları Güncelle
 
 ```json
 {
@@ -423,7 +423,7 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 }
 ```
 
-### Switch to Multimodal Mode
+### Multimodal Moda Geç
 
 ```json
 {
@@ -435,7 +435,7 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 }
 ```
 
-### Update Tools and Knowledgebase
+### Araçları ve Bilgi Bankasını Güncelle
 
 ```json
 {
@@ -445,7 +445,7 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 }
 ```
 
-### Update Re-engagement and Voicemail
+### Yeniden Etkileşim ve Sesli Mesajı Güncelle
 
 ```json
 {
@@ -456,7 +456,7 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 }
 ```
 
-### Remove Optional Settings
+### İsteğe Bağlı Ayarları Kaldır
 
 ```json
 {
@@ -469,35 +469,35 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 
 ---
 
-## Response
+## Yanıt
 
 <ResponseField name="message" type="string">
-  Success message confirming assistant update
+  Asistan güncellemesini onaylayan başarı mesajı
 </ResponseField>
 
 <ResponseField name="data" type="object">
   <Expandable title="properties">
     <ResponseField name="id" type="integer">
-      The unique identifier of the updated assistant
+      Güncellenen asistanın benzersiz tanımlayıcısı
     </ResponseField>
     <ResponseField name="name" type="string">
-      The name of the assistant
+      Asistanın adı
     </ResponseField>
     <ResponseField name="status" type="string">
-      The current status of the assistant
+      Asistanın mevcut durumu
     </ResponseField>
     <ResponseField name="type" type="string">
-      The type (`inbound` or `outbound`)
+      Türü (`inbound` veya `outbound`)
     </ResponseField>
     <ResponseField name="mode" type="string">
-      The engine mode (`pipeline`, `multimodal`, or `dualplex`)
+      Motor modu (`pipeline`, `multimodal` veya `dualplex`)
     </ResponseField>
   </Expandable>
 </ResponseField>
 
 <ResponseExample>
 
-```json 200 Success Response
+```json 200 Başarılı Yanıt
 {
   "message": "Assistant updated successfully",
   "data": {
@@ -510,13 +510,13 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 }
 ```
 
-```json 404 Not Found
+```json 404 Bulunamadı
 {
   "message": "Assistant not found"
 }
 ```
 
-```json 422 Validation Error
+```json 422 Doğrulama Hatası
 {
   "message": "Validation failed",
   "errors": {
@@ -531,13 +531,13 @@ Bu endpoint, mevcut bir AI asistanının yapılandırmasını güncellemenize ol
 
 ---
 
-## Notes
+## Notlar
 
-- Only the fields you provide in the request body will be updated
-- To remove optional fields, explicitly set them to `null`
-- To clear arrays (tools, secondary languages), pass an empty array `[]`
-- The assistant must belong to the authenticated user
-- Use the Get Voices endpoint with `mode` parameter to get compatible voices
-- For multimodal/dualplex modes, `knowledgebase_mode` must be `function_call`
-- For multimodal/dualplex modes, `allow_interruptions` cannot be disabled
-- Changing the mode resets mode-specific settings (LLM model, multimodal model, providers)
+- Yalnızca istek gövdesinde sağladığınız alanlar güncellenecektir
+- İsteğe bağlı alanları kaldırmak için açıkça `null` olarak ayarlayın
+- Dizileri temizlemek (araçlar, ikincil diller) için boş bir dizi `[]` gönderin
+- Asistan, kimlik doğrulaması yapılmış kullanıcıya ait olmalıdır
+- Uyumlu sesleri almak için `mode` parametresi ile Get Voices endpoint'ini kullanın
+- Multimodal/dualplex modları için `knowledgebase_mode` değeri `function_call` olmalıdır
+- Multimodal/dualplex modları için `allow_interruptions` devre dışı bırakılamaz
+- Modun değiştirilmesi moda özel ayarları sıfırlar (LLM modeli, multimodal model, sağlayıcılar)
