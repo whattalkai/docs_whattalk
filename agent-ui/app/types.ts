@@ -25,6 +25,5 @@ export interface ApiAction {
 }
 
 export interface Settings {
-  anthropicApiKey: string;
   autocallsApiKey: string;
 }

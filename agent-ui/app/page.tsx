@@ -36,15 +36,9 @@ function SettingsModal({ settings, onSave, onClose }: {
       <div className="bg-[#1a1a1a] rounded-xl p-6 w-[480px] border border-[#2e2e2e]" onClick={(e) => e.stopPropagation()}>
         <h2 className="text-lg font-semibold mb-4">Settings</h2>
         <div className="space-y-4">
+          <p className="text-xs text-[#666] mb-2">Anthropic API key is loaded from .env.local on the server.</p>
           <div>
-            <label className="block text-sm text-[#a0a0a0] mb-1">Anthropic API Key</label>
-            <input type="password" value={local.anthropicApiKey}
-              onChange={(e) => setLocal({ ...local, anthropicApiKey: e.target.value })}
-              className="w-full bg-[#0f0f0f] border border-[#2e2e2e] rounded-lg px-3 py-2 text-sm text-[#e5e5e5] focus:outline-none focus:border-[#6d5cff]"
-              placeholder="sk-ant-..." />
-          </div>
-          <div>
-            <label className="block text-sm text-[#a0a0a0] mb-1">AutoCalls API Key</label>
+            <label className="block text-sm text-[#a0a0a0] mb-1">AutoCalls API Key (optional — for API actions)</label>
             <input type="password" value={local.autocallsApiKey}
               onChange={(e) => setLocal({ ...local, autocallsApiKey: e.target.value })}
               className="w-full bg-[#0f0f0f] border border-[#2e2e2e] rounded-lg px-3 py-2 text-sm text-[#e5e5e5] focus:outline-none focus:border-[#6d5cff]"
@@ -232,7 +226,7 @@ function ResultsPanel({ actions, onRunAction }: {
 }
 
 export default function Home() {
-  const [settings, setSettings] = useState<Settings>({ anthropicApiKey: "", autocallsApiKey: "" });
+  const [settings, setSettings] = useState<Settings>({ autocallsApiKey: "" });
   const [showSettings, setShowSettings] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([
     { id: "default", name: "General", status: "idle", type: "general", createdAt: new Date().toISOString() },
@@ -245,11 +239,7 @@ export default function Home() {
   useEffect(() => {
     const saved = localStorage.getItem("agent-settings");
     if (saved) {
-      const parsed = JSON.parse(saved);
-      setSettings(parsed);
-      if (!parsed.anthropicApiKey) setShowSettings(true);
-    } else {
-      setShowSettings(true);
+      setSettings(JSON.parse(saved));
     }
   }, []);
 
@@ -290,7 +280,6 @@ export default function Home() {
   }, []);
 
   const sendMessage = async (text: string) => {
-    if (!settings.anthropicApiKey) { setShowSettings(true); return; }
     const taskId = activeTaskId;
     const userMsg: Message = { id: generateId(), role: "user", content: text, timestamp: new Date().toISOString() };
     addMessage(taskId, userMsg);
@@ -309,7 +298,7 @@ export default function Home() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: allMessages, anthropicApiKey: settings.anthropicApiKey, autocallsApiKey: settings.autocallsApiKey }),
+        body: JSON.stringify({ messages: allMessages, autocallsApiKey: settings.autocallsApiKey }),
       });
 
       if (!res.ok) {
