@@ -33,3 +33,11 @@ npm run dev
 ```
 
 Opens at `http://localhost:3000`.
+
+## Documentation URLs
+
+When referencing documentation pages, always use the full production URL with the base domain `https://yardim.whattalk.ai`. Never use relative paths like `/tr/releases`.
+
+Examples:
+- `https://yardim.whattalk.ai/tr/releases`
+- `https://yardim.whattalk.ai/tr/api-reference/assistants/create-assistant`
