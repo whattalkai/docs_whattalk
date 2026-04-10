@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AutoCalls Agent Manager",
-  description: "AI-powered AutoCalls assistant management",
+  title: "WhatTalk Prompt Agent",
+  description: "AI-powered voice assistant designer for WhatTalk",
 };
 
 export default function RootLayout({
