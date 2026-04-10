@@ -66,8 +66,8 @@ function Sidebar({ tasks, activeTaskId, onSelect, onCreate }: {
   return (
     <div className="w-[280px] min-w-[280px] bg-[#1a1a1a] border-r border-[#2e2e2e] flex flex-col h-full">
       <div className="p-4 border-b border-[#2e2e2e] flex items-center gap-2">
-        <div className="w-8 h-8 rounded-lg bg-[#6d5cff] flex items-center justify-center text-white text-sm font-bold">AC</div>
-        <span className="font-semibold text-sm">AutoCalls Agent</span>
+        <div className="w-8 h-8 rounded-lg bg-[#6d5cff] flex items-center justify-center text-white text-sm font-bold">W</div>
+        <span className="font-semibold text-sm">WhatTalk Prompt Agent</span>
       </div>
       <div className="p-3">
         <button onClick={onCreate} className="w-full flex items-center gap-2 px-3 py-2 text-sm bg-[#242424] hover:bg-[#2a2a2a] rounded-lg transition-colors">
@@ -113,9 +113,9 @@ function ChatPanel({ messages, isStreaming, onSend }: {
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
               <div className="text-5xl mb-4">&#9742;</div>
-              <h3 className="text-lg font-semibold mb-2">AutoCalls Agent</h3>
+              <h3 className="text-lg font-semibold mb-2">WhatTalk Prompt Agent</h3>
               <p className="text-sm text-[#a0a0a0] max-w-md">
-                Create assistants, manage tools, purchase phone numbers, set up campaigns — all through chat.
+                Design AI voice assistants, create system prompts, configure tools and variables — all through chat.
               </p>
               <div className="mt-6 flex flex-wrap gap-2 justify-center">
                 {["List my assistants", "Create an outbound assistant", "Show available voices", "Search phone numbers"].map((s) => (
