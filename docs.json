@@ -1,4 +1,5 @@
 {
+  "excludeFiles": ["agent-ui/**"],
   "name": "WhatTalk",
   "logo": {
     "dark": "/resources/logo/dark.png",
