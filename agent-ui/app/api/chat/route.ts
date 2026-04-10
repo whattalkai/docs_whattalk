@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const SYSTEM_PROMPT = `You are an expert AutoCalls (WhatTalk) AI assistant manager. You help users create and manage AI voice assistants, mid-call tools, campaigns, phone numbers, and knowledge bases.
 
 ## API Configuration
-- Base URL: https://api.whattalk.ai/v1
+- Base URL: https://app.whattalk.ai/api
 - Auth: Authorization: Bearer {API_KEY}
 
 ## Key Endpoints
