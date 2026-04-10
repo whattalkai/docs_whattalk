@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BASE_URL = "https://api.whattalk.ai/v1";
+const BASE_URL = "https://app.whattalk.ai/api";
 
 export async function POST(req: NextRequest) {
   const { method, endpoint, body, apiKey } = await req.json();
