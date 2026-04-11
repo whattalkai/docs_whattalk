@@ -8,28 +8,19 @@ function generateId() {
 }
 
 function formatTime(iso: string) {
-  return new Date(iso).toLocaleTimeString("tr-TR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return new Date(iso).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
 }
 
 function parseApiActions(text: string): { cleanText: string; actions: Array<{ method: string; endpoint: string; body: unknown; description: string }> } {
   const actions: Array<{ method: string; endpoint: string; body: unknown; description: string }> = [];
   const cleanText = text.replace(/```api-action\n([\s\S]*?)```/g, (_, json) => {
-    try {
-      actions.push(JSON.parse(json.trim()));
-    } catch { /* ignore parse errors */ }
+    try { actions.push(JSON.parse(json.trim())); } catch { /* ignore */ }
     return "";
   });
   return { cleanText: cleanText.trim(), actions };
 }
 
-function SettingsModal({ settings, onSave, onClose }: {
-  settings: Settings;
-  onSave: (s: Settings) => void;
-  onClose: () => void;
-}) {
+function SettingsModal({ settings, onSave, onClose }: { settings: Settings; onSave: (s: Settings) => void; onClose: () => void }) {
   const [local, setLocal] = useState(settings);
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={onClose}>
@@ -54,15 +45,8 @@ function SettingsModal({ settings, onSave, onClose }: {
   );
 }
 
-function Sidebar({ tasks, activeTaskId, onSelect, onCreate }: {
-  tasks: Task[];
-  activeTaskId: string | null;
-  onSelect: (id: string) => void;
-  onCreate: () => void;
-}) {
-  const statusColors: Record<string, string> = {
-    idle: "#666", running: "#6d5cff", done: "#22c55e", error: "#ef4444",
-  };
+function Sidebar({ tasks, activeTaskId, onSelect, onCreate }: { tasks: Task[]; activeTaskId: string | null; onSelect: (id: string) => void; onCreate: () => void }) {
+  const statusColors: Record<string, string> = { idle: "#666", running: "#6d5cff", done: "#22c55e", error: "#ef4444" };
   return (
     <div className="w-[280px] min-w-[280px] bg-[#1a1a1a] border-r border-[#2e2e2e] flex flex-col h-full">
       <div className="p-4 border-b border-[#2e2e2e] flex items-center gap-2">
@@ -90,22 +74,11 @@ function Sidebar({ tasks, activeTaskId, onSelect, onCreate }: {
   );
 }
 
-function ChatPanel({ messages, isStreaming, onSend }: {
-  messages: Message[];
-  isStreaming: boolean;
-  onSend: (text: string) => void;
-}) {
+function ChatPanel({ messages, isStreaming, onSend }: { messages: Message[]; isStreaming: boolean; onSend: (text: string) => void }) {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [messages]);
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isStreaming) return;
-    onSend(input.trim());
-    setInput("");
-  };
+  useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight; }, [messages]);
+  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); if (!input.trim() || isStreaming) return; onSend(input.trim()); setInput(""); };
   return (
     <div className="flex-1 flex flex-col h-full min-w-0">
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -114,15 +87,11 @@ function ChatPanel({ messages, isStreaming, onSend }: {
             <div className="text-center">
               <div className="text-5xl mb-4">&#9742;</div>
               <h3 className="text-lg font-semibold mb-2">WhatTalk Prompt Agent</h3>
-              <p className="text-sm text-[#a0a0a0] max-w-md">
-                Design AI voice assistants, create system prompts, configure tools and variables — all through chat.
-              </p>
+              <p className="text-sm text-[#a0a0a0] max-w-md">Design AI voice assistants, create system prompts, configure tools and variables — all through chat.</p>
               <div className="mt-6 flex flex-wrap gap-2 justify-center">
-                {["List my assistants", "Create an outbound assistant", "Show available voices", "Search phone numbers"].map((s) => (
+                {["Yeni asistan tasarla", "List my assistants", "Show available voices", "Elif templateini incele"].map((s) => (
                   <button key={s} onClick={() => onSend(s)}
-                    className="px-3 py-1.5 text-xs bg-[#242424] hover:bg-[#2a2a2a] border border-[#2e2e2e] rounded-lg transition-colors">
-                    {s}
-                  </button>
+                    className="px-3 py-1.5 text-xs bg-[#242424] hover:bg-[#2a2a2a] border border-[#2e2e2e] rounded-lg transition-colors">{s}</button>
                 ))}
               </div>
             </div>
@@ -130,13 +99,9 @@ function ChatPanel({ messages, isStreaming, onSend }: {
         )}
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
-              msg.role === "user" ? "bg-[#6d5cff] text-white" : "bg-[#242424] text-[#e5e5e5]"
-            }`}>
+            <div className={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${msg.role === "user" ? "bg-[#6d5cff] text-white" : "bg-[#242424] text-[#e5e5e5]"}`}>
               <div className="whitespace-pre-wrap break-words">{msg.content}</div>
-              <div className={`text-[10px] mt-1 ${msg.role === "user" ? "text-white/50" : "text-[#666]"}`}>
-                {formatTime(msg.timestamp)}
-              </div>
+              <div className={`text-[10px] mt-1 ${msg.role === "user" ? "text-white/50" : "text-[#666]"}`}>{formatTime(msg.timestamp)}</div>
             </div>
           </div>
         ))}
@@ -144,9 +109,7 @@ function ChatPanel({ messages, isStreaming, onSend }: {
           <div className="flex justify-start">
             <div className="bg-[#242424] rounded-xl px-4 py-3">
               <div className="typing-indicator flex gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#a0a0a0]" />
-                <span className="w-2 h-2 rounded-full bg-[#a0a0a0]" />
-                <span className="w-2 h-2 rounded-full bg-[#a0a0a0]" />
+                <span className="w-2 h-2 rounded-full bg-[#a0a0a0]" /><span className="w-2 h-2 rounded-full bg-[#a0a0a0]" /><span className="w-2 h-2 rounded-full bg-[#a0a0a0]" />
               </div>
             </div>
           </div>
@@ -158,66 +121,88 @@ function ChatPanel({ messages, isStreaming, onSend }: {
             disabled={isStreaming}
             className="flex-1 bg-[#242424] border border-[#2e2e2e] rounded-xl px-4 py-3 text-sm text-[#e5e5e5] focus:outline-none focus:border-[#6d5cff] placeholder:text-[#666] disabled:opacity-50" />
           <button type="submit" disabled={isStreaming || !input.trim()}
-            className="px-5 py-3 bg-[#6d5cff] hover:bg-[#7d6eff] disabled:opacity-40 rounded-xl text-sm font-medium text-white transition-colors">
-            Send
-          </button>
+            className="px-5 py-3 bg-[#6d5cff] hover:bg-[#7d6eff] disabled:opacity-40 rounded-xl text-sm font-medium text-white transition-colors">Send</button>
         </div>
       </form>
     </div>
   );
 }
 
-function ResultsPanel({ actions, onRunAction }: {
-  actions: ApiAction[];
-  onRunAction: (action: ApiAction) => void;
-}) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function formatResultData(data: any): React.ReactElement | null {
+  if (!data) return null;
+
+  // Assistant list
+  if (data.data && Array.isArray(data.data) && data.data[0]?.system_prompt !== undefined) {
+    return (
+      <div className="space-y-2">
+        <div className="text-xs text-[#666] mb-2">{data.total || data.data.length} assistant(s)</div>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {data.data.map((a: any) => (
+          <div key={a.id} className="bg-[#0f0f0f] border border-[#2e2e2e] rounded-lg p-3">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm font-medium">{a.name}</span>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded ${a.status === "active" ? "bg-green-900/30 text-green-400" : "bg-yellow-900/30 text-yellow-400"}`}>{a.status}</span>
+            </div>
+            <div className="flex gap-2 text-[11px] text-[#666]">
+              <span>ID: {a.id}</span>
+              <span>|</span>
+              <span>{a.type}</span>
+              <span>|</span>
+              <span>{a.mode}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Single result with message
+  if (data.message && data.data?.id) {
+    return (
+      <div className="bg-[#0f0f0f] border border-[#2e2e2e] rounded-lg p-3">
+        <div className="text-sm text-green-400 mb-1">{data.message}</div>
+        <div className="text-xs text-[#666]">ID: {data.data.id} | {data.data.name}</div>
+      </div>
+    );
+  }
+
+  // Fallback: formatted JSON
+  return (
+    <pre className="text-xs text-[#a0a0a0] overflow-x-auto max-h-[400px] overflow-y-auto whitespace-pre-wrap !bg-transparent !border-0 !p-0">
+      {JSON.stringify(data, null, 2)}
+    </pre>
+  );
+}
+
+function ResultsPanel({ results }: { results: Array<{ id: string; description: string; status: string; statusCode?: number; data?: unknown; timestamp: string }> }) {
   return (
     <div className="w-[380px] min-w-[380px] bg-[#1a1a1a] border-l border-[#2e2e2e] flex flex-col h-full">
       <div className="p-4 border-b border-[#2e2e2e]">
-        <h2 className="font-semibold text-sm">API Actions & Results</h2>
-        <p className="text-xs text-[#666] mt-0.5">{actions.length} actions</p>
+        <h2 className="font-semibold text-sm">Results</h2>
       </div>
-      <div className="flex-1 overflow-y-auto p-3 space-y-2">
-        {actions.length === 0 && (
-          <div className="flex items-center justify-center h-full text-[#666] text-sm">
-            API actions will appear here
+      <div className="flex-1 overflow-y-auto p-3 space-y-3">
+        {results.length === 0 && (
+          <div className="flex items-center justify-center h-full text-[#666] text-sm text-center px-4">
+            Results will appear here when API actions run
           </div>
         )}
-        {actions.map((action) => (
-          <div key={action.id} className="bg-[#0f0f0f] border border-[#2e2e2e] rounded-lg overflow-hidden">
-            <div className="flex items-center justify-between px-3 py-2">
+        {results.map((r) => (
+          <div key={r.id} className="border border-[#2e2e2e] rounded-lg overflow-hidden">
+            <div className="flex items-center justify-between px-3 py-2 bg-[#242424]">
+              <span className="text-xs font-medium">{r.description}</span>
               <div className="flex items-center gap-2">
-                <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${
-                  action.method === "GET" ? "bg-green-900/30 text-green-400" :
-                  action.method === "POST" ? "bg-blue-900/30 text-blue-400" :
-                  action.method === "PUT" ? "bg-yellow-900/30 text-yellow-400" :
-                  "bg-red-900/30 text-red-400"
-                }`}>{action.method}</span>
-                <span className="text-xs font-mono text-[#a0a0a0] truncate max-w-[180px]">{action.endpoint}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                {action.statusCode && <span className="text-xs font-mono text-[#666]">{action.statusCode}</span>}
+                {r.statusCode && <span className="text-xs font-mono text-[#666]">{r.statusCode}</span>}
                 <div className="w-2 h-2 rounded-full" style={{
-                  background: action.status === "success" ? "#22c55e" : action.status === "error" ? "#ef4444" : "#f59e0b"
+                  background: r.status === "success" ? "#22c55e" : r.status === "error" ? "#ef4444" : "#f59e0b"
                 }} />
               </div>
             </div>
-            {action.status === "pending" && (
-              <div className="px-3 pb-2">
-                <button onClick={() => onRunAction(action)}
-                  className="text-xs bg-[#6d5cff] hover:bg-[#7d6eff] px-3 py-1 rounded-md text-white transition-colors">
-                  Run
-                </button>
-              </div>
-            )}
-            {action.responseBody && (
-              <div className="border-t border-[#2e2e2e] px-3 py-2">
-                <pre className="text-xs text-[#a0a0a0] overflow-x-auto max-h-[200px] overflow-y-auto whitespace-pre-wrap !bg-transparent !border-0 !p-0">
-                  {action.responseBody}
-                </pre>
-              </div>
-            )}
-            <div className="px-3 py-1 text-[10px] text-[#666]">{formatTime(action.timestamp)}</div>
+            <div className="p-3">
+              {r.status === "loading" && <div className="text-xs text-[#666]">Loading...</div>}
+              {r.data ? formatResultData(r.data) : null}
+            </div>
+            <div className="px-3 py-1 text-[10px] text-[#666] border-t border-[#2e2e2e]">{formatTime(r.timestamp)}</div>
           </div>
         ))}
       </div>
@@ -233,30 +218,24 @@ export default function Home() {
   ]);
   const [activeTaskId, setActiveTaskId] = useState("default");
   const [taskMessages, setTaskMessages] = useState<Record<string, Message[]>>({ default: [] });
-  const [taskActions, setTaskActions] = useState<Record<string, ApiAction[]>>({ default: [] });
+  const [taskResults, setTaskResults] = useState<Record<string, Array<{ id: string; description: string; status: string; statusCode?: number; data?: unknown; timestamp: string }>>>({ default: [] });
   const [isStreaming, setIsStreaming] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("agent-settings");
-    if (saved) {
-      setSettings(JSON.parse(saved));
-    }
+    if (saved) setSettings(JSON.parse(saved));
   }, []);
 
-  const saveSettings = (s: Settings) => {
-    setSettings(s);
-    localStorage.setItem("agent-settings", JSON.stringify(s));
-  };
+  const saveSettings = (s: Settings) => { setSettings(s); localStorage.setItem("agent-settings", JSON.stringify(s)); };
 
   const messages = taskMessages[activeTaskId] || [];
-  const actions = taskActions[activeTaskId] || [];
+  const results = taskResults[activeTaskId] || [];
 
   const createTask = () => {
     const id = generateId();
-    const task: Task = { id, name: `Task ${tasks.length}`, status: "idle", type: "general", createdAt: new Date().toISOString() };
-    setTasks((prev) => [task, ...prev]);
+    setTasks((prev) => [{ id, name: `Task ${tasks.length}`, status: "idle", type: "general", createdAt: new Date().toISOString() }, ...prev]);
     setTaskMessages((prev) => ({ ...prev, [id]: [] }));
-    setTaskActions((prev) => ({ ...prev, [id]: [] }));
+    setTaskResults((prev) => ({ ...prev, [id]: [] }));
     setActiveTaskId(id);
   };
 
@@ -275,9 +254,41 @@ export default function Home() {
     });
   }, []);
 
-  const addAction = useCallback((taskId: string, action: ApiAction) => {
-    setTaskActions((prev) => ({ ...prev, [taskId]: [...(prev[taskId] || []), action] }));
+  const addResult = useCallback((taskId: string, result: { id: string; description: string; status: string; statusCode?: number; data?: unknown; timestamp: string }) => {
+    setTaskResults((prev) => ({ ...prev, [taskId]: [...(prev[taskId] || []), result] }));
   }, []);
+
+  const updateResult = useCallback((taskId: string, resultId: string, updates: Partial<{ status: string; statusCode: number; data: unknown }>) => {
+    setTaskResults((prev) => ({
+      ...prev,
+      [taskId]: (prev[taskId] || []).map((r) => r.id === resultId ? { ...r, ...updates } : r),
+    }));
+  }, []);
+
+  const executeApiAction = useCallback(async (taskId: string, action: { method: string; endpoint: string; body: unknown; description: string }) => {
+    const resultId = generateId();
+    addResult(taskId, { id: resultId, description: action.description || `${action.method} ${action.endpoint}`, status: "loading", timestamp: new Date().toISOString() });
+
+    try {
+      const res = await fetch("/api/proxy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          method: action.method, endpoint: action.endpoint,
+          body: action.body || null,
+          apiKey: settings.autocallsApiKey,
+        }),
+      });
+      const result = await res.json();
+      updateResult(taskId, resultId, { status: result.ok ? "success" : "error", statusCode: result.status, data: result.data });
+
+      // Send result back to Claude for formatted response in chat
+      return result.data;
+    } catch {
+      updateResult(taskId, resultId, { status: "error", data: { error: "Network error" } });
+      return null;
+    }
+  }, [settings.autocallsApiKey, addResult, updateResult]);
 
   const sendMessage = async (text: string) => {
     const taskId = activeTaskId;
@@ -301,11 +312,7 @@ export default function Home() {
         body: JSON.stringify({ messages: allMessages, autocallsApiKey: settings.autocallsApiKey }),
       });
 
-      if (!res.ok) {
-        updateLastAssistantMessage(taskId, "Error: Failed to get response. Check your API key.");
-        setIsStreaming(false);
-        return;
-      }
+      if (!res.ok) { updateLastAssistantMessage(taskId, "Error: Failed to get response."); setIsStreaming(false); return; }
 
       const reader = res.body?.getReader();
       const decoder = new TextDecoder();
@@ -315,28 +322,57 @@ export default function Home() {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          const chunk = decoder.decode(value);
-          for (const line of chunk.split("\n")) {
+          for (const line of decoder.decode(value).split("\n")) {
             if (line.startsWith("data: ")) {
               const data = line.slice(6);
               if (data === "[DONE]") break;
-              try {
-                const parsed = JSON.parse(data);
-                fullText += parsed.text;
-                updateLastAssistantMessage(taskId, parsed.text);
-              } catch { /* ignore */ }
+              try { const p = JSON.parse(data); fullText += p.text; updateLastAssistantMessage(taskId, p.text); } catch { /* ignore */ }
             }
           }
         }
       }
 
+      // Auto-execute API actions and feed results back to Claude
       const { actions: parsedActions } = parseApiActions(fullText);
-      for (const action of parsedActions) {
-        addAction(taskId, {
-          id: generateId(), method: action.method, endpoint: action.endpoint,
-          status: "pending", requestBody: action.body ? JSON.stringify(action.body, null, 2) : undefined,
-          timestamp: new Date().toISOString(),
-        });
+      if (parsedActions.length > 0 && settings.autocallsApiKey) {
+        for (const action of parsedActions) {
+          const resultData = await executeApiAction(taskId, action);
+
+          if (resultData) {
+            // Send result to Claude for formatted chat response
+            const resultMsg: Message = { id: generateId(), role: "assistant", content: "", timestamp: new Date().toISOString() };
+            addMessage(taskId, resultMsg);
+
+            const followUpMessages = [
+              ...allMessages,
+              { role: "assistant" as const, content: fullText },
+              { role: "user" as const, content: `API result for "${action.description}":\n${JSON.stringify(resultData, null, 2)}\n\nPlease format this result in a clear, readable way in Turkish. For assistant lists show: name, type, mode, status. For other results summarize what happened.` },
+            ];
+
+            const followRes = await fetch("/api/chat", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ messages: followUpMessages, autocallsApiKey: settings.autocallsApiKey }),
+            });
+
+            if (followRes.ok) {
+              const followReader = followRes.body?.getReader();
+              if (followReader) {
+                while (true) {
+                  const { done, value } = await followReader.read();
+                  if (done) break;
+                  for (const line of decoder.decode(value).split("\n")) {
+                    if (line.startsWith("data: ")) {
+                      const data = line.slice(6);
+                      if (data === "[DONE]") break;
+                      try { const p = JSON.parse(data); updateLastAssistantMessage(taskId, p.text); } catch { /* ignore */ }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     } catch {
       updateLastAssistantMessage(taskId, "Error: Network error");
@@ -346,41 +382,11 @@ export default function Home() {
     setIsStreaming(false);
   };
 
-  const runAction = async (action: ApiAction) => {
-    if (!settings.autocallsApiKey) { setShowSettings(true); return; }
-
-    try {
-      const res = await fetch("/api/proxy", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          method: action.method, endpoint: action.endpoint,
-          body: action.requestBody ? JSON.parse(action.requestBody) : null,
-          apiKey: settings.autocallsApiKey,
-        }),
-      });
-      const result = await res.json();
-      setTaskActions((prev) => ({
-        ...prev,
-        [activeTaskId]: (prev[activeTaskId] || []).map((a) =>
-          a.id === action.id ? { ...a, status: result.ok ? "success" as const : "error" as const, statusCode: result.status, responseBody: JSON.stringify(result.data, null, 2) } : a
-        ),
-      }));
-    } catch {
-      setTaskActions((prev) => ({
-        ...prev,
-        [activeTaskId]: (prev[activeTaskId] || []).map((a) =>
-          a.id === action.id ? { ...a, status: "error" as const, responseBody: "Network error" } : a
-        ),
-      }));
-    }
-  };
-
   return (
     <div className="flex h-screen">
       <Sidebar tasks={tasks} activeTaskId={activeTaskId} onSelect={setActiveTaskId} onCreate={createTask} />
       <ChatPanel messages={messages} isStreaming={isStreaming} onSend={sendMessage} />
-      <ResultsPanel actions={actions} onRunAction={runAction} />
+      <ResultsPanel results={results} />
       <button onClick={() => setShowSettings(true)} title="Settings"
         className="fixed bottom-4 left-4 w-8 h-8 rounded-full bg-[#242424] border border-[#2e2e2e] flex items-center justify-center text-[#666] hover:text-[#e5e5e5] transition-colors z-10">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
